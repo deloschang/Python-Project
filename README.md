@@ -1,4 +1,6 @@
 Memeja-Loves-Python
 ===================
 
-Migrating Memeja from PHP to Django
+Repo to migrate Memeja from PHP to Django
+
+

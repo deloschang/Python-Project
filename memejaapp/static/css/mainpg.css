@@ -678,23 +678,12 @@
 	}
 
 	#cta_message{
-		font-size: 16px;
-		color:#777;
-		text-shadow: 0px 2px 3px #ff9718;
+		font-size: 13px;
+		color:black;
 		position: absolute;
 		width:400px;
 		left:750px;
 		top:380px;
-		animation-name: wordPulse;
-	    animation-duration: 2s;
-	    animation-iteration-count: infinite;
-		-webkit-animation-name: wordPulse;
-	    -webkit-animation-duration: 2s;
-	    -webkit-animation-iteration-count: infinite;
-	    -moz-animation-name: wordPulse;
-	    -moz-animation-duration: 2s;
-	    -moz-animation-iteration-count: infinite;
-
 	}
 
 	@keyframes wordPulse {
