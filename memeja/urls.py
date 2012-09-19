@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from memejaapp.views import index
+from webapp.views import index
 from django.views.static import *
 
 # Uncomment the next two lines to enable the admin:
