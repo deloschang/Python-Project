@@ -3,30 +3,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <title>{% block title %}Memeja{% endblock %}</title>
-		<div id="cloud_container">
-				<div id="cloud_1" class="large_cloud"></div>
-				<div id="cloud_2" class="large_cloud"></div>
-				<div id="cloud_3" class="large_cloud"></div>
-				<div id="cloud_4" class="large_cloud"></div>
-				<div id="cloud_5" class="cloud"></div>
-				<div id="cloud_6" class="cloud"></div>
-				<div id="cloud_7" class="cloud"></div>
-				<div id="cloud_8" class="cloud"></div>
-				<div id="cloud_9" class="cloud"></div>
-				<div id="cloud_11" class="cloud"></div>
-				<div id="cloud_12" class="cloud"></div>
-				<div id="cloud_13" class="cloud"></div>
-				<div id="cloud_14" class="cloud"></div>
-				<div id="cloud_15" class="cloud"></div>
-				<div id="cloud_16" class="cloud"></div>
-				<div id="cloud_17" class="cloud"></div>	
-		</div>
+  <!--Commented out for now -->
+		<!--<div id="cloud_container">-->
+				<!--<div id="cloud_1" class="large_cloud"></div>-->
+				<!--<div id="cloud_2" class="large_cloud"></div>-->
+				<!--<div id="cloud_3" class="large_cloud"></div>-->
+				<!--<div id="cloud_4" class="large_cloud"></div>-->
+				<!--<div id="cloud_5" class="cloud"></div>-->
+				<!--<div id="cloud_6" class="cloud"></div>-->
+				<!--<div id="cloud_7" class="cloud"></div>-->
+				<!--<div id="cloud_8" class="cloud"></div>-->
+				<!--<div id="cloud_9" class="cloud"></div>-->
+				<!--<div id="cloud_11" class="cloud"></div>-->
+				<!--<div id="cloud_12" class="cloud"></div>-->
+				<!--<div id="cloud_13" class="cloud"></div>-->
+				<!--<div id="cloud_14" class="cloud"></div>-->
+				<!--<div id="cloud_15" class="cloud"></div>-->
+				<!--<div id="cloud_16" class="cloud"></div>-->
+				<!--<div id="cloud_17" class="cloud"></div>	-->
+		<!--</div>-->
 
     <div id="sidebar">
       {% block sidebar %}{% endblock %}
     </div>
+
+    <div id="login_button">
+      {% if user.is_authenticated %}
+        You are authenticated! T also has lost his element.
+      {% else %}
+      <a href="/login/">Log in</a> and remove T's element! 
+      {% endif %}
+    </div>
     
-		<div id="video_container">
 			<div id="intro_logo">
         <a href="##LBL_SITE_URL##" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif"style="width:228px;height:70px;"/></a>
 			</div>
@@ -41,17 +49,18 @@
    {% block content-related %}
    {% endblock %}
 
-		<div id="cta_button">
-			<div id="cta_login"class="fb-login-button" size="large" scope="
-		    	email,
-		    	publish_stream
-		    	,user_education_history
-		    	{*,user_birthday*}	{* Uncomment to enable *}
-		    	">
-	        Connect with Facebook
-			</div>
-			<div id="cta_message">We will never post without your permission</div>
-		</div>
+		<!--<div id="cta_button">-->
+			<!--<div id="cta_login"class="fb-login-button" size="large" scope="-->
+					<!--email,-->
+					<!--publish_stream-->
+					<!--,user_education_history-->
+					<!--{*,user_birthday*}	{* Uncomment to enable *}-->
+					<!--">-->
+					<!--Connect with Facebook-->
+			<!--</div>-->
+			<!--<div id="cta_message">We will never post without your permission</div>-->
+		<!--</div>-->
+
 		<div id="bottom_bar">
 			<table><tr>
 			<td><div id="about"><a href="/about.html">About </a></div></td>
