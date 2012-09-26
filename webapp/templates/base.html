@@ -32,17 +32,14 @@
 			</div>
 
    {% block content %}
-      {# Sample Comment Code #}
-			<div id="headline">Share Experiences With the People You Care About</div>
-			<div id="video">
-				<iframe src="http://player.vimeo.com/video/47618336?byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-			</div>
-		</div>
    {% endblock %}
 
    <div id="main_content">
       {% block main_content %}{% endblock %} 
-    </div>
+   </div>
+   
+   {% block content-related %}
+   {% endblock %}
 
 		<div id="cta_button">
 			<div id="cta_login"class="fb-login-button" size="large" scope="

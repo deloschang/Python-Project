@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'memeja.views.home', name='home'),
     # url(r'^memeja/', include('memeja.foo.urls')),
 
-    url(r'^$', include('registration.backends.default.urls')),
+    url(r'^', include('registration.backends.default.urls')),
     #url(r'^$', registration/registration_form),
 
     # Uncomment the admin/doc line below to enable admin documentation:
