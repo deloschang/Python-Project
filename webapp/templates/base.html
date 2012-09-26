@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mainpg.css"/>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<title>{% block title %}Memeja{% endblock %}</title>
+		<div id="cloud_container">
+				<div id="cloud_1" class="large_cloud"></div>
+				<div id="cloud_2" class="large_cloud"></div>
+				<div id="cloud_3" class="large_cloud"></div>
+				<div id="cloud_4" class="large_cloud"></div>
+				<div id="cloud_5" class="cloud"></div>
+				<div id="cloud_6" class="cloud"></div>
+				<div id="cloud_7" class="cloud"></div>
+				<div id="cloud_8" class="cloud"></div>
+				<div id="cloud_9" class="cloud"></div>
+				<div id="cloud_11" class="cloud"></div>
+				<div id="cloud_12" class="cloud"></div>
+				<div id="cloud_13" class="cloud"></div>
+				<div id="cloud_14" class="cloud"></div>
+				<div id="cloud_15" class="cloud"></div>
+				<div id="cloud_16" class="cloud"></div>
+				<div id="cloud_17" class="cloud"></div>	
+		</div>
+
+    <div id="sidebar">
+      {% block sidebar %}{% endblock %}
+    </div>
+    
+		<div id="video_container">
+			<div id="intro_logo">
+        <a href="##LBL_SITE_URL##" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif"style="width:228px;height:70px;"/></a>
+			</div>
+
+   {% block content %}
+      {# Sample Comment Code #}
+			<div id="headline">Share Experiences With the People You Care About</div>
+			<div id="video">
+				<iframe src="http://player.vimeo.com/video/47618336?byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			</div>
+		</div>
+   {% endblock %}
+
+   <div id="main_content">
+      {% block main_content %}{% endblock %} 
+    </div>
+
+		<div id="cta_button">
+			<div id="cta_login"class="fb-login-button" size="large" scope="
+		    	email,
+		    	publish_stream
+		    	,user_education_history
+		    	{*,user_birthday*}	{* Uncomment to enable *}
+		    	">
+	        Connect with Facebook
+			</div>
+			<div id="cta_message">We will never post without your permission</div>
+		</div>
+		<div id="bottom_bar">
+			<table><tr>
+			<td><div id="about"><a href="/about.html">About </a></div></td>
+			<td><div id="blog"><a href="http://blog.memeja.com">Blog </a></div></td>
+			<td><div id="privacy_policy"><a href="/privacypolicy.html">Privacy  </a></div></td>
+			</tr></table>
+		</div>
