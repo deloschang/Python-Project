@@ -126,6 +126,18 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+# Registration Options
+ACCOUNT_ACTIVATION_DAYS=7
+
+# Workaround for dev server
+EMAIL_HOST='localhost'
+EMAIL_PORT=1025
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'testing@memeja.com'
+#EMAIL_HOST_USER='deloschang'
+#EMAIL_HOST_PASSWORD='pf1cs3f2xo3q'
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
