@@ -29,7 +29,7 @@
 
     <div id="login_button">
       {% if user.is_authenticated %}
-        You are authenticated! T also has lost his element.
+      You are authenticated! T also has lost his element. <a href="/logout/">Log out</a>
       {% else %}
       <a href="/login/">Log in</a> and remove T's element! 
       {% endif %}
