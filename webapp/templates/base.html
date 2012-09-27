@@ -1,8 +1,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mainpg.css"/>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">-->
 
 <title>{% block title %}Memeja{% endblock %}</title>
+
+{# Library Support for Macromeme Test #}
+  <!-- Include support librarys first -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+		<script type="text/javascript">
+          // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+          var swfVersionStr = "11.2.0";
+          // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+          var xiSwfUrlStr = "playerProductInstall.swf";
+          var flashvars = {};
+          flashvars.appId = "219049284838691";
+          var params = {};
+          params.quality = "high";
+          params.bgcolor = "#FFFFFF";
+          params.allowscriptaccess = "sameDomain";
+          params.allowfullscreen = "true";
+          var attributes = {};
+          attributes.id = "macromeme";
+          attributes.name = "macromeme";
+          attributes.align = "middle";
+          swfobject.embedSWF(
+              "{{ STATIC_URL}}macromeme.swf", "flashContent", 
+              "100%", "100%", 
+              swfVersionStr, xiSwfUrlStr, 
+              flashvars, params, attributes);
+          // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+          swfobject.createCSS("#flashContent", "display:block;text-align:left");
+    </script>
+
   <!--Commented out for now -->
 		<!--<div id="cloud_container">-->
 				<!--<div id="cloud_1" class="large_cloud"></div>-->
@@ -29,15 +58,16 @@
 
     <div id="login_button">
       {% if user.is_authenticated %}
-      You are authenticated! T also has lost his element. <a href="/logout/">Log out</a>
+        {# part of top of header that remains there #}
+        You are authenticated!<a href="/logout/">Log out</a>
       {% else %}
-      <a href="/login/">Log in</a> and remove T's element! 
+        <a href="/login/">Log in</a> and remove T's element! 
       {% endif %}
     </div>
     
-			<div id="intro_logo">
-        <a href="##LBL_SITE_URL##" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif"style="width:228px;height:70px;"/></a>
-			</div>
+    <div id="intro_logo">
+      <a href="##LBL_SITE_URL##" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif"style="width:228px;height:70px;"/></a>
+    </div>
 
    {% block content %}
    {% endblock %}
