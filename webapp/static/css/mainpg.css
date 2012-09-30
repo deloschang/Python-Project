@@ -72,8 +72,7 @@
 		padding:5px;
 		border: 2px solid #ACACAC;
     	top:50px;
-      /*height: 680px;*/
-      width: 500px;
+    	height: 680px;
     	-moz-border-radius: 10px; 
 		-webkit-border-radius: 10px;
 		border-radius: 10px;
@@ -415,8 +414,10 @@
 
 	#cloud_container{
 		position: relative;
-		left:260px;
-		top:-40px;
+        margin:auto;
+        width:650px;
+        left:-20px;
+		top:-50px;
 
 	}
 
@@ -487,7 +488,7 @@
 
 	#cloud_7{
 		position:absolute;
-		top:264px;
+		top:234px;
 		left:34px;
 	}
 
@@ -535,7 +536,7 @@
 
 	#cloud_15{
 		position:absolute;
-		top:412px;
+		top:442px;
 		left:504px;
 	}
 
@@ -561,17 +562,19 @@
 	#video_container{
 		position:relative;
 		z-index: 100;
-		width:500px;
-		left:360px;
-		top:130px;
+        margin-left:auto;
+        margin-right:auto;
+        width:500px;
+		top:100px;
 	}
 
 	#intro_logo {
 		width:228px;
 		height:70px;
 		position: relative;
-		left:120px;
-		top:-40px;
+        margin:auto;
+		top:50px;
+        z-index:10;
 	}
 
 	#headline{
@@ -580,9 +583,23 @@
 		font-size: 21px;
 		color: #777;
 		position: relative;
-		top:-15px;
-		left:10px;
+		top:50px;
+        z-index:10;        
 	}
+
+    #login_button{
+        margin:auto;
+        position:relative;
+        top:100px;
+        z-index:10;
+    }
+
+    #login_area{
+        margin:auto;
+        position:relative;
+        top:50px;
+        display:none;
+    }
 
 	#video{
 		width:500px;
@@ -595,6 +612,7 @@
 		-moz-border-radius: 5px; 
 		-webkit-border-radius: 5px; 
 		border-radius: 5px;
+        z-index:10;
 	}
 
 	#videoa{
@@ -772,13 +790,24 @@
 		left:835px;
 		top:335px;
 	}
+
+    #spam_promise{
+        position:relative;
+        margin:auto;
+        top:110px;
+        z-index:10;
+    }
+
 	#bottom_bar{
 		font-size:14px;
-		position:absolute;
-		top:700px;
-		left:530px;
+		position:relative;
+        width:150px;
+        margin-left:auto;
+        margin-right:auto;
+        top:150px;
 	}
-
+    
+  #
 	#bottom_bar a {
 		color: #888;
 		text-shadow: 0px 2px 3px #999;

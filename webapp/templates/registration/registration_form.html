@@ -11,19 +11,20 @@
 
       
     <div id="headline">Share Experiences With the People You Care About</div>
+    <div id ="login_area">
     <h1>Create an account</h1>
     
     <form method="post" action="" class="wide">
     {% csrf_token %}
       <p>
-        <label for="id_username">Full Name:</label>
+        <label for="id_username">Username:</label>
         {% if form.username.errors %}
           <p class="errors">{{ form.username.errors.as_text }}</p>
         {% endif %}
         {{ form.username }}
       </p>
       <p>
-        <label for="id_email">Email:</label>
+        <label for="id_email">Email address:</label>
         {% if form.email.errors %}
           <p class="errors">{{ form.email.errors.as_text }}</p>
         {% endif %}
@@ -45,6 +46,7 @@
       </p>
       <p class="submit"><input type="submit" value="Register &rarr;"></p>
     </form>
+    </div>
     
       {# Sample Comment Code #}
       <div id="video_container">
@@ -54,52 +56,55 @@
       </div>
   {% else %}
       {# User has now logged in #}
-      
-        {# Library Support for Macromeme #}
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
-      <script type="text/javascript">
-        // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
-        var swfVersionStr = "11.2.0";
-        // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
-        var xiSwfUrlStr = "playerProductInstall.swf";
-        var flashvars = {};
-        flashvars.appId = "479174175436255";
-        var params = {};
-        params.quality = "high";
-        params.bgcolor = "#FFFFFF";
-        params.allowscriptaccess = "sameDomain";
-        params.allowfullscreen = "true";
-        var attributes = {};
-        attributes.id = "macromeme";
-        attributes.name = "macromeme";
-        attributes.align = "middle";
-        swfobject.embedSWF(
-        "{{ STATIC_URL }}macromeme.swf", "flashContent", 
-            "100%", "100%", 
-            swfVersionStr, xiSwfUrlStr, 
-            flashvars, params, attributes);
-        // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
-        //swfobject.createCSS("#flashContent", "display:block;text-align:left");
-      </script>
 
-      <br>
-      <div id="flashContent">
-        <p>
-          to view this page ensure that adobe flash player version 11.2.0 or greater is installed. 
-        </p>
-        <script type="text/javascript"> 
-          var pagehost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
-          document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
-                         + pagehost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='get adobe flash player' /></a>" ); 
-        </script> 
-      </div>
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>-->
+    <script type="text/javascript">
+    /*
+          // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+          var swfVersionStr = "11.2.0";
+          // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+          var xiSwfUrlStr = "playerProductInstall.swf";
+          var flashvars = {};
+          flashvars.appId = "219049284838691";
+          var params = {};
+          params.quality = "high";
+          params.bgcolor = "#FF0000";
+          params.allowscriptaccess = "sameDomain";
+          params.allowfullscreen = "true";
+          var attributes = {};
+          attributes.id = "macromeme";
+          attributes.name = "macromeme";
+          attributes.align = "middle";
+          swfobject.embedSWF(
+              "macromeme.swf", "flashContent", 
+              "100%", "100%", 
+              swfVersionStr, xiSwfUrlStr, 
+              flashvars, params, attributes);
+          // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+          swfobject.createCSS("#flashContent", "display:block;text-align:left");
+    */
+    </script>
+
+         <div id="flashContent">
+						<p>
+							to view this page ensure that adobe flash player version 
+							11.2.0 or greater is installed. 
+						</p>
+						<script type="text/javascript"> 
+							var pagehost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+							document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
+											+ pagehost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='get adobe flash player' /></a>" ); 
+						</script> 
+          </div>
 
 {% endif %}
 {% endblock %}
 
 {% block content-related %}
   {% if not user.is_authenticated %}
+  <div id="spam_promise">
     <p>We'll only use your email to send you signup instructions. We hate spam
 as much as you do.</p>
+  </div>
   {% endif %}
 {% endblock %}

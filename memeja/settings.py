@@ -4,7 +4,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+          #(, 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
@@ -24,7 +24,7 @@ DATABASES = {
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Los_Angeles'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -64,7 +64,6 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    '/Users/deloschang/memeja/webapp/static',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -79,7 +78,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'n3!(tijtg!v+jg_y9safs4#%py)m4ovb5nzrl)g1xt%hb!^i#%'
+SECRET_KEY = 'wg%l=c6=hap25y=_hm64zku5ntunb(-_5frl*c@58*&amp;dv+qf7&amp;'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -107,12 +106,10 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/deloschang/memeja/webapp/templates'
 )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
-    'django.contrib.humanize',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -125,18 +122,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
-
-# Registration Options
-ACCOUNT_ACTIVATION_DAYS=7
-
-# Workaround for dev server
-EMAIL_HOST='localhost'
-EMAIL_PORT=1025
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'testing@memeja.com'
-#EMAIL_HOST_USER='deloschang'
-#EMAIL_HOST_PASSWORD='pf1cs3f2xo3q'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
