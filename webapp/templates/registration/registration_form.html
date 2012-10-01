@@ -81,7 +81,7 @@
             swfVersionStr, xiSwfUrlStr, 
             flashvars, params, attributes);
         // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
-        //swfobject.createCSS("#flashContent", "display:block;text-align:left");
+            swfobject.createCSS("#flashContent", "display:block;text-align:left");
       </script>
 
       <br>
@@ -97,7 +97,7 @@
       </div>
 
       {# uploader  -- should be separate #}
-      {% include 'list.html' %}
+      {# include 'list.html' #}
 
 {% endif %}
 {% endblock %}
