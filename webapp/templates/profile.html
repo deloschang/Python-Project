@@ -4,6 +4,13 @@
 
 {% extends 'base.html' %}
 
+{# links new/uncategorized memes to the front page #}
 {% block content %}
-  Default Albums go here.
+  {% if documents %}
+    {% for documents in documents %}
+      <ul>
+        <li> hello </li>
+      </ul>
+    {% endfor %}
+  {% endif %}
 {% endblock %}

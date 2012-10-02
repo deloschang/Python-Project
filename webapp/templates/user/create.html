@@ -6,11 +6,12 @@
 {% block content %}
   <!-- List of uploaded documents -->
   {% if documents %}
-    <ul>
       {% for documents in documents %}
-        <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+        <ul>
+          <li>hello</li>
+          <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+        </ul>
       {% endfor %}
-    </ul>
   {% else %}
     <p>No documents.</p>
   {% endif %}

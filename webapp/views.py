@@ -20,9 +20,16 @@ def index(request, backend, success_url=None,
         return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
     else:
         # logic to show albums/profile page
-        return render_to_response('profile.html', RequestContext(request))
+
+        # show uncategorized memes on the profile 
+        documents = Document.objects.all()
+        return render_to_response(
+                'profile.html',
+                {'documents': documents},
+                RequestContext(request))
 
 def create(request):
+    #import pdb; pdb.set_trace()
     # Handle file upload
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
@@ -36,8 +43,7 @@ def create(request):
         form = DocumentForm() # A empty, unbound form
 
     # Load documents for the list page
-    #documents = Document.objects.all()
-    documents = False;
+    documents = Document.objects.all()
 
     # Render list page with the documents and the form
     return render_to_response(
