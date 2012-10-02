@@ -18,7 +18,7 @@ urlpatterns = patterns('',
 
     # First page that user comes to 
     url(r'^$', include('webapp.urls')),
-    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^', include('registration.backends.default.urls')),
 
 
     url(r'^', include('webapp.urls')),

@@ -17,11 +17,10 @@ def index(request, backend, success_url=None,
         extra_context=None):
     if not request.user.is_authenticated():
         # logic to show landing page with 
-        #return render_to_response('landing.html', RequestContext(request))
         return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
     else:
-        # logic to show albums
-        return render_to_response('base.html', RequestContext(request))
+        # logic to show albums/profile page
+        return render_to_response('profile.html', RequestContext(request))
 
 def list(request):
     # Handle file upload

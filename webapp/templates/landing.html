@@ -1,5 +1,5 @@
 {# NLU LANDING PAGE #}
-{# This page is the landing page that extends from the base design #}
+{# This is the first page that the non-logged-in user sees #}
 {# Authentication is handled in views.index #}
 
 {% extends 'base.html' %}
@@ -81,5 +81,7 @@
           <iframe src="http://player.vimeo.com/video/47618336?byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
         </div>
       </div>
+  {% else %}
+    {% include 'profile.html' %}
   {% endif %}
 {% endblock %}
