@@ -1,6 +1,54 @@
-{% extends "base.html" %}
+{#{% extends "base.html" %}#}
+  {% if not user.is_authenticated %}
+    {% if form.errors %}
+      <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
+    {% endif %}
 
-{% block title %}Memeja: Index{% endblock %}
+      
+    <div id="headline">Share Experiences With the People You Care About</div>
+    <h1>Create an account</h1>
+    
+    <form method="post" action="" class="wide">
+    {% csrf_token %}
+      <p>
+        <label for="id_username">Full Name:</label>
+        {% if form.username.errors %}
+          <p class="errors">{{ form.username.errors.as_text }}</p>
+        {% endif %}
+        {{ form.username }}
+      </p>
+      <p>
+        <label for="id_email">Email:</label>
+        {% if form.email.errors %}
+          <p class="errors">{{ form.email.errors.as_text }}</p>
+        {% endif %}
+        {{ form.email }}
+      </p>
+      <p>
+        <label for="id_password1">Password:</label>
+        {% if form.password1.errors %}
+          <p class="errors">{{ form.password1.errors.as_text }}</p>
+        {% endif %}
+        {{ form.password1 }}
+      </p>
+      <p>
+        <label for="id_password2">Password (type again to catch typos):</label>
+        {% if form.password2.errors %}
+          <p class="errors">{{ form.password2.errors.as_text }}</p>
+        {% endif %}
+        {{ form.password2 }}
+      </p>
+      <p class="submit"><input type="submit" value="Register &rarr;"></p>
+    </form>
+    
+      {# Sample Comment Code #}
+      <div id="video_container">
+        <div id="video">
+          <iframe src="http://player.vimeo.com/video/47618336?byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+        </div>
+      </div>
+
+  {% endif %}
 
 {% block content %}
   {% if not user.is_authenticated %}
@@ -56,6 +104,8 @@
   {% else %}
 
       {# User has now logged in #}
+
+      {# Should now show album page when user is logged in #}
       
         {# Library Support for Macromeme #}
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
@@ -97,7 +147,7 @@
       </div>
 
       {# uploader  -- should be separate #}
-      {# include 'list.html' #}
+      {% include 'list.html' %}
 
 {% endif %}
 {% endblock %}
@@ -107,4 +157,4 @@
     <p>We'll only use your email to send you signup instructions. We hate spam
 as much as you do.</p>
   {% endif %}
-{% endblock %}
+  {% endblock %}

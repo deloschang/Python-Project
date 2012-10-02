@@ -1,0 +1,85 @@
+{# NLU LANDING PAGE #}
+{# This page is the landing page that extends from the base design #}
+{# Authentication is handled in views.index #}
+
+{% extends 'base.html' %}
+
+{# Muaz Cloud Design #}
+  <!--Commented out for now -->
+		<!--<div id="cloud_container">-->
+				<!--<div id="cloud_1" class="large_cloud"></div>-->
+				<!--<div id="cloud_2" class="large_cloud"></div>-->
+				<!--<div id="cloud_3" class="large_cloud"></div>-->
+				<!--<div id="cloud_4" class="large_cloud"></div>-->
+				<!--<div id="cloud_5" class="cloud"></div>-->
+				<!--<div id="cloud_6" class="cloud"></div>-->
+				<!--<div id="cloud_7" class="cloud"></div>-->
+				<!--<div id="cloud_8" class="cloud"></div>-->
+				<!--<div id="cloud_9" class="cloud"></div>-->
+				<!--<div id="cloud_11" class="cloud"></div>-->
+				<!--<div id="cloud_12" class="cloud"></div>-->
+				<!--<div id="cloud_13" class="cloud"></div>-->
+				<!--<div id="cloud_14" class="cloud"></div>-->
+				<!--<div id="cloud_15" class="cloud"></div>-->
+				<!--<div id="cloud_16" class="cloud"></div>-->
+				<!--<div id="cloud_17" class="cloud"></div>	-->
+		<!--</div>-->
+
+{# Funnel NLU to Registration system #}
+
+{% block content %}
+  {% if not user.is_authenticated %}
+    {# User is not authenticated #}
+      {# Show registration page #}
+
+    {% if form.errors %}
+      <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
+    {% endif %}
+
+      
+    {# Value Proposition Line #} 
+    <div id="headline">Share Experiences With the People You Care About</div>
+
+    <h1>Create an account</h1>
+    
+    <form method="post" action="" class="wide">
+    {% csrf_token %}
+      <p>
+        <label for="id_username">Full Name:</label>
+        {% if form.username.errors %}
+          <p class="errors">{{ form.username.errors.as_text }}</p>
+        {% endif %}
+        {{ form.username }}
+      </p>
+      <p>
+        <label for="id_email">Email:</label>
+        {% if form.email.errors %}
+          <p class="errors">{{ form.email.errors.as_text }}</p>
+        {% endif %}
+        {{ form.email }}
+      </p>
+      <p>
+        <label for="id_password1">Password:</label>
+        {% if form.password1.errors %}
+          <p class="errors">{{ form.password1.errors.as_text }}</p>
+        {% endif %}
+        {{ form.password1 }}
+      </p>
+      <p>
+        <label for="id_password2">Password (type again to catch typos):</label>
+        {% if form.password2.errors %}
+          <p class="errors">{{ form.password2.errors.as_text }}</p>
+        {% endif %}
+        {{ form.password2 }}
+      </p>
+      <p class="submit"><input type="submit" value="Register &rarr;"></p>
+    </form>
+    
+    {# Video for NLU to watch #}
+      <div id="video_container">
+        <div id="video">
+          <iframe src="http://player.vimeo.com/video/47618336?byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+        </div>
+      </div>
+  {% endif %}
+{% endblock %}

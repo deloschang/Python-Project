@@ -1,70 +1,33 @@
+
+{% comment %}
+  Base.html template is the base design we build on top of. 
+  Only add code here to show on entire site 
+{% endcomment %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mainpg.css"/>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <title>{% block title %}Memeja{% endblock %}</title>
 
-        {# Library Support for Macromeme #}
-        <!--
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
-      <script type="text/javascript">
-        // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
-        var swfVersionStr = "11.2.0";
-        // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
-        var xiSwfUrlStr = "playerProductInstall.swf";
-        var flashvars = {};
-        flashvars.appId = "219049284838691";
-        var params = {};
-        params.quality = "high";
-        params.bgcolor = "#FFFFFF";
-        params.allowscriptaccess = "sameDomain";
-        params.allowfullscreen = "true";
-        var attributes = {};
-        attributes.id = "macromeme";
-        attributes.name = "macromeme";
-        attributes.align = "middle";
-        swfobject.embedSWF(
-        "{{ STATIC_URL }}macromeme.swf", "flashContent", 
-            "100%", "100%", 
-            swfVersionStr, xiSwfUrlStr, 
-            flashvars, params, attributes);
-        // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
-        swfobject.createCSS("#flashContent", "display:block;text-align:left");
-      </script>
-      -->
-  <!--Commented out for now -->
-		<!--<div id="cloud_container">-->
-				<!--<div id="cloud_1" class="large_cloud"></div>-->
-				<!--<div id="cloud_2" class="large_cloud"></div>-->
-				<!--<div id="cloud_3" class="large_cloud"></div>-->
-				<!--<div id="cloud_4" class="large_cloud"></div>-->
-				<!--<div id="cloud_5" class="cloud"></div>-->
-				<!--<div id="cloud_6" class="cloud"></div>-->
-				<!--<div id="cloud_7" class="cloud"></div>-->
-				<!--<div id="cloud_8" class="cloud"></div>-->
-				<!--<div id="cloud_9" class="cloud"></div>-->
-				<!--<div id="cloud_11" class="cloud"></div>-->
-				<!--<div id="cloud_12" class="cloud"></div>-->
-				<!--<div id="cloud_13" class="cloud"></div>-->
-				<!--<div id="cloud_14" class="cloud"></div>-->
-				<!--<div id="cloud_15" class="cloud"></div>-->
-				<!--<div id="cloud_16" class="cloud"></div>-->
-				<!--<div id="cloud_17" class="cloud"></div>	-->
-		<!--</div>-->
+    {% comment %}
+      Note: 
+        Abstract these bars to another template page 
+    {% endcomment %}
 
-    <div id="sidebar">
-      {% block sidebar %}{% endblock %}
-    </div>
-
-    <div id="login_button">
+    <div id="header_bar">
       {% if user.is_authenticated %}
         {# permanent header at top in base.html #}
-          You are authenticated!<a href="/logout/">Log out</a>
+          <ul>
+            <li><a href="/create"> Create </a></li> 
+            <li><a href="/">Profile</a></li>
+            <li> You are authenticated!<a href="/logout/">Log out</a></li>
+          </ul>
       {% else %}
-        <a href="/login/">Log in</a> and remove T's element! 
+        <a href="/login/">Log in</a> 
       {% endif %}
     </div>
-    
+
     <div id="intro_logo">
       <a href="##LBL_SITE_URL##" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif"style="width:228px;height:70px;"/></a>
     </div>
@@ -79,6 +42,7 @@
    {% block content-related %}
    {% endblock %}
 
+   {# Old Code #}
 		<!--<div id="cta_button">-->
 			<!--<div id="cta_login"class="fb-login-button" size="large" scope="-->
 					<!--email,-->

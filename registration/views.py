@@ -94,7 +94,7 @@ def activate(request, backend,
 
 def register(request, backend, success_url=None, form_class=None,
              disallowed_url='registration_disallowed',
-             template_name='registration/registration_form.html',
+             template_name='landing.html',
              extra_context=None):
     """
     Allow a new user to register an account.

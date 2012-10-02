@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from webapp.views import index
+#from webapp.views import index
 from django.views.static import *
 
 # Uncomment the next two lines to enable the admin:
@@ -13,10 +13,12 @@ from django.conf.urls.static import static
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'memeja.views.home', name='home'),
+    #url(r'^$', 'webapp.views.home', name='home'),
     # url(r'^memeja/', include('memeja.foo.urls')),
 
-    url(r'^', include('registration.backends.default.urls')),
+    # First page that user comes to 
+    url(r'^$', include('webapp.urls')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
 
 
     url(r'^', include('webapp.urls')),
