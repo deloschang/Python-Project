@@ -22,7 +22,7 @@ def index(request, backend, success_url=None,
         # logic to show albums/profile page
         return render_to_response('profile.html', RequestContext(request))
 
-def list(request):
+def create(request):
     # Handle file upload
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
@@ -31,7 +31,7 @@ def list(request):
             newdoc.save()
 
             # Redirect to the document list after POST
-            return HttpResponseRedirect(reverse('webapp.views.list'))
+            return HttpResponseRedirect(reverse('webapp.views.create'))
     else:
         form = DocumentForm() # A empty, unbound form
 
@@ -41,7 +41,7 @@ def list(request):
 
     # Render list page with the documents and the form
     return render_to_response(
-        'list.html',
+        'user/create.html',
         {'documents': documents, 'form': form},
         context_instance=RequestContext(request)
     )
