@@ -1,5 +1,7 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 
+{% block content %}
   <!-- List of uploaded documents -->
   {% if documents %}
     <ul>
@@ -22,3 +24,4 @@
       </p>
       <p><input type="submit" value="Upload" /></p>
     </form>
+{% endblock %}
