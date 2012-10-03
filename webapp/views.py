@@ -38,15 +38,12 @@ def create(request):
             newimage = Meme(image = request.FILES['image'])
             newimage.save()
 
-
-#
-# FIGURE OUT REDIRECT BACK TO THE PROFILE PAGE
-#
-
-            return render_to_response(
-                'profile.html',
-                context_instance=RequestContext(request)
-            )
+            #redirect('webapp.views.index')
+            return HttpResponseRedirect(reverse('memeja_index'))
+            #return render_to_response(
+                #'profile.html',
+                #context_instance=RequestContext(request)
+            #)
 
 
 
@@ -66,11 +63,11 @@ def create(request):
     #documents = Document.objects.all()
 
     # Render list page with the documents and the form
-    return render_to_response(
-        'user/create.html',
-        #{'documents': documents, 'form': form},
-        {'form': imageform},
-        context_instance=RequestContext(request)
-    )
+        return render_to_response(
+            'user/create.html',
+            #{'documents': documents, 'form': form},
+            {'form': imageform},
+            context_instance=RequestContext(request)
+        )
 
 
