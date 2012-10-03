@@ -5,29 +5,38 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from webapp.models import Document, Meme
-from webapp.forms import DocumentForm, ImageUploadForm
+from webapp.models import *
+from webapp.forms import *
 
 # for registration
 from registration.views import register
 
+# Home URL
 def index(request, backend, success_url=None, 
         form_class=None, profile_callback=None,
         template_name='landing.html',
         extra_context=None):
     if not request.user.is_authenticated():
-        # logic to show landing page with 
+
+        # SHOW LANDING PAGE WITH REGISTRATION
         return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
     else:
-        # logic to show albums/profile page
 
-        # show uncategorized memes on the profile 
+        # SHOW PROFILE PAGE 
+
+        # grabs memes from the database
         memes = Meme.objects.all()
+        
+        # grabs experiences from the database
+        experiences = Experiences.objects.all()
+        addexperienceform = AddExperienceForm()
+        
         return render_to_response(
                 'profile.html',
-                {'memes': memes},
+                {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform},
                 RequestContext(request))
 
+# Upload a Meme 
 def create(request):
     #import pdb; pdb.set_trace()
     # Handle file upload
@@ -70,4 +79,16 @@ def create(request):
             context_instance=RequestContext(request)
         )
 
+def add_experience(request):
+    import pdb;
+    if request.method == 'POST':
+        # add experience into database
+        
+        new_experience_form = AddExperienceForm(request.POST)
+        if new_experience_form.is_valid(): 
+            post = request.POST
 
+            # adds the title into database
+            new_experience = Experiences(title = request.POST['title'])
+            new_experience.save()
+            return HttpResponseRedirect(reverse('memeja_index'))

@@ -6,6 +6,27 @@
 
 {# displays new/uncategorized memes to profile for categorization#}
 {% block content %}
+  <h1><div>Albums:</div></h1>
+  <div><a href="javascript:void(0);">Add Experience</a></div>
+
+  {# Temporary placeholder until JS implemented #}
+  <div>
+    <form action="{% url add_experience %}" method="post">
+      {% csrf_token %}
+      {{ addexperienceform.title }}
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+  {# end #}
+    {% if experiences %}
+      hi
+    {% else %}
+      Uncategorized [ Invite | Del ]
+    {% endif %}
+
+ <div>-----------------</div> 
+
+  <h1><div>Uncategorized Memes: (Drag into an album)</div></h1>
   {% if memes %}
     {% for memes in memes %}
       <ul>
