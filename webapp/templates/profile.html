@@ -4,12 +4,12 @@
 
 {% extends 'base.html' %}
 
-{# links new/uncategorized memes to the front page #}
+{# displays new/uncategorized memes to profile for categorization#}
 {% block content %}
-  {% if documents %}
-    {% for documents in documents %}
+  {% if memes %}
+    {% for memes in memes %}
       <ul>
-        <li> hello </li>
+        <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
       </ul>
     {% endfor %}
   {% endif %}
