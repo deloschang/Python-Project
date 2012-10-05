@@ -83,8 +83,11 @@
     this.style.opacity = '0.4';
     this.classList.add('over');
 
+    {# set source object #}
+    DRAGSOURCE = this;
+
     e.dataTransfer.effectAllowed = 'copy'; 
-    e.dataTransfer.setData('Text', this.id);
+    e.dataTransfer.setData('Text', this.innerHTML);
   }
 
   var cols = document.querySelectorAll('#uncategorized .uncatmemes');
@@ -93,13 +96,11 @@
   });
 
   var bin = document.querySelectorAll('.experiences_list');
-  console.log(bin);
 
   {# when image dragged over album #}
   addEvent(bin, 'dragover', function(e){
     if (e.preventDefault)
       e.preventDefault();
-    console.log('dragged over');
 
     this.classList.add('over');
     e.dataTransfer.dropEffect = 'copy';
@@ -110,10 +111,16 @@
   addEvent(bin, 'drop', function(e) {
     if (e.stopPropagation)
       e.stopPropagation();
-    console.log('dropped');
-    $('.uncatmemes').remove()
 
-    {# AJAX call to add meme into album #}
+    {# link specific meme to disappear #}
+    $(DRAGSOURCE).remove(); 
+    
+    {# AJAX call to add meme into album - server side #}
+    {% comment %}
+      post = 'image name'
+      $.post(' some url ', post
+        then view changes things in database.
+    {% endcomment %}
     
   });
   </script>
