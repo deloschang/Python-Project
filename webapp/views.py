@@ -39,6 +39,7 @@ def index(request, backend, success_url=None,
 # Upload a Meme 
 def create(request):
     #import pdb; pdb.set_trace()
+
     # Handle file upload
     if request.method == 'POST':
         imageform = ImageUploadForm(request.POST, request.FILES)
@@ -46,6 +47,13 @@ def create(request):
         if imageform.is_valid():
             newimage = Meme(image = request.FILES['image'])
             newimage.save()
+
+            testalbum = Experiences.objects.get(pk=1)
+
+            #
+            # Move to dragging functionality
+            #
+            newimage.e.add(testalbum)
 
             #redirect('webapp.views.index')
             return HttpResponseRedirect(reverse('memeja_index'))
@@ -92,3 +100,13 @@ def add_experience(request):
             new_experience = Experiences(title = request.POST['title'])
             new_experience.save()
             return HttpResponseRedirect(reverse('memeja_index'))
+
+def show_experience(request, pk):
+    experiences = Experiences.objects.get(pk=pk)
+
+    memes = experiences.meme_set.all()
+    return render_to_response(
+        'user/experience_display.html', 
+        {'experiences' : experiences, 'memes' : memes},
+        context_instance = RequestContext(request)
+    ) 

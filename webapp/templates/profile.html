@@ -6,6 +6,8 @@
 
 {# displays new/uncategorized memes to profile for categorization#}
 {% block content %}
+  
+
   <h1><div>Albums:</div></h1>
   <div><a href="javascript:void(0);">Add Experience</a></div>
 
@@ -13,15 +15,21 @@
   <div>
     <form action="{% url add_experience %}" method="post">
       {% csrf_token %}
-      {{ addexperienceform.title }}
+        {{ addexperienceform.title }}
       <input type="submit" value="Submit" />
     </form>
   </div>
   {# end #}
     {% if experiences %}
-      hi
+      {% for experiences in experiences %}
+        <ul>
+          <li><a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list"> {{ experiences.title }} </a>
+            ({{ experiences.memes_set.count }} memes)
+          </li>
+        </ul>
+      {% endfor %}
     {% else %}
-      Uncategorized [ Invite | Del ]
+      No experience albums
     {% endif %}
 
  <div>-----------------</div> 
@@ -30,8 +38,84 @@
   {% if memes %}
     {% for memes in memes %}
       <ul>
-        <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
+        <div id="uncategorized">
+          <img src="{{ MEDIA_URL }}/{{ memes.image }}" class="uncatmemes"/>
+        </div>
       </ul>
     {% endfor %}
   {% endif %}
+  <style>
+    .over {
+      border: 2px dashed #000;
+    }
+  </style>
+
+  {# Move to external file #}
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script>
+  {# JS utils #}
+  var addEvent = (function () {
+    if (document.addEventListener) {
+      return function (el, type, fn) {
+        if (el && el.nodeName || el === window) {
+          el.addEventListener(type, fn, false);
+        } else if (el && el.length) {
+          for (var i = 0; i < el.length; i++) {
+            addEvent(el[i], type, fn);
+          }
+        }
+      };
+    } else {
+      return function (el, type, fn) {
+        if (el && el.nodeName || el === window) {
+          el.attachEvent('on' + type, function () { return fn.call(el, window.event); });
+        } else if (el && el.length) {
+          for (var i = 0; i < el.length; i++) {
+            addEvent(el[i], type, fn);
+          }
+        }
+      };
+    }
+  })();
+  {# end #}
+
+  function handleDragStart(e){
+    this.style.opacity = '0.4';
+    this.classList.add('over');
+
+    e.dataTransfer.effectAllowed = 'copy'; 
+    e.dataTransfer.setData('Text', this.id);
+  }
+
+  var cols = document.querySelectorAll('#uncategorized .uncatmemes');
+  [].forEach.call(cols, function(col) {
+    col.addEventListener('dragstart', handleDragStart, false);
+  });
+
+  var bin = document.querySelectorAll('.experiences_list');
+  console.log(bin);
+
+  {# when image dragged over album #}
+  addEvent(bin, 'dragover', function(e){
+    if (e.preventDefault)
+      e.preventDefault();
+    console.log('dragged over');
+
+    this.classList.add('over');
+    e.dataTransfer.dropEffect = 'copy';
+    return false;
+  });
+
+  {# when image dropped into album #}
+  addEvent(bin, 'drop', function(e) {
+    if (e.stopPropagation)
+      e.stopPropagation();
+    console.log('dropped');
+    $('.uncatmemes').remove()
+
+    {# AJAX call to add meme into album #}
+    
+  });
+  </script>
+
 {% endblock %}
