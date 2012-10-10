@@ -126,10 +126,20 @@ def show_experience(request, pk):
 def meme_in_album(request):
     if request.is_ajax():
         if request.method == 'POST':
+            dragged_meme_id = request.POST['meme']
+            dropped_album_id = request.POST['album']
+
+            dragged_meme_obj = Meme.objects.get(pk=dragged_meme_id)
+            dropped_album_obj = Experiences.objects.get(pk=dropped_album_id)
+
+            dragged_meme_obj.e.add(dropped_album_obj)
+
             # newimage = Meme.objects.get(pk=#)
             # testalbum = Experiences.objects.get(pk=#)
             # newimage.e.add(testalbum)
-            return HttpResponse(request.POST['meme'])
-            #return render_to_response('base.html')
+
+            #updated_meme_count = dropped_album_obj.meme_set.count
+            return HttpResponse('success')
+            #return render_to_response('user/experience_display.html')
     else:
         return HttpResponse('this is not ajax')

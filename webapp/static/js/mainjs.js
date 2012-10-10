@@ -75,18 +75,20 @@
     // link specific meme to disappear #}
     if (DRAGSOURCE){
       $(DRAGSOURCE).remove(); 
-    }
     
-    var csrftoken = getCookie('csrftoken');
+      var csrftoken = getCookie('csrftoken');
 
-    //// AJAX call to add meme into album - server side #}
-    $.post('/meme_in_album/', {
-      meme:DRAGSOURCE.id,
-      'csrfmiddlewaretoken': csrftoken  
-      // id of the meme to pass in #}
-      // id of album to pass in #}
-    }, 
-      function(data){
-        console.log(data);
-    });
+      //// AJAX call to add meme into album - server side #}
+      $.post('/meme_in_album/', {
+        meme:DRAGSOURCE.id,
+        album:this.id,
+        'csrfmiddlewaretoken': csrftoken  
+      }, 
+        function(data){
+          //show user validation
+          // if success...
+            // update album count by 1 and show some check mark
+          console.log(data);
+      });
+    }
   });
