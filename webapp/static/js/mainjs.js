@@ -58,7 +58,7 @@
 
   var bin = document.querySelectorAll('.experiences_list');
 
-  //// when image dragged over album #}
+  // when image dragged over album #}
   addEvent(bin, 'dragover', function(e){
     if (e.preventDefault)
       e.preventDefault();
@@ -67,19 +67,21 @@
     return false;
   });
 
-  //// when image dropped into album #}
+  // when image dropped into album #}
   addEvent(bin, 'drop', function(e) {
     if (e.stopPropagation)
       e.stopPropagation();
 
-    //// link specific meme to disappear #}
-    $(DRAGSOURCE).remove(); 
+    // link specific meme to disappear #}
+    if (DRAGSOURCE){
+      $(DRAGSOURCE).remove(); 
+    }
     
     var csrftoken = getCookie('csrftoken');
 
     //// AJAX call to add meme into album - server side #}
     $.post('/meme_in_album/', {
-      meme:'hello',
+      meme:DRAGSOURCE.id,
       'csrfmiddlewaretoken': csrftoken  
       // id of the meme to pass in #}
       // id of album to pass in #}

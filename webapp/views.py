@@ -125,7 +125,11 @@ def show_experience(request, pk):
 # drag meme into album and update server
 def meme_in_album(request):
     if request.is_ajax():
-        return HttpResponse(request.POST['meme'])
-        #return render_to_response('base.html')
+        if request.method == 'POST':
+            # newimage = Meme.objects.get(pk=#)
+            # testalbum = Experiences.objects.get(pk=#)
+            # newimage.e.add(testalbum)
+            return HttpResponse(request.POST['meme'])
+            #return render_to_response('base.html')
     else:
         return HttpResponse('this is not ajax')
