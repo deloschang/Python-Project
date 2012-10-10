@@ -3,6 +3,10 @@ from django.template import RequestContext
 
 # for file uploader
 from django.http import HttpResponseRedirect
+
+# temp to test AJAX
+from django.http import HttpResponse
+
 from django.core.urlresolvers import reverse
 
 from webapp.models import *
@@ -52,9 +56,11 @@ def create(request):
 
             testalbum = Experiences.objects.get(pk=1)
 
+            #### TEMPORARY ####
             #
             # Move to dragging functionality
             #
+
             newimage.e.add(testalbum)
 
             #redirect('webapp.views.index')
@@ -115,3 +121,11 @@ def show_experience(request, pk):
         {'experiences' : experiences, 'memes' : memes},
         context_instance = RequestContext(request)
     ) 
+
+# drag meme into album and update server
+def meme_in_album(request):
+    if request.is_ajax():
+        return HttpResponse(request.POST['meme'])
+        #return render_to_response('base.html')
+    else:
+        return HttpResponse('this is not ajax')

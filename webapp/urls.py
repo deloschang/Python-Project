@@ -8,4 +8,5 @@ urlpatterns = patterns('webapp.views',
     url(r'^add_experience/$', add_experience, name='add_experience'),
     
     (r"^(\d+)/$", "show_experience"),
+    (r'^meme_in_album/$', 'meme_in_album'),
 )

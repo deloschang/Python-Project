@@ -119,6 +119,14 @@
     $(DRAGSOURCE).remove(); 
     
     {# AJAX call to add meme into album - server side #}
+    $.post('/meme_in_album/', {
+      meme:'hello',
+      'csrfmiddlewaretoken': '{{ csrf_token }}'
+    }, 
+      function(data){
+      console.log(data);
+    });
+
     {% comment %}
       post = 'image name'
       $.post(' some url ', post
