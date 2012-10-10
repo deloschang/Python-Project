@@ -20,11 +20,13 @@
     </form>
   </div>
   {# end #}
+
+  {# Displays existing experiences #}
     {% if experiences %}
       {% for experiences in experiences %}
         <ul>
           <li><a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list"> {{ experiences.title }} </a>
-            ({{ experiences.memes_set.count }} memes)
+            ({{ experiences.meme_set.count }} memes)
           </li>
         </ul>
       {% endfor %}
@@ -38,12 +40,14 @@
   {% if memes %}
     {% for memes in memes %}
       <ul>
-        <div id="uncategorized">
-          <img src="{{ MEDIA_URL }}/{{ memes.image }}" class="uncatmemes"/>
-        </div>
+        <span id="uncategorized">
+          <img src="{{ MEDIA_URL }}/{{ memes.image }}" class="uncatmemes" style="float:left;"/>
+        </span>
       </ul>
     {% endfor %}
   {% endif %}
+
+  {# External CSS #}
   <style>
     .over {
       border: 2px dashed #000;
@@ -102,7 +106,6 @@
     if (e.preventDefault)
       e.preventDefault();
 
-    this.classList.add('over');
     e.dataTransfer.dropEffect = 'copy';
     return false;
   });

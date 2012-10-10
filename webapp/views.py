@@ -16,19 +16,21 @@ def index(request, backend, success_url=None,
         form_class=None, profile_callback=None,
         template_name='landing.html',
         extra_context=None):
-    if not request.user.is_authenticated():
 
-        # SHOW LANDING PAGE WITH REGISTRATION
+    # Show landing page with registration 
+    if not request.user.is_authenticated():
         return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
     else:
 
         # SHOW PROFILE PAGE 
 
-        # grabs memes from the database
+        # grabs uncategorized memes from the database
         memes = Meme.objects.all()
         
-        # grabs experiences from the database
+        # grabs existing experiences/albums from the database
         experiences = Experiences.objects.all()
+
+        # form to create new experience/album
         addexperienceform = AddExperienceForm()
         
         return render_to_response(
@@ -87,8 +89,10 @@ def create(request):
             context_instance=RequestContext(request)
         )
 
+
+# Add new album for user   
 def add_experience(request):
-    import pdb;
+    #import pdb;
     if request.method == 'POST':
         # add experience into database
         
@@ -104,6 +108,7 @@ def add_experience(request):
 def show_experience(request, pk):
     experiences = Experiences.objects.get(pk=pk)
 
+    # Grabs memes within the experience albums
     memes = experiences.meme_set.all()
     return render_to_response(
         'user/experience_display.html', 
