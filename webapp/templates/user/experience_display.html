@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{# Images #}
+<ul>
+  <div>Album name: {{ experiences.title }}</div> 
+    <ul>
+      {% for memes in memes %}
+        <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
+      {% endfor %}
+    </ul>
+</ul>
+
+{# Invite friends #}
+Invite friends (django-invitation)
+{% endblock %}
