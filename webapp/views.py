@@ -1,21 +1,26 @@
+# required
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.core.urlresolvers import reverse
 
-# for file uploader
+# for login required
+from django.contrib.auth.decorators import login_required
+
+# for meme uploading
 from django.http import HttpResponseRedirect
 
 # temp to test AJAX
 from django.http import HttpResponse
 
-from django.core.urlresolvers import reverse
 
+# for models and forms
 from webapp.models import *
 from webapp.forms import *
 
 # for registration
 from registration.views import register
 
-# Home URL
+# Home URL and Profile Page
 def index(request, backend, success_url=None, 
         form_class=None, profile_callback=None,
         template_name='landing.html',
@@ -26,13 +31,15 @@ def index(request, backend, success_url=None,
         return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
     else:
 
-        # SHOW PROFILE PAGE 
+        ## SHOW PROFILE PAGE ##
 
         # grabs uncategorized memes from the database
+
+            ## FILTER MEMES BY THE USER ID
         memes = Meme.objects.all()
         
         # grabs existing experiences/albums from the database
-        experiences = Experiences.objects.all()
+        experiences = Experiences.objects.filter(creator = request.user)
 
         # form to create new experience/album
         addexperienceform = AddExperienceForm()
@@ -97,6 +104,8 @@ def create(request):
 
 
 # Add new album for user   
+
+@login_required
 def add_experience(request):
     #import pdb;
     if request.method == 'POST':
@@ -105,12 +114,14 @@ def add_experience(request):
         new_experience_form = AddExperienceForm(request.POST)
         if new_experience_form.is_valid(): 
             post = request.POST
+            logged_user = request.user # the user's username
 
-            # adds the title into database
-            new_experience = Experiences(title = request.POST['title'])
+            # adds the experience from form into database
+            new_experience = Experiences(title = request.POST['title'], creator = logged_user)
             new_experience.save()
             return HttpResponseRedirect(reverse('memeja_index'))
 
+# User clicks an album and experiences are displayed
 def show_experience(request, pk):
     experiences = Experiences.objects.get(pk=pk)
 
