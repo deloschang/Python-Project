@@ -19,14 +19,18 @@
       <input type="submit" value="Submit" />
     </form>
   </div>
+  
   {# end #}
 
   {# Displays existing experiences #}
     {% if experiences %}
       {% for experiences in experiences %}
         <ul>
-          <li><a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}"> {{ experiences.title }} </a>
+          <li><a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
             ({{ experiences.meme_set.count }} memes)
+            {# Temporary #}
+            <br><br>
+            {# end #}
           </li>
         </ul>
       {% endfor %}

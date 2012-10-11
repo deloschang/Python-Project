@@ -78,8 +78,10 @@
     
       var csrftoken = getCookie('csrftoken');
 
-      //// AJAX call to add meme into album - server side #}
+      // AJAX call to add meme into album - server side #}
       $.post('/meme_in_album/', {
+        
+        // figure out better way to retrieve id
         meme:DRAGSOURCE.id,
         album:this.id,
         'csrfmiddlewaretoken': csrftoken  
