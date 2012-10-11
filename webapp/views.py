@@ -29,16 +29,17 @@ def index(request, backend, success_url=None,
     # Show landing page with registration 
     if not request.user.is_authenticated():
         return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
+
+    ## SHOW PROFILE PAGE ##
     else:
 
-        ## SHOW PROFILE PAGE ##
 
         # grabs uncategorized memes from the database
-
-            ## FILTER MEMES BY THE USER ID
-        memes = Meme.objects.all()
+        # filter by USER
+        memes = Meme.objects.filter(creator = request.user)
         
         # grabs existing experiences/albums from the database
+        # filter by USER
         experiences = Experiences.objects.filter(creator = request.user)
 
         # form to create new experience/album
@@ -50,6 +51,7 @@ def index(request, backend, success_url=None,
                 RequestContext(request))
 
 # Upload a Meme 
+@login_required
 def create(request):
     #import pdb; pdb.set_trace()
 
@@ -58,7 +60,7 @@ def create(request):
         imageform = ImageUploadForm(request.POST, request.FILES)
 
         if imageform.is_valid():
-            newimage = Meme(image = request.FILES['image'])
+            newimage = Meme(image = request.FILES['image'], creator = request.user)
             newimage.save()
 
             testalbum = Experiences.objects.get(pk=1)

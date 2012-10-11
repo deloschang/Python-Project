@@ -12,13 +12,12 @@ class Experiences(models.Model):
 
 class Meme(models.Model):
     image = models.ImageField(upload_to='images/%Y/%m%d')
-    #creator = models.ForeignKey(User, null=True, blank=True)
+    creator = models.ForeignKey(User, null=True, blank=True)
     # many-to-many relationship with the experiences
 
     e = models.ManyToManyField(Experiences, blank=True)
     #created = models.DateTimeField(auto_now_add=True)
 
-    # user id
     # which album it goes into
 
     def __unicode__(self):
