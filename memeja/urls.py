@@ -18,6 +18,9 @@ urlpatterns = patterns('',
 
     # First page that user comes to 
     url(r'^$', include('webapp.urls')),
+
+    # invitation urls
+    url(r'^', include('invitation.urls')),
     url(r'^', include('registration.backends.default.urls')),
 
 

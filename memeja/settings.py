@@ -118,8 +118,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webapp',
-    'registration',
+    'webapp', # main application
+    'registration', # registration system
+    'invitation', # invitation system
     'south',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
@@ -129,6 +130,10 @@ INSTALLED_APPS = (
 
 # Registration Options
 ACCOUNT_ACTIVATION_DAYS=7
+
+# Invitation Keys
+ACCOUNT_INVITATION_DAYS=14  # number of days invitation keys remain valid
+INVITATIONS_PER_USER = 7 
 
 # Workaround for dev server
 EMAIL_HOST='localhost'

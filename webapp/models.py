@@ -6,6 +6,8 @@ class Experiences(models.Model):
     title = models.CharField(max_length=60)
     creator = models.ForeignKey(User, null=True, blank=True)
 
+    # add invited field to for users to be added in when invited.
+
 
     def __unicode__(self):
         return self.title
