@@ -1,6 +1,10 @@
 import os
 import random
 import datetime
+
+# manually imported to fix naive and aware comparisons
+from django.utils import timezone
+
 from django.db import models
 from django.conf import settings
 from django.utils.http import int_to_base36
@@ -78,7 +82,7 @@ class InvitationKey(models.Model):
         
         """
         expiration_date = datetime.timedelta(days=settings.ACCOUNT_INVITATION_DAYS)
-        return self.date_invited + expiration_date <= datetime.datetime.now()
+        return self.date_invited + expiration_date <= timezone.now()
     key_expired.boolean = True
     
     def send_to(self, email):

@@ -15,8 +15,9 @@ is_key_valid = InvitationKey.objects.is_key_valid
 # TODO: move the authorization control to a dedicated decorator
 
 def invited(request, invitation_key=None):
-    if 'INVITE_MODE' in settings.get_all_members() and settings.INVITE_MODE:
-        if invitation_key and is_key_valid(invitation_key):
+    #if 'INVITE_MODE' in settings.get_all_members() and settings.INVITE_MODE:
+    if hasattr(settings, 'INVITE_MODE') and settings.INVITE_MODE:
+        if invitation_key and is_key_valid(invitation_key): 
             template = 'invitation/invited.html'
         else:
             template = 'invitation/wrong_invitation_key.html'

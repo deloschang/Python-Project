@@ -20,6 +20,9 @@ from webapp.forms import *
 # for registration
 from registration.views import register
 
+# for invitation
+from invitation.views import invite
+
 # Home URL and Profile Page
 def index(request, backend, success_url=None, 
         form_class=None, profile_callback=None,

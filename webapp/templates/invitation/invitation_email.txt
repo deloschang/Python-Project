@@ -1,0 +1,4 @@
+This is the invitation email body.
+
+Here is your invitation from {{ site }}: {{ invitation_key }}.
+It will expire in {{ expiration_days }} days 
