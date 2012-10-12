@@ -22,17 +22,40 @@ from registration.views import register
 
 # for invitation (experimental)
 from invitation.views import invite
+from django.conf import settings
+from invitation.models import InvitationKey
 
 # Home URL and Profile Page
 def index(request, backend, success_url=None, 
         form_class=None, profile_callback=None,
         template_name='landing.html',
-        extra_context=None):
+        extra_context=None, invitation_key=None):
 
     # Show landing page with registration 
     if not request.user.is_authenticated():
-        return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
+        # Check invite mode 
+        if hasattr(settings, 'INVITE_MODE') and settings.INVITE_MODE:
+            is_key_valid = InvitationKey.objects.is_key_valid
 
+            # User enters site 
+            if invitation_key and is_key_valid(invitation_key): 
+                # has valid key
+                # show prefilled registration
+                return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
+
+            else:
+                if invitation_key == None:
+                    # User enters website normally (uninvited)
+                    return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
+                else:
+                    # User entered invalid key
+                    template = 'invitation/wrong_invitation_key.html'
+                    return render_to_response(template, {'invitation_key': invitation_key})
+
+        else: 
+            # norm registration mode (w/ block)
+            return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
+        
     ## SHOW PROFILE PAGE ##
     else:
 

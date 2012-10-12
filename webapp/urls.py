@@ -3,7 +3,11 @@ from django.conf.urls.defaults import patterns, url
 from webapp.views import *
 
 urlpatterns = patterns('webapp.views', 
-    url(r'^$', index, {'backend' : 'registration.backends.default.DefaultBackend'}, name='webapp_index'),
+    url(r'^$', index, {'backend' : 'registration.backends.default.DefaultBackend'},
+                name='webapp_index'),
+    url(r'^invited/(?P<invitation_key>\w+)/$', 
+                index, {'backend' : 'registration.backends.default.DefaultBackend'},
+                name='invitation_invited'), # change if works
     url(r'^create/$', create, name='create'),
     url(r'^add_experience/$', add_experience, name='add_experience'),
     

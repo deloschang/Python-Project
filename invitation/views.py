@@ -21,32 +21,42 @@ is_key_valid = InvitationKey.objects.is_key_valid
 
 # TODO: move the authorization control to a dedicated decorator
 
-def invited(request, invitation_key=None):
-    #if 'INVITE_MODE' in settings.get_all_members() and settings.INVITE_MODE:
+def invited(request, invitation_key=None,
+            success_url=None, form_class=None, profile_callback=None,
+            template_name='landing.html',
+            extra_context=None):
     if hasattr(settings, 'INVITE_MODE') and settings.INVITE_MODE:
         if invitation_key and is_key_valid(invitation_key): 
-            template = 'invitation/invited.html'
+            #template = 'invitation/invited.html'
+
+            ##### Registration page prefilled w/ user email
+            return render(request, reverse('webapp_index'), {'invitation_key': invitation_key})
+            #return registration_register(request, backend, success_url, form_class, profile_callback, template_name, extra_context={'invitation_key': invitation_key})
+            #return index()
+
         else:
             template = 'invitation/wrong_invitation_key.html'
         return direct_to_template(request, template, {'invitation_key': invitation_key})
+        #return HttpResponseRedirect(reverse('registration_register'))
+        
     else:
         return HttpResponseRedirect(reverse('registration_register'))
 
 def register(request, success_url=None,
             form_class=RegistrationForm, profile_callback=None,
-            template_name='registration/registration_form.html',
+            template_name='landing.html',
             extra_context=None):
-    if 'INVITE_MODE' in settings.get_all_members() and settings.INVITE_MODE:
-        if 'invitation_key' in request.REQUEST \
-            and is_key_valid(request.REQUEST['invitation_key']):
-            if extra_context is None:
-                extra_context = {'invitation_key': request.REQUEST['invitation_key']}
-            else:
-                extra_context.update({'invitation_key': invitation_key})
+    if hasattr(settings, 'INVITE_MODE') and settings.INVITE_MODE:
+        #if 'invitation_key' in request.REQUEST \
+            #and is_key_valid(request.REQUEST['invitation_key']):
+            #if extra_context is None:
+                #extra_context = {'invitation_key': request.REQUEST['invitation_key']}
+            #else:
+                #extra_context.update({'invitation_key': invitation_key})
             return registration_register(request, success_url, form_class, 
                         profile_callback, template_name, extra_context)
-        else:
-            return direct_to_template(request, 'invitation/wrong_invitation_key.html')
+        #else:
+            #return direct_to_template(request, 'invitation/wrong_invitation_key.html')
     else:
         return registration_register(request, success_url, form_class, 
                             profile_callback, template_name, extra_context)
