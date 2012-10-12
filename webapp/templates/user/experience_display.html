@@ -13,4 +13,11 @@
 
 {# Invite friends #}
 Invite friends (django-invitation)
+  <form action="{% url invitation_invite %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>{{ form.as_p }}</p>
+    <p><input type="submit" value="Send" /></p>
+  </form>
+
+  Remaining invitations: {{ remaining_invitations }}
 {% endblock %}

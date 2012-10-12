@@ -20,7 +20,7 @@ from webapp.forms import *
 # for registration
 from registration.views import register
 
-# for invitation
+# for invitation (experimental)
 from invitation.views import invite
 
 # Home URL and Profile Page
@@ -127,16 +127,24 @@ def add_experience(request):
             return HttpResponseRedirect(reverse('memeja_index'))
 
 # User clicks an album and experiences are displayed
-def show_experience(request, pk):
+def show_experience(request, pk,
+        success_url=None, form_class=InvitationKeyForm,
+        template_name='user/experience_display.html',
+        extra_context=None,):
     experiences = Experiences.objects.get(pk=pk)
+
+    # Form to invite friends
+    form = form_class()
 
     # Grabs memes within the experience albums
     memes = experiences.meme_set.all()
-    return render_to_response(
-        'user/experience_display.html', 
-        {'experiences' : experiences, 'memes' : memes},
-        context_instance = RequestContext(request)
-    ) 
+    return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes})
+
+    #return render_to_response(
+        #'user/experience_display.html', 
+        #{'experiences' : experiences, 'memes' : memes},
+        #context_instance = RequestContext(request)
+    #) 
 
 # drag meme into album and update server
 def meme_in_album(request):

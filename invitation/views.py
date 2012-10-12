@@ -1,5 +1,10 @@
 from django.conf import settings
 from django.views.generic.simple import direct_to_template
+
+# modify to allow extra_context for invite function
+from django.template import RequestContext
+from django.shortcuts import render
+
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -46,7 +51,7 @@ def register(request, success_url=None,
 
 def invite(request, success_url=None,
             form_class=InvitationKeyForm,
-            template_name='invitation/invitation_form.html',):
+            template_name='invitation/invitation_form.html', extra_context=None):
     if request.method == 'POST':
         form = form_class(data=request.POST, files=request.FILES)
         if form.is_valid():
@@ -59,8 +64,16 @@ def invite(request, success_url=None,
             return HttpResponseRedirect(success_url or reverse('invitation_complete'))
     else:
         form = form_class()
-    return direct_to_template(request, template_name, {
+
+    # add extra context to load memes and experiences in 
+    if extra_context is None:
+        extra_context = {}
+    context = RequestContext(request)
+    for key, value in extra_context.items():
+        context[key] = value
+
+    return render(request, template_name, {
         'form': form,
         'remaining_invitations': InvitationKey.objects.remaining_invitations_for_user(request.user),
-    })
+    }, context_instance=context)
 invite = login_required(invite)

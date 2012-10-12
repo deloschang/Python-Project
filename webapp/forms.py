@@ -15,3 +15,6 @@ class ImageUploadForm(forms.Form):
 
 class AddExperienceForm(forms.Form):
     title = forms.CharField(max_length=60)
+
+class InvitationKeyForm(forms.Form):
+    email = forms.EmailField()
