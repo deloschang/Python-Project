@@ -5,6 +5,8 @@ from django.views.generic.simple import direct_to_template
 from django.template import RequestContext
 from django.shortcuts import render
 
+from django.contrib import messages
+
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -61,7 +63,11 @@ def invite(request, success_url=None,
             # a default value using reverse() will cause circular-import
             # problems with the default URLConf for this application, which
             # imports this file.
-            return HttpResponseRedirect(success_url or reverse('invitation_complete'))
+
+
+            # Add a message that is output in templates/profile.html
+            messages.add_message(request, messages.INFO, 'Hooray! You invited your friend')
+            return HttpResponseRedirect(success_url or reverse('webapp_index'))
     else:
         form = form_class()
 
