@@ -45,16 +45,15 @@ def index(request, backend, success_url=None,
             if invitation_key and is_key_valid(invitation_key): 
                 # has valid key
 
-                # grab associated email with key
+                # grab associated object with key
                 str_invitation = '"'+invitation_key+'"'
                 invitee_object = InvitationKey.objects.get(key=invitation_key)
-                email_in_key = invitee_object.to_user_email
 
                 # save email in session to pass into registration
-                request.session['email'] = email_in_key
+                request.session['email'] = invitee_object.to_user_email
 
                 # show registration landing w/ prefilled
-                return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context={'invitation_key': invitation_key, 'email_in_key': email_in_key})
+                return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context={'invitation_key': invitation_key, 'invitee_object': invitee_object})
 
             else:
                 if invitation_key == None:
