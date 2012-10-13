@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Experiences(models.Model):
     # user id
     title = models.CharField(max_length=60)
-    creator = models.ForeignKey(User, null=True, blank=True)
+    creator = models.ManyToManyField(User, blank=True)
 
     # add invited field to for users to be added in when invited.
 

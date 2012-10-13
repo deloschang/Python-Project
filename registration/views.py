@@ -181,7 +181,6 @@ def register(request, backend, success_url=None, form_class=None,
     if form_class is None:
         form_class = backend.get_form_class(request)
 
-    import pdb;
 
     if request.method == 'POST':
         # User registering

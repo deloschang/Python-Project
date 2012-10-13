@@ -99,15 +99,6 @@ def create(request):
             newimage = Meme(image = request.FILES['image'], creator = request.user)
             newimage.save()
 
-            testalbum = Experiences.objects.get(pk=1)
-
-            #### TEMPORARY ####
-            #
-            # Move to dragging functionality
-            #
-
-            newimage.e.add(testalbum)
-
             #redirect('webapp.views.index')
             return HttpResponseRedirect(reverse('webapp_index'))
             #return render_to_response(
