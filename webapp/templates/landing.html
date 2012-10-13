@@ -46,7 +46,6 @@
     {% if invitation_key %}
       <h2>
         <div>Welcome! You've been invited! Your key: {{ invitation_key }}</div>
-        <div>Your email: {{ email_in_key }}</div>
       </h2>
     {% endif %}
     
@@ -59,13 +58,20 @@
         {% endif %}
         {{ form.username }}
       </p>
-      <p>
-        <label for="id_email">Email:</label>
-        {% if form.email.errors %}
-          <p class="errors">{{ form.email.errors.as_text }}</p>
-        {% endif %}
-        {{ form.email }}
-      </p>
+
+      {# Use prefilled email for registration #}
+      {% if not email_in_key %}
+        <p>
+          <label for="id_email">Email:</label>
+          {% if form.email.errors %}
+            <p class="errors">{{ form.email.errors.as_text }}</p>
+          {% endif %}
+          {{ form.email }}
+        </p>
+      {% else %}
+        <label for="id_email">Your email: {{ email_in_key }} </label>
+      {% endif %}
+
       <p>
         <label for="id_password1">Password:</label>
         {% if form.password1.errors %}

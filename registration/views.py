@@ -181,8 +181,20 @@ def register(request, backend, success_url=None, form_class=None,
     if form_class is None:
         form_class = backend.get_form_class(request)
 
+    import pdb;
+
     if request.method == 'POST':
-        form = form_class(data=request.POST, files=request.FILES)
+        # User registering
+
+        # copying POST values because POST is immutable
+        post_values = request.POST.copy()
+
+        # Check if user is using invitation
+        if not request.POST.get('email', False) and request.session['email']:
+            #User uses invitation so replace email
+            post_values['email'] = request.session['email']
+
+        form = form_class(data=post_values, files=request.FILES)
         if form.is_valid():
             new_user = backend.register(request, **form.cleaned_data)
             if success_url is None:
@@ -190,6 +202,8 @@ def register(request, backend, success_url=None, form_class=None,
                 return redirect(to, *args, **kwargs)
             else:
                 return redirect(success_url)
+
+
     else:
         form = form_class()
     
