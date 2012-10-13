@@ -42,9 +42,11 @@
 
     <h1>Create an account</h1>
 
+    {# For invited users #}
     {% if invitation_key %}
       <h2>
         <div>Welcome! You've been invited! Your key: {{ invitation_key }}</div>
+        <div>Your email: {{ email_in_key }}</div>
       </h2>
     {% endif %}
     

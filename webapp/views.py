@@ -38,11 +38,16 @@ def index(request, backend, success_url=None,
             is_key_valid = InvitationKey.objects.is_key_valid
             # check key with email and pull email.
 
+
             # User enters site 
             if invitation_key and is_key_valid(invitation_key): 
                 # has valid key
-                # show prefilled registration
-                return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context={'invitation_key': invitation_key})
+                # show prefilled email
+                str_invitation = '"'+invitation_key+'"'
+                invitee_object = InvitationKey.objects.get(key=invitation_key)
+                email_in_key = invitee_object.to_user_email
+
+                return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context={'invitation_key': invitation_key, 'email_in_key': email_in_key})
 
             else:
                 if invitation_key == None:
@@ -51,7 +56,7 @@ def index(request, backend, success_url=None,
                 else:
                     # User entered invalid key
                     template = 'invitation/wrong_invitation_key.html'
-                    return render_to_response(template, {'invitation_key': invitation_key}, RequestContext(request))
+                    return render_to_response(template, {'invitation_key': invitation_key }, RequestContext(request))
 
         else: 
             # norm registration mode (w/ block)
