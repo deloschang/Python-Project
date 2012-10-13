@@ -41,6 +41,12 @@
     <div id="headline">Share Experiences With the People You Care About</div>
 
     <h1>Create an account</h1>
+
+    {% if invitation_key %}
+      <h2>
+        <div>Welcome! You've been invited! Your key: {{ invitation_key }}</div>
+      </h2>
+    {% endif %}
     
     <form method="post" action="" class="wide">
     {% csrf_token %}

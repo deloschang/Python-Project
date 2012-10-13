@@ -41,7 +41,7 @@ def index(request, backend, success_url=None,
             if invitation_key and is_key_valid(invitation_key): 
                 # has valid key
                 # show prefilled registration
-                return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
+                return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context={'invitation_key': invitation_key})
 
             else:
                 if invitation_key == None:
@@ -50,7 +50,7 @@ def index(request, backend, success_url=None,
                 else:
                     # User entered invalid key
                     template = 'invitation/wrong_invitation_key.html'
-                    return render_to_response(template, {'invitation_key': invitation_key})
+                    return render_to_response(template, {'invitation_key': invitation_key}, RequestContext(request))
 
         else: 
             # norm registration mode (w/ block)
@@ -99,7 +99,7 @@ def create(request):
             newimage.e.add(testalbum)
 
             #redirect('webapp.views.index')
-            return HttpResponseRedirect(reverse('memeja_index'))
+            return HttpResponseRedirect(reverse('webapp_index'))
             #return render_to_response(
                 #'profile.html',
                 #context_instance=RequestContext(request)
@@ -147,9 +147,10 @@ def add_experience(request):
             # adds the experience from form into database
             new_experience = Experiences(title = request.POST['title'], creator = logged_user)
             new_experience.save()
-            return HttpResponseRedirect(reverse('memeja_index'))
+            return HttpResponseRedirect(reverse('webapp_index'))
 
 # User clicks an album and experiences are displayed
+@login_required
 def show_experience(request, pk,
         success_url=None, form_class=InvitationKeyForm,
         template_name='user/experience_display.html',
@@ -170,6 +171,7 @@ def show_experience(request, pk,
     #) 
 
 # drag meme into album and update server
+@login_required
 def meme_in_album(request):
     if request.is_ajax():
         if request.method == 'POST':
