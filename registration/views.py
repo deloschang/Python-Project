@@ -190,12 +190,15 @@ def register(request, backend, success_url=None, form_class=None,
 
         # Check if user is using invitation
         if not request.POST.get('email', False) and request.session['email']:
-            #User uses invitation so replace email
+            # User uses invitation so replace email
             post_values['email'] = request.session['email']
 
         form = form_class(data=post_values, files=request.FILES)
         if form.is_valid():
             new_user = backend.register(request, **form.cleaned_data)
+            ## need to add album 
+                #experience_obj (that was dragged).creator.add(new_user_instance)
+
             if success_url is None:
                 to, args, kwargs = backend.post_registration_redirect(request, new_user)
                 return redirect(to, *args, **kwargs)

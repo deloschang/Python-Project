@@ -39,6 +39,8 @@ def index(request, backend, success_url=None,
             # check key with email and pull email.
 
 
+            #### HANDLE INVITATION PROCESS ####
+                ## For prefilling email registration, go to registration/views.py
             # User enters site 
             if invitation_key and is_key_valid(invitation_key): 
                 # has valid key
@@ -50,6 +52,7 @@ def index(request, backend, success_url=None,
 
                 # save email in session to pass into registration
                 request.session['email'] = email_in_key
+
                 # show registration landing w/ prefilled
                 return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context={'invitation_key': invitation_key, 'email_in_key': email_in_key})
 
@@ -146,8 +149,11 @@ def add_experience(request):
             logged_user = request.user # the user's username
 
             # adds the experience from form into database
-            new_experience = Experiences(title = request.POST['title'], creator = logged_user)
+            creator_obj = User.objects.get(pk=request.user.id) # grab user object with id
+            new_experience = Experiences(title = request.POST['title']) # create the experience
             new_experience.save()
+            new_experience.creator.add(creator_obj) # add user object into the experience
+
             return HttpResponseRedirect(reverse('webapp_index'))
 
 # User clicks an album and experiences are displayed

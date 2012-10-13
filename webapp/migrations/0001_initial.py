@@ -12,9 +12,16 @@ class Migration(SchemaMigration):
         db.create_table('webapp_experiences', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=60)),
-            ('creator', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
         ))
         db.send_create_signal('webapp', ['Experiences'])
+
+        # Adding M2M table for field creator on 'Experiences'
+        db.create_table('webapp_experiences_creator', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('experiences', models.ForeignKey(orm['webapp.experiences'], null=False)),
+            ('user', models.ForeignKey(orm['auth.user'], null=False))
+        ))
+        db.create_unique('webapp_experiences_creator', ['experiences_id', 'user_id'])
 
         # Adding model 'Meme'
         db.create_table('webapp_meme', (
@@ -36,6 +43,9 @@ class Migration(SchemaMigration):
     def backwards(self, orm):
         # Deleting model 'Experiences'
         db.delete_table('webapp_experiences')
+
+        # Removing M2M table for field creator on 'Experiences'
+        db.delete_table('webapp_experiences_creator')
 
         # Deleting model 'Meme'
         db.delete_table('webapp_meme')
@@ -83,7 +93,7 @@ class Migration(SchemaMigration):
         },
         'webapp.experiences': {
             'Meta': {'object_name': 'Experiences'},
-            'creator': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'}),
+            'creator': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'symmetrical': 'False', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '60'})
         },

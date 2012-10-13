@@ -27,19 +27,23 @@ def invite(request, success_url=None,
     if request.method == 'POST':
         form = form_class(data=request.POST, files=request.FILES)
         if form.is_valid():
-            invitation = InvitationKey.objects.create_invitation(request.user, form.cleaned_data["email"])
-            invitation.send_to(form.cleaned_data["email"])
-            # success_url needs to be dynamically generated here; setting a
-            # a default value using reverse() will cause circular-import
-            # problems with the default URLConf for this application, which
-            # imports this file.
+            # Check for album number
+            if request.session['experience_no']:
+                invitation = InvitationKey.objects.create_invitation(request.user, form.cleaned_data["email"], request.session['experience_no'])
+                invitation.send_to(form.cleaned_data["email"])
+
+                # success_url needs to be dynamically generated here; setting a
+                # a default value using reverse() will cause circular-import
+                # problems with the default URLConf for this application, which
+                # imports this file.
 
 
-            # Add a message that is output in templates/profile.html
-            messages.add_message(request, messages.INFO, 'Hooray! You invited your friend')
-            return HttpResponseRedirect(success_url or reverse('webapp_index'))
+                # Add a message that is output in templates/profile.html
+                messages.add_message(request, messages.INFO, 'Hooray! You invited your friend')
+                return HttpResponseRedirect(success_url or reverse('webapp_index'))
     else:
         form = form_class()
+        request.session['experience_no'] = extra_context['experiences']
 
     # add extra context to load memes and experiences in 
     if extra_context is None:
