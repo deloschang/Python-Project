@@ -36,6 +36,7 @@ def index(request, backend, success_url=None,
         # Check invite mode 
         if hasattr(settings, 'INVITE_MODE') and settings.INVITE_MODE:
             is_key_valid = InvitationKey.objects.is_key_valid
+            # check key with email and pull email.
 
             # User enters site 
             if invitation_key and is_key_valid(invitation_key): 
