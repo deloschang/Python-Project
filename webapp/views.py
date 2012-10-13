@@ -49,8 +49,9 @@ def index(request, backend, success_url=None,
                 str_invitation = '"'+invitation_key+'"'
                 invitee_object = InvitationKey.objects.get(key=invitation_key)
 
-                # save email in session to pass into registration
+                # save email and album_no in session to pass into registration
                 request.session['email'] = invitee_object.to_user_email
+                request.session['invited_album'] = invitee_object.from_user_album
 
                 # show registration landing w/ prefilled
                 return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context={'invitation_key': invitation_key, 'invitee_object': invitee_object})

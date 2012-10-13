@@ -182,6 +182,7 @@ def register(request, backend, success_url=None, form_class=None,
         form_class = backend.get_form_class(request)
 
 
+
     if request.method == 'POST':
         # User registering
 
@@ -196,8 +197,9 @@ def register(request, backend, success_url=None, form_class=None,
         form = form_class(data=post_values, files=request.FILES)
         if form.is_valid():
             new_user = backend.register(request, **form.cleaned_data)
-            ## need to add album 
-                #experience_obj (that was dragged).creator.add(new_user_instance)
+
+            linked_experience = request.session['invited_album']
+            linked_experience.creator.add(new_user)
 
             if success_url is None:
                 to, args, kwargs = backend.post_registration_redirect(request, new_user)
