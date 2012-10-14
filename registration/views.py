@@ -198,9 +198,11 @@ def register(request, backend, success_url=None, form_class=None,
         if form.is_valid():
             new_user = backend.register(request, **form.cleaned_data)
 
+            # Check if user is coming from invited album
+            if request.session.get('invited_album', False):
             # add invitee into album 'creator'
-            linked_experience = request.session['invited_album']
-            linked_experience.creator.add(new_user)
+                linked_experience = request.session['invited_album']
+                linked_experience.creator.add(new_user)
 
             if success_url is None:
                 to, args, kwargs = backend.post_registration_redirect(request, new_user)
