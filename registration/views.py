@@ -198,6 +198,7 @@ def register(request, backend, success_url=None, form_class=None,
         if form.is_valid():
             new_user = backend.register(request, **form.cleaned_data)
 
+            # add invitee into album 'creator'
             linked_experience = request.session['invited_album']
             linked_experience.creator.add(new_user)
 
