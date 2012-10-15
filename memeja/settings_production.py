@@ -72,6 +72,11 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.static',
+    'webapp.processor.analytics',
+)
+
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -101,9 +106,6 @@ TEMPLATE_DIRS = (
     '/Users/deloschang/memeja/webapp/templates'
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "webapp.processor",
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

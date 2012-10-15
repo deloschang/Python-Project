@@ -1,10 +1,10 @@
 # settings used for local development
 from settings_local import * 
 
-GOOGLE_ANALYTICS_KEY = 'UA-32708254-1'
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+GOOGLE_ANALYTICS_KEY = 'UA-32708243-1'
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -76,6 +76,11 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.static',
+    'webapp.processor.analytics',
 )
 
 MIDDLEWARE_CLASSES = (
