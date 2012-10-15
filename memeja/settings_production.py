@@ -75,6 +75,7 @@ STATICFILES_FINDERS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'webapp.processor.analytics',
+    'django.core.context_processors.auth',
 )
 
 # List of callables that know how to import templates from various sources.

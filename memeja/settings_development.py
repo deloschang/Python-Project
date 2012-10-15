@@ -81,6 +81,7 @@ TEMPLATE_LOADERS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'webapp.processor.analytics',
+    'django.core.context_processors.auth',
 )
 
 MIDDLEWARE_CLASSES = (

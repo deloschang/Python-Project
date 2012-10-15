@@ -8,15 +8,11 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mainpg.css"/>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-{{ analytics_code }} 
 
 <title>{% block title %}Memeja{% endblock %}</title>
-
-    {% comment %}
-      Note: 
-        Abstract these bars to another template page 
-    {% endcomment %}
-
+  <head>
+    {{ analytics_code }} 
+  </head>
     <div id="header_bar">
       {% if user.is_authenticated %}
         {# permanent header at top in base.html #}
