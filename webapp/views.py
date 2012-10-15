@@ -163,21 +163,29 @@ def show_experience(request, pk,
         success_url=None, form_class=InvitationKeyForm,
         template_name='user/experience_display.html',
         extra_context=None,):
-    experiences = Experiences.objects.get(pk=pk)
 
-    # Form to invite friends
-    form = form_class()
 
-    # Grabs memes within the experience albums
-        # reverse order: newest memes are on top
-    memes = reversed(experiences.meme_set.all())
-    return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes})
+    # Check if user has access to the experiences album
+    try:
+        experiences = request.user.experiences_set.get(pk=pk)
 
-    #return render_to_response(
-        #'user/experience_display.html', 
-        #{'experiences' : experiences, 'memes' : memes},
-        #context_instance = RequestContext(request)
-    #) 
+        # Form to invite friends
+        form = form_class()
+
+        # Grabs memes within the experience albums
+            # reverse order: newest memes are on top
+        memes = reversed(experiences.meme_set.all())
+        return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes})
+
+        #return render_to_response(
+            #'user/experience_display.html', 
+            #{'experiences' : experiences, 'memes' : memes},
+            #context_instance = RequestContext(request)
+        #) 
+
+    # User does not have access to the experiences album
+    except:
+        return render_to_response('profile/access_denied.html', RequestContext(request))
 
 # drag meme into album and update server
 @login_required

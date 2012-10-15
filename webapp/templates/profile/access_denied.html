@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Access Denied{% endblock %}
+{% block content %}
+<div>
+  <h2>
+    Sorry, you don't have access to this page!
+    But here is a picture from my friend Ian:
+  </h2>
+</div>
+
+<div id="access_denied_pic">
+  <img src="{{ STATIC_URL }}images/access_denied.png"/>
+</div>
+{% endblock %}
