@@ -10,17 +10,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-#DATABASES = {
-    #'default': {
-        #'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        #'NAME': 'memejadb',                      # Or path to database file if using sqlite3.
-        #'USER': '',                      # Not used with sqlite3.
-        #'PASSWORD': '',                  # Not used with sqlite3.
-        #'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        #'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    #}
-#}
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -135,14 +124,7 @@ INVITE_MODE = True
 ACCOUNT_INVITATION_DAYS=30  # number of days invitation keys remain valid
 INVITATIONS_PER_USER = 7 
 
-# Workaround for dev server
-EMAIL_HOST='localhost'
-EMAIL_PORT=1025
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'testing@memeja.com'
-#EMAIL_HOST_USER='deloschang'
-#EMAIL_HOST_PASSWORD='pf1cs3f2xo3q'
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
