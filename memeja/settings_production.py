@@ -3,6 +3,8 @@
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+GOOGLE_ANALYTICS_KEY = 'UA-32708243-1'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
