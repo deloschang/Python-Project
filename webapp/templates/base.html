@@ -9,7 +9,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 {% if settings.GOOGLE_ANALYTICS_KEY %}
-  Hello there
+  <div>Hello there</div>
+{% else %}
+  <div>No analytic</div> 
 {% endif %}
 
 <title>{% block title %}Memeja{% endblock %}</title>
