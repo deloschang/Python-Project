@@ -76,7 +76,7 @@ def index(request, backend, success_url=None,
         # grabs uncategorized memes from the database
         # filter by USER
             # filter out categorized memes
-        memes = Meme.objects.filter(creator = request.user, e = None)
+        memes = reversed(Meme.objects.filter(creator = request.user, e = None))
         
         # grabs existing experiences/albums from the database
         # filter by USER
@@ -169,7 +169,8 @@ def show_experience(request, pk,
     form = form_class()
 
     # Grabs memes within the experience albums
-    memes = experiences.meme_set.all()
+        # reverse order: newest memes are on top
+    memes = reversed(experiences.meme_set.all())
     return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes})
 
     #return render_to_response(
