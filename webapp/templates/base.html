@@ -8,11 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mainpg.css"/>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-{% if settings.GOOGLE_ANALYTICS_KEY %}
-  <div>Hello there</div>
-{% else %}
-  <div>No analytic</div> 
-{% endif %}
+{{ analytics_code }} 
 
 <title>{% block title %}Memeja{% endblock %}</title>
 

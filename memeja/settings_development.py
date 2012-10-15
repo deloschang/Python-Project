@@ -1,6 +1,8 @@
 # settings used for local development
 from settings_local import * 
 
+GOOGLE_ANALYTICS_KEY = 'UA-32708254-1'
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
