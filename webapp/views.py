@@ -75,7 +75,8 @@ def index(request, backend, success_url=None,
 
         # grabs uncategorized memes from the database
         # filter by USER
-        memes = Meme.objects.filter(creator = request.user)
+            # filter out categorized memes
+        memes = Meme.objects.filter(creator = request.user, e = None)
         
         # grabs existing experiences/albums from the database
         # filter by USER
