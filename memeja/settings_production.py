@@ -101,6 +101,10 @@ TEMPLATE_DIRS = (
     '/Users/deloschang/memeja/webapp/templates'
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "webapp.processor",
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.humanize',
