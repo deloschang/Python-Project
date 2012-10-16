@@ -62,6 +62,26 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.humanize',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'webapp', # main application
+    'registration', # registration system
+    'invitation', # invitation system
+    'south',
+    'email_usernames',
+    # Uncomment the next line to enable the admin:
+    # 'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
+)
+
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
