@@ -91,6 +91,11 @@ STATICFILES_FINDERS = (
 )
 
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'email_usernames.backends.EmailOrUsernameModelBackend',
+)
+
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
