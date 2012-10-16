@@ -109,24 +109,6 @@ TEMPLATE_DIRS = (
 )
 
 
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.humanize',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'webapp', # main application
-    'registration', # registration system
-    'invitation', # invitation system
-    'south',
-    'email_usernames',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
-)
 
 # Registration Options
 ACCOUNT_ACTIVATION_DAYS=20
