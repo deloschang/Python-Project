@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'registration', # registration system
     'invitation', # invitation system
     'south',
+    'email_usernames',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
