@@ -29,9 +29,10 @@ class RegistrationForm(forms.Form):
     registration backend.
     
     """
-    username = forms.RegexField(regex=r'^[\w.@+-]+$',
-                                max_length=30,
-                                widget=forms.TextInput(attrs=attrs_dict),
+    #username = forms.RegexField(regex=r'^[\w.@+-]+$',
+    username = forms.CharField(widget=forms.TextInput(attrs=attrs_dict),
+                                #max_length=30,
+                                #widget=forms.TextInput(attrs=attrs_dict),
                                 label=_("Username"),
                                 error_messages={'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
     email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict,
