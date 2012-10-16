@@ -26,6 +26,9 @@ from invitation.views import invite
 from django.conf import settings
 from invitation.models import InvitationKey
 
+# for messages
+from django.contrib import messages
+
 # Home URL and Profile Page
 def index(request, backend, success_url=None, 
         form_class=EmailRegistrationForm, profile_callback=None,
@@ -210,3 +213,47 @@ def meme_in_album(request):
             #return render_to_response('user/experience_display.html')
     else:
         return HttpResponse('this is not ajax')
+
+@login_required
+def delete_meme(request, delete_meme_id=None):
+    if delete_meme_id:
+        # Query for the meme
+        try:
+            selected_meme = Meme.objects.get(pk=delete_meme_id)
+
+            # Check if user created the meme
+            if request.user == selected_meme.creator:
+                # Delete it and refresh page
+                selected_meme.delete()
+                messages.add_message(request, messages.INFO, 'Success! You deleted the meme!')
+
+                return HttpResponseRedirect(reverse('webapp_index'))
+            else:
+                # Meme does not belong to user
+                return render_to_response('profile/access_denied.html', RequestContext(request))
+        except:
+            # Meme does not exist
+            return render_to_response('profile/access_denied.html', RequestContext(request))
+
+@login_required
+def delete_album(request, delete_album_id=None):
+    if delete_album_id:
+        # Query for the album
+        try:
+            selected_album = request.user.experiences_set.get(pk=delete_album_id)
+
+            # delete memes in album
+            selected_album.meme_set.all().delete()
+
+            # delete album and refresh page
+            selected_album.delete()
+            messages.add_message(request, messages.INFO, 'Success! You deleted the album')
+
+            return HttpResponseRedirect(reverse('webapp_index'))
+        except:
+            # User does not have access to album or DNE
+            return render_to_response('profile/access_denied.html', RequestContext(request))
+
+
+
+

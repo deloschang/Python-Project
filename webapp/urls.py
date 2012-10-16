@@ -10,7 +10,12 @@ urlpatterns = patterns('webapp.views',
                 name='invitation_invited'), # change if works
     url(r'^create/$', create, name='create'),
     url(r'^add_experience/$', add_experience, name='add_experience'),
-    
+    url(r'delete/(?P<delete_meme_id>\w+)/$',
+                delete_meme,
+                name='webapp_delete'),
+    url(r'deletealbum/(?P<delete_album_id>\w+)/$',
+                delete_album,
+                name='webapp_deletealbum'),
     (r"^(\d+)/$", "show_experience"),
     (r'^meme_in_album/$', 'meme_in_album'),
 )
