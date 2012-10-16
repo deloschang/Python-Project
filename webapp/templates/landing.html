@@ -53,6 +53,7 @@
     
     <form method="post" action="" class="wide">
     {% csrf_token %}
+
       <p>
         <label for="id_username">Full Name:</label>
         {% if form.username.errors %}

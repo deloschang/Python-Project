@@ -16,6 +16,7 @@ from django.http import HttpResponse
 # for models and forms
 from webapp.models import *
 from webapp.forms import *
+from email_usernames.forms import EmailRegistrationForm
 
 # for registration
 from registration.views import register
@@ -27,7 +28,7 @@ from invitation.models import InvitationKey
 
 # Home URL and Profile Page
 def index(request, backend, success_url=None, 
-        form_class=None, profile_callback=None,
+        form_class=EmailRegistrationForm, profile_callback=None,
         template_name='landing.html',
         extra_context=None, invitation_key=None):
 
