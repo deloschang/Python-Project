@@ -181,12 +181,6 @@ def show_experience(request, pk,
         memes = reversed(experiences.meme_set.all())
         return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes})
 
-        #return render_to_response(
-            #'user/experience_display.html', 
-            #{'experiences' : experiences, 'memes' : memes},
-            #context_instance = RequestContext(request)
-        #) 
-
     # User does not have access to the experiences album
     except:
         return render_to_response('profile/access_denied.html', RequestContext(request))

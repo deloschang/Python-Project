@@ -4,13 +4,13 @@
   Only add code here to show on entire site 
 {% endcomment %}
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mainpg.css"/>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-
-<title>{% block title %}Memeja{% endblock %}</title>
   <head>
+    <title>{% block title %}Memeja{% endblock %}</title>
+    <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
     {{ analytics_code }} 
   </head>
     <div id="header_bar">

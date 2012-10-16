@@ -4,8 +4,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {# NOTE #}
-  {# Remove later when imagefield is integrated #}
 
   {% if memes %}
       {% for memes in memes %}
@@ -18,6 +16,8 @@
     <p>Nothing here</p>
   {% endif %}
   
+  <body>
+    <div id="fb-root"></div>
     <!-- Upload form. -->
     <form action="{% url create %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
@@ -35,6 +35,7 @@
       {# Should now show album page when user is logged in #}
       
         {# Library Support for Macromeme #}
+      <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
       <script type="text/javascript">
         // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
@@ -72,5 +73,6 @@
                          + pagehost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='get adobe flash player' /></a>" ); 
         </script> 
       </div>
+    </body>
 
 {% endblock %}
