@@ -6,7 +6,6 @@
 
 {# displays new/uncategorized memes to profile for categorization#}
 {% block content %}
-  
 
   <h1><div>Albums:</div></h1>
   <div><a href="javascript:void(0);">Add Experience</a></div>
@@ -35,6 +34,13 @@
           <li><a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
             ({{ experiences.meme_set.count }} memes)
             <a href="{% url webapp.views.delete_album experiences.pk %}">Delete</a>
+            <div>
+              with
+              {% for creator in experiences.creator.all %}
+                <a href="/{{ creator.username }}/">{{ creator.username }}</a> 
+              
+              {% endfor %}
+            </div>
           </li>
             {# Temporary #}
             <br><br>

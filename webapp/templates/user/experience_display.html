@@ -14,7 +14,13 @@ Invite friends (django-invitation)
 
 {# Images #}
 <ul>
-  <div>Album name: {{ experiences.title }}</div> 
+  <div><h2>Album name: {{ experiences.title }}</h2></div> 
+  <div>
+    with 
+    {% for creator in experiences.creator.all %}
+        <a href="/{{ creator.username }}/">{{ creator.username }}</a> 
+    {% endfor %}
+  </div>
     <ul>
       {% for memes in memes %}
         <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
