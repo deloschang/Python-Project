@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if linked_experiences %}
+  <div>
+    Your Shared albums with {{ linked_user.username }}
+    {% for experiences in linked_experiences %}
+      <ul>
+        <li><a href="{% url webapp.views.show_experience experiences.pk %}">{{ experiences.title }}</a></li>
+      </ul>
+    {% endfor %}
+  </div>
+{% else %}
+<div>You have no shared experiences with {{ linked_user.username }} :(</div>
+
+{% endif %}
+{% endblock  %}
