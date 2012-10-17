@@ -2,6 +2,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 
 # for login required
 from django.contrib.auth.decorators import login_required
@@ -184,6 +185,29 @@ def show_experience(request, pk,
     # User does not have access to the experiences album
     except:
         return render_to_response('profile/access_denied.html', RequestContext(request))
+
+# User clicks on linked username & profile of shared albums displayed
+def linked_username(request, linked_username):
+    # Check if username exists
+    #try: 
+        linked_user_obj = User.objects.get(username = linked_username)
+
+        # Check if USER is logged in (if not show a landing page)
+        if request.user.is_authenticated():
+            # Grab albums that this user has in common with you
+            linked_experiences = Experiences.objects.filter(creator = request.user).filter(creator = linked_user_obj)
+
+            return render_to_response('user/shared_profile.html', 
+                    {'linked_experiences': linked_experiences, 'linked_user': linked_user_obj},
+                    RequestContext(request)) 
+        else:
+            return HttpResponseRedirect(reverse('webapp_index'))
+
+    #except:
+        # Username doesn't exist
+            # maybe replace with surprise/delight page later
+        #return HttpResponseRedirect(reverse('webapp_index'))
+
 
 # drag meme into album and update server
 @login_required
