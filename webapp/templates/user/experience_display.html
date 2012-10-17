@@ -19,7 +19,7 @@ Invite friends (django-invitation)
       {% for memes in memes %}
         <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
         
-        <span ><a href="/delete/{{ memes.pk }}/">X</a></span>
+        <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
         <div>Created by <a href ="/{{ memes.creator }}/">{{ memes.creator }}</a></div>
       {% endfor %}
     </ul>

@@ -34,7 +34,7 @@
         <ul>
           <li><a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
             ({{ experiences.meme_set.count }} memes)
-            <a href="/deletealbum/{{ experiences.pk }}/">Delete</a>
+            <a href="{% url webapp.views.delete_album experiences.pk %}">Delete</a>
           </li>
             {# Temporary #}
             <br><br>
@@ -55,7 +55,7 @@
         <span id="uncategorized">
           <img src="{{ MEDIA_URL }}/{{ memes.image }}" class="uncatmemes" id="{{ memes.pk }}" style="float:left;"/>
         </span>
-        <div style="float:left;"><a href="/delete/{{ memes.pk }}/">X</a></div>
+        <div style="float:left;"><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></div>
       </ul>
     {% endfor %}
   {% endif %}
