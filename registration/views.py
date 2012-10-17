@@ -188,11 +188,13 @@ def register(request, backend, success_url=None, form_class=None,
 
         # copying POST values because POST is immutable
         post_values = request.POST.copy()
+        post_values['password2'] = post_values['password1'] # fix for 2nd 'type again' pass
 
         # Check if user is using invitation
         if not request.POST.get('email', False) and request.session['email']:
             # User uses invitation so replace email
             post_values['email'] = request.session['email']
+
 
         form = form_class(data=post_values, files=request.FILES)
         if form.is_valid():

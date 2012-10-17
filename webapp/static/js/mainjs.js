@@ -87,9 +87,6 @@
         'csrfmiddlewaretoken': csrftoken  
       }, 
         function(data){
-          //show user validation
-          // if success...
-            // update album count by 1 and show some check mark
           console.log(data);
       });
     }

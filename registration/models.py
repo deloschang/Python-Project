@@ -75,8 +75,14 @@ class RegistrationManager(models.Manager):
         user. To disable this, pass ``send_email=False``.
         
         """
+        first_and_last = username.split(' ')
         new_user = User.objects.create_user(username, email, password)
         new_user.is_active = False
+
+        # Adding first and last names
+        new_user.first_name = first_and_last[0]
+        new_user.last_name = first_and_last[1]
+
         new_user.save()
 
         registration_profile = self.create_profile(new_user)

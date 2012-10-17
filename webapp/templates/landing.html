@@ -83,6 +83,7 @@
         {% endif %}
         {{ form.password1 }}
       </p>
+      {% comment %}
       <p>
         <label for="id_password2">Password (type again to catch typos):</label>
         {% if form.password2.errors %}
@@ -90,6 +91,7 @@
         {% endif %}
         {{ form.password2 }}
       </p>
+      {% endcomment %}
       <p class="submit"><input type="submit" value="Register &rarr;"></p>
     </form>
 

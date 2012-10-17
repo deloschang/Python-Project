@@ -8,7 +8,7 @@
 {% block content %}
 
   <h1><div>Albums:</div></h1>
-  <div><a href="javascript:void(0);">Add Experience</a></div>
+ Create new album
 
   {# Insert flash message when inviting friend #}
   {% if messages %}
@@ -39,7 +39,7 @@
               {% for creator in experiences.creator.all %}
                 <a href="/{{ creator.username }}/">{{ creator.username }}</a> 
               
-              {% endfor %}
+                {% endfor %}
             </div>
           </li>
             {# Temporary #}
