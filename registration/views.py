@@ -200,6 +200,13 @@ def register(request, backend, success_url=None, form_class=None,
         if form.is_valid():
             new_user = backend.register(request, **form.cleaned_data)
 
+            # Save hyphenated name for URL
+            url_username = post_values['username'].replace(' ','-').lower()
+            new_user_profile = new_user.get_profile()
+            new_user_profile.url_username = url_username
+            new_user_profile.save()
+            
+
             # Check if user is coming from invited album
             if request.session.get('invited_album', False):
             # add invitee into album 'creator'
