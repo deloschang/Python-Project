@@ -52,10 +52,11 @@ class RegistrationForm(forms.Form):
 
          #commenting out for Full Name on website
         existing = User.objects.filter(username__iexact=self.cleaned_data['username'])
-        if existing.exists():
-            raise forms.ValidationError(_("A user with that username already exists."))
-        else:
-            return self.cleaned_data['username']
+        #if existing.exists():
+            #raise forms.ValidationError(_("A user with that username already exists."))
+        #else:
+            #return self.cleaned_data['username']
+        return self.cleaned_data['username']
 
     def clean(self):
         """

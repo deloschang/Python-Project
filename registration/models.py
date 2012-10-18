@@ -17,7 +17,7 @@ except ImportError:
 
 
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
-
+User._meta.get_field('username')._unique = False
 
 class RegistrationManager(models.Manager):
     """
