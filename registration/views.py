@@ -10,6 +10,8 @@ from django.template import RequestContext
 
 from registration.backends import get_backend
 
+from django.contrib.auth.models import User
+
 
 def activate(request, backend,
              template_name='registration/activate.html',
@@ -201,7 +203,10 @@ def register(request, backend, success_url=None, form_class=None,
             new_user = backend.register(request, **form.cleaned_data)
 
             # Save hyphenated name for URL
-            url_username = post_values['username'].replace(' ','-').lower()
+            count_existing = User.objects.filter(username__iexact=new_user.username).count() # count existing duplicates
+            new_reg_count = count_existing + 1 # add 1 for new user
+            url_username = post_values['username'].replace(' ','-').lower()+'-'+str(new_reg_count)
+
 
             new_user_profile = new_user.get_profile()
             new_user_profile.url_username = url_username
