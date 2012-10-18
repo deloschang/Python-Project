@@ -202,6 +202,7 @@ def register(request, backend, success_url=None, form_class=None,
 
             # Save hyphenated name for URL
             url_username = post_values['username'].replace(' ','-').lower()
+
             new_user_profile = new_user.get_profile()
             new_user_profile.url_username = url_username
             new_user_profile.save()

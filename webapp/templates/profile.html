@@ -37,7 +37,7 @@
             <div>
               with
               {% for creator in experiences.creator.all %}
-                <a href="/{{ creator.username }}/">{{ creator.username }}</a> 
+                <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
               
                 {% endfor %}
             </div>

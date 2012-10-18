@@ -18,5 +18,5 @@ urlpatterns = patterns('webapp.views',
                 name='webapp_deletealbum'),
     (r"^(\d+)/$", "show_experience"),
     (r'^meme_in_album/$', 'meme_in_album'),
-    (r'^(?P<linked_username>\w+)/$', 'linked_username'),
+    (r'^(?P<linked_username>[-\w]+)/$', 'linked_username'),
 )

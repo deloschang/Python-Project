@@ -22,13 +22,15 @@ from email_usernames.forms import EmailRegistrationForm
 # for registration
 from registration.views import register
 
-# for invitation (experimental)
+# for invitation 
 from invitation.views import invite
 from django.conf import settings
 from invitation.models import InvitationKey
 
 # for messages
 from django.contrib import messages
+
+
 
 # Home URL and Profile Page
 def index(request, backend, success_url=None, 
@@ -190,7 +192,8 @@ def show_experience(request, pk,
 def linked_username(request, linked_username):
     # Check if username exists
     #try: 
-        linked_user_obj = User.objects.get(username = linked_username)
+        # Index by username provided in hyphened URL
+        linked_user_obj = UserProfile.objects.get(url_username = linked_username).user
 
         # Check if USER is logged in (if not show a landing page)
         if request.user.is_authenticated():
