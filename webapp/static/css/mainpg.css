@@ -1,3 +1,21 @@
+/***** Newest CSS - do not delete ****/
+.uncatmemes {
+  display: block;
+  float: left;
+  /*width: 420px;*/
+  /*margin: 5px;*/
+}
+
+.masonryImage img {
+  display: block;
+  width: 300px;
+}
+
+#container {
+  /*display:inline;*/
+  width: 2000px;
+  margin: 5 auto;
+}
 /****************************** Main Page Styling *******************************/
     *{  
        margin:0;  

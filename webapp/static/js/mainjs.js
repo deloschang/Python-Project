@@ -91,3 +91,17 @@
       });
     }
   });
+
+  // document ready for jQuery Masonry
+  $(function(){
+ 
+    var $container = $('#container');
+ 
+    $container.imagesLoaded( function(){
+      $container.masonry({
+        itemSelector : '.masonryImage'
+      });
+      $('#content').data('masonry');
+    });
+ 
+  });

@@ -56,14 +56,15 @@
 
   <h1><div>Uncategorized Memes: (Drag into an album)</div></h1>
   {% if memes %}
-    {% for memes in memes %}
-      <ul>
-        <span id="uncategorized">
-          <img src="{{ MEDIA_URL }}/{{ memes.image }}" class="uncatmemes" id="{{ memes.pk }}" style="float:left;"/>
-        </span>
-        <div style="float:left;"><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></div>
-      </ul>
-    {% endfor %}
+    <div id="container">
+        {% for memes in memes %}
+          <div class="masonryImage">
+            <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
+          </div>
+        {% endfor %}
+    </div>
+    {#  <div style="float:left;"><a href="{% url webapp.views.delete_meme memes.pk %}">x</a></div>#}
+
   {% endif %}
 
   {# External CSS to be moved #}
@@ -77,4 +78,6 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script src="{{ STATIC_URL }}js/mainjs.js"></script>
 
+  {# Masonry for Pinterest Design #}
+  <script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
 {% endblock %}
