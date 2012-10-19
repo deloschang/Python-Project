@@ -60,8 +60,8 @@
         {% for memes in memes %}
           <div class="uncatmemes">
             <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
+            <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
           </div>
-            <div style="float:left;"><a href="{% url webapp.views.delete_meme memes.pk %}">x</a></div>
         {% endfor %}
     </div>
 
