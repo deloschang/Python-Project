@@ -13,22 +13,36 @@ Invite friends (django-invitation)
   Remaining invitations: {{ remaining_invitations }}
 
 {# Images #}
-<ul>
   <div><h2>Album name: {{ experiences.title }}</h2></div> 
   <div>
     with 
-    {% for creator in experiences.creator.all %}
-        <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
-    {% endfor %}
-  </div>
-    <ul>
-      {% for memes in memes %}
-        <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
-        
-        <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
-        <div>Created by <a href ="/{{ memes.creator }}/">{{ memes.creator }}</a></div>
+      {% for creator in experiences.creator.all %}
+          <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
       {% endfor %}
-    </ul>
-</ul>
+  </div>
+    <div id="album_list">
+      {% for memes in memes %}
+        <div class="uncatmemes">
+          <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
+          
+          <!--<span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>-->
+          <!--<div>Created by <a href ="/{{ memes.creator }}/">{{ memes.creator }}</a></div>-->
+        </div>
+      {% endfor %}
+    </div>
 
+<script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
+<script>
+  $(function(){
+ 
+    var $container = $('#albumlist');
+ 
+    $container.imagesLoaded( function(){
+      $container.masonry({
+        itemSelector : '.uncatmemes'
+      });
+    });
+ 
+  });
+</script>
 {% endblock %}

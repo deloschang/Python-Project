@@ -102,7 +102,6 @@
       $container.masonry({
         itemSelector : '.uncatmemes'
       });
-      $('#content').data('masonry');
     });
  
   });

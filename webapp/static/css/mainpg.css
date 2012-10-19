@@ -1,19 +1,18 @@
 /***** Newest CSS - do not delete ****/
-.uncatmemes {
+.uncatmemes{
   display: block;
   float: left;
   /*width: 420px;*/
   /*margin: 5px;*/
 }
 
-.uncatmemes img {
+.uncatmemes img{
   display: block;
   width: 300px;
 }
 
-#uncategorized {
+#uncategorized, #album_list {
   width: 1800px;
-  margin: 5 auto;
 }
 /****************************** Main Page Styling *******************************/
     *{  
