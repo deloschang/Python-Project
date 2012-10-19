@@ -6,14 +6,13 @@
   /*margin: 5px;*/
 }
 
-.masonryImage img {
+.uncatmemes img {
   display: block;
   width: 300px;
 }
 
-#container {
-  /*display:inline;*/
-  width: 2000px;
+#uncategorized {
+  width: 1800px;
   margin: 5 auto;
 }
 /****************************** Main Page Styling *******************************/

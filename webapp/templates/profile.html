@@ -56,14 +56,14 @@
 
   <h1><div>Uncategorized Memes: (Drag into an album)</div></h1>
   {% if memes %}
-    <div id="container">
+    <div id="uncategorized">
         {% for memes in memes %}
-          <div class="masonryImage">
+          <div class="uncatmemes">
             <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
           </div>
+            <div style="float:left;"><a href="{% url webapp.views.delete_meme memes.pk %}">x</a></div>
         {% endfor %}
     </div>
-    {#  <div style="float:left;"><a href="{% url webapp.views.delete_meme memes.pk %}">x</a></div>#}
 
   {% endif %}
 

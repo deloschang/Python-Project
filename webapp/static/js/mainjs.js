@@ -51,7 +51,7 @@
     e.dataTransfer.setData('Text', this.innerHTML);
   }
 
-  var cols = document.querySelectorAll('#uncategorized .uncatmemes');
+  var cols = document.querySelectorAll('#uncategorized .uncatmemes img');
   [].forEach.call(cols, function(col) {
     col.addEventListener('dragstart', handleDragStart, false);
   });
@@ -75,6 +75,7 @@
     // link specific meme to disappear #}
     if (DRAGSOURCE){
       $(DRAGSOURCE).remove(); 
+      console.log(DRAGSOURCE);
     
       var csrftoken = getCookie('csrftoken');
 
@@ -82,11 +83,11 @@
       $.post('/meme_in_album/', {
         
         // figure out better way to retrieve id
+          // id not passed from masonry
         meme:DRAGSOURCE.id,
         album:this.id,
         'csrfmiddlewaretoken': csrftoken  
-      }, 
-        function(data){
+      }, function(data){
           console.log(data);
       });
     }
@@ -95,11 +96,11 @@
   // document ready for jQuery Masonry
   $(function(){
  
-    var $container = $('#container');
+    var $container = $('#uncategorized');
  
     $container.imagesLoaded( function(){
       $container.masonry({
-        itemSelector : '.masonryImage'
+        itemSelector : '.uncatmemes'
       });
       $('#content').data('masonry');
     });

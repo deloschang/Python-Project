@@ -223,7 +223,9 @@ def meme_in_album(request):
             dragged_meme_obj = Meme.objects.get(pk=dragged_meme_id)
             dropped_album_obj = Experiences.objects.get(pk=dropped_album_id)
 
-            dragged_meme_obj.e.add(dropped_album_obj)
+            # Check if user is authenticated for album and meme
+            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id):
+                dragged_meme_obj.e.add(dropped_album_obj)
 
             # newimage = Meme.objects.get(pk=#)
             # testalbum = Experiences.objects.get(pk=#)
