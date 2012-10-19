@@ -4,7 +4,7 @@
 
 {% if linked_experiences %}
   <div>
-    Your Shared albums with {{ linked_user.username }}
+    <h1>Your Shared albums with {{ linked_user.username }}</h1>
     {% for experiences in linked_experiences %}
       <ul>
         <li><a href="{% url webapp.views.show_experience experiences.pk %}">{{ experiences.title }}</a></li>
@@ -15,4 +15,34 @@
 <div>You have no shared experiences with {{ linked_user.username }} :(</div>
 
 {% endif %}
+
+{# Show all the memes #}
+<h1>All your shared memes</h1>
+<div>
+  {% for experiences in linked_experiences %}
+    {% for memes in experiences.meme_set.all %}
+      <div class="uncatmemes">
+        <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
+        
+        <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
+      </div>
+    {% endfor %}
+  {% endfor %}
+</div>
+
+<script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
+<script>
+  $(function(){
+ 
+    var $container = $('#shared_albumlist');
+ 
+    $container.imagesLoaded( function(){
+      $container.masonry({
+        itemSelector : '.uncatmemes'
+      });
+    });
+ 
+  });
+</script>
 {% endblock  %}
+

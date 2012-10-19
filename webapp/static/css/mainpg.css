@@ -1,4 +1,5 @@
 /***** Newest CSS - do not delete ****/
+/* for masonry */
 .uncatmemes{
   display: block;
   float: left;
@@ -8,10 +9,10 @@
 
 .uncatmemes img{
   display: block;
-  width: 300px;
+  width: 350px;
 }
 
-#uncategorized, #album_list {
+#uncategorized, #album_list, #shared_albumlist {
   width: 1800px;
 }
 /****************************** Main Page Styling *******************************/
@@ -89,7 +90,7 @@
 		border: 2px solid #ACACAC;
     	top:50px;
       /*height: 680px;*/
-      width: 500px;
+      width: 2000px;
     	-moz-border-radius: 10px; 
 		-webkit-border-radius: 10px;
 		border-radius: 10px;
