@@ -10,6 +10,7 @@ class Experiences(models.Model):
 
     # add invited field to for users to be added in when invited.
 
+    # add experiences images
 
     def __unicode__(self):
         return self.title

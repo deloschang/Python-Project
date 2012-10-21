@@ -52,6 +52,11 @@ class InvitationKeyManager(models.Manager):
         """
         Returns the number of remaining invitations for a given ``User``.
         """
+
+        # able to tell number of invitations
+            # distinguish between DBN users and non ... 
+
+        # if DBN user then create invitation key with other object..
         inviteds_count = self.filter(from_user=user).count()
         return settings.INVITATIONS_PER_USER - inviteds_count
 
