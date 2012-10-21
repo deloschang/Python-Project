@@ -84,6 +84,8 @@ AUTHENTICATION_BACKENDS = (
     'email_usernames.backends.EmailOrUsernameModelBackend',
 )
 
+AUTH_PROFILE_MODULE = 'webapp.UserProfile'
+
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
