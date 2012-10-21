@@ -56,6 +56,7 @@
     col.addEventListener('dragstart', handleDragStart, false);
   });
 
+  // drop source
   var bin = document.querySelectorAll('.experiences_list');
 
   // when image dragged over album #}
