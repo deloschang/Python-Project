@@ -90,7 +90,8 @@
 		border: 2px solid #ACACAC;
     	top:50px;
       /*height: 680px;*/
-      width: 2000px;
+      /*width: 2000px;*/
+      width:500px;
     	-moz-border-radius: 10px; 
 		-webkit-border-radius: 10px;
 		border-radius: 10px;

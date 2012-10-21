@@ -227,6 +227,11 @@ def meme_in_album(request):
             if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id):
                 dragged_meme_obj.e.add(dropped_album_obj)
 
+                # If no album profile pic, add it
+                if not dropped_album_obj.album_pic: 
+                    dropped_album_obj.album_pic = dragged_meme_obj # adding instance
+                    dropped_album_obj.save()
+
             # newimage = Meme.objects.get(pk=#)
             # testalbum = Experiences.objects.get(pk=#)
             # newimage.e.add(testalbum)

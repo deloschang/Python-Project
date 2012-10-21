@@ -30,23 +30,26 @@
   {# Displays existing experiences #}
     {% if experiences %}
       {% for experiences in experiences %}
-        <ul>
-          <li><a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
-            ({{ experiences.meme_set.count }} memes)
-            <a href="{% url webapp.views.delete_album experiences.pk %}">Delete</a>
-            <div>
-              with
-              {% for creator in experiences.creator.all %}
-                <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
-              
-                {% endfor %}
-            </div>
-          </li>
-            {# Temporary #}
-            <br><br>
-            {# end #}
-
-        </ul>
+          <div>
+            <a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
+              ({{ experiences.meme_set.count }} memes)
+              <a href="{% url webapp.views.delete_album experiences.pk %}">Delete</a>
+              <div>
+                with
+                {% for creator in experiences.creator.all %}
+                  <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
+                
+                  {% endfor %}
+              </div>
+                {% if experiences.album_pic %}
+                  <img src="{{ MEDIA_URL }}/{{ experiences.album_pic.image }}" style="height:125px;width:125px;"/>
+                {% else %}
+                  <img src="{{ STATIC_URL }}/images/memeja_logo.png" style="height:125px;width:125px;"/>
+                {% endif %}
+              {# Temporary #}
+              <br><br>
+              {# end #}
+          </div>
       {% endfor %}
     {% else %}
       No experience albums
