@@ -10,7 +10,6 @@ class Experiences(models.Model):
 
     # add invited field to for users to be added in when invited.
 
-    # add default album picture
     album_pic = models.ForeignKey('Meme', blank=True, null=True)
 
     def __unicode__(self):

@@ -7,8 +7,18 @@
 {# displays new/uncategorized memes to profile for categorization#}
 {% block content %}
 
-  <h1><div>Albums:</div></h1>
  Create new album
+  <div>
+    <form action="{% url add_experience %}" method="post">
+      {% csrf_token %}
+        {{ addexperienceform.title }}
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+
+ <div>-----------------</div> 
+
+  <h1><div>Albums:</div></h1>
 
   {# Insert flash message when inviting friend #}
   {% if messages %}
@@ -19,13 +29,6 @@
   </ul>
   {% endif %}
 
-  <div>
-    <form action="{% url add_experience %}" method="post">
-      {% csrf_token %}
-        {{ addexperienceform.title }}
-      <input type="submit" value="Submit" />
-    </form>
-  </div>
 
   {# Displays existing experiences #}
     {% if experiences %}
