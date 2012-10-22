@@ -30,7 +30,6 @@ class Meme(models.Model):
 
 class UserProfile(models.Model):  
     user = models.OneToOneField(User)  
-    #other fields here
     url_username = models.CharField(max_length=60)
 
     def __str__(self):  
