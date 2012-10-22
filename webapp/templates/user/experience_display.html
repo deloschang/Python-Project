@@ -25,8 +25,8 @@ Invite friends (django-invitation)
         <div class="uncatmemes">
           <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
           
-          <!--<span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>-->
-          <!--<div>Created by <a href ="/{{ memes.creator.get_profile.url_username }}/">{{ memes.creator }}</a></div>-->
+          <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
+          <div>Created by <a href ="/{{ memes.creator.get_profile.url_username }}/">{{ memes.creator }}</a></div>
         </div>
       {% endfor %}
     </div>
