@@ -30,7 +30,7 @@ def invite(request, success_url=None,
             # Check for album number
             if request.session['experience_no']:
                 invitation = InvitationKey.objects.create_invitation(request.user, form.cleaned_data["email"], request.session['experience_no'])
-                invitation.send_to(form.cleaned_data["email"])
+                invitation.send_to(form.cleaned_data["email"], request.user, request.session['experience_no'])
 
                 # success_url needs to be dynamically generated here; setting a
                 # a default value using reverse() will cause circular-import

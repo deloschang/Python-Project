@@ -13,7 +13,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.contrib.sites.models import Site
 
 from registration.models import SHA1_RE
 
@@ -96,21 +95,23 @@ class InvitationKey(models.Model):
         return self.date_invited + expiration_date <= timezone.now()
     key_expired.boolean = True
     
-    def send_to(self, email):
+    def send_to(self, email, user, album):
         """
         Send an invitation email to ``email``.
         """
-        current_site = Site.objects.get_current()
-        
         subject = render_to_string('invitation/invitation_email_subject.txt',
-                                   { 'site': current_site })
+                                   { 'from_user': user,
+                                     'album': album,
+                                       })
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())
         
         message = render_to_string('invitation/invitation_email.txt',
                                    { 'invitation_key': self.key,
+                                     'from_user': user,
+                                     'album': album,
                                      'expiration_days': settings.ACCOUNT_INVITATION_DAYS,
-                                     'site': current_site })
+                                     })
         
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
 

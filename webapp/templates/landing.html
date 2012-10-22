@@ -45,9 +45,7 @@
     {# For invited users #}
     {% if invitation_key %}
       <h2>
-          <div>You've been invited by {{ invitee_object.from_user }} to
-              the album: "{{ invitee_object.from_user_album }}"</div>
-            <div>Your special key: {{ invitation_key }}</div>
+          <div>{{ invitee_object.from_user }} invited you to share in the experience: "{{ invitee_object.from_user_album }}"</div>
       </h2>
     {% endif %}
     
@@ -73,6 +71,9 @@
         </p>
       {% else %}
         <label for="id_email">Your email: {{ invitee_object.to_user_email }} </label>
+        {% if form.email.errors %}
+          <p class="errors">{{ form.email.errors.as_text }}</p>
+        {% endif %}
       {% endif %}
       {# end #}
 

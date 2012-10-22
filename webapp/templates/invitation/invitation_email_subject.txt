@@ -1,1 +1,2 @@
-You're invited to share in an experience
+{{ from_user.username }} sent you a personal invitation to join his
+experience titled "{{ album.title }}"

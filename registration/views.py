@@ -195,11 +195,17 @@ def register(request, backend, success_url=None, form_class=None,
         # Check if user is using invitation
         if not request.POST.get('email', False) and request.session['email']:
             # User uses invitation so replace email
-            post_values['email'] = request.session['email']
+            #post_values['email'] = request.session['email']
+            post_values['email'] = request.session['invite_key']+'@dartmouth.edu' # hack for non-BDNYU users
 
 
         form = form_class(data=post_values, files=request.FILES)
         if form.is_valid():
+
+            # Check for invitation -- hack in email to avoid regex in forms.py
+            if request.session['email']:
+                form.cleaned_data['email'] = request.session['email']       # hack for non-BDNYU users
+
             new_user = backend.register(request, **form.cleaned_data)
 
             # Save hyphenated name for URL

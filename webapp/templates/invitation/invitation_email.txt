@@ -1,7 +1,8 @@
-This is the invitation email body.
+{{ from_user.username }} sent you a personal invitation to the experience titled "{{ album.title }}" with {{ album.meme_set.count }} memes.
 
-Here is your invitation.
+Memeja is an invite-only website where users collaboratively share inside jokes with their social circle.
 
-http://new.memeja.com/invited/{{ invitation_key }}.
+Click the link below to activate your personal invitation before it expires in {{ expiration_days }} days.
 
-It will expire in {{ expiration_days }} days 
+http://new.memeja.com/invited/{{ invitation_key }}
+
