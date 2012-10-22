@@ -40,9 +40,9 @@
               <div>
                 with
                 {% for creator in experiences.creator.all %}
-                  <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
-                
-                  {% endfor %}
+                    {% if not forloop.first %},{% endif %}
+                    <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
+                {% endfor %}
               </div>
                 <a href="{% url webapp.views.show_experience experiences.pk %}">
                   {% if experiences.album_pic %}
