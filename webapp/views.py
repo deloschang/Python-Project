@@ -102,10 +102,13 @@ def index(request, backend, success_url=None,
 
         # form to create new experience/album
         addexperienceform = AddExperienceForm()
+
+        # form to upload meme
+        imageform = ImageUploadForm()
         
         return render_to_response(
                 'profile.html',
-                {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform},
+                {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform},
                 RequestContext(request))
 
 # Upload a Meme 
@@ -148,8 +151,6 @@ def create(request):
     # Render list page with the documents and the form
         return render_to_response(
             'user/create.html',
-            #{'documents': documents, 'form': form},
-            {'form': imageform},
             context_instance=RequestContext(request)
         )
 

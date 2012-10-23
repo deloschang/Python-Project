@@ -16,6 +16,18 @@
     </form>
   </div>
 
+ Upload new meme
+    <form action="{% url create %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <p>{{ imageform.non_field_errors }}</p>
+      <p>{{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}</p>
+      <p>
+        {{ imageform.image.errors }}
+        {{ imageform.image }}
+      </p>
+      <p><input type="submit" value="Upload" /></p>
+    </form>
+
  <div>-----------------</div> 
 
   <h1><div>Albums:</div></h1>
