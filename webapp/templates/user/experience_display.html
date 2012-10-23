@@ -3,7 +3,7 @@
 
 {% block content %}
 {# Invite friends #}
-Invite friends (django-invitation)
+Invite friends
   <form action="{% url invitation_invite %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>{{ form.as_p }}</p>
