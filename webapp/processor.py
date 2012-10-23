@@ -12,6 +12,7 @@ def analytics(request):
         return { 'analytics_code': "" }
 
 def macromeme_key(request):
+    return { 'flashappid': "320238601417173" }
     if not settings.DEBUG:
         # production
         return { 'flashappid': "320238601417173" }
