@@ -12,7 +12,6 @@ def analytics(request):
         return { 'analytics_code': "" }
 
 def macromeme_key(request):
-    return { 'flashappid': render_to_string("analytics/analytics.html", { 'GOOGLE_ANALYTICS_KEY': settings.GOOGLE_ANALYTICS_KEY}) }
     if not settings.DEBUG:
         # production
         return { 'flashappid': "320238601417173" }
