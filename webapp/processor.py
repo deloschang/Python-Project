@@ -11,6 +11,4 @@ def analytics(request):
     else:
         return { 'analytics_code': "" }
 
-def hello(request):
-    return { 'hello': 'hello'}
 
