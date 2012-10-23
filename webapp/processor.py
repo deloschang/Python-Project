@@ -2,6 +2,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 
 def macromeme_key(request):
+    raise Exception
     if not settings.DEBUG:
         # production
         return { 'flashappid': "320238601417173" }
