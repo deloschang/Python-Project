@@ -39,6 +39,7 @@ import base64
 from PIL import Image
 from django.core.files.base import ContentFile
 from django.core.files import File
+from django.utils.html import strip_tags # sanitize
 
 
 # Home URL and Profile Page
@@ -157,7 +158,7 @@ def library(request, meme_id = None):
     # grab memes from library database
     if meme_id:
         # if remixing, filter only for the selected meme
-        selected_meme_id = meme_id  # need to sanitize
+        selected_meme_id = strip_tags(meme_id)  # need to sanitize
         meme_obj = Meme.objects.filter(pk=meme_id)
     else:
         meme_obj = MemeLibrary.objects.all()
@@ -200,11 +201,11 @@ def library(request, meme_id = None):
 def macromeme_publish(request):
     if request.method == 'POST':
 
-        # need to sanitize input
+        # sanitize input
         type = request.POST['type']
-        title = request.POST['title']
-        top_caption = request.POST['top_caption']
-        bottom_caption = request.POST['bottom_caption']
+        title = strip_tags(request.POST['title'])
+        top_caption = strip_tags(request.POST['top_caption'])
+        bottom_caption = strip_tags(request.POST['bottom_caption'])
 
         # decode the byte array and save into disk
         img_byte_array = base64.b64decode(request.POST['image'])
