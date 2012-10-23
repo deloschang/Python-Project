@@ -12,8 +12,6 @@ def analytics(request):
         return { 'analytics_code': "" }
 
 def macromeme_key(request):
-    import pdb;
-    pdb.set_trace()
     if not settings.DEBUG:
         # production
         return { 'flashappid': "320238601417173" }
