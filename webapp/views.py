@@ -214,34 +214,36 @@ def macromeme_publish(request):
 
         # decode the byte array and save into disk
         img_byte_array = base64.b64decode(request.POST['image'])
-        out = open("test.png", "wb")
-        out.write(img_byte_array) # write into disk
-        out.close()
 
 
-        saved_image = Image.open("test.png")
+        ### OBSOLETE: saving to disk ###
+        #out = open("temp_newfilepath.png", "wb")
+        #out.write(img_byte_array) # write into disk
+        #out.close()
+
+        #saved_image = Image.open("temp_newfilepath.png")
+        ### end ###
 
 
         # add sized image into DB
         img_content = ContentFile(img_byte_array)
         add_meme_in_db = Meme(creator = request.user, type = type, title = title, top_caption = top_caption, bottom_caption = bottom_caption) 
-        add_meme_in_db.image.save('test.png', img_content) # image field
-        add_meme_in_db.source = 'test.png' #filepath
+        add_meme_in_db.image.save('newfilepath.png', img_content) # image field
+        add_meme_in_db.source = 'newfilepath.png' #filepath of saved image
 
 
+        ### OBSOLETE: thumb ###
         # create thumbnail and save path to disk
-        saved_image.thumbnail((120, 120), Image.ANTIALIAS)
-        new_out = open("test_thumbnail.png", "wb")
-        saved_image.save(new_out, 'PNG')
-
-        #import pdb;
-        #pdb.set_trace()
+        #saved_image.thumbnail((120, 120), Image.ANTIALIAS)
+        #new_out = open("test_thumbnail.png", "wb")
+        #saved_image.save(new_out, 'PNG')
 
         # add thumbnail image into DB
         #thumb_data = open('test_thumbnail.png', 'r')
         #thumbnail_img_content = File(thumb_data)
         #add_meme_in_db.thumb.save('test_thumbnail.png', thumbnail_img_content)
-        add_meme_in_db.thumb = '/static/images/test_thumbnail.png' #filepath
+        #add_meme_in_db.thumb = '/static/images/test_thumbnail.png' #filepath
+        ### end ###
 
         add_meme_in_db.save()
         
