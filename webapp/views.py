@@ -244,7 +244,7 @@ def macromeme_publish(request):
 
         add_meme_in_db.save()
         
-        return HttpResponse('http://localhost:8000')
+        return HttpResponse('http://new.memeja.com')
 
 
 

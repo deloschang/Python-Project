@@ -3,7 +3,8 @@ from django.template.loader import render_to_string
 
 def analytics(request):
     """
-    Returns analytics code for Google Analytics
+    1. Returns analytics code for Google Analytics
+    2. Also returns flashapp id for macromeme generator
     """
     if not settings.DEBUG:
         # production
