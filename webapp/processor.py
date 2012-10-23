@@ -5,6 +5,8 @@ def analytics(request):
     """
     Returns analytics code for Google Analytics
     """
+    import pdb;
+    pdb.set_trace()
     if not settings.DEBUG:
         # production
         return { 'analytics_code': render_to_string("analytics/analytics.html", { 'GOOGLE_ANALYTICS_KEY': settings.GOOGLE_ANALYTICS_KEY}) }
