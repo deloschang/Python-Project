@@ -26,7 +26,7 @@ class Meme(models.Model):
     
     # for macromeme generator
     type = models.CharField(max_length=60, blank=True)
-    thumb = models.CharField(max_length=60, blank=True)  # path to relative path
+    #thumb = models.CharField(max_length=60, blank=True)  # path to relative path
     source = models.CharField(max_length=60, blank=True) # path to relative path
     title = models.CharField(max_length=60, blank=True)
     top_caption = models.CharField(max_length=180, blank=True)

@@ -153,20 +153,36 @@ def create(request):
         )
 
 
-def library(request):
+def library(request, meme_id = None):
     # grab memes from library database
-    meme_obj = MemeLibrary.objects.all()
+    #import pdb; pdb.set_trace()
+    if meme_id:
+        # if remixing, filter only for the selected meme
+        selected_meme_id = meme_id  # need to filter
+        meme_obj = Meme.objects.filter(pk=meme_id)
+    else:
+        meme_obj = MemeLibrary.objects.all()
 
     item_list = []
     for meme in meme_obj:
 
         # add fields into dict
-        response_data = {
-            "title": meme.title,
-            "type": meme.type,
-            "thumb": meme.thumb,
-            "source": meme.source,
-        }
+        if meme_id:
+            # if remixing, no need for thumb
+            response_data = {
+                "title": meme.title,
+                "type": meme.type,
+                #"thumb": meme.thumb,
+                #"source": meme.source,
+                "source": "/static/images/bad_joke_eel.jpg"
+            }
+        else:
+            response_data = {
+                "title": meme.title,
+                "type": meme.type,
+                "thumb": meme.thumb,
+                "source": meme.source,
+            }
 
         # decode caption
         response_data['top_caption'] = json.loads(meme.top_caption)
@@ -181,6 +197,11 @@ def library(request):
 
     # re-encode the dict and pass back to generator
     return HttpResponse(json.dumps(items), mimetype="application/json")
+
+def macromeme_remix(request):
+    if request.method == 'GET':
+        return HttpResponse('success')
+    #return HttpResponse('success')
 
 @csrf_exempt   # send in csrf token  in the future
 def macromeme_publish(request):
@@ -229,6 +250,7 @@ def macromeme_publish(request):
 
         
         return HttpResponse('success')
+
 
 
 # Add new album for user   
