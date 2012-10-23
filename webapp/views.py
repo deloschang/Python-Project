@@ -7,6 +7,9 @@ from django.db.models import Q
 # for login required
 from django.contrib.auth.decorators import login_required
 
+# exempt csrf
+from django.views.decorators.csrf import csrf_exempt
+
 # for meme uploading
 from django.http import HttpResponseRedirect
 
@@ -30,11 +33,9 @@ from invitation.models import InvitationKey
 # for messages
 from django.contrib import messages
 
-
-# for json
-from django.core import serializers
+# for generator
 import json
-
+import base64
 
 
 # Home URL and Profile Page
@@ -151,13 +152,10 @@ def create(request):
 
 def library(request):
     # grab memes from library database
-    obj = MemeLibrary.objects.all()
-    #json_serializer = serializers.get_serializer('json')()
-    #json_data = json_serializer.serialize(obj, ensure_ascii=False, fields =('type', 'source', 'thumb'))
-    #json.dumps(list(obj))
+    meme_obj = MemeLibrary.objects.all()
 
     item_list = []
-    for meme in obj:
+    for meme in meme_obj:
 
         # add fields into dict
         response_data = {
@@ -167,7 +165,7 @@ def library(request):
             "source": meme.source,
         }
 
-        # first decode caption
+        # decode caption
         response_data['top_caption'] = json.loads(meme.top_caption)
         response_data['bottom_caption'] = json.loads(meme.bottom_caption)
 
@@ -181,17 +179,22 @@ def library(request):
     # re-encode the dict and pass back to generator
     return HttpResponse(json.dumps(items), mimetype="application/json")
 
+@csrf_exempt   # send in csrf token  in the future
+def macromeme_publish(request):
+    if request.method == 'POST':
 
-    #return HttpResponse('{"items": [{"thumb": "/static/images/bad_joke_eel_thumb.jpg", "top_caption": {"autoSize": true, "text": "What do you call someone with no body and a nose?", "height": 100, "width": 576.65, "fontSize": 50, "y": 20, "x": 15.5}, "type": "meme", "title": "Bad Joke Eel", "source": "/static/images/bad_joke_eel.jpg", "bottom_caption": {"autoSize": true, "text": "What do you call someone with no body and a nose?", "height": 100, "width": 576.65, "fontSize": 50, "y": 20, "x": 15.5}}]}')
-
-    # working hardcode for generator
-    #return HttpResponse('{"items":	[{"type":"meme", "thumb": "/static/images/bad_joke_eel_thumb.jpg", "source": "/static/images/bad_joke_eel.jpg", "title": "Bad Joke Eel", "top_caption":{"x":15.5,"text":"What do you call someone with no body and a nose?","fontSize":50,"width":576.65,"autoSize":true,"height":100,"y":20}, "bottom_caption":{"x":15.5,"text":"Nobody Knows","fontSize":50,"width":576.65,"autoSize":true,"height":100,"y":321} }]}')
+        # decode the byte array and save into disk
+        img_byte_array = base64.b64decode(request.POST['image'])
+        out = open("test.png", "wb")
+        out.write(img_byte_array)
+        out.close()
+        
+        return HttpResponse('success')
 
 
 # Add new album for user   
 @login_required
 def add_experience(request):
-    #import pdb;
     if request.method == 'POST':
         # add experience into database
         
