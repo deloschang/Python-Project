@@ -11,10 +11,6 @@ def analytics(request):
     else:
         return { 'analytics_code': "" }
 
-def macromeme_key(request):
-    if not settings.DEBUG:
-        # production
-        return { 'flashappid': "320238601417173" }
-    else:
-        # development
-        return { 'flashappid': "479174175436255" }
+def hello(request):
+    return { 'hello': 'hello'}
+
