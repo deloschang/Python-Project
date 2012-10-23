@@ -2,5 +2,6 @@
 *.pot
 *.pyc
 settings_local.py
+settings_local_backup.py
 media/
 migrations/
