@@ -5,8 +5,6 @@ def analytics(request):
     """
     Returns analytics code for Google Analytics
     """
-    import pdb;
-    pdb.set_trace()
     if not settings.DEBUG:
         # production
         return { 'analytics_code': render_to_string("analytics/analytics.html", { 'GOOGLE_ANALYTICS_KEY': settings.GOOGLE_ANALYTICS_KEY}) }
@@ -14,6 +12,8 @@ def analytics(request):
         return { 'analytics_code': "" }
 
 def macromeme_key(request):
+    import pdb;
+    pdb.set_trace()
     if not settings.DEBUG:
         # production
         return { 'flashappid': "320238601417173" }
