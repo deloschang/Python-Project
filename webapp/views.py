@@ -155,10 +155,9 @@ def create(request):
 
 def library(request, meme_id = None):
     # grab memes from library database
-    #import pdb; pdb.set_trace()
     if meme_id:
         # if remixing, filter only for the selected meme
-        selected_meme_id = meme_id  # need to filter
+        selected_meme_id = meme_id  # need to sanitize
         meme_obj = Meme.objects.filter(pk=meme_id)
     else:
         meme_obj = MemeLibrary.objects.all()
@@ -172,8 +171,8 @@ def library(request, meme_id = None):
             response_data = {
                 "title": meme.title,
                 "type": meme.type,
-                #"source": meme.source,
-                "source": "/static/images/bad_joke_eel.jpg"
+                "source": meme.source,
+                #"source": "/static/images/bad_joke_eel.jpg"
             }
         else:
             response_data = {
@@ -196,11 +195,6 @@ def library(request, meme_id = None):
 
     # re-encode the dict and pass back to generator
     return HttpResponse(json.dumps(items), mimetype="application/json")
-
-def macromeme_remix(request):
-    if request.method == 'GET':
-        return HttpResponse('success')
-    #return HttpResponse('success')
 
 @csrf_exempt   # send in csrf token  in the future
 def macromeme_publish(request):
@@ -228,9 +222,11 @@ def macromeme_publish(request):
         # add sized image into DB
         img_content = ContentFile(img_byte_array)
         add_meme_in_db = Meme(creator = request.user, type = type, title = title, top_caption = top_caption, bottom_caption = bottom_caption) 
-        add_meme_in_db.image.save('newfilepath.png', img_content) # image field
-        add_meme_in_db.source = 'newfilepath.png' #filepath of saved image
 
+        img_file_path = request.user.get_profile().url_username+'.png' # unique to username
+        add_meme_in_db.image.save(img_file_path, img_content) # save image into database
+
+        add_meme_in_db.source = '/static/media/'+add_meme_in_db.image.name #filepath of saved image
 
         ### OBSOLETE: thumb ###
         # create thumbnail and save path to disk
