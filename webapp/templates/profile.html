@@ -69,6 +69,9 @@
           <div class="uncatmemes">
             <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
             <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
+            {% if memes.top_caption %}
+              <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
+            {% endif %}
           </div>
         {% endfor %}
     </div>
