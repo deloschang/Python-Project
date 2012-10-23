@@ -25,12 +25,12 @@ class Meme(models.Model):
 
     
     # for macromeme generator
-    #type = models.CharField(max_length=60, blank=True)
-    #thumb = models.CharField(max_length=60, blank=True)
-    #source = models.CharField(max_length=60, blank=True)
-    #title = models.CharField(max_length=60, blank=True)
-    #top_caption = models.CharField(max_length=90, blank=True)
-    #bottom_caption = models.CharField(max_length=90, blank=True)
+    type = models.CharField(max_length=60, blank=True)
+    thumb = models.CharField(max_length=60, blank=True)  # path to relative path
+    source = models.CharField(max_length=60, blank=True) # path to relative path
+    title = models.CharField(max_length=60, blank=True)
+    top_caption = models.CharField(max_length=180, blank=True)
+    bottom_caption = models.CharField(max_length=180, blank=True)
 
     def __unicode__(self):
         return self.image.name

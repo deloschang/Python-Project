@@ -37,6 +37,8 @@ from django.contrib import messages
 import json
 import base64
 from PIL import Image
+from django.core.files.base import ContentFile
+from django.core.files import File
 
 
 # Home URL and Profile Page
@@ -184,21 +186,47 @@ def library(request):
 def macromeme_publish(request):
     if request.method == 'POST':
 
+        # need to sanitize input
+        type = request.POST['type']
+        title = request.POST['title']
+        top_caption = request.POST['top_caption']
+        bottom_caption = request.POST['bottom_caption']
+
         # decode the byte array and save into disk
         img_byte_array = base64.b64decode(request.POST['image'])
         out = open("test.png", "wb")
-        out.write(img_byte_array)
+        out.write(img_byte_array) # write into disk
         out.close()
 
-        import pdb;
-        pdb.set_trace()
 
         saved_image = Image.open("test.png")
-        saved_image.thumbnail((120, 120), Image.ANTIALIAS)
 
+
+        # add sized image into DB
+        img_content = ContentFile(img_byte_array)
+        add_meme_in_db = Meme(creator = request.user, type = type, title = title, top_caption = top_caption, bottom_caption = bottom_caption) 
+        add_meme_in_db.image.save('test.png', img_content) # image field
+        add_meme_in_db.source = 'test.png' #filepath
+
+
+        # create thumbnail and save path to disk
+        saved_image.thumbnail((120, 120), Image.ANTIALIAS)
         new_out = open("test_thumbnail.png", "wb")
         saved_image.save(new_out, 'PNG')
-        
+
+        #import pdb;
+        #pdb.set_trace()
+
+        # add thumbnail image into DB
+        #thumb_data = open('test_thumbnail.png', 'r')
+        #thumbnail_img_content = File(thumb_data)
+        #add_meme_in_db.thumb.save('test_thumbnail.png', thumbnail_img_content)
+        add_meme_in_db.thumb = '/static/images/test_thumbnail.png' #filepath
+
+
+       
+        add_meme_in_db.save()
+
         
         return HttpResponse('success')
 
