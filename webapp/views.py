@@ -36,6 +36,7 @@ from django.contrib import messages
 # for generator
 import json
 import base64
+from PIL import Image
 
 
 # Home URL and Profile Page
@@ -188,6 +189,16 @@ def macromeme_publish(request):
         out = open("test.png", "wb")
         out.write(img_byte_array)
         out.close()
+
+        import pdb;
+        pdb.set_trace()
+
+        saved_image = Image.open("test.png")
+        saved_image.thumbnail((120, 120), Image.ANTIALIAS)
+
+        new_out = open("test_thumbnail.png", "wb")
+        saved_image.save(new_out, 'PNG')
+        
         
         return HttpResponse('success')
 
