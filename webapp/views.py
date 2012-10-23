@@ -172,7 +172,6 @@ def library(request, meme_id = None):
             response_data = {
                 "title": meme.title,
                 "type": meme.type,
-                #"thumb": meme.thumb,
                 #"source": meme.source,
                 "source": "/static/images/bad_joke_eel.jpg"
             }
@@ -244,12 +243,9 @@ def macromeme_publish(request):
         #add_meme_in_db.thumb.save('test_thumbnail.png', thumbnail_img_content)
         add_meme_in_db.thumb = '/static/images/test_thumbnail.png' #filepath
 
-
-       
         add_meme_in_db.save()
-
         
-        return HttpResponse('success')
+        return HttpResponse('http://localhost:8000')
 
 
 
