@@ -159,7 +159,7 @@ def library(request, meme_id = None):
     if meme_id:
         # if remixing, filter only for the selected meme
         selected_meme_id = strip_tags(meme_id)  # need to sanitize
-        meme_obj = Meme.objects.filter(pk=meme_id)
+        meme_obj = Meme.objects.filter(pk=meme_id, creator = request.user) # filter for meme id and ownership
     else:
         meme_obj = MemeLibrary.objects.all()
 
