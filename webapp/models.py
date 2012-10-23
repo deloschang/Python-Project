@@ -37,9 +37,9 @@ class Meme(models.Model):
 
 class MemeLibrary(models.Model):
     type = models.CharField(max_length=60, blank=True)
-    thumb = models.CharField(max_length=60, blank=True)
-    source = models.CharField(max_length=60, blank=True)
-    title = models.CharField(max_length=60, blank=True)
+    thumb = models.CharField(max_length=180, blank=True)
+    source = models.CharField(max_length=180, blank=True)
+    title = models.CharField(max_length=90, blank=True)
     top_caption = models.CharField(max_length=180, blank=True)
     bottom_caption = models.CharField(max_length=180, blank=True)
 
