@@ -31,6 +31,11 @@ from invitation.models import InvitationKey
 from django.contrib import messages
 
 
+# for json
+from django.core import serializers
+import json
+
+
 
 # Home URL and Profile Page
 def index(request, backend, success_url=None, 
@@ -144,8 +149,46 @@ def create(request):
         )
 
 
-# Add new album for user   
+def library(request):
+    # grab memes from library database
+    obj = MemeLibrary.objects.all()
+    #json_serializer = serializers.get_serializer('json')()
+    #json_data = json_serializer.serialize(obj, ensure_ascii=False, fields =('type', 'source', 'thumb'))
+    #json.dumps(list(obj))
 
+    item_list = []
+    for meme in obj:
+
+        # add fields into dict
+        response_data = {
+            "title": meme.title,
+            "type": meme.type,
+            "thumb": meme.thumb,
+            "source": meme.source,
+        }
+
+        # first decode caption
+        response_data['top_caption'] = json.loads(meme.top_caption)
+        response_data['bottom_caption'] = json.loads(meme.bottom_caption)
+
+        item_list.append(response_data)
+
+    # Add the meme JSONs into larger items container
+    items = {
+        "items": item_list
+    }
+
+    # re-encode the dict and pass back to generator
+    return HttpResponse(json.dumps(items), mimetype="application/json")
+
+
+    #return HttpResponse('{"items": [{"thumb": "/static/images/bad_joke_eel_thumb.jpg", "top_caption": {"autoSize": true, "text": "What do you call someone with no body and a nose?", "height": 100, "width": 576.65, "fontSize": 50, "y": 20, "x": 15.5}, "type": "meme", "title": "Bad Joke Eel", "source": "/static/images/bad_joke_eel.jpg", "bottom_caption": {"autoSize": true, "text": "What do you call someone with no body and a nose?", "height": 100, "width": 576.65, "fontSize": 50, "y": 20, "x": 15.5}}]}')
+
+    # working hardcode for generator
+    #return HttpResponse('{"items":	[{"type":"meme", "thumb": "/static/images/bad_joke_eel_thumb.jpg", "source": "/static/images/bad_joke_eel.jpg", "title": "Bad Joke Eel", "top_caption":{"x":15.5,"text":"What do you call someone with no body and a nose?","fontSize":50,"width":576.65,"autoSize":true,"height":100,"y":20}, "bottom_caption":{"x":15.5,"text":"Nobody Knows","fontSize":50,"width":576.65,"autoSize":true,"height":100,"y":321} }]}')
+
+
+# Add new album for user   
 @login_required
 def add_experience(request):
     #import pdb;

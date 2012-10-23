@@ -9,6 +9,7 @@ urlpatterns = patterns('webapp.views',
                 index, {'backend' : 'registration.backends.default.DefaultBackend'},
                 name='invitation_invited'), # change if works
     url(r'^create/$', create, name='create'),
+    (r'^create/library/$', 'library'),
     url(r'^add_experience/$', add_experience, name='add_experience'),
     url(r'delete/(?P<delete_meme_id>\w+)/$',
                 delete_meme,

@@ -23,10 +23,28 @@ class Meme(models.Model):
     e = models.ManyToManyField(Experiences, blank=True)
     #created = models.DateTimeField(auto_now_add=True)
 
-    # which album it goes into
+    
+    # for macromeme generator
+    #type = models.CharField(max_length=60, blank=True)
+    #thumb = models.CharField(max_length=60, blank=True)
+    #source = models.CharField(max_length=60, blank=True)
+    #title = models.CharField(max_length=60, blank=True)
+    #top_caption = models.CharField(max_length=90, blank=True)
+    #bottom_caption = models.CharField(max_length=90, blank=True)
 
     def __unicode__(self):
         return self.image.name
+
+class MemeLibrary(models.Model):
+    type = models.CharField(max_length=60, blank=True)
+    thumb = models.CharField(max_length=60, blank=True)
+    source = models.CharField(max_length=60, blank=True)
+    title = models.CharField(max_length=60, blank=True)
+    top_caption = models.CharField(max_length=180, blank=True)
+    bottom_caption = models.CharField(max_length=180, blank=True)
+
+    def __unicode__(self):
+        return 'Title: '+self.title+' Source: '+self.source
 
 class UserProfile(models.Model):  
     user = models.OneToOneField(User)  
