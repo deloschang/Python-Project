@@ -40,6 +40,8 @@ from PIL import Image
 from django.core.files.base import ContentFile
 from django.core.files import File
 from django.utils.html import strip_tags # sanitize
+import urllib2
+from django.core.files.temp import NamedTemporaryFile
 
 
 # Home URL and Profile Page
@@ -238,35 +240,27 @@ def macromeme_publish(request):
         # check what photo source is
         if request.POST['photo_source'] == 'library':
             add_meme_in_db.source = request.POST['source'] # source is just filepath to library source image
+
         elif request.POST['photo_source'] == 'facebook':
-            return HttpResponse('hello')
+            # take img from URL and download to server
+            img_temp = NamedTemporaryFile(delete=True)
+            img_temp.write(urllib2.urlopen(request.POST['source']).read())
+            img_temp.flush()
+
+            add_meme_in_db.source_content.save(img_file_path+'_source'+img_file_format, File(img_temp))
+            add_meme_in_db.source = '/static/media/'+add_meme_in_db.source_content.name # filepath of saved source
+
         elif request.POST['photo_source'] == 'computer': # source is from 'upload image' or was cropped
             # write base64 into disk
-            #computer_source_path = 'webapp/static/media/images/source/'+img_file_path+'_source'+img_file_format
-            #upload_content = open(computer_source_path, "wb")
 
             source_byte_array = base64.b64decode(request.POST['source'])
-            # OBSOLETE ##
-            #out = open("temp_newfilepath.png", "wb")
-            #out.write(source_byte_array) # write into disk
-            #out.close()
             source_image = ContentFile(source_byte_array)
 
             add_meme_in_db.source_content.save(img_file_path+'_source'+img_file_format, source_image)
             add_meme_in_db.source = '/static/media/'+add_meme_in_db.source_content.name # filepath of saved source
 
-            # now save source filepath to database
-            #add_meme_in_db.source = '/static/media/images/source/'+img_file_path+'_source'+img_file_format
-
-
-        ## add in path if library // download if URL
-        #add_meme_in_db.source = request.POST['source']
-
         # save created image with filepath
         add_meme_in_db.image.save(img_file_path+img_file_format, img_content) # save image into database
-
-        #add_meme_in_db.source = '/static/media/'+add_meme_in_db.image.name #filepath of saved image
-
 
         ### OBSOLETE: thumb ###
         # create thumbnail and save path to disk
