@@ -203,7 +203,7 @@ def register(request, backend, success_url=None, form_class=None,
         if form.is_valid():
 
             # Check for invitation -- hack in email to avoid regex in forms.py
-            if request.session['email']:
+            if request.session.get('email', False):
                 form.cleaned_data['email'] = request.session['email']       # hack for non-BDNYU users
 
             new_user = backend.register(request, **form.cleaned_data)
