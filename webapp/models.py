@@ -17,6 +17,8 @@ class Experiences(models.Model):
 
 class Meme(models.Model):
     image = models.ImageField(upload_to='images/%Y/%m%d')
+    source_content = models.ImageField(upload_to='images/%Y/%m%d', null=True)
+
     creator = models.ForeignKey(User, null=True, blank=True)
     # many-to-many relationship with the experiences
 
@@ -28,6 +30,8 @@ class Meme(models.Model):
     type = models.CharField(max_length=60, blank=True)
     #thumb = models.CharField(max_length=60, blank=True)  # path to relative path
     source = models.CharField(max_length=180, blank=True) # path to relative path
+
+
     title = models.CharField(max_length=90, blank=True)
     top_caption = models.CharField(max_length=180, blank=True)
     bottom_caption = models.CharField(max_length=180, blank=True)

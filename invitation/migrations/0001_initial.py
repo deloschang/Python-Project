@@ -53,7 +53,7 @@ class Migration(SchemaMigration):
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
+            'username': ('django.db.models.fields.CharField', [], {'max_length': '30'})
         },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
@@ -73,9 +73,23 @@ class Migration(SchemaMigration):
         },
         'webapp.experiences': {
             'Meta': {'object_name': 'Experiences'},
+            'album_pic': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['webapp.Meme']", 'null': 'True', 'blank': 'True'}),
             'creator': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'symmetrical': 'False', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '60'})
+        },
+        'webapp.meme': {
+            'Meta': {'object_name': 'Meme'},
+            'bottom_caption': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
+            'creator': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'}),
+            'e': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['webapp.Experiences']", 'symmetrical': 'False', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'source': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
+            'source_content': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '90', 'blank': 'True'}),
+            'top_caption': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '60', 'blank': 'True'})
         }
     }
 

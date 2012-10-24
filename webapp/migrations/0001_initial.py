@@ -12,6 +12,7 @@ class Migration(SchemaMigration):
         db.create_table('webapp_experiences', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=60)),
+            ('album_pic', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['webapp.Meme'], null=True, blank=True)),
         ))
         db.send_create_signal('webapp', ['Experiences'])
 
@@ -27,7 +28,13 @@ class Migration(SchemaMigration):
         db.create_table('webapp_meme', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
+            ('source_content', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True)),
             ('creator', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
+            ('type', self.gf('django.db.models.fields.CharField')(max_length=60, blank=True)),
+            ('source', self.gf('django.db.models.fields.CharField')(max_length=180, blank=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=90, blank=True)),
+            ('top_caption', self.gf('django.db.models.fields.CharField')(max_length=180, blank=True)),
+            ('bottom_caption', self.gf('django.db.models.fields.CharField')(max_length=180, blank=True)),
         ))
         db.send_create_signal('webapp', ['Meme'])
 
@@ -38,6 +45,18 @@ class Migration(SchemaMigration):
             ('experiences', models.ForeignKey(orm['webapp.experiences'], null=False))
         ))
         db.create_unique('webapp_meme_e', ['meme_id', 'experiences_id'])
+
+        # Adding model 'MemeLibrary'
+        db.create_table('webapp_memelibrary', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('type', self.gf('django.db.models.fields.CharField')(max_length=60, blank=True)),
+            ('thumb', self.gf('django.db.models.fields.CharField')(max_length=180, blank=True)),
+            ('source', self.gf('django.db.models.fields.CharField')(max_length=180, blank=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=90, blank=True)),
+            ('top_caption', self.gf('django.db.models.fields.CharField')(max_length=180, blank=True)),
+            ('bottom_caption', self.gf('django.db.models.fields.CharField')(max_length=180, blank=True)),
+        ))
+        db.send_create_signal('webapp', ['MemeLibrary'])
 
 
     def backwards(self, orm):
@@ -52,6 +71,9 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field e on 'Meme'
         db.delete_table('webapp_meme_e')
+
+        # Deleting model 'MemeLibrary'
+        db.delete_table('webapp_memelibrary')
 
 
     models = {
@@ -82,7 +104,7 @@ class Migration(SchemaMigration):
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
+            'username': ('django.db.models.fields.CharField', [], {'max_length': '30'})
         },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
@@ -93,16 +115,33 @@ class Migration(SchemaMigration):
         },
         'webapp.experiences': {
             'Meta': {'object_name': 'Experiences'},
+            'album_pic': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['webapp.Meme']", 'null': 'True', 'blank': 'True'}),
             'creator': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'symmetrical': 'False', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '60'})
         },
         'webapp.meme': {
             'Meta': {'object_name': 'Meme'},
+            'bottom_caption': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
             'creator': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'}),
             'e': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['webapp.Experiences']", 'symmetrical': 'False', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'})
+            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'source': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
+            'source_content': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '90', 'blank': 'True'}),
+            'top_caption': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '60', 'blank': 'True'})
+        },
+        'webapp.memelibrary': {
+            'Meta': {'object_name': 'MemeLibrary'},
+            'bottom_caption': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'source': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
+            'thumb': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '90', 'blank': 'True'}),
+            'top_caption': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '60', 'blank': 'True'})
         }
     }
 

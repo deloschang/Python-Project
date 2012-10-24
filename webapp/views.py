@@ -160,9 +160,11 @@ def library(request, meme_id = None):
     if meme_id:
         # if remixing, filter only for the selected meme
         selected_meme_id = strip_tags(meme_id)  # need to sanitize
+
         meme_obj = Meme.objects.filter(pk=meme_id, creator = request.user) # filter for meme id and ownership
     else:
         meme_obj = MemeLibrary.objects.all()
+
 
     item_list = []
     for meme in meme_obj:
@@ -211,6 +213,10 @@ def macromeme_publish(request):
         # decode the byte array and save into disk
         img_byte_array = base64.b64decode(request.POST['image'])
 
+        # when meme from facebook
+        # request.POST = http://
+        # when meme from computer/cropped
+        # request.POST = base64 decode 
 
         ### OBSOLETE: saving to disk ###
         #out = open("temp_newfilepath.png", "wb")
@@ -221,14 +227,46 @@ def macromeme_publish(request):
         ### end ###
 
 
-        # add sized image into DB
+        # add image into DB
         img_content = ContentFile(img_byte_array)
+
         add_meme_in_db = Meme(creator = request.user, type = type, title = title, top_caption = top_caption, bottom_caption = bottom_caption) 
 
-        img_file_path = request.user.get_profile().url_username+'.png' # unique to username
-        add_meme_in_db.image.save(img_file_path, img_content) # save image into database
+        img_file_path = request.user.get_profile().url_username # unique to username
+        img_file_format = '.png'
 
-        add_meme_in_db.source = '/static/media/'+add_meme_in_db.image.name #filepath of saved image
+        # check what photo source is
+        if request.POST['photo_source'] == 'library':
+            add_meme_in_db.source = request.POST['source'] # source is just filepath to library source image
+        elif request.POST['photo_source'] == 'facebook':
+            return HttpResponse('hello')
+        elif request.POST['photo_source'] == 'computer': # source is from 'upload image' or was cropped
+            # write base64 into disk
+            #computer_source_path = 'webapp/static/media/images/source/'+img_file_path+'_source'+img_file_format
+            #upload_content = open(computer_source_path, "wb")
+
+            source_byte_array = base64.b64decode(request.POST['source'])
+            # OBSOLETE ##
+            #out = open("temp_newfilepath.png", "wb")
+            #out.write(source_byte_array) # write into disk
+            #out.close()
+            source_image = ContentFile(source_byte_array)
+
+            add_meme_in_db.source_content.save(img_file_path+'_source'+img_file_format, source_image)
+            add_meme_in_db.source = '/static/media/'+add_meme_in_db.source_content.name # filepath of saved source
+
+            # now save source filepath to database
+            #add_meme_in_db.source = '/static/media/images/source/'+img_file_path+'_source'+img_file_format
+
+
+        ## add in path if library // download if URL
+        #add_meme_in_db.source = request.POST['source']
+
+        # save created image with filepath
+        add_meme_in_db.image.save(img_file_path+img_file_format, img_content) # save image into database
+
+        #add_meme_in_db.source = '/static/media/'+add_meme_in_db.image.name #filepath of saved image
+
 
         ### OBSOLETE: thumb ###
         # create thumbnail and save path to disk

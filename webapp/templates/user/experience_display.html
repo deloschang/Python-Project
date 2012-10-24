@@ -27,6 +27,9 @@ Invite friends
           
           <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
           <div>Created by <a href ="/{{ memes.creator.get_profile.url_username }}/">{{ memes.creator }}</a></div>
+          {% if memes.top_caption %}
+            <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
+          {% endif %}
         </div>
       {% endfor %}
     </div>
