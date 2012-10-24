@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 
 class Experiences(models.Model):
     # user id
@@ -38,6 +39,11 @@ class Meme(models.Model):
 
     def __unicode__(self):
         return self.image.name
+
+@receiver(post_delete, sender=Meme)
+def post_delete_user(sender, instance, *args, **kwargs):
+    instance.image.delete(save=False)
+    instance.source_content.delete(save=False)
 
 class MemeLibrary(models.Model):
     type = models.CharField(max_length=60, blank=True)

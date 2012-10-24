@@ -386,6 +386,7 @@ def meme_in_album(request):
 
 @login_required
 def delete_meme(request, delete_meme_id=None):
+
     if delete_meme_id:
         # Query for the meme
         try:
@@ -395,6 +396,7 @@ def delete_meme(request, delete_meme_id=None):
             if request.user == selected_meme.creator:
                 # Delete it and refresh page
                 selected_meme.delete()
+                    # calls post_delete signal to delete files
                 messages.add_message(request, messages.INFO, 'Success! You deleted the meme!')
 
                 return HttpResponseRedirect(reverse('webapp_index'))
