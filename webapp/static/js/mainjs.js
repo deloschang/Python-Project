@@ -94,10 +94,23 @@
     }
   });
 
-  // document ready for jQuery Masonry
+  // jQuery masonry for profile.html
   $(function(){
  
     var $container = $('#uncategorized');
+ 
+    $container.imagesLoaded( function(){
+      $container.masonry({
+        itemSelector : '.uncatmemes',
+      });
+    });
+ 
+  });
+
+  // jQuery masonry for experience_display.html
+  $(function(){
+ 
+    var $container = $('#album_list');
  
     $container.imagesLoaded( function(){
       $container.masonry({

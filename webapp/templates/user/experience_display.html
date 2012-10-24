@@ -33,17 +33,5 @@ Invite friends
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
-<script>
-  $(function(){
- 
-    var $container = $('#albumlist');
- 
-    $container.imagesLoaded( function(){
-      $container.masonry({
-        itemSelector : '.uncatmemes'
-      });
-    });
- 
-  });
-</script>
+<script src="{{ STATIC_URL }}js/mainjs.js"></script>
 {% endblock %}
