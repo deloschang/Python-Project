@@ -420,6 +420,9 @@ def delete_album(request, delete_album_id=None):
             # User does not have access to album or DNE
             return render_to_response('profile/access_denied.html', RequestContext(request))
 
+def fb_privacy_explanation(request):
+    return render_to_response('base.html', RequestContext(request))
+
 def custom_404(request):
     return render_to_response('400.html', RequestContext(request))
 
