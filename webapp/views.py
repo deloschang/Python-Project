@@ -80,7 +80,7 @@ def index(request, backend, success_url=None,
             else:
                 if invitation_key == None:
                     # User enters website normally (uninvited)
-                    form_auth = EmailLoginForm()
+                    form_auth = EmailLoginForm() # for login form
                     return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context={'form_auth': form_auth})
                 else:
                     # User entered invalid key
@@ -93,8 +93,6 @@ def index(request, backend, success_url=None,
         
     ## SHOW PROFILE PAGE ##
     else:
-
-
         # grabs uncategorized memes from the database
         # filter by USER
             # filter out categorized memes
