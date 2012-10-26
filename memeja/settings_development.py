@@ -94,7 +94,7 @@ AJAX_LOOKUP_CHANNELS = {
 
     # Custom channels are specified with a tuple
     # channel: ( module.where_lookup_is, ClassNameOfLookup )
-    'label' : ('webapp.lookups', 'MemeLookup'),
+    'label' : ('webapp.lookups', 'UserLookup'),
     #'person' : ('example.lookups', 'PersonLookup'),
     #'group'  : ('example.lookups', 'GroupLookup'),
     #'song'   : ('example.lookups', 'SongLookup'),
