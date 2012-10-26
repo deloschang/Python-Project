@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from ajax_select import LookupChannel
 
 
+# User autocomplete for invitation system
 class UserLookup(LookupChannel):
 
     model = User
@@ -25,5 +26,6 @@ class UserLookup(LookupChannel):
 
     def format_item_display(self,obj):
         """ (HTML) formatted item for displaying item in the selected deck area """
-        return u"%s<div><i>%s</i></div>" % (escape(obj.username),escape(obj.email))
+        #return u"%s<div><i>%s</i></div>" % (escape(obj.username),escape(obj.email))
+        return u"%s<div><i>%s</i></div>" % (escape(obj.username),escape(obj.get_profile().url_username))
 
