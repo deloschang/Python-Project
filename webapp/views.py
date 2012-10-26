@@ -318,7 +318,6 @@ class SearchForm(forms.Form):
 
 # User clicks an album and experiences are displayed
 @login_required
-@csrf_exempt   # send in csrf token  in the future
 def show_experience(request, pk,
         success_url=None, form_class=InvitationKeyForm,
         template_name='user/experience_display.html',

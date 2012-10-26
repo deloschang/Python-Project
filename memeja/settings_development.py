@@ -89,12 +89,12 @@ INSTALLED_APPS = (
 # Channels and models for ajax-select application
 AJAX_LOOKUP_CHANNELS = {
     # simplest way, automatically construct a search channel by passing a dictionary
-    'label'  : {'model':'webapp.Meme', 'search_field':'title'},
+    #'label'  : {'model':'webapp.Meme', 'search_field':'title'},
     #'invite_user' : {'model':'django.contrib.auth.User'
 
     # Custom channels are specified with a tuple
     # channel: ( module.where_lookup_is, ClassNameOfLookup )
-    #'label' : {'meme.lookups', 'MemeLookup'),
+    'label' : ('webapp.lookups', 'MemeLookup'),
     #'person' : ('example.lookups', 'PersonLookup'),
     #'group'  : ('example.lookups', 'GroupLookup'),
     #'song'   : ('example.lookups', 'SongLookup'),
