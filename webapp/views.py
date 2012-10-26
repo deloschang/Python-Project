@@ -86,7 +86,7 @@ def index(request, backend, success_url=None,
                     return render_to_response(template, {'invitation_key': invitation_key }, RequestContext(request))
 
         else: 
-            # norm registration mode (not used unelss invite mode off)
+            # norm registration mode (not used unless invite mode off)
             return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
         
     ## SHOW PROFILE PAGE ##
@@ -278,7 +278,6 @@ def macromeme_publish(request):
         add_meme_in_db.save()
         
         return HttpResponse('http://new.memeja.com')
-
 
 
 # Add new album for user   
