@@ -7,15 +7,15 @@ from ajax_select import LookupChannel
 
 # User autocomplete for invitation system
 class UserLookup(LookupChannel):
-
     model = User
 
     #def get_query(self,q,request):
         #return Meme.objects.filter(Q(title__icontains=q) | Q(creator__istartswith=q)).order_by('title')
+    #def get_query(self,q,request):
+        #return User.objects.filter(username__icontains=q).order_by('username')
     def get_query(self,q,request):
-        return User.objects.filter(username__icontains=q).order_by('username')
+        return User.objects.filter(Q(username__icontains=q) | Q(email__istartswith=q)).order_by('username')
     
-
     def get_result(self,obj):
         u""" result is the simple text that is the completion of what the person typed """
         return obj.username

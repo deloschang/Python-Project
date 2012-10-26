@@ -44,7 +44,7 @@ import urllib2
 from django.core.files.temp import NamedTemporaryFile
 
 # for autocomplete
-from ajax_select.fields import AutoCompleteField
+from ajax_select.fields import AutoCompleteSelectField, AutoCompleteField
 
 
 
@@ -308,12 +308,13 @@ def add_experience(request):
 
 class SearchForm(forms.Form):
 
-    q = AutoCompleteField(
+    #q = AutoCompleteField(
+    q = AutoCompleteSelectField(
             'label',
             required=True,
             help_text="Search for the meme creator!",
             label="Meme Creator",
-            attrs={'size': 100}
+            #attrs={'size': 100}
             )
 
 # User clicks an album and experiences are displayed
@@ -335,8 +336,9 @@ def show_experience(request, pk,
         dd = {}
         if 'q' in request.GET:
             dd['entered'] = request.GET.get('q')
-        initial = {'q':"\"This is an initial value,\" said O'Leary."}
-        autocomplete_form = SearchForm(initial=initial)
+        #initial = {'q':"\"This is an initial value,\" said O'Leary."}
+        #autocomplete_form = SearchForm(initial=initial)
+        autocomplete_form = SearchForm()
         dd['autocomplete_form'] = autocomplete_form
 
         # Grabs memes within the experience albums

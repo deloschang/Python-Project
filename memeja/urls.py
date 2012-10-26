@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url(r'^', include('invitation.urls')),
     url(r'^', include('registration.backends.default.urls')),
 
-    (r'^admin/lookups/', include(ajax_select_urls)),
+    (r'^lookups/', include(ajax_select_urls)),
 
     url(r'^', include('webapp.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

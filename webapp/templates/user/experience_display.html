@@ -17,7 +17,8 @@ Invite friends
 	
 
   {# need to fix url link here #}
-	<form action="{% url webapp_index %}" method="GET">
+	<form action="{% url invitation_invite %}" method="POST">
+      {% csrf_token %}
 	<table>
 	{{ autocomplete_form }}
 	<tr>

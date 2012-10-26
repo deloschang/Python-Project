@@ -25,6 +25,9 @@ def invite(request, success_url=None,
             form_class=InvitationKeyForm,
             template_name='invitation/invitation_form.html', extra_context=None):
     if request.method == 'POST':
+        import pdb;
+        pdb.set_trace()
+
         form = form_class(data=request.POST, files=request.FILES)
         if form.is_valid():
             # Check for album number
@@ -41,6 +44,8 @@ def invite(request, success_url=None,
                 # Add a message that is output in templates/profile.html
                 messages.add_message(request, messages.INFO, 'Hooray! You invited your friend')
                 return HttpResponseRedirect(success_url or reverse('webapp_index'))
+    #if request.method == 'GET':
+        #return HttpResponseRedirect(success_url or reverse('webapp_index'))
     else:
         form = form_class()
         request.session['experience_no'] = extra_context['experiences']
