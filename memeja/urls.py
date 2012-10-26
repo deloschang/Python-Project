@@ -11,6 +11,8 @@ from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
 
+from ajax_select import urls as ajax_select_urls
+
 urlpatterns = patterns('',
     # Examples:
     #url(r'^$', 'webapp.views.home', name='home'),
@@ -23,9 +25,11 @@ urlpatterns = patterns('',
     url(r'^', include('invitation.urls')),
     url(r'^', include('registration.backends.default.urls')),
 
+    (r'^admin/lookups/', include(ajax_select_urls)),
 
     url(r'^', include('webapp.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
     #url(r'^$', registration/registration_form),
 

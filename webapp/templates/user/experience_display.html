@@ -10,6 +10,24 @@ Invite friends
     <p><input type="submit" value="Send" /></p>
   </form>
 
+  {# new #}
+	{% if entered %}
+		<p>You entered: <blockquote>{{ entered }}</blockquote></p>
+	{% endif %}
+	
+
+  {# need to fix url link here #}
+	<form action="{% url webapp_index %}" method="GET">
+	<table>
+	{{ autocomplete_form }}
+	<tr>
+		<th></th><td><input type="submit" /></td>
+	</tr>
+	</table>
+	</form>
+  {# end #}
+  
+
   Remaining invitations: {{ remaining_invitations }}
 
 {# Images #}

@@ -43,6 +43,10 @@ from django.utils.html import strip_tags # sanitize
 import urllib2
 from django.core.files.temp import NamedTemporaryFile
 
+# for autocomplete
+from ajax_select.fields import AutoCompleteField
+
+
 
 # Home URL and Profile Page
 def index(request, backend, success_url=None, 
@@ -206,6 +210,9 @@ def library(request, meme_id = None):
 def macromeme_publish(request):
     if request.method == 'POST':
 
+        import pdb;
+        pdb.set_trace()
+
         # sanitize input
         type = request.POST['type']
         title = strip_tags(request.POST['title'])
@@ -299,8 +306,19 @@ def add_experience(request):
 
             return HttpResponseRedirect(reverse('webapp_index'))
 
+class SearchForm(forms.Form):
+
+    q = AutoCompleteField(
+            'label',
+            required=True,
+            help_text="Search for the meme creator!",
+            label="Meme Creator",
+            attrs={'size': 100}
+            )
+
 # User clicks an album and experiences are displayed
 @login_required
+@csrf_exempt   # send in csrf token  in the future
 def show_experience(request, pk,
         success_url=None, form_class=InvitationKeyForm,
         template_name='user/experience_display.html',
@@ -308,20 +326,28 @@ def show_experience(request, pk,
 
 
     # Check if user has access to the experiences album
-    try:
+    #try:
         experiences = request.user.experiences_set.get(pk=pk)
 
         # Form to invite friends
         form = form_class()
 
+        #### New implementation for autocomplete####
+        dd = {}
+        if 'q' in request.GET:
+            dd['entered'] = request.GET.get('q')
+        initial = {'q':"\"This is an initial value,\" said O'Leary."}
+        autocomplete_form = SearchForm(initial=initial)
+        dd['autocomplete_form'] = autocomplete_form
+
         # Grabs memes within the experience albums
             # reverse order: newest memes are on top
         memes = reversed(experiences.meme_set.all())
-        return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes})
+        return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes, 'autocomplete_form':autocomplete_form})
 
     # User does not have access to the experiences album
-    except:
-        return render_to_response('profile/access_denied.html', RequestContext(request))
+    #except:
+        #return render_to_response('profile/access_denied.html', RequestContext(request))
 
 # User clicks on linked username & profile of shared albums displayed
 def linked_username(request, linked_username):
