@@ -44,7 +44,7 @@ import urllib2
 from django.core.files.temp import NamedTemporaryFile
 
 # for autocomplete
-from ajax_select.fields import AutoCompleteSelectField, AutoCompleteField
+from ajax_select.fields import AutoCompleteSelectField, AutoCompleteField, AutoCompleteSelectMultipleField
 
 
 
@@ -309,10 +309,11 @@ def add_experience(request):
 class SearchForm(forms.Form):
 
     #q = AutoCompleteField(
-    q = AutoCompleteSelectField(
+    #q = AutoCompleteSelectField(
+    q = AutoCompleteSelectMultipleField(
             'label',
             required=True,
-            help_text="Search for the meme creator!",
+            help_text="Search for an existing user",
             label="Meme Creator",
             #attrs={'size': 100}
             )
@@ -323,7 +324,6 @@ def show_experience(request, pk,
         success_url=None, form_class=InvitationKeyForm,
         template_name='user/experience_display.html',
         extra_context=None,):
-
 
     # Check if user has access to the experiences album
     #try:
