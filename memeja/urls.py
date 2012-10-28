@@ -11,7 +11,7 @@ from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
 
-from ajax_select import urls as ajax_select_urls
+#from ajax_select import urls as ajax_select_urls
 
 urlpatterns = patterns('',
     # Examples:
@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url(r'^', include('invitation.urls')),
     url(r'^', include('registration.backends.default.urls')),
 
-    (r'^lookups/', include(ajax_select_urls)),
+    (r'^lookups/', include('ajax_select.urls')),
 
     url(r'^', include('webapp.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
