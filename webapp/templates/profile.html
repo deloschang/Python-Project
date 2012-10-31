@@ -42,6 +42,12 @@
   {% endif %}
 
 
+  {# FOR YC APPLICATION -- message #}
+  {% if yc %}
+    <div>Hey YC, thanks for checking out our demo!</div>
+  {% endif %}
+
+
   {# Displays existing experiences #}
     {% if experiences %}
       {% for experiences in experiences %}

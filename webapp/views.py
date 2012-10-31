@@ -55,8 +55,8 @@ from django.contrib.auth import login
 def yc_no_login(request):
     # preauthenticate with email and password
     post_values = {}
-    post_values['email'] = 'forycombinator123456@dartmouth.edu'
-    post_values['password'] = 'ycw2013'
+    post_values['email'] = 'yc@gmail.com'
+    post_values['password'] = 'dmang'
 
     login_form = EmailLoginForm(data=post_values)
     if login_form.is_valid():
@@ -64,7 +64,6 @@ def yc_no_login(request):
         user = login(request, login_form.user)
 
         # message for YC
-        messages.add_message(request, messages.INFO, 'Hi YC, Thanks for checking out our demo')
         return HttpResponseRedirect(reverse('webapp_index'))
 
 
@@ -133,11 +132,20 @@ def index(request, backend, success_url=None,
 
         # form to upload meme
         imageform = ImageUploadForm()
-        
-        return render_to_response(
-                'profile.html',
-                {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform},
-                RequestContext(request))
+
+        ##### FOR YC ONLY #####
+        if request.user.email == 'yc@gmail.com':
+            yc = request.user
+            
+            return render_to_response(
+                    'profile.html',
+                    {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform, 'yc' : yc},
+                    RequestContext(request))
+        else:
+            return render_to_response(
+                    'profile.html',
+                    {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform},
+                    RequestContext(request))
 
 # Upload a Meme 
 @login_required
