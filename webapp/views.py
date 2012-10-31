@@ -52,7 +52,7 @@ from django.contrib.auth import login
 
 
 #### TEST URL FOR YC ####
-def yc_no_login(request):
+def yc_no_login(request, extra=None):
     # preauthenticate with email and password
     post_values = {}
     post_values['email'] = 'yc@gmail.com'
@@ -63,8 +63,12 @@ def yc_no_login(request):
         # The user has been authenticated, so log in and redirect
         user = login(request, login_form.user)
 
-        # message for YC
-        return HttpResponseRedirect(reverse('webapp_index'))
+        if extra == 'create':
+            return HttpResponseRedirect(reverse('create'))
+
+        else:
+            # message for YC
+            return HttpResponseRedirect(reverse('webapp_index'))
 
 
 
