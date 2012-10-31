@@ -29,3 +29,7 @@ class UserLookup(LookupChannel):
         #return u"%s<div><i>%s</i></div>" % (escape(obj.username),escape(obj.email))
         return u"%s<div><i>%s</i></div>" % (escape(obj.username),escape(obj.get_profile().url_username))
 
+    # ensure nobody can get json by just knowing URL
+    def check_auth(self, request):
+        if request.user:
+            return True
