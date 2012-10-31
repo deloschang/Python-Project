@@ -4,6 +4,7 @@ from webapp.views import *
 
 urlpatterns = patterns('webapp.views', 
     # temporary url for YC
+    url(r'^yc/$', 'yc_no_login'),
     url(r'^yc/(?P<extra>[-\w]+)', 'yc_no_login'),
 
     #### end ####
