@@ -40,10 +40,10 @@ class Meme(models.Model):
     def __unicode__(self):
         return self.image.name
 
-@receiver(post_delete, sender=Meme)
-def post_delete_user(sender, instance, *args, **kwargs):
-    instance.image.delete(save=False)
-    instance.source_content.delete(save=False)
+#@receiver(post_delete, sender=Meme)
+#def post_delete_user(sender, instance, *args, **kwargs):
+    #instance.image.delete(save=False)
+    #instance.source_content.delete(save=False)
 
 class MemeLibrary(models.Model):
     type = models.CharField(max_length=60, blank=True)
