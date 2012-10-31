@@ -343,8 +343,8 @@ class SearchForm(forms.Form):
     q = AutoCompleteSelectMultipleField(
             'label',
             required=True,
-            help_text="Search for an existing user",
-            label="Meme Creator",
+            help_text="Enter name or email",
+            label="Search for an existing user",
             #attrs={'size': 100}
             )
 
