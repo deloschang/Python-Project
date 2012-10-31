@@ -3,6 +3,10 @@ from django.conf.urls.defaults import patterns, url
 from webapp.views import *
 
 urlpatterns = patterns('webapp.views', 
+    # temporary url for YC
+    url(r'^yc/$', 'yc_no_login'),
+
+    #### end ####
     url(r'^$', index, {'backend' : 'registration.backends.default.DefaultBackend'},
                 name='webapp_index'),
     url(r'^invited/(?P<invitation_key>\w+)/$', 

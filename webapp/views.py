@@ -47,6 +47,28 @@ from django.core.files.temp import NamedTemporaryFile
 from ajax_select.fields import AutoCompleteSelectField, AutoCompleteField, AutoCompleteSelectMultipleField
 
 
+# login for YC
+from django.contrib.auth import login
+
+
+#### TEST URL FOR YC ####
+def yc_no_login(request):
+    # preauthenticate with email and password
+    post_values = {}
+    post_values['email'] = 'forycombinator123456@dartmouth.edu'
+    post_values['password'] = 'ycw2013'
+
+    login_form = EmailLoginForm(data=post_values)
+    if login_form.is_valid():
+        # The user has been authenticated, so log in and redirect
+        user = login(request, login_form.user)
+
+        # message for YC
+        messages.add_message(request, messages.INFO, 'Hi YC, Thanks for checking out our demo')
+        return HttpResponseRedirect(reverse('webapp_index'))
+
+
+
 
 # Home URL and Profile Page
 def index(request, backend, success_url=None, 
@@ -209,10 +231,6 @@ def library(request, meme_id = None):
 @csrf_exempt   # send in csrf token  in the future
 def macromeme_publish(request):
     if request.method == 'POST':
-
-        import pdb;
-        pdb.set_trace()
-
         # sanitize input
         type = request.POST['type']
         title = strip_tags(request.POST['title'])

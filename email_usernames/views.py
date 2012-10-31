@@ -18,6 +18,7 @@ def email_login(request, template="registration/login.html", extra_context=None)
             parameter, if specified."""
 
     if request.method == 'POST':
+
         login_form = EmailLoginForm(data=request.POST)
         if login_form.is_valid():
             # The user has been authenticated, so log in and redirect
