@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'invitation', # invitation system
     'south',
     'email_usernames',
+    'ajax_select',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
