@@ -41,14 +41,19 @@ def invite(request, success_url=None,
 
         # some autocomplete for existing users selected (e.g. |2|3|4|)
         if post_values['q'] != "":
-
+            # e.g. [|4|2|3|]
             auto_list = post_values['q'].split('|')  # sep list of users
 
             linked_experience = request.session['experience_no']  # find selected album
+
+            # list of users to return
+            user_invited_list = []
             for invited_existing_user_pk in auto_list[1:len(auto_list)-1]:  # slice off first | and last |
 
                 invited_existing_user = User.objects.get(pk=invited_existing_user_pk)
                 linked_experience.creator.add(invited_existing_user) 
+
+                user_invited_list.append(invited_existing_user.username)
 
         # If an email value was entered
         if post_values['email'] != "":
@@ -67,8 +72,10 @@ def invite(request, success_url=None,
                     # problems with the default URLConf for this application, which
                     # imports this file.
 
+                    user_invited_list.append(post_values['email'])
+
         # Add a message that is output in templates/profile.html
-        messages.add_message(request, messages.INFO, 'Hooray! You invited your friend')
+        messages.add_message(request, messages.INFO, 'Hooray! You invited '+request.session['experience_no'].title)
         return HttpResponseRedirect(success_url or reverse('webapp_index'))
 
     else:

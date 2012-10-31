@@ -284,7 +284,7 @@ def macromeme_publish(request):
 
         add_meme_in_db.save()
         
-        return HttpResponse('http://new.memeja.com')
+        return HttpResponse('http://memeja.com')
 
 
 # Add new album for user   

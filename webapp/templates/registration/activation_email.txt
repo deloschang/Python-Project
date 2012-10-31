@@ -3,6 +3,6 @@
 Congratulations! You are almost there! 
 
 Click the link below to activate your account: 
-http://new.memeja.com/activate/{{ activation_key }}/
+http://memeja.com/activate/{{ activation_key }}/
 
 If you didn't request this, you don't need to do anything; you won't receive any more email from us, and the account will expire automatically in {{ expiration_days|apnumber }} days.

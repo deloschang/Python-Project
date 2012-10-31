@@ -4,5 +4,5 @@ Memeja is an invite-only website where users collaboratively share inside jokes 
 
 Click the link below to activate your personal invitation before it expires in {{ expiration_days }} days.
 
-http://new.memeja.com/invited/{{ invitation_key }}
+http://memeja.com/invited/{{ invitation_key }}
 
