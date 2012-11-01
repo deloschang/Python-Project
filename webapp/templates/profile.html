@@ -7,30 +7,14 @@
 {# displays new/uncategorized memes to profile for categorization#}
 {% block content %}
 
- Create new album
-  <div>
-    <form action="{% url add_experience %}" method="post">
-      {% csrf_token %}
-        {{ addexperienceform.title }}
-      <input type="submit" value="Submit" />
-    </form>
+<div id="albums_container">
+  <div id="albums_header_container">
+    <div id="albums_header"> 
+       Albums
+    </div>
+    
+    <div style ="clear:both;"></div>
   </div>
-
- Upload new meme
-    <form action="{% url create %}" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <p>{{ imageform.non_field_errors }}</p>
-      <p>{{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}</p>
-      <p>
-        {{ imageform.image.errors }}
-        {{ imageform.image }}
-      </p>
-      <p><input type="submit" value="Upload" /></p>
-    </form>
-
- <div>-----------------</div> 
-
-  <h1><div>Albums:</div></h1>
 
   {# Insert flash message when inviting friend #}
   {% if messages %}
@@ -40,47 +24,94 @@
       {% endfor %}
   </ul>
   {% endif %}
-
-
-  {# FOR YC APPLICATION -- message #}
-  {% if yc %}
-    <div>Hey YC, thanks for checking out our demo!</div>
-  {% endif %}
-
-
+    
   {# Displays existing experiences #}
-    {% if experiences %}
-      {% for experiences in experiences %}
-          <div>
-            <a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
-              ({{ experiences.meme_set.count }} memes)
-              <a href="{% url webapp.views.delete_album experiences.pk %}">Delete</a>
-              <div>
-                with
-                {% for creator in experiences.creator.all %}
-                    {% if not forloop.first %},{% endif %}
-                    <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
-                {% endfor %}
-              </div>
-                <a href="{% url webapp.views.show_experience experiences.pk %}">
-                  {% if experiences.album_pic %}
-                    <img src="{{ MEDIA_URL }}/{{ experiences.album_pic.image }}" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
-                  {% else %}
-                      <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
-                  {% endif %}
-                </a>
-              {# Temporary #}
-              <br><br>
-              {# end #}
+  {% if experiences %}
+    <div id="create_album_container">
+      <div id="create_album">
+        <div id="input_name">
+        <form action="{% url add_experience %}" method="post">
+          <!--<input placeholder="Album Title" size="6">-->
           </div>
-      {% endfor %}
-    {% else %}
-      No experience albums
+          {% csrf_token %}
+          {{ addexperienceform.title }}
+         <div id="create_button">
+         <input type="submit" value="Create Album" />
+         </div>
+        
+        </div>
+      </form>
+    </div>
+
+    {# Insert flash message when inviting friend #}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
     {% endif %}
 
- <div>-----------------</div> 
 
-  <h1><div>Uncategorized Memes: (Drag into an album)</div></h1>
+    {# FOR YC APPLICATION -- message #}
+    {% if yc %}
+      <div>Hey YC, thanks for checking out our demo!</div>
+    {% endif %}
+
+    {% for experiences in experiences %}
+      <div id ="albums_display">
+        <span id="hide_text_container">
+          <span id="albums_info">
+            <a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
+             <!-- ({{ experiences.meme_set.count }} memes)-->
+              <a href="{% url webapp.views.delete_album experiences.pk %}"> X</a>
+              <div>
+                <a> with </a>
+                {% for creator in experiences.creator.all %}
+                  {% if not forloop.first %},{% endif %}
+                  <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
+                {% endfor %}
+              </div>
+          </span>
+        </span>
+        <a href="{% url webapp.views.show_experience experiences.pk %}">
+          {% if experiences.album_pic %}
+          <img src="{{ MEDIA_URL }}/{{ experiences.album_pic.image }}" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
+          {% else %}
+            <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
+          {% endif %}
+        </a>
+      </div>
+    {% endfor %}
+  {% else %}
+    No experience albums
+  {% endif %}
+</div>
+
+
+ <div id="uncat_container">
+	<div id="uncat_header_container">
+		<div id="uncat_header_text"> 
+			Uncategorized 
+		</div>
+		<span id="uncat_header_text_addition">
+		(Drag into an album)
+		</span>
+ 
+		<div id="upload_button_container" >
+			<form action="{% url create %}" method="post" enctype="multipart/form-data">
+			  {% csrf_token %}
+			  {{ imageform.non_field_errors }}
+			  {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
+			  
+				{{ imageform.image.errors }}
+				{{ imageform.image }}
+					<input class="basic_button" type="submit" value="Upload" /></p>
+			</form>
+		</div>
+		<div style ="clear:both;"></div>
+	 </div>
+
   {% if memes %}
     <div id="uncategorized">
         {% for memes in memes %}
@@ -95,17 +126,7 @@
           </div>
         {% endfor %}
     </div>
-
   {% endif %}
-
-  {# External CSS to be moved #}
-  <style>
-    .over {
-      border: 2px dashed #000;
-    }
-  </style>
-
-  {# Extra Fancybox Files #}
 
   {# Load Javascript files #}
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>

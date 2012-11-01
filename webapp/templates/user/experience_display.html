@@ -1,40 +1,49 @@
 {% extends 'base.html' %}
 
 
-{% block content %}
+	{% block content %}
+	{# Invite friends #}
+		<div id= "album_header_container">
+				<div id="invitation_container">
+					<!--<div id="invite_friends_email"></div>
+					<div id="invite_friends_button"></div>-->
+				  
+          <form action="{% url invitation_invite %}" method="POST">
+              {% csrf_token %}
+            <table>
+              {{ autocomplete_form }}
+              <tr>
+                <th></th><td><input class="smaller_button" type="submit" value="Invite to Album" /></td>
+              </tr>
+            </table>
+          </form>
+				</div>
+			<div id="album_title_container">
+			{# Images #}
+			  <div><h2> {{ experiences.title }}</h2></div> 
+			  <div>
+				with 
+				<span id="creator_name_size">
+				  {% for creator in experiences.creator.all %}
+					  <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
+				  {% endfor %}
+				  </span>
+			  </div>
+	  
+			</div>
+			<div style ="clear:both;"></div>
+	  </div>
+		<div id="album_container">
 
-{# Invite friends #}
-	<form action="{% url invitation_invite %}" method="POST">
-      {% csrf_token %}
-	<table>
-	{{ autocomplete_form }}
-	<tr>
-		<th></th><td><input type="submit" /></td>
-	</tr>
-	</table>
-	</form>
-
-{# Images #}
-  <div><h2>Album name: {{ experiences.title }}</h2></div> 
-  <div>
-    with 
-      {% for creator in experiences.creator.all %}
-          <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
-      {% endfor %}
-  </div>
-    <div id="album_list">
-      {% for memes in memes %}
-        <div class="uncatmemes">
-          <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}"><img src="{{ MEDIA_URL }}/{{ memes.image }}" /></a>
-          
-          <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
-          <div>Created by <a href ="/{{ memes.creator.get_profile.url_username }}/">{{ memes.creator }}</a></div>
-          {% if memes.top_caption %}
-            <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
-          {% endif %}
-        </div>
-      {% endfor %}
-    </div>
+		  {% for memes in memes %}
+			<div class="uncatmemes">
+			  <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
+			  
+			  <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
+			  <div>Created by <a href ="/{{ memes.creator.get_profile.url_username }}/">{{ memes.creator }}</a></div>
+			</div>
+		  {% endfor %}
+		</div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
