@@ -29,6 +29,17 @@
   border-radius: 5px;
 }
 
+/* CSS for fancybox hovering magnifying */
+span.roll {
+	background:url(/static/images/mag.png) center center no-repeat #000;
+	height: 250px;
+	position: absolute;
+	width: 370px; /* match uncatmemes img width */
+	z-index: 10;	
+	-webkit-box-shadow: 0px 0px 4px #000;
+	-moz-box-shadow: 0px 0px 4px  #000;
+	box-shadow: 0px 0px 4px  #000; 
+}
 
 /*! fancyBox v2.1.3 fancyapps.com | fancyapps.com/fancybox/#license */
 .fancybox-wrap,

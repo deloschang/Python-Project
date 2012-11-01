@@ -4,6 +4,33 @@
     $(".fancybox").fancybox();
   });
 
+  // Magnifying glass rollover code
+  $(function() {
+    // OPACITY OF BUTTON SET TO 0%
+    $(".roll").css("opacity","0");
+     
+    // ON MOUSE OVER
+    $(".roll").hover(function () {
+      // calculate the height based on what's hovered over
+      //var q = $(this).closest('.uncatmemes').attr('img')
+      var adj_height = $(this).closest('.fancybox').find("img").height()
+      $('.roll').height(adj_height)
+       
+      // SET OPACITY TO 70%
+      $(this).stop().animate({
+        opacity: .7
+      }, "fast");
+    },
+   
+    // ON MOUSE OUT
+    function () {
+     
+      //SET OPACITY BACK 
+      $(this).css({'opacity':'0'});
+    });
+  });
+    
+
   var addEvent = (function () {
     if (document.addEventListener) {
       return function (el, type, fn) {
