@@ -63,6 +63,14 @@ def yc_no_login(request, extra=None):
         # The user has been authenticated, so log in and redirect
         user = login(request, login_form.user)
 
+        ####### send an email to admins #######
+        if not settings.DEBUG:
+            subject = 'YCombinator logged in'
+            message = request.user.username+' logged in with '+request.user.email
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['deloschang@memeja.com'], fail_silently=True)
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['max@memeja.com'], fail_silently=True)
+        ####### end #######
+
         if extra == 'create':
             return HttpResponseRedirect(reverse('create'))
 
