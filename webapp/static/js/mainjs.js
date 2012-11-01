@@ -1,4 +1,9 @@
   // JS utils #}
+    // Fancybox 
+  $(document).ready(function() {
+    $(".fancybox").fancybox();
+  });
+
   var addEvent = (function () {
     if (document.addEventListener) {
       return function (el, type, fn) {
@@ -119,3 +124,4 @@
     });
  
   });
+

@@ -29,15 +29,17 @@
       <a href="/" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif"style="width:228px;height:70px;"/></a>
     </div>
 
-   {% block content %}
-   {% endblock %}
-
-   <div id="main_content">
-      {% block main_content %}{% endblock %} 
-   </div>
-   
-   {% block content-related %}
-   {% endblock %}
+   <body>
+     {% block content %}
+     {% endblock %}
+  
+     <div id="main_content">
+        {% block main_content %}{% endblock %} 
+     </div>
+     
+     {% block content-related %}
+     {% endblock %}
+   </body>
 
 {# Olark Code #}
 <script data-cfasync="false" type='text/javascript'>/*{literal}<![CDATA[*/
