@@ -1,14 +1,5 @@
 from django import forms
-
-#class ImageUploadForm(forms.Form):
-    #"""Image upload form."""
-    #image = forms.ImageField()
-
-class DocumentForm(forms.Form):
-    docfile = forms.FileField(
-        label='Select a field',
-        help_text='max. 42 meg'
-    )
+from ajax_select.fields import AutoCompleteSelectMultipleField
 
 class ImageUploadForm(forms.Form):
     image = forms.ImageField()
@@ -18,3 +9,15 @@ class AddExperienceForm(forms.Form):
 
 class InvitationKeyForm(forms.Form):
     email = forms.EmailField()
+
+class SearchForm(forms.Form):
+
+    #q = AutoCompleteField(
+    #q = AutoCompleteSelectField(
+    q = AutoCompleteSelectMultipleField(
+            'label',
+            required=True,
+            help_text="Enter name or email. Or leave email in input box to invite",
+            label="Invite users to album",
+            #attrs={'size': 100}
+            )

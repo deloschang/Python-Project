@@ -44,7 +44,7 @@ import urllib2
 from django.core.files.temp import NamedTemporaryFile
 
 # for autocomplete
-from ajax_select.fields import AutoCompleteSelectField, AutoCompleteField, AutoCompleteSelectMultipleField
+from ajax_select.fields import AutoCompleteSelectField, AutoCompleteField
 
 
 # login for YC
@@ -336,17 +336,6 @@ def add_experience(request):
 
             return HttpResponseRedirect(reverse('webapp_index'))
 
-class SearchForm(forms.Form):
-
-    #q = AutoCompleteField(
-    #q = AutoCompleteSelectField(
-    q = AutoCompleteSelectMultipleField(
-            'label',
-            required=True,
-            help_text="Enter name or email. To invite, leave email in input box",
-            label="Existing User Search",
-            #attrs={'size': 100}
-            )
 
 # User clicks an album and experiences are displayed
 @login_required
