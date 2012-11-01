@@ -2,9 +2,8 @@
 
 
 {% block content %}
-{# Invite friends #}
 
-  {# need to fix url link here #}
+{# Invite friends #}
 	<form action="{% url invitation_invite %}" method="POST">
       {% csrf_token %}
 	<table>
@@ -14,7 +13,7 @@
 	</tr>
 	</table>
 	</form>
-  {# end #}
+
 {# Images #}
   <div><h2>Album name: {{ experiences.title }}</h2></div> 
   <div>
