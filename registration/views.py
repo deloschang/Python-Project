@@ -12,6 +12,9 @@ from registration.backends import get_backend
 
 from django.contrib.auth.models import User
 
+# for mailing admins
+from django.core.mail import send_mail
+
 
 def activate(request, backend,
              template_name='registration/activate.html',
@@ -218,6 +221,16 @@ def register(request, backend, success_url=None, form_class=None,
             new_user_profile.url_username = url_username
             new_user_profile.save()
             
+
+            ####### send an email to admins #######
+            if not settings.DEBUG:
+                subject = 'New login'
+                message = request.user.username+' logged in with '+request.user.email
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['deloschang@memeja.com'], fail_silently=True)
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['max@memeja.com'], fail_silently=True)
+            ####### end #######
+            
+
 
             # Check if user is coming from invited album
             if request.session.get('invited_album', False):

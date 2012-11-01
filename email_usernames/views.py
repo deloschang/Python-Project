@@ -7,6 +7,9 @@ from django.core.urlresolvers import reverse
 
 from forms import EmailLoginForm
 
+# for mailing admins
+from django.core.mail import send_mail
+
 def email_login(request, template="registration/login.html", extra_context=None):
     """A generic view that you can use instead of the default auth.login view, for email logins.
        On GET:
@@ -25,6 +28,15 @@ def email_login(request, template="registration/login.html", extra_context=None)
             user = login(request, login_form.user)
             # Redirect to page pointed to by the 'next' param, or else just the first page
             next_page = request.REQUEST.get('next', settings.LOGIN_REDIRECT_URL)
+
+            ####### send an email to admins #######
+            if not settings.DEBUG:
+                subject = 'New login'
+                message = request.user.username+' logged in with '+request.user.email
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['deloschang@memeja.com'], fail_silently=True)
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['max@memeja.com'], fail_silently=True)
+            ####### end #######
+
             return HttpResponseRedirect(next_page)
     else:
         login_form = EmailLoginForm()
