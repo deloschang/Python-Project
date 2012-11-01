@@ -86,7 +86,7 @@
         {% for memes in memes %}
           <div class="uncatmemes">
             <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
-              <span class="roll"></span>
+              <!--<span class="roll"></span>-->
               <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
             </a>
             <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
