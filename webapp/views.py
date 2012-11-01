@@ -343,8 +343,8 @@ class SearchForm(forms.Form):
     q = AutoCompleteSelectMultipleField(
             'label',
             required=True,
-            help_text="Enter name or email",
-            label="Search for an existing user",
+            help_text="Enter name or email. To invite, leave email in input box",
+            label="Existing User Search",
             #attrs={'size': 100}
             )
 
@@ -356,7 +356,7 @@ def show_experience(request, pk,
         extra_context=None,):
 
     # Check if user has access to the experiences album
-    #try:
+    try:
         experiences = request.user.experiences_set.get(pk=pk)
 
         # Form to invite friends
@@ -377,8 +377,8 @@ def show_experience(request, pk,
         return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes, 'autocomplete_form':autocomplete_form})
 
     # User does not have access to the experiences album
-    #except:
-        #return render_to_response('profile/access_denied.html', RequestContext(request))
+    except:
+        return render_to_response('profile/access_denied.html', RequestContext(request))
 
 # User clicks on linked username & profile of shared albums displayed
 def linked_username(request, linked_username):

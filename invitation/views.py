@@ -40,6 +40,7 @@ def invite(request, success_url=None,
         post_values['email'] = post_values['q_text'] # copy email from input into email for form
 
         # some autocomplete for existing users selected (e.g. |2|3|4|)
+        user_added_list = []  # list for existing users
         if post_values['q'] != "":
             # e.g. [|4|2|3|]
             auto_list = post_values['q'].split('|')  # sep list of users
@@ -47,15 +48,15 @@ def invite(request, success_url=None,
             linked_experience = request.session['experience_no']  # find selected album
 
             # list of users to return
-            user_invited_list = []
             for invited_existing_user_pk in auto_list[1:len(auto_list)-1]:  # slice off first | and last |
 
                 invited_existing_user = User.objects.get(pk=invited_existing_user_pk)
                 linked_experience.creator.add(invited_existing_user) 
 
-                user_invited_list.append(invited_existing_user.username)
+                user_added_list.append(invited_existing_user.username)
 
         # If an email value was entered
+        email_invited_list = [] # list for email invites
         if post_values['email'] != "":
             # for email invitation processing
             form = form_class(data=post_values, files=request.FILES)
@@ -72,18 +73,22 @@ def invite(request, success_url=None,
                     # problems with the default URLConf for this application, which
                     # imports this file.
 
-                    user_invited_list.append(post_values['email'])
+                    email_invited_list.append(post_values['email'])
 
         # Add a message that is output in templates/profile.html
-        messages.add_message(request, messages.INFO, 'Hooray! You invited '+request.session['experience_no'].title)
+        messages.success(request, 'For "'+request.session['experience_no'].title+'"')
+
+        # notify who was invited
+        for existing_add in user_added_list:
+            messages.info(request, '* added '+existing_add)
+        for new_invitee in email_invited_list:
+            messages.info(request, '* invited '+new_invitee)
+
         return HttpResponseRedirect(success_url or reverse('webapp_index'))
 
     else:
         # Show standard experience_display.html page
-
-        form = form_class()
         request.session['experience_no'] = extra_context['experiences']
-
 
         # add extra context to load memes and experiences in 
         if extra_context is None:
@@ -92,8 +97,5 @@ def invite(request, success_url=None,
         for key, value in extra_context.items():
             context[key] = value
 
-        return render(request, template_name, {
-            'form': form,
-            'remaining_invitations': InvitationKey.objects.remaining_invitations_for_user(request.user),
-        }, context_instance=context)
+        return render(request, template_name, context_instance=context)
 invite = login_required(invite)

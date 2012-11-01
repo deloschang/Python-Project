@@ -3,18 +3,6 @@
 
 {% block content %}
 {# Invite friends #}
-Invite friends
-  <form action="{% url invitation_invite %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>{{ form.as_p }}</p>
-    <p><input type="submit" value="Send" /></p>
-  </form>
-
-  {# new #}
-	{% if entered %}
-		<p>You entered: <blockquote>{{ entered }}</blockquote></p>
-	{% endif %}
-	
 
   {# need to fix url link here #}
 	<form action="{% url invitation_invite %}" method="POST">
@@ -27,10 +15,6 @@ Invite friends
 	</table>
 	</form>
   {# end #}
-  
-
-  Remaining invitations: {{ remaining_invitations }}
-
 {# Images #}
   <div><h2>Album name: {{ experiences.title }}</h2></div> 
   <div>
