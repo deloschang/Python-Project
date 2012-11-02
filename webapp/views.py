@@ -521,7 +521,7 @@ def custom_500(request, template_name='500.html'):
 
 # tracks the users that login and register for admins
 def privatetracking(request):
-    if request.user.username = 'Delos Chang' or request.user.username = 'Max Frenkel':
+    if request.user.username == 'Delos Chang' or request.user.username == 'Max Frenkel':
         readlogfile = open('login_track.txt', 'r+').read()
         readregfile = open('registration_track.txt', 'r+').read()
         return render_to_response('privatetracking.html', {'readlogfile':readlogfile, 'readregfile':readregfile}, RequestContext(request))
