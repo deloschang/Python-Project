@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-
-
 	{% block content %}
 	{# Invite friends #}
 		<div id= "album_header_container">
@@ -34,10 +32,11 @@
 			<div style ="clear:both;"></div>
 	  </div>
 		<div id="album_container">
-
 		  {% for memes in memes %}
 			<div class="uncatmemes">
-			  <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
+        <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
+          <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
+        </a>
 			  
 			  <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
 			  <div>Created by <a href ="/{{ memes.creator.get_profile.url_username }}/">{{ memes.creator }}</a></div>
