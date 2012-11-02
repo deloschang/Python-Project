@@ -1,5 +1,0 @@
-2012-11-02 17:04:47.275388    deloschang logged in with lol.i.laugh@gmail.com
-2012-11-02 17:05:57.849416    Bob Chang logged in with bobchang@dartmouth.edu
-2012-11-02 17:30:53.951205    Bob Chang logged in with bobchang@dartmouth.edu
-2012-11-02 17:33:09.247467    Y Combinator logged in with yc@gmail.com
-2012-11-02 17:38:55.335552    deloschang logged in with lol.i.laugh@gmail.com
