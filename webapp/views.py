@@ -326,6 +326,18 @@ def macromeme_publish(request):
         
         return HttpResponse('http://memeja.com')
 
+# First-time user tutorial page
+@login_required
+def helloworld(request):
+    #if request.user.get_profile().is_first_login:
+        # not first time login ANYMORE
+        #request.user.get_profile().is_first_login = False
+        #request.user.get_profile().save()
+
+        # Check which school they are from
+        school = request.user.get_profile().school 
+        return render_to_response('user/tutorial.html', {'school':school}, RequestContext(request))
+
 
 # Add new album for user   
 @login_required

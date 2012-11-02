@@ -36,6 +36,11 @@ def email_login(request, template="registration/login.html", extra_context=None)
                 send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['memeja@googlegroups.com'], fail_silently=True)
             ####### end #######
 
+            # check if first login 
+            #if request.user.get_profile().is_first_login:
+                # send to the tutorial
+                #return HttpResponseRedirect(reverse('webapp_helloworld'))
+
             #return HttpResponseRedirect(next_page)
             return HttpResponseRedirect(reverse('webapp_index'))
     else:

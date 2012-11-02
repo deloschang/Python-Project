@@ -59,6 +59,8 @@ class MemeLibrary(models.Model):
 class UserProfile(models.Model):  
     user = models.OneToOneField(User)  
     url_username = models.CharField(max_length=60)
+    is_first_login = models.BooleanField(default=True)
+    school = models.CharField(max_length=60, blank=True)
 
     def __str__(self):  
           return "%s's profile" % self.user  

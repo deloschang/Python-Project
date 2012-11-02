@@ -14,6 +14,9 @@ from django.contrib.auth.models import User
 
 # for mailing admins
 from django.core.mail import send_mail
+from django.conf import settings
+
+
 
 
 def activate(request, backend,
@@ -216,11 +219,18 @@ def register(request, backend, success_url=None, form_class=None,
             new_reg_count = count_existing + 1 # add 1 for new user
             url_username = post_values['username'].replace(' ','-').lower()+'-'+str(new_reg_count)
 
-
             new_user_profile = new_user.get_profile()
             new_user_profile.url_username = url_username
+
+            # Check if Berkeley/Dartmouth
+            if 'berkeley.edu' in new_user.email:
+                new_user_profile.school = 'Berkeley'
+            elif 'dartmouth.edu' in new_user.email:
+                new_user_profile.school = 'Dartmouth'
+
             new_user_profile.save()
-            
+
+
 
             ####### send an email to admins #######
             if not settings.DEBUG:
@@ -228,8 +238,6 @@ def register(request, backend, success_url=None, form_class=None,
                 message = request.user.username+' logged in with '+request.user.email
                 send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['memeja@googlegroups.com'], fail_silently=True)
             ####### end #######
-            
-
 
             # Check if user is coming from invited album
             if request.session.get('invited_album', False):
