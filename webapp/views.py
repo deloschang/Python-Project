@@ -70,17 +70,15 @@ def yc_no_login(request, extra=None):
             subject = 'YCombinator logged in'
             message = request.user.username+' logged in with '+request.user.email
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['deloschang@memeja.com'], fail_silently=True)
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['max@memeja.com'], fail_silently=True)
         ####### end #######
 
         if extra == 'create':
             return HttpResponseRedirect(reverse('create'))
 
         else:
-            # message for YC
-            return HttpResponseRedirect(reverse('webapp_index'))
-
-
+            # Send YC to tutorial
+            messages.add_message(request, messages.INFO, 'For our demo, this first-time user tutorial is shown every time', extra_tags="text-warning")
+            return HttpResponseRedirect(reverse('webapp_helloworld'))
 
 
 # Home URL and Profile Page
@@ -339,6 +337,8 @@ def helloworld(request):
             first_friend_experience.save()
             first_friend_experience.creator.add(request.user)
             
+            messages.add_message(request, messages.SUCCESS, 'Awesome! We created an album for you', extra_tags="text-success")
+            messages.add_message(request, messages.SUCCESS, 'You can drag memes into your album', extra_tags="text-success")
             return HttpResponseRedirect(reverse('webapp_index'))
 
     else:
@@ -476,7 +476,7 @@ def delete_meme(request, delete_meme_id=None):
                 # Delete it and refresh page
                 selected_meme.delete()
                     # calls post_delete signal to delete files
-                messages.add_message(request, messages.INFO, 'Success! You deleted the meme!')
+                messages.add_message(request, messages.SUCCESS, 'Success! You deleted the album', extra_tags="text-success")
 
                 return HttpResponseRedirect(reverse('webapp_index'))
             else:
@@ -498,7 +498,7 @@ def delete_album(request, delete_album_id=None):
 
             # delete album and refresh page
             selected_album.delete()
-            messages.add_message(request, messages.INFO, 'Success! You deleted the album')
+            messages.add_message(request, messages.SUCCESS, 'Success! You deleted the album', extra_tags="text-success")
 
             return HttpResponseRedirect(reverse('webapp_index'))
         except:

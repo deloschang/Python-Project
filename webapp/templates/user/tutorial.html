@@ -30,6 +30,19 @@
     </div>
   
   </div>
+  {% if request.user.username == 'Y Combinator' %}
+    <div class="text-info"> </div>
+  {% endif %}
+
+  {# added for YC demo 'For our demo, this first-time user tutorial' #}
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %}
+
 </body>
 
 <style>

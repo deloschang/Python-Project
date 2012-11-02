@@ -18,12 +18,18 @@
 
   {# Insert flash message when inviting friend #}
   {% if messages %}
-  <ul class="messages">
-      {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-  </ul>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
   {% endif %}
+
+  {# FOR YC APPLICATION -- message #}
+    {% if yc %}
+      <div class="text-info">Hey YC, thanks for checking out our demo!</div>
+    {% endif %}
+  {# end #}
     
   {# Displays existing experiences #}
   <div id="create_album_container">
@@ -46,21 +52,6 @@
     </div>
   {% if experiences %}
    
-
-    {# Insert flash message when inviting friend #}
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
-
-    {# FOR YC APPLICATION -- message #}
-    {% if yc %}
-      <div>Hey YC, thanks for checking out our demo!</div>
-    {% endif %}
 
     {% for experiences in experiences %}
       <div id ="albums_display">
