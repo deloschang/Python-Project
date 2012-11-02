@@ -318,8 +318,7 @@
 		font-family: Trebuchet, Helvetica, sans-serif;
 		font-size:.8em;
 		background-color:rgb(245,243,244);
-		min-width:768px;
-  }
+		min-width:768px;}
 		
 		/* =p Define paragraph text size */
 	p {
@@ -399,9 +398,6 @@
 		border:1px solid #ACACA5;
 		box-shadow:0px .5px 2px #ACACA5;
 		padding-bottom:10px;
-	}
-	
-	
 	}
 	
 	#header_menu_container{

@@ -19,7 +19,7 @@ class SearchForm(forms.Form):
             'label',
             required=True,
             help_text="Enter name or email. Or leave email in input box to invite",
-            label="Invite users to album",
+            label="",
             #attrs={'size': 100}
             )
 

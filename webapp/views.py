@@ -51,7 +51,8 @@ from ajax_select.fields import AutoCompleteSelectField, AutoCompleteField
 from django.contrib.auth import login
 
 # for mailing admins
-from django.core.mail import send_mail
+#from django.core.mail import send_mail
+from datetime import datetime
 
 #### TEST URL FOR YC ####
 def yc_no_login(request, extra=None):
@@ -66,11 +67,15 @@ def yc_no_login(request, extra=None):
         user = login(request, login_form.user)
 
         ####### send an email to admins #######
-        if not settings.DEBUG:
-            subject = 'YCombinator logged in'
-            message = request.user.username+' logged in with '+request.user.email
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['deloschang@memeja.com'], fail_silently=True)
+        #if not settings.DEBUG:
+            #subject = 'YCombinator logged in'
+            #message = request.user.username+' logged in with '+request.user.email
+            #send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['deloschang@memeja.com'], fail_silently=True)
         ####### end #######
+        date = []
+        date.append(str(datetime.now()))
+        with open("login_track.txt", "a") as text_file:
+            text_file.write(date[0]+'    '+request.user.username+' logged in with '+request.user.email+'\n')
 
         if extra == 'create':
             return HttpResponseRedirect(reverse('create'))
@@ -514,7 +519,10 @@ def custom_404(request):
 def custom_500(request, template_name='500.html'):
     return render_to_response(template_name, RequestContext(request))
 
+# tracks the users that login and register for admins
 def privatetracking(request):
-    readlogfile = open('login_track.txt', 'r+').read()
-    return render_to_response('privatetracking.html', {'readlogfile':readlogfile}, RequestContext(request))
+    if request.user.username = 'Delos Chang' or request.user.username = 'Max Frenkel':
+        readlogfile = open('login_track.txt', 'r+').read()
+        readregfile = open('registration_track.txt', 'r+').read()
+        return render_to_response('privatetracking.html', {'readlogfile':readlogfile, 'readregfile':readregfile}, RequestContext(request))
 
