@@ -344,7 +344,8 @@ def add_experience(request):
             new_experience.save()
             new_experience.creator.add(creator_obj) # add user object into the experience
 
-            return HttpResponseRedirect(reverse('webapp_index'))
+        return HttpResponseRedirect(reverse('webapp_index'))
+
 
 
 # User clicks an album and experiences are displayed

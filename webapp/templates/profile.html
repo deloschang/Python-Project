@@ -32,6 +32,9 @@
         <div id="input_name">
         <form action="{% url add_experience %}" method="post">
           <!--<input placeholder="Album Title" size="6">-->
+          {% if addexperienceform.title.errors %}
+            <p class="errors">Please correct the errors below: {{ addexperienceform.non_field_errors }}</p>
+          {% endif %}
           </div>
           {% csrf_token %}
           {{ addexperienceform.title }}
