@@ -226,8 +226,7 @@ def register(request, backend, success_url=None, form_class=None,
             if not settings.DEBUG:
                 subject = 'New login'
                 message = request.user.username+' logged in with '+request.user.email
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['deloschang@memeja.com'], fail_silently=True)
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['max@memeja.com'], fail_silently=True)
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['memeja@googlegroups.com'], fail_silently=True)
             ####### end #######
             
 

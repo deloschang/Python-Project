@@ -27,17 +27,17 @@ def email_login(request, template="registration/login.html", extra_context=None)
             # The user has been authenticated, so log in and redirect
             user = login(request, login_form.user)
             # Redirect to page pointed to by the 'next' param, or else just the first page
-            next_page = request.REQUEST.get('next', settings.LOGIN_REDIRECT_URL)
+            #next_page = request.REQUEST.get('next', settings.LOGIN_REDIRECT_URL)
 
             ####### send an email to admins #######
             if not settings.DEBUG:
                 subject = 'New login'
                 message = request.user.username+' logged in with '+request.user.email
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['deloschang@memeja.com'], fail_silently=True)
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['max@memeja.com'], fail_silently=True)
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['memeja@googlegroups.com'], fail_silently=True)
             ####### end #######
 
-            return HttpResponseRedirect(next_page)
+            #return HttpResponseRedirect(next_page)
+            return HttpResponseRedirect(reverse('webapp_index'))
     else:
         login_form = EmailLoginForm()
 
