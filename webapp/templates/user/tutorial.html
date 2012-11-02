@@ -1,30 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 <!--<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mainpg.css"/>-->
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css"/>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css"/>-->
+<!--<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mainpg.css"/>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">-->
 
-<img src="{{ STATIC_URL }}images/intro_logo.gif"/>
 
-<div id="top_container">
-  <p id="top_instruction" class="lead">Welcome! I see you're from {{ school }}.</p>
-
-  <h2 id="lower_instruction">Memeja is a new way to share experiences</h2>
-
-  <a href="#" id="start_me" class="btn btn-success">Let's start</a>
-
-  <div id="friend_form" style="display:none;">
-    <form action="{% url webapp_helloworld %}" method="post" class="form_search">
-      {% csrf_token %}
-      <div class="input-append">
-        {% for field in friend_form %}
-          {{ field }}
-        {% endfor %}
-        <input type="submit" class="btn btn-primary" value="Go!" />
-      </div>
-    </form>
+<body>
+  <div id="top_container">
+    <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
+    <p id="top_instruction" class="lead">Welcome! {% if school %}I see you're from {{ school }}.{% endif %}</p>
+  
+    <p id="lower_instruction" class="text-info">Memeja is a new way to share experiences</p>
+  
+    <a href="#" id="start_me" class="btn btn-success">Let's start</a>
+  
+    <div id="friend_form" style="display:none;">
+      <form action="{% url webapp_helloworld %}" method="post" class="form_search">
+        {% csrf_token %}
+        <div class="input-append">
+          {% for field in friend_form %}
+            {{ field }}
+          {% endfor %}
+          <input type="submit" class="btn btn-primary" value="Go!" />
+        </div>
+      </form>
+    </div>
+  
   </div>
+</body>
 
-</div>
+<style>
+  html {
+    height: 100%;
+    background: url({{ STATIC_URL }}images/grey.png) repeat;
+  }
+
+  #top_container {
+    width:500px;
+    height:200px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-250px 0 0 -250px;
+  }
+</style>
 
 {{ standard_js }}
+{% endblock %}
 
