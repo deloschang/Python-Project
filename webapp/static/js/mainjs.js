@@ -137,7 +137,7 @@
   // Tutorial JS 
   $('#start_me').live('click', function(){
     $('#top_instruction').fadeOut('medium', function(){
-      $('#lower_instruction').html('Think of a friend you\'ve had experiences with');
+      $('#lower_instruction').html('Think of a friend you\'ve shared experiences with');
       $('#start_me').hide();
       $('#friend_form').fadeIn('slow');
     });

@@ -10,7 +10,7 @@
 
   <h2 id="lower_instruction">Memeja is a new way to share experiences</h2>
 
-  <a href="#" id="start_me">Let's start</a>
+  <a href="#" id="start_me" class="btn btn-success">Let's start</a>
 
   <div id="friend_form" style="display:none;">
     <form action="{% url webapp_helloworld %}" method="post" class="form_search">
@@ -18,7 +18,7 @@
       {% for field in friend_form %}
         {{ field }}
       {% endfor %}
-      <input type="submit" value="Go!" />
+      <input type="submit" class="btn btn-primary" value="Go!" />
     </form>
   </div>
 
