@@ -14,6 +14,15 @@
   <h2 id="lower_instruction">Memeja is a new way to share experiences</h2>
 
   <a href="#" id="start_me">Let's start</a>
+
+  <div id="friend_form" style="display:none;">
+    <form action="" method="post">
+      {% for field in friend_form %}
+        {{ field }}
+      {% endfor %}
+      <input type="submit" value="Continue" />
+    </form>
+  </div>
 </div>
 
 <script>
@@ -21,7 +30,8 @@ $('#start_me').live('click', function(){
   console.log('activated');
   $('#top_instruction').fadeOut('medium', function(){
     $('#lower_instruction').html('Think of a friend you\'ve had experiences with');
-    $('#start_me').html('changed');
+    $('#start_me').hide();
+    $('#friend_form').fadeIn('slow');
   });
 });
 

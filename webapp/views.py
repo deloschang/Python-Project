@@ -334,9 +334,10 @@ def helloworld(request):
         #request.user.get_profile().is_first_login = False
         #request.user.get_profile().save()
 
-        # Check which school they are from
+        # Check which school they are from package import module
         school = request.user.get_profile().school 
-        return render_to_response('user/tutorial.html', {'school':school}, RequestContext(request))
+        friend_form = TutorialNameForm()
+        return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form}, RequestContext(request))
 
 
 # Add new album for user   
