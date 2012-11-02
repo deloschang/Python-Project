@@ -13,8 +13,10 @@ from registration.backends import get_backend
 from django.contrib.auth.models import User
 
 # for mailing admins
-from django.core.mail import send_mail
-from django.conf import settings
+#from django.core.mail import send_mail
+#from django.conf import settings
+
+from datetime import datetime
 
 
 
@@ -232,11 +234,17 @@ def register(request, backend, success_url=None, form_class=None,
 
 
             ####### send an email to admins #######
-            if not settings.DEBUG:
-                subject = 'New login'
-                message = request.user.username+' logged in with '+request.user.email
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['memeja@googlegroups.com'], fail_silently=True)
+            #if not settings.DEBUG:
+                #subject = 'New login'
+                #message = request.user.username+' logged in with '+request.user.email
+                #send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['memeja@googlegroups.com'], fail_silently=True)
             ####### end #######
+
+            date = []
+            date.append(str(datetime.now()))
+
+            with open("registration_track.txt", "a") as text_file:
+                text_file.write(date[0]+'    '+request.user.username+' registered with '+request.user.email+'\n')
 
             # Check if user is coming from invited album
             if request.session.get('invited_album', False):

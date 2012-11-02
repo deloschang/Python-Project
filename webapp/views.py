@@ -514,5 +514,7 @@ def custom_404(request):
 def custom_500(request, template_name='500.html'):
     return render_to_response(template_name, RequestContext(request))
 
-
+def privatetracking(request):
+    readlogfile = open('login_track.txt', 'r+').read()
+    return render_to_response('privatetracking.html', {'readlogfile':readlogfile}, RequestContext(request))
 

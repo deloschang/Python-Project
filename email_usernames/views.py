@@ -7,8 +7,8 @@ from django.core.urlresolvers import reverse
 
 from forms import EmailLoginForm
 
-# for mailing admins
-from django.core.mail import send_mail
+# notify
+from datetime import datetime
 
 def email_login(request, template="registration/login.html", extra_context=None):
     """A generic view that you can use instead of the default auth.login view, for email logins.
@@ -35,6 +35,12 @@ def email_login(request, template="registration/login.html", extra_context=None)
                 #message = request.user.username+' logged in with '+request.user.email
                 #send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['memeja@googlegroups.com'], fail_silently=True)
             ####### end #######
+
+            date = []
+            date.append(str(datetime.now()))
+
+            with open("login_track.txt", "a") as text_file:
+                text_file.write(date[0]+'    '+request.user.username+' logged in with '+request.user.email+'\n')
 
             # check if first login 
             if request.user.get_profile().is_first_login:
