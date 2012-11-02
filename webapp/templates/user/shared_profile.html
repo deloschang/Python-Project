@@ -23,7 +23,9 @@
   {% for experiences in linked_experiences %}
       {% for memes in experiences.meme_set.all %}
         <div class="uncatmemes">
-          <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
+          <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
+            <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
+          </a>
           
           <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
           {% if memes.top_caption %}
@@ -34,8 +36,6 @@
   {% endfor %}
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
-<script src="{{ STATIC_URL }}js/mainjs.js"></script>
+  {{ standard_js }}
 {% endblock  %}
 
