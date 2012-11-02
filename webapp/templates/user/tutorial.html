@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mainpg.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css"/>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-<div id="intro_logo">
-  <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
-</div>
+<img src="{{ STATIC_URL }}images/intro_logo.gif"/>
 
 <div id="top_container">
-  <h1 id="top_instruction">Welcome! I see you're from {{ school }}.</h1>
+  <p id="top_instruction" class="lead">Welcome! I see you're from {{ school }}.</p>
 
   <h2 id="lower_instruction">Memeja is a new way to share experiences</h2>
 
   <a href="#" id="start_me">Let's start</a>
 
   <div id="friend_form" style="display:none;">
-    <form action="{% url webapp_helloworld %}" method="post">
+    <form action="{% url webapp_helloworld %}" method="post" class="form_search">
       {% csrf_token %}
       {% for field in friend_form %}
         {{ field }}
       {% endfor %}
-      <input type="submit" value="Continue" />
+      <input type="submit" value="Go!" />
     </form>
   </div>
+
 </div>
 
 {{ standard_js }}

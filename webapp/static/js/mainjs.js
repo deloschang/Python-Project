@@ -136,7 +136,6 @@
 
   // Tutorial JS 
   $('#start_me').live('click', function(){
-    console.log('activated');
     $('#top_instruction').fadeOut('medium', function(){
       $('#lower_instruction').html('Think of a friend you\'ve had experiences with');
       $('#start_me').hide();
