@@ -9,6 +9,7 @@ from forms import EmailLoginForm
 
 # notify
 from datetime import datetime
+import os
 
 def email_login(request, template="registration/login.html", extra_context=None):
     """A generic view that you can use instead of the default auth.login view, for email logins.
