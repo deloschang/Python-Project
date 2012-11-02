@@ -243,7 +243,7 @@ def register(request, backend, success_url=None, form_class=None,
             date = []
             date.append(str(datetime.now()))
 
-            with open("registration_track.txt", "a") as text_file:
+            with open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), "a") as text_file:
                 text_file.write(date[0]+'    '+new_user.username+' registered with '+new_user.email+'\n')
 
             # Check if user is coming from invited album

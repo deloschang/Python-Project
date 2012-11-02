@@ -39,7 +39,7 @@ def email_login(request, template="registration/login.html", extra_context=None)
             date = []
             date.append(str(datetime.now()))
 
-            with open("login_track.txt", "a") as text_file:
+            with open(os.path.join(settings.STATIC_ROOT, 'login_track.txt'), "a") as text_file:
                 text_file.write(date[0]+'    '+request.user.username+' logged in with '+request.user.email+'\n')
 
             # check if first login 
