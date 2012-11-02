@@ -342,15 +342,15 @@ def helloworld(request):
             return HttpResponseRedirect(reverse('webapp_index'))
 
     else:
-    if request.user.get_profile().is_first_login:
-        # not first time login ANYMORE
-        request.user.get_profile().is_first_login = False
-        request.user.get_profile().save()
+        if request.user.get_profile().is_first_login:
+            # not first time login ANYMORE
+            request.user.get_profile().is_first_login = False
+            request.user.get_profile().save()
 
-        # Check which school they are from package import module
-        school = request.user.get_profile().school 
-        friend_form = TutorialNameForm()
-        return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form}, RequestContext(request))
+            # Check which school they are from package import module
+            school = request.user.get_profile().school 
+            friend_form = TutorialNameForm()
+            return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form}, RequestContext(request))
 
 
 # Add new album for user   
