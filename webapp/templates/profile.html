@@ -18,23 +18,17 @@
 
   {# Insert flash message when inviting friend #}
   {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
   {% endif %}
-
-  {# FOR YC APPLICATION -- message #}
-    {% if yc %}
-      <div class="text-info">Hey YC, thanks for checking out our demo!</div>
-    {% endif %}
-  {# end #}
     
   {# Displays existing experiences #}
   <div id="create_album_container">
       <div id="create_album">
-        <div id="input_name">
+        <div id="input_field_container">
         <form action="{% url add_experience %}" method="post">
           <!--<input placeholder="Album Title" size="6">-->
           {% if addexperienceform.title.errors %}
@@ -43,7 +37,7 @@
           </div>
           {% csrf_token %}
           {{ addexperienceform.title }}
-         <div id="create_button">
+         <div id="profile_button">
          <input type="submit" value="Create Album" />
          </div>
         
@@ -53,33 +47,49 @@
   {% if experiences %}
    
 
+    {# Insert flash message when inviting friend #}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    {# FOR YC APPLICATION -- message #}
+    {% if yc %}
+      <div>Hey YC, thanks for checking out our demo!</div>
+    {% endif %}
+	<span id="albums_display_container">
     {% for experiences in experiences %}
-      <div id ="albums_display">
-        <span id="hide_text_container">
-          <span id="albums_info">
-            <a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
-             <!-- ({{ experiences.meme_set.count }} memes)-->
-              <span id="delete_album">
-				<a href="{% url webapp.views.delete_album experiences.pk %}"> X</a>
+		  <div id ="albums_display">
+			<span id="hide_text_container">
+			  <span id="albums_info">
+				<a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
+				 <!-- ({{ experiences.meme_set.count }} memes)-->
+				  <span id="delete_album">
+					<a href="{% url webapp.views.delete_album experiences.pk %}"> X</a>
+				  </span>
+				  <div>
+					<a> with </a>
+					<class id="coowner">
+						{% for creator in experiences.creator.all %}
+						  {% if not forloop.first %},{% endif %}<a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
+						{% endfor %}
+					</class>
+				  </div>
 			  </span>
-              <div>
-                <a> with </a>
-                <class id="coowner">
-					{% for creator in experiences.creator.all %}
-					  {% if not forloop.first %},{% endif %}<a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
-					{% endfor %}
-				</class>
-              </div>
-          </span>
-        </span>
-        <a href="{% url webapp.views.show_experience experiences.pk %}">
-          {% if experiences.album_pic %}
-          <img src="{{ MEDIA_URL }}/{{ experiences.album_pic.image }}" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
-          {% else %}
-            <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
-          {% endif %}
-        </a>
-      </div>
+			</span>
+			<a href="{% url webapp.views.show_experience experiences.pk %}">
+			  {% if experiences.album_pic %}
+			  <img src="{{ MEDIA_URL }}/{{ experiences.album_pic.image }}" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
+			  {% else %}
+				<img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
+			  {% endif %}
+			</a>
+		  </div>
+	  </span>
     {% endfor %}
   {% else %}
     No experience albums
@@ -96,7 +106,7 @@
 			  
 				{{ imageform.image.errors }}
 				{{ imageform.image }}
-					<span id="upload_button">
+					<span id="profile_button">
 						<input type="submit" value="Upload" /></p>
 					</span>
 			</form>
