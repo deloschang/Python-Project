@@ -335,7 +335,7 @@ def helloworld(request):
         friend_form = TutorialNameForm(request.POST)
         if friend_form.is_valid():
             # set up first album with friend name
-            first_friend_experience = Experiences(title='My Experiences with '+request.POST['friend_name'])
+            first_friend_experience = Experiences(title='Experiences with '+request.POST['friend_name'])
             first_friend_experience.save()
             first_friend_experience.creator.add(request.user)
             
