@@ -14,7 +14,7 @@ urlpatterns = patterns('webapp.views',
                 index, {'backend' : 'registration.backends.default.DefaultBackend'},
                 name='invitation_invited'), # change if works
     url(r'^create/$', create, name='create'),
-    url(r'^hello-world/$', helloworld, name='webapp_helloworld'),
+    url(r'^welcome/hello-world/$', helloworld, name='webapp_helloworld'),
     (r'^create/library/$', 'library'),
     (r'^create/publish/$', 'macromeme_publish'),
     (r'^create/remix/(?P<meme_id>\d+)', 'library'),

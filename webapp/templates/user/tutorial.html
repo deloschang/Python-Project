@@ -1,10 +1,16 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mainpg.css"/>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-{% block content %}
 <div id="intro_logo">
   <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
 </div>
 
-<h2>Welcome! I see you're from {{ school }}.</h2>
+{% block content %}
+<h1 id="top_instruction">Welcome! I see you're from {{ school }}.</h1>
 
+<h2 id="lower_instruction">Memeja is a new way to share experiences</h2>
+
+<a href="#" id="start_me">Let's start</a>
 {% endblock %}
+
