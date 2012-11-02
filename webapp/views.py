@@ -343,8 +343,8 @@ def helloworld(request):
 
     else:
         ### bring back when done testing ###
-        #if request.user.get_profile().is_first_login:
-        if not request.user.get_profile().is_first_login:
+        if request.user.get_profile().is_first_login:
+        #if not request.user.get_profile().is_first_login:
             # not first time login ANYMORE
             request.user.get_profile().is_first_login = False
             request.user.get_profile().save()
