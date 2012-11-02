@@ -1,24 +1,13 @@
-.green_btn {
-  background-color: hsl(145, 62%, 68%) !important;
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cdf3dd", endColorstr="#7adfa4");
-  background-image: -khtml-gradient(linear, left top, left bottom, from(#cdf3dd), to(#7adfa4));
-  background-image: -moz-linear-gradient(top, #cdf3dd, #7adfa4);
-  background-image: -ms-linear-gradient(top, #cdf3dd, #7adfa4);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cdf3dd), color-stop(100%, #7adfa4));
-  background-image: -webkit-linear-gradient(top, #cdf3dd, #7adfa4);
-  background-image: -o-linear-gradient(top, #cdf3dd, #7adfa4);
-  background-image: linear-gradient(#cdf3dd, #7adfa4);
-  border-color: #7adfa4 #7adfa4 hsl(145, 62%, 63%);
-  color: #333 !important;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33);
-  -webkit-font-smoothing: antialiased;
-}
-/*******************/
+/***** Newest CSS - do not delete ****/
 /* for masonry */
 .uncatmemes{
   display: block;
   float: left;
+  padding:5px;
+  margin: 5px;
+  border:0 0 1px solid #ACACA5;
+  box-shadow:0 0 10px #ACACA5;
+  background-color:white;
   /*width: 420px;*/
   /*margin: 5px;*/
 }
@@ -409,7 +398,7 @@
 		height:40px;
 		border:1px solid #ACACA5;
 		box-shadow:0px .5px 2px #ACACA5;
-		margin-bottom:10px;
+		padding-bottom:10px;
 	}
 	
 	
@@ -465,10 +454,11 @@
 	
 	#albums_container{
 		position:relative;
-		min-height:160px;
+		min-height:233px;
 		border-bottom:1px solid #ACACA5;
 		width:100%;
 		background-color:rgb(245,243,244);
+		padding-top:5px;
 	}
 	
 	#albums_header_container{
@@ -562,6 +552,11 @@
 		-webkit-box-shadow:0 1px 3px rgba(34, 25, 25, 0.4);
 	} 
 	
+	#delete_album{
+		float:right;
+	
+	}
+	
 	#hide_text_container{
 		/*position:absolute;*/
 		overflow:hidden;
@@ -620,24 +615,23 @@
 	#uncat_header_container{
 		min-height:34px;
 		height:auto;
-		padding:5px;
+		text-align:center;
+		width:50%;
+		margin-left:auto;
+		margin-right:auto;
 
 	}
 	
 	
 	#uncat_header_text{
-		text-align:center;
 		font-size:30px;
-		padding:4px;
 		color:#221919;
 		font-family:"helvetica neu", arial, sans-serif;
 	}
 	
 	#uncat_header_text_addition{
-		float:left;
 		font-size:10px;
-		color:#ACACAC;
-		margin-top:19px;
+		color:#221919;
 	}
 	
 	#upload_button_container{
@@ -670,7 +664,7 @@
 		float:left;
 		margin:10px;
 		margin-top:20px;
-		color:#ACACAC; 
+		color:#221919;
 		font-size:15px;
 	}
 	#invitation_container{
@@ -686,8 +680,12 @@
 		font-size:14px;
 	}
 	
-	#creator_name_size{
+	#coowner a{
 		font-size:14px;
+		color:grey;
+	}
+	#coowner a:hover{
+		text-decoration:underline;
 	}
 	
 	#album_list{
@@ -699,5 +697,34 @@
 		border-bottom-right-radius:8px;
 		}
 	
+	#upload_button input{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 2px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+	}
+	#upload_button input:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+	}
+	#upload_button:active {
+	position:relative;
 	/*End*/
 	

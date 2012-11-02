@@ -26,8 +26,7 @@
   {% endif %}
     
   {# Displays existing experiences #}
-  {% if experiences %}
-    <div id="create_album_container">
+  <div id="create_album_container">
       <div id="create_album">
         <div id="input_name">
         <form action="{% url add_experience %}" method="post">
@@ -45,6 +44,8 @@
         </div>
       </form>
     </div>
+  {% if experiences %}
+   
 
     {# Insert flash message when inviting friend #}
     {% if messages %}
@@ -67,12 +68,16 @@
           <span id="albums_info">
             <a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
              <!-- ({{ experiences.meme_set.count }} memes)-->
-              <a href="{% url webapp.views.delete_album experiences.pk %}"> X</a>
+              <span id="delete_album">
+				<a href="{% url webapp.views.delete_album experiences.pk %}"> X</a>
+			  </span>
               <div>
                 <a> with </a>
-                {% for creator in experiences.creator.all %}
-                  {% if not forloop.first %},{% endif %}<a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
-                {% endfor %}
+                <class id="coowner">
+					{% for creator in experiences.creator.all %}
+					  {% if not forloop.first %},{% endif %}<a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
+					{% endfor %}
+				</class>
               </div>
           </span>
         </span>
@@ -88,10 +93,23 @@
   {% else %}
     No experience albums
   {% endif %}
-</div>
+  </div>
 
 
  <div id="uncat_container">
+	<div id="upload_button_container" >
+			<form action="{% url create %}" method="post" enctype="multipart/form-data">
+			  {% csrf_token %}
+			  {{ imageform.non_field_errors }}
+			  {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
+			  
+				{{ imageform.image.errors }}
+				{{ imageform.image }}
+					<span id="upload_button">
+						<input type="submit" value="Upload" /></p>
+					</span>
+			</form>
+		</div>
 	<div id="uncat_header_container">
 		<div id="uncat_header_text"> 
 			Uncategorized 
@@ -100,17 +118,7 @@
 		(Drag into an album)
 		</span>
  
-		<div id="upload_button_container" >
-			<form action="{% url create %}" method="post" enctype="multipart/form-data">
-			  {% csrf_token %}
-			  {{ imageform.non_field_errors }}
-			  {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
-			  
-				{{ imageform.image.errors }}
-				{{ imageform.image }}
-					<input class="basic_button" type="submit" value="Upload" /></p>
-			</form>
-		</div>
+		
 		<div style ="clear:both;"></div>
 	 </div>
 
