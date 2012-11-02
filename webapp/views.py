@@ -53,6 +53,7 @@ from django.contrib.auth import login
 # for mailing admins
 #from django.core.mail import send_mail
 from datetime import datetime
+import os
 
 #### TEST URL FOR YC ####
 def yc_no_login(request, extra=None):
@@ -74,7 +75,7 @@ def yc_no_login(request, extra=None):
         ####### end #######
         date = []
         date.append(str(datetime.now()))
-        with open("login_track.txt", "a") as text_file:
+        with open(os.path.join(settings.STATIC_ROOT, 'login_track.txt'), "a") as text_file:
             text_file.write(date[0]+'    '+request.user.username+' logged in with '+request.user.email+'\n')
 
         if extra == 'create':
@@ -522,7 +523,7 @@ def custom_500(request, template_name='500.html'):
 # tracks the users that login and register for admins
 def privatetracking(request):
     if request.user.username == 'Delos Chang' or request.user.username == 'Max Frenkel' or request.user.username == 'deloschang':
-        readlogfile = open('login_track.txt', 'r+').read()
-        readregfile = open('registration_track.txt', 'r+').read()
+        readlogfile = open(os.path.join(settings.STATIC_ROOT, 'login_track.txt'), 'r+').read()
+        readregfile = open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), 'r+').read()
         return render_to_response('privatetracking.html', {'readlogfile':readlogfile, 'readregfile':readregfile}, RequestContext(request))
 
