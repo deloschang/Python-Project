@@ -21,8 +21,8 @@
 			  <div><h2> {{ experiences.title }}</h2></div> 
 			  <div>
 				with 
-				<span id="creator_name_size">
 				  {% for creator in experiences.creator.all %}
+				  <span id="coowner">
 					  <a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
 				  {% endfor %}
 				  </span>
