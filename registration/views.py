@@ -231,7 +231,6 @@ def register(request, backend, success_url=None, form_class=None,
             new_user_profile.save()
 
 
-
             ####### send an email to admins #######
             if not settings.DEBUG:
                 subject = 'New login'

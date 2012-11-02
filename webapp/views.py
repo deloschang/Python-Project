@@ -342,10 +342,10 @@ def helloworld(request):
             return HttpResponseRedirect(reverse('webapp_index'))
 
     else:
-    #if request.user.get_profile().is_first_login:
+    if request.user.get_profile().is_first_login:
         # not first time login ANYMORE
-        #request.user.get_profile().is_first_login = False
-        #request.user.get_profile().save()
+        request.user.get_profile().is_first_login = False
+        request.user.get_profile().save()
 
         # Check which school they are from package import module
         school = request.user.get_profile().school 
