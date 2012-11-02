@@ -16,7 +16,8 @@
   <a href="#" id="start_me">Let's start</a>
 
   <div id="friend_form" style="display:none;">
-    <form action="" method="post">
+    <form action="{% url webapp_helloworld %}" method="post">
+      {% csrf_token %}
       {% for field in friend_form %}
         {{ field }}
       {% endfor %}
