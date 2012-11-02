@@ -30,10 +30,10 @@ def email_login(request, template="registration/login.html", extra_context=None)
             #next_page = request.REQUEST.get('next', settings.LOGIN_REDIRECT_URL)
 
             ####### send an email to admins #######
-            if not settings.DEBUG:
-                subject = 'New login'
-                message = request.user.username+' logged in with '+request.user.email
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['memeja@googlegroups.com'], fail_silently=True)
+            #if not settings.DEBUG:
+                #subject = 'New login'
+                #message = request.user.username+' logged in with '+request.user.email
+                #send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['memeja@googlegroups.com'], fail_silently=True)
             ####### end #######
 
             # check if first login 
