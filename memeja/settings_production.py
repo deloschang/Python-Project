@@ -76,12 +76,12 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.static',
-    'django.core.context_processors.media',
-    'webapp.processor.analytics',
-    'django.contrib.auth.context_processors.auth',
-)
+#TEMPLATE_CONTEXT_PROCESSORS = (
+    #'django.core.context_processors.static',
+    #'django.core.context_processors.media',
+    #'webapp.processor.analytics',
+    #'django.contrib.auth.context_processors.auth',
+#)
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
