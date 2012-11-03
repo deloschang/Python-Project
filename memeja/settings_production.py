@@ -1,4 +1,5 @@
 # settings used for production server
+from settings_local import *
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
