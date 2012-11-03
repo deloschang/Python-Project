@@ -15,7 +15,7 @@
 <dd>{{ form_auth.email }}</dd>
 <dt><label for="id_password">Password:</label>{% if form_auth.password.errors %} <span class="error">{{ form.password.errors|join:", " }}</span>{% endif %}</dt>
 <dd>{{ form_auth.password }}</dd>
-<dt><input type="submit" value="Log in" /></dt>
+<dt><input type="submit" class="btn btn-info" value="Log in" /></dt>
 </dl>
 </form>
 

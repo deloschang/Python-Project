@@ -21,8 +21,10 @@ except ImportError:
     pass
 
 class EmailLoginForm(forms.Form):
-    email = forms.CharField(label=_("Email"), max_length=75, widget=forms.TextInput(attrs=dict(maxlength=75)))
-    password = forms.CharField(label=_(u"Password"), widget=forms.PasswordInput)
+    email = forms.CharField(label=_("Email"), max_length=75, 
+                                    widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    password = forms.CharField(label=_(u"Password"), 
+                                    widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
     def clean(self):
         # Try to authenticate the user

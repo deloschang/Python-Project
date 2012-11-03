@@ -18,7 +18,7 @@
 
       
     {# Value Proposition Line #} 
-    <div id="headline">Share Experiences With the People You Care About</div>
+    <div id="headline" class="lead">Share Experiences With the People You Care About</div>
 
     <h1>Create an account</h1>
 
@@ -33,7 +33,7 @@
     {% csrf_token %}
 
       <p>
-        <label for="id_username">Full Name:</label>
+        <!--<label for="id_username">Full Name:</label>-->
         {% if form.username.errors %}
           <p class="errors">{{ form.username.errors.as_text }}</p>
         {% endif %}
@@ -43,7 +43,7 @@
       {# Use prefilled email for registration #}
       {% if not invitee_object.to_user_email %}
         <p>
-          <label for="id_email">Email:</label>
+          <!--<label for="id_email">Email:</label>-->
           {% if form.email.errors %}
             <p class="errors">{{ form.email.errors.as_text }}</p>
           {% endif %}
@@ -58,7 +58,7 @@
       {# end #}
 
       <p>
-        <label for="id_password1">Password:</label>
+        <!--<label for="id_password1">Password:</label>-->
         {% if form.password1.errors %}
           <p class="errors">{{ form.password1.errors.as_text }}</p>
         {% endif %}
@@ -73,7 +73,7 @@
         {{ form.password2 }}
       </p>
       {% endcomment %}
-      <p class="submit"><input type="submit" value="Register &rarr;"></p>
+      <p class="submit"><input type="submit" class="btn btn-primary" value="Register &rarr;"></p>
     </form>
 
 
