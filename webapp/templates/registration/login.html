@@ -12,12 +12,16 @@
 
 <form method="post" action="?next={{ next|default:"/" }}">{% csrf_token %}
 <dl>
-  <dt><label for="id_username"> Email:</label>{% if form.username.errors %} <span class="error">{{ form.username.errors|join:", " }}</span>{% endif %}</dt>
+  <dt>
+  <!--<label for="id_username"> Email:</label>-->
+  {% if form.username.errors %} <span class="error">{{ form.username.errors|join:", " }}</span>{% endif %}</dt>
 {#<dd>{{ form.username }}</dd>#}
 <dd>{{ form.email }}</dd>
-<dt><label for="id_password">Password:</label>{% if form.password.errors %} <span class="error">{{ form.password.errors|join:", " }}</span>{% endif %}</dt>
+<dt>
+<!--<label for="id_password">Password:</label>-->
+{% if form.password.errors %} <span class="error">{{ form.password.errors|join:", " }}</span>{% endif %}</dt>
 <dd>{{ form.password }}</dd>
-<dt><input type="submit" value="Log in" /></dt>
+<dt><input type="submit" class="btn btn-primary" value="Log in" /></dt>
 </dl>
 </form>
 {% endblock %}
