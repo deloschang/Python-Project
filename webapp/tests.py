@@ -6,11 +6,19 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
+from django.test.client import Client
+from django.contrib.auth.models import User
 
+# Login test case
+class ViewsTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
+    def test_login(self):
+        User.objects.create_user('Fake Name', 'fake@dartmouth.edu', 'password')
+
+        # perform login and check
+        #user = self.client.login(username='Fake Name', password='mypassword')
+
+        user = self.client.login(username='Fake Name', password='password')
+        self.assertTrue(user)
