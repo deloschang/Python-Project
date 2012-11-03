@@ -29,7 +29,7 @@
       </h2>
     {% endif %}
     
-    <form method="post" action="" class="wide">
+    <form method="post" action="" id="registrationForm" class="wide">
     {% csrf_token %}
 
       <p>
@@ -37,7 +37,11 @@
         {% if form.username.errors %}
           <p class="errors">{{ form.username.errors.as_text }}</p>
         {% endif %}
-        {{ form.username }}
+        <div class="control-group">
+          <div class="controls">
+            {{ form.username }}
+          </div>
+        </div>
       </p>
 
       {# Use prefilled email for registration #}
@@ -47,10 +51,14 @@
           {% if form.email.errors %}
             <p class="errors">{{ form.email.errors.as_text }}</p>
           {% endif %}
-          {{ form.email }}
+          <div class="control-group">
+            <div class="controls">
+            {{ form.email }}
+            </div>
+          </div>
         </p>
       {% else %}
-        <label for="id_email">Your email: {{ invitee_object.to_user_email }} </label>
+        <label for="id_email" class="text-success">{{ invitee_object.to_user_email }} </label>
         {% if form.email.errors %}
           <p class="errors">{{ form.email.errors.as_text }}</p>
         {% endif %}
@@ -62,7 +70,12 @@
         {% if form.password1.errors %}
           <p class="errors">{{ form.password1.errors.as_text }}</p>
         {% endif %}
-        {{ form.password1 }}
+          
+          <div class="control-group">
+            <div class="controls">
+          {{ form.password1 }}
+            </div>
+          </div>
       </p>
       {% comment %}
       <p>
@@ -108,5 +121,32 @@
           <iframe src="http://player.vimeo.com/video/47618336?byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
         </div>
       </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL}}js/jquery.validate.js"></script>
+  <script>
+    $('#registrationForm').validate({
+      errorClass: 'text-error',
+      validClass: 'text-success',
+
+      // shows for any error
+      showErrors: function(errorMap, errorList){
+        this.defaultShowErrors();
+        if (errorList.length < 1){
+          $('label.error').remove();
+          return;
+        }
+        $.each(errorList, function(index, error){
+          $(error.element).parent().parent().attr('class', 'control-group error');
+        });
+      },
+
+      // changes form to green on success
+      success: function(label){
+        label.parent().parent().attr('class', 'control-group success');
+      }
+    });
+  </script>
+
   {% endif %}
 {% endblock %}
