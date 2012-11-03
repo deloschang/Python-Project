@@ -20,6 +20,13 @@ from datetime import datetime
 import os
 from django.conf import settings
 
+# skip to login
+from django.contrib.auth import login
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+
+# for messages
+from django.contrib import messages
 
 
 
@@ -87,11 +94,21 @@ def activate(request, backend,
     account = backend.activate(request, **kwargs)
 
     if account:
-        if success_url is None:
-            to, args, kwargs = backend.post_activation_redirect(request, account)
-            return redirect(to, *args, **kwargs)
-        else:
-            return redirect(success_url)
+        # activated, first time logging in 
+        account.backend = 'django.contrib.auth.backends.ModelBackend' # manual patch to avoid authenticate
+        user = login(request, account) # log in user now
+
+        # check if first login (probably are - just to be safe)
+        if request.user.get_profile().is_first_login:
+            # send to the tutorial
+            messages.add_message(request, messages.SUCCESS, 'Woohoo!  This is your brand, spanking new account', extra_tags="text-success")
+            return HttpResponseRedirect(reverse('webapp_helloworld'))
+
+        #if success_url is None:
+            #to, args, kwargs = backend.post_activation_redirect(request, account)
+            #return redirect(to, *args, **kwargs)
+        #else:
+            #return redirect(success_url)
 
     if extra_context is None:
         extra_context = {}
