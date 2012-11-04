@@ -353,13 +353,18 @@ def helloworld_create(request):
 
         friend_form = TutorialNameForm(request.POST)
         if friend_form.is_valid():
+
+            friend_name = strip_tags(request.POST['friend_name'].title())
             # create first album with friend name: "My Experiences with <friend>"
-            first_friend_experience = Experiences(title='Experiences with '+strip_tags(request.POST['friend_name'].title()))
+            first_friend_experience = Experiences(title='Experiences with '+friend_name)
             first_friend_experience.save()
             first_friend_experience.creator.add(request.user)
 
             # pass to next page (dragging memes into album)
             request.session['first_friend_experience'] = first_friend_experience
+
+            # pass friends name for tutorial generator page
+            request.session['friend_name'] = friend_name
             
             #messages.add_message(request, messages.SUCCESS, 'Awesome! We created an album for you', extra_tags="text-success")
             #messages.add_message(request, messages.SUCCESS, 'You can drag memes into your album', extra_tags="text-success")
@@ -368,11 +373,23 @@ def helloworld_create(request):
             # create album and return for user
             return HttpResponse(first_friend_experience.title)
 
+
+    # Tutorial: user can drag memes now
     first_friend_experience = request.session['first_friend_experience']
+
+    drag_list_experience = Experiences.objects.get(title = 'UCB') # hardcoded UCB meme album
+    drag_list_memes = reversed(drag_list_experience.meme_set.all())
+
     return render_to_response('user/tutorial2.html',
-            {'first_friend_experience':first_friend_experience}, 
+            {'first_friend_experience':first_friend_experience, 
+                'memes': drag_list_memes }, 
             RequestContext(request))
     
+@login_required
+def helloworld_generator(request):
+    return render_to_response('user/tutorial3.html',
+            {'friend_name': request.session['friend_name']},
+            RequestContext(request))
 
 
 # Add new album for user   
@@ -464,7 +481,9 @@ def meme_in_album(request):
             dropped_album_obj = Experiences.objects.get(pk=dropped_album_id)
 
             # Check if user is authenticated for album and meme
-            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id):
+                # UCB is a hardcoded album for display
+            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.get(title = 'UCB'):
+
                 dragged_meme_obj.e.add(dropped_album_obj)
 
                 # If no album profile pic, add it
@@ -477,8 +496,10 @@ def meme_in_album(request):
             # newimage.e.add(testalbum)
 
             #updated_meme_count = dropped_album_obj.meme_set.count
-            return HttpResponse('success')
+                return HttpResponse('success')
             #return render_to_response('user/experience_display.html')
+
+            return HttpResponse('forbidden')
     else:
         return HttpResponse('this is not ajax')
 

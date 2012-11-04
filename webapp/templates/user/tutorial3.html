@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div id="top_container">
+    <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
+    <p id="top_instruction" class="lead">Or create a personal meme for {{ friend_name }}</p>
+
+  </div>
+<style>
+  html {
+    height: 100%;
+    background: url({{ STATIC_URL }}images/grey.png) repeat;
+  }
+
+  #top_container {
+    width:500px;
+    height:200px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-250px 0 0 -250px;
+  }
+
+</style>
+
+{{ standard_js }}
+{% endblock %}
+

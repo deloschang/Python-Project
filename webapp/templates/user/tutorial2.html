@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div id="top_container">
+    <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
+    <p id="top_instruction" class="lead">Drag memes into your album, bro.</p>
+
+      {# User's first album #}
+      <div id="albums_display">
+        <div style="font-size:20px; padding-bottom:15px;"> {{ first_friend_experience.title }} </div>
+        <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ first_friend_experience.pk }}" style="height:100px;"/>
+      </div>
+  
+    <div>
+      <a href="{% url webapp_helloworld_generator %}" id="letsflash" class="btn btn-success">Done <i class="icon-white icon-ok"></i></a>
+    </div>
+
+		<div id="uncategorized">
+      <div id="album_list">
+        {% for memes in memes %}
+          <div class="uncatmemes">
+            <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
+              <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+		</div>
+  </div>
+<style>
+  html {
+    height: 100%;
+    background: url({{ STATIC_URL }}images/grey.png) repeat;
+  }
+
+  #top_container {
+    width:500px;
+    height:200px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-250px 0 0 -250px;
+  }
+
+  .uncatmemes{
+    display: block;
+    float: left;
+    padding:5px;
+    margin: 5px;
+    border:0 0 1px solid #ACACA5;
+    box-shadow:0 0 10px #ACACA5;
+    background-color:white;
+    /*width: 420px;*/
+    /*margin: 5px;*/
+  }
+
+  .uncatmemes img{
+    display: block;
+    width: 200px;
+
+  }
+
+  #album_list{
+    width: 1000px;
+    right: 200px;
+  }
+
+</style>
+
+{{ standard_js }}
+{% endblock %}
+

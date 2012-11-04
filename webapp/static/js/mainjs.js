@@ -53,13 +53,13 @@
     return cookieValue;
   }
 
-  // end #}
+  // end 
 
   function handleDragStart(e){
     this.style.opacity = '0.4';
     this.classList.add('over');
 
-    // set source object #}
+    // set source object 
     DRAGSOURCE = this;
 
     e.dataTransfer.effectAllowed = 'copy'; 
@@ -74,7 +74,7 @@
   // drop source
   var bin = document.querySelectorAll('.experiences_list');
 
-  // when image dragged over album #}
+  // when image dragged over album 
   addEvent(bin, 'dragover', function(e){
     if (e.preventDefault)
       e.preventDefault();
@@ -83,18 +83,18 @@
     return false;
   });
 
-  // when image dropped into album #}
+  // when image dropped into album 
   addEvent(bin, 'drop', function(e) {
     if (e.stopPropagation)
       e.stopPropagation();
 
-    // link specific meme to disappear #}
+    // link specific meme to disappear 
     if (DRAGSOURCE){
       $(DRAGSOURCE).remove(); 
     
       var csrftoken = getCookie('csrftoken');
 
-      // AJAX call to add meme into album - server side #}
+      // AJAX call to add meme into album - server side 
       $.post('/meme_in_album/', {
         
         // figure out better way to retrieve id
@@ -143,6 +143,7 @@
     });
   });
 
+  // Tutorial: enter friends name JS
   $('#friend_form').submit(function(){
     //e.preventDefault();
     //return false;
@@ -168,8 +169,8 @@
     return false;
   });
 
-  // Tutorial creation JS
-  //$('#letscreate').live('click', function(){
+  // Tutorial: create flash meme in generator
+  //$('#letsflash').live('click', function(){
     //$('#lower_instruction').fadeOut('medium', function(){
       //$('#top_instruction').html('Lets create a meme for your album');
       //$('#letscreate').hide();
