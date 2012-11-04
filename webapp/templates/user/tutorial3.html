@@ -7,6 +7,50 @@
     <p id="top_instruction" class="lead">Or create a personal meme for {{ friend_name }}</p>
 
   </div>
+        {# Library Support for Macromeme #}
+      <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+      <script type="text/javascript">
+        // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+        var swfVersionStr = "11.2.0";
+        // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+        var xiSwfUrlStr = "playerProductInstall.swf";
+        var flashvars = {};
+        //flashvars.appId = "479174175436255";
+        flashvars.appId = "{{ flashappid }}";
+        flashvars.library = "library" // calls to view
+        flashvars.publish = "publish/"
+        flashvars.remix = "remix/"
+        flashvars.ohwhy = "ohwhy/"
+        var params = {};
+        params.quality = "high";
+        params.bgcolor = "#FFFFFF";
+        params.allowscriptaccess = "sameDomain";
+        params.allowfullscreen = "true";
+        var attributes = {};
+        attributes.id = "macromeme";
+        attributes.name = "macromeme";
+        attributes.align = "middle";
+        swfobject.embedSWF(
+        "{{ STATIC_URL }}macromeme.swf", "flashContent", 
+            "100%", "100%", 
+            swfVersionStr, xiSwfUrlStr, 
+            flashvars, params, attributes);
+        // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+            swfobject.createCSS("#flashContent", "display:block;text-align:left");
+      </script>
+
+      <br>
+      <div id="flashContent">
+        <p>
+          to view this page ensure that adobe flash player version 11.2.0 or greater is installed. 
+        </p>
+        <script type="text/javascript"> 
+          var pagehost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+          document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
+                         + pagehost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='get adobe flash player' /></a>" ); 
+        </script> 
+      </div>
 <style>
   html {
     height: 100%;
@@ -21,6 +65,19 @@
     top:50%;
     margin:-250px 0 0 -250px;
   }
+
+#macromeme {
+  height:500px;
+  width:600px;
+  position:absolute;
+  top:31%;
+  left:90%;
+  /*margin-left: -760px;*/
+  border: 1px solid #ACACAC;
+    -moz-border-radius: 8px; 
+    -webkit-border-radius: 8px;
+  border-radius: 5px;
+}
 
 </style>
 
