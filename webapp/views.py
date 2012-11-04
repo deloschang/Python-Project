@@ -328,7 +328,10 @@ def macromeme_publish(request):
 
         add_meme_in_db.save()
         
-        return HttpResponse('http://memeja.com')
+        if request.path == '/welcome/hello-world/publish/': ## hardcoded from the urls.py - DO NOT CHANGE
+            return HttpResponse('/')
+        else:
+            return HttpResponse('http://memeja.com')
 
 # First-time user tutorial page 'experience'
 @login_required

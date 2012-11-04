@@ -4,8 +4,9 @@
 
   <div id="top_container">
     <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
-    <p id="top_instruction" class="lead">Or create a personal meme for {{ friend_name }}</p>
-
+    <p id="top_instruction" class="lead">Or create a personal meme for {{ friend_name }}
+      <a href="#" class="btn btn-small btn-warning" style="float:right;">Skip <i class="icon-white icon-chevron-right"></i></a>
+    </p>
   </div>
         {# Library Support for Macromeme #}
       <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
@@ -66,18 +67,18 @@
     margin:-250px 0 0 -250px;
   }
 
-#macromeme {
-  height:500px;
-  width:600px;
-  position:absolute;
-  top:31%;
-  left:90%;
-  /*margin-left: -760px;*/
-  border: 1px solid #ACACAC;
-    -moz-border-radius: 8px; 
-    -webkit-border-radius: 8px;
-  border-radius: 5px;
-}
+  #macromeme {
+    height:500px;
+    width:600px;
+    position:absolute;
+    top:31%;
+    left:90%;
+    /*margin-left: -760px;*/
+    border: 1px solid #ACACAC;
+      -moz-border-radius: 8px; 
+      -webkit-border-radius: 8px;
+    border-radius: 5px;
+  }
 
 </style>
 

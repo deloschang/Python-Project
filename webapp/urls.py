@@ -19,6 +19,12 @@ urlpatterns = patterns('webapp.views',
     url(r'^welcome/hello-world/experience$', helloworld, name='webapp_helloworld'),
     url(r'^welcome/hello-world/create$', helloworld_create, name='webapp_helloworld_create'),
     url(r'^welcome/hello-world/personalize$', helloworld_generator, name='webapp_helloworld_generator'),
+
+    # hardcoded in webapp.views.macromeme_publish for HttpResponse
+    (r'^welcome/hello-world/publish/$', 'macromeme_publish'),
+    (r'^welcome/hello-world/library/$', 'library'),
+    (r'^welcome/hello-world/ohwhy/$', 'fb_privacy_explanation'), 
+
     (r'^create/library/$', 'library'),
     (r'^create/publish/$', 'macromeme_publish'),
     (r'^create/remix/(?P<meme_id>\d+)', 'library'),
