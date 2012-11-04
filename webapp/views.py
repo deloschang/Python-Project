@@ -329,7 +329,11 @@ def macromeme_publish(request):
         add_meme_in_db.save()
         
         if request.path == '/welcome/hello-world/publish/': ## hardcoded from the urls.py - DO NOT CHANGE
-            return HttpResponse('/')
+            # add the created meme into the tutorial album
+            first_friend_experience = request.session['first_friend_experience']
+
+            add_meme_in_db.e.add(first_friend_experience)
+            return HttpResponse('invite') # like localhost:8000/welcome/hello-world/invite
         else:
             return HttpResponse('http://memeja.com')
 
@@ -388,10 +392,36 @@ def helloworld_create(request):
                 'memes': drag_list_memes }, 
             RequestContext(request))
     
+
+# Tutorial: user makes a meme with generator
 @login_required
 def helloworld_generator(request):
     return render_to_response('user/tutorial3.html',
             {'friend_name': request.session['friend_name']},
+            RequestContext(request))
+
+# Tutorial: user invites friends
+@login_required
+def helloworld_invite(request):
+    # Grab the memes in the album
+
+    first_friend_experience = request.session['first_friend_experience']
+    first_friend_experience_memes = reversed(first_friend_experience.meme_set.all())
+
+    #### New implementation for autocomplete####
+    dd = {}
+    if 'q' in request.GET:
+        dd['entered'] = request.GET.get('q')
+    #initial = {'q':"\"This is an initial value,\" said O'Leary."}
+    #autocomplete_form = SearchForm(initial=initial)
+    autocomplete_form = SearchForm()
+    dd['autocomplete_form'] = autocomplete_form
+
+    return render_to_response('user/tutorial4.html',
+            {'friend_name': request.session['friend_name'], 
+                'memes': first_friend_experience_memes,
+                'first_friend_experience': first_friend_experience,
+                'autocomplete_form':autocomplete_form},
             RequestContext(request))
 
 

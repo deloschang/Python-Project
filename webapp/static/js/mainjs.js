@@ -169,14 +169,14 @@
     return false;
   });
 
-  // Tutorial: create flash meme in generator
-  //$('#letsflash').live('click', function(){
-    //$('#lower_instruction').fadeOut('medium', function(){
-      //$('#top_instruction').html('Lets create a meme for your album');
-      //$('#letscreate').hide();
-      ////$('#macromeme').fadeIn('slow');
-      //$('#macromeme').show();
-    //});
-  //});
+  // Tutorial: Looks great button, sends to invite
+  $('#looksgreatbutton').live('click', function(){
+    $('#looksgreatbutton').hide();
+    $('#top_instruction').fadeOut('fast', function(){
+      $('#invite_instruction').show();
+      $('#tutorial_invite_container').show();
+      $('#tutorial_skipme').show();
+    });
+  });
 
 
