@@ -91,7 +91,6 @@
     // link specific meme to disappear #}
     if (DRAGSOURCE){
       $(DRAGSOURCE).remove(); 
-      console.log(DRAGSOURCE);
     
       var csrftoken = getCookie('csrftoken');
 
@@ -146,7 +145,6 @@
 
   $('#friend_form').submit(function(){
     //e.preventDefault();
-    //console.log('I went');
     //return false;
     var csrftoken = getCookie('csrftoken');
     //$.post('/welcome/hello-world/create', {
@@ -157,10 +155,12 @@
       //'csrfmiddlewaretoken': csrftoken
       success: function(response){
         $('#friend_div').fadeOut('medium', function(){
-          $('#lower_instruction').html('This is your album');
-          $('#albums_display').fadeIn('slow', function(){
+          $('#lower_instruction').html('This is your Album').attr('class', 'lead');
+          $('#second_lower_instruction').fadeIn('medium', function(){
             $('#my_first_album_title').html(response);
-            $('#second_lower_instruction').fadeIn('medium');
+            $('#albums_display').fadeIn('slow', function(){
+              $('#letscreate').fadeIn('medium');
+            });
           });
         });
       }
