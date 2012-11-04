@@ -98,6 +98,13 @@ def activate(request, backend,
         account.backend = 'django.contrib.auth.backends.ModelBackend' # manual patch to avoid authenticate
         user = login(request, account) # log in user now
 
+        # record it for admins
+        date = []
+        date.append(str(datetime.now()))
+
+        with open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), "a") as text_file:
+            text_file.write(date[0]+'    '+new_user.username+' activated\n')
+
         # check if first login (probably are - just to be safe)
         if request.user.get_profile().is_first_login:
             # send to the tutorial
