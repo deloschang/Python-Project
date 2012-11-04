@@ -53,30 +53,6 @@
     return cookieValue;
   }
 
-  // csrf passed for AJAX 
-  $.ajaxSetup({ 
-       beforeSend: function(xhr, settings) {
-           function getCookie(name) {
-               var cookieValue = null;
-               if (document.cookie && document.cookie != '') {
-                   var cookies = document.cookie.split(';');
-                   for (var i = 0; i < cookies.length; i++) {
-                       var cookie = jQuery.trim(cookies[i]);
-                       // Does this cookie string begin with the name we want?
-                   if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                       cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                       break;
-                   }
-               }
-           }
-           return cookieValue;
-           }
-           if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-               // Only send the token to relative URLs i.e. locally.
-               xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-           }
-       } 
-  });
   // end #}
 
   function handleDragStart(e){
@@ -162,9 +138,44 @@
   // Tutorial JS 
   $('#start_me').live('click', function(){
     $('#top_instruction').fadeOut('medium', function(){
-      $('#lower_instruction').html('Think of a friend you share experiences with');
+      $('#lower_instruction').html('Name a friend you share experiences with');
       $('#start_me').hide();
-      $('#friend_form').fadeIn('slow');
+      $('#friend_div').fadeIn('slow');
     });
   });
+
+  $('#friend_form').submit(function(){
+    //e.preventDefault();
+    //console.log('I went');
+    //return false;
+    var csrftoken = getCookie('csrftoken');
+    //$.post('/welcome/hello-world/create', {
+    $.ajax({
+      data: $(this).serialize(),
+      type: "post",
+      url: $(this).attr('action'),
+      //'csrfmiddlewaretoken': csrftoken
+      success: function(response){
+        $('#friend_div').fadeOut('medium', function(){
+          $('#lower_instruction').html('This is your album');
+          $('#albums_display').fadeIn('slow', function(){
+            $('#my_first_album_title').html(response);
+            $('#second_lower_instruction').fadeIn('medium');
+          });
+        });
+      }
+    });
+    return false;
+  });
+
+  // Tutorial creation JS
+  $('#letscreate').live('click', function(){
+    $('#lower_instruction').fadeOut('medium', function(){
+      $('#top_instruction').html('Lets create a meme for your album');
+      $('#letscreate').hide();
+      //$('#macromeme').fadeIn('slow');
+      $('#macromeme').show();
+    });
+  });
+
 

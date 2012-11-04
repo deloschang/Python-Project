@@ -330,36 +330,43 @@ def macromeme_publish(request):
         
         return HttpResponse('http://memeja.com')
 
-# First-time user tutorial page
+# First-time user tutorial page 'experience'
 @login_required
 def helloworld(request):
+    ### bring back when done testing ###
+    if request.user.get_profile().is_first_login or request.user.email == 'yc@gmail.com':
+    #if not request.user.get_profile().is_first_login:
+         #not first time login ANYMORE
+        request.user.get_profile().is_first_login = False
+        request.user.get_profile().save()
+
+        # Check which school they are from package import module
+        school = request.user.get_profile().school 
+        friend_form = TutorialNameForm()
+        return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form}, RequestContext(request))
+        
+@login_required
+def helloworld_create(request):
     if request.method == 'POST':
-        # user entered their friends name in tutorial
 
         friend_form = TutorialNameForm(request.POST)
         if friend_form.is_valid():
-            # set up first album with friend name
-            first_friend_experience = Experiences(title='Experiences with '+request.POST['friend_name'])
+            # create first album with friend name: "My Experiences with <friend>"
+            first_friend_experience = Experiences(title='Experiences with '+strip_tags(request.POST['friend_name']))
             first_friend_experience.save()
             first_friend_experience.creator.add(request.user)
+
+            request.session['first_friend_experience'] = first_friend_experience
             
-            messages.add_message(request, messages.SUCCESS, 'Awesome! We created an album for you', extra_tags="text-success")
-            messages.add_message(request, messages.SUCCESS, 'You can drag memes into your album', extra_tags="text-success")
-            return HttpResponseRedirect(reverse('webapp_index'))
+            #messages.add_message(request, messages.SUCCESS, 'Awesome! We created an album for you', extra_tags="text-success")
+            #messages.add_message(request, messages.SUCCESS, 'You can drag memes into your album', extra_tags="text-success")
+            #return HttpResponseRedirect(reverse('webapp_helloworld_create'))
+            return HttpResponse(first_friend_experience.title)
 
-    else:
-        ### bring back when done testing ###
-        if request.user.get_profile().is_first_login or request.user.email == 'yc@gmail.com':
-        #if not request.user.get_profile().is_first_login:
-             #not first time login ANYMORE
-            request.user.get_profile().is_first_login = False
-            request.user.get_profile().save()
-
-            # Check which school they are from package import module
-            school = request.user.get_profile().school 
-            friend_form = TutorialNameForm()
-            return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form}, RequestContext(request))
-        
+    first_friend_experience = request.session['first_friend_experience']
+    return render_to_response('user/tutorial2.html', {'first_friend_experience':first_friend_experience}, 
+            RequestContext(request))
+    
 
 
 # Add new album for user   

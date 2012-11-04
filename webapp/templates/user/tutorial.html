@@ -9,31 +9,6 @@
 
 
 <body>
-  <div id="top_container">
-    <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
-    <p id="top_instruction" class="lead">Welcome! {% if school %}I see you're from {{ school }}.{% endif %}</p>
-  
-    <p id="lower_instruction" class="text-info" style="padding-top:25px;">Memeja is a new way to share experiences</p>
-  
-    <a href="javascript:;" id="start_me" class="btn btn-success">Let's start</a>
-  
-    <div id="friend_form" style="display:none;">
-      <form action="{% url webapp_helloworld %}" method="post" class="form_search">
-        {% csrf_token %}
-        <div class="input-append">
-          {% for field in friend_form %}
-            {{ field }}
-          {% endfor %}
-          <input type="submit" class="btn btn-primary" value="Go!" />
-        </div>
-      </form>
-    </div>
-  
-  </div>
-  {% if request.user.username == 'Y Combinator' %}
-    <div class="text-info"> </div>
-  {% endif %}
-
   {# added for YC demo 'For our demo, this first-time user tutorial' #}
   {% if messages %}
     <ul class="messages">
@@ -42,6 +17,35 @@
         {% endfor %}
     </ul>
   {% endif %}
+
+  <div id="top_container">
+    <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
+    <p id="top_instruction" class="lead">Welcome! {% if school %}I see you're from {{ school }}.{% endif %}</p>
+  
+    <p id="lower_instruction" class="text-info" style="padding-top:25px;">Memeja is a new way to share experiences</p>
+  
+    <a href="javascript:;" id="start_me" class="btn btn-success">Let's start</a>
+  
+    <div id="friend_div" style="display:none;">
+      <!--<form action="url webapp_helloworld %}" method="post" class="form_search">-->
+      <form action="{% url webapp_helloworld_create %}" method="post" id="friend_form" class="form_search">
+        {% csrf_token %}
+        <div class="input-append">
+          {% for field in friend_form %}
+            {{ field }}
+          {% endfor %}
+          <input type="submit" id="createmyfirstalbum" class="btn btn-primary" value="Go!" />
+        </div>
+      </form>
+    </div>
+  
+  </div>
+  <div id="albums_display" style="display:none;">
+    <div id="my_first_album_title" style="font-size:20px; padding-bottom:15px;"></div>
+    <img src="{{ STATIC_URL }}/images/memeja_logo.png" style="height:100px;"/>
+  </div>
+  <div id="second_lower_instruction" class="text-info" style="display:none;"></div>
+
 
 </body>
 
