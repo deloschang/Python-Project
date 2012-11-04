@@ -155,7 +155,7 @@
       //'csrfmiddlewaretoken': csrftoken
       success: function(response){
         $('#friend_div').fadeOut('medium', function(){
-          $('#lower_instruction').html('This is your Album').attr('class', 'lead');
+          $('#lower_instruction').html('This is your Album!').attr('class', 'lead');
           $('#second_lower_instruction').fadeIn('medium', function(){
             $('#my_first_album_title').html(response);
             $('#albums_display').fadeIn('slow', function(){
@@ -169,13 +169,13 @@
   });
 
   // Tutorial creation JS
-  $('#letscreate').live('click', function(){
-    $('#lower_instruction').fadeOut('medium', function(){
-      $('#top_instruction').html('Lets create a meme for your album');
-      $('#letscreate').hide();
-      //$('#macromeme').fadeIn('slow');
-      $('#macromeme').show();
-    });
-  });
+  //$('#letscreate').live('click', function(){
+    //$('#lower_instruction').fadeOut('medium', function(){
+      //$('#top_instruction').html('Lets create a meme for your album');
+      //$('#letscreate').hide();
+      ////$('#macromeme').fadeIn('slow');
+      //$('#macromeme').show();
+    //});
+  //});
 
 

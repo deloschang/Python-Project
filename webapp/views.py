@@ -347,24 +347,30 @@ def helloworld(request):
         
 @login_required
 def helloworld_create(request):
+
+    # Tutorial: user just entered friends name
     if request.method == 'POST':
 
         friend_form = TutorialNameForm(request.POST)
         if friend_form.is_valid():
             # create first album with friend name: "My Experiences with <friend>"
-            first_friend_experience = Experiences(title='Experiences with '+strip_tags(request.POST['friend_name']))
+            first_friend_experience = Experiences(title='Experiences with '+strip_tags(request.POST['friend_name'].title()))
             first_friend_experience.save()
             first_friend_experience.creator.add(request.user)
 
+            # pass to next page (dragging memes into album)
             request.session['first_friend_experience'] = first_friend_experience
             
             #messages.add_message(request, messages.SUCCESS, 'Awesome! We created an album for you', extra_tags="text-success")
             #messages.add_message(request, messages.SUCCESS, 'You can drag memes into your album', extra_tags="text-success")
             #return HttpResponseRedirect(reverse('webapp_helloworld_create'))
+
+            # create album and return for user
             return HttpResponse(first_friend_experience.title)
 
     first_friend_experience = request.session['first_friend_experience']
-    return render_to_response('user/tutorial2.html', {'first_friend_experience':first_friend_experience}, 
+    return render_to_response('user/tutorial2.html',
+            {'first_friend_experience':first_friend_experience}, 
             RequestContext(request))
     
 

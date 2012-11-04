@@ -103,7 +103,7 @@ def activate(request, backend,
         date.append(str(datetime.now()))
 
         with open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), "a") as text_file:
-            text_file.write(date[0]+'    '+new_user.username+' activated\n')
+            text_file.write(date[0]+'    '+account.username+' activated\n')
 
         # check if first login (probably are - just to be safe)
         if request.user.get_profile().is_first_login:
@@ -224,6 +224,7 @@ def register(request, backend, success_url=None, form_class=None,
 
         # copying POST values because POST is immutable
         post_values = request.POST.copy()
+        post_values['username'] = post_values['username'].title()
         post_values['password2'] = post_values['password1'] # fix for 2nd 'type again' pass
 
         # Check if user is using invitation
