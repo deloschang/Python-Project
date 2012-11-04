@@ -152,7 +152,7 @@
        } 
   });
     $.validator.addMethod("usernameRegex", function(value, element){
-      return this.optional(element) || /^\w+\s\w+$/i.test(value);
+      return this.optional(element) || /^[A-Za-z0-9._%-]+\s[A-Za-z0-9._%-]+$/i.test(value);
     }, "Please enter your full name");
 
     $.validator.addMethod("emailRegex", function(value, element){
