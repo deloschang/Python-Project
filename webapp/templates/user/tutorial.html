@@ -23,7 +23,7 @@
     <p id="top_instruction" class="lead">Welcome! {% if school %}I see you're from {{ school }}.{% endif %}</p>
   
     <p id="lower_instruction" class="text-info" style="padding-top:25px;">Memeja is a new way to share experiences</p>
-    <p id="second_lower_instruction" class="text-info" style="display:none;">Only the people <strong>you</strong> invite can see inside</p>
+    <div id="second_lower_instruction" class="text-info" style="display:none; margin-top:-10px;">Only the people <strong>you</strong> invite can see inside</div>
   
     <a href="javascript:;" id="start_me" class="btn btn-success">Let's start</a>
   
@@ -40,7 +40,7 @@
       </form>
     </div>
   
-    <div id="albums_display" style="display:none; padding-bottom:10px;">
+    <div id="albums_display" style="display:none; margin-bottom:25px;">
       <div id="my_first_album_title" style="font-size:20px; padding-bottom:15px;"></div>
       <img src="{{ STATIC_URL }}/images/memeja_logo.png" style="height:100px;"/>
     </div>
