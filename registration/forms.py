@@ -41,7 +41,7 @@ class RegistrationForm(forms.Form):
     email = forms.RegexField(regex=r'^[A-Za-z0-9._%-]+@(dartmouth|berkeley|nyu)\.edu$', # change
                                 max_length=75,
                                 #widget=forms.TextInput(attrs=attrs_dict), 
-                                widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'required email'}),
+                                widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'required'}),
                                 label=_("E-mail"),
                                 error_messages={'invalid':_("You must use a Berkeley, Dartmouth, or NYU email")})
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'class': 'required'}, render_value=False),
