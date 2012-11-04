@@ -13,6 +13,8 @@ urlpatterns = patterns('webapp.views',
     url(r'^invited/(?P<invitation_key>\w+)/$', 
                 index, {'backend' : 'registration.backends.default.DefaultBackend'},
                 name='invitation_invited'), # change if works
+    url(r'^validate/email_duplicates/$', 
+                'validate_email_duplicate'),
     url(r'^create/$', create, name='create'),
     url(r'^welcome/hello-world/$', helloworld, name='webapp_helloworld'),
     (r'^create/library/$', 'library'),

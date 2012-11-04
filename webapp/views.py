@@ -492,6 +492,7 @@ def delete_meme(request, delete_meme_id=None):
             # Meme does not exist
             return render_to_response('profile/access_denied.html', RequestContext(request))
 
+
 @login_required
 def delete_album(request, delete_album_id=None):
     if delete_album_id:
@@ -510,6 +511,19 @@ def delete_album(request, delete_album_id=None):
         except:
             # User does not have access to album or DNE
             return render_to_response('profile/access_denied.html', RequestContext(request))
+
+# Registration - checks for email duplicates
+def validate_email_duplicate(request):
+    post_email = strip_tags(request.POST['email'])
+    
+    # find if an account with that email already exists
+    try:
+        user = User.objects.get(email__exact=post_email)
+        response_str = "false"
+    except User.DoesNotExist:
+        response_str = "true" # response for jQuery validate to parse
+
+    return HttpResponse(response_str)
 
 def fb_privacy_explanation(request):
     return render_to_response('meme/ohwhy.html', RequestContext(request))
