@@ -393,7 +393,9 @@ def helloworld_create(request):
     elif request.user.get_profile().school == 'Dartmouth': 
         drag_list_experience = Experiences.objects.get(title = 'Dartmouth', creator = college_meme_obj) # hardcoded Dartmouth album
     elif request.user.get_profile().school == 'Y Combinator':
-        drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # worst-case, default to UCB
+        drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
+    else:
+        drag_list_experience = Experiences.objects.get(title = 'UCB', creator = college_meme_obj) # if nothing, default to UCB
 
     drag_list_memes = reversed(drag_list_experience.meme_set.all())
 
