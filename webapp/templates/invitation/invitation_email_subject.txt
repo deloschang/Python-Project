@@ -1,2 +1,1 @@
-{{ from_user.username }} sent you a personal invitation to join his
-experience titled "{{ album.title }}"
+{{ from_user.username }} want to share his album titled "{{ album.title }}" with you

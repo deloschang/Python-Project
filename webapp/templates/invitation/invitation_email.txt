@@ -1,8 +1,10 @@
-{{ from_user.username }} sent you a personal invitation to the experience titled "{{ album.title }}" with {{ album.meme_set.count }} memes.
+Hi,
+
+I've invited you to the album titled to an album titled "{{ album.title }}" with {{ album.meme_set.count }} memes.
 
 Memeja is an invite-only website for sharing inside jokes in your social circle.
 
-Click the link below to activate your personal invitation before it expires in {{ expiration_days }} days.
 
+Click the link below to activate this personal invitation (it expires in {{ expiration_days }} days).
 http://memeja.com/invited/{{ invitation_key }}
 
