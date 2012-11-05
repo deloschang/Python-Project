@@ -417,6 +417,7 @@ def helloworld_invite(request):
     autocomplete_form = SearchForm()
     dd['autocomplete_form'] = autocomplete_form
 
+    request.session['experience_no'] = first_friend_experience
     return render_to_response('user/tutorial4.html',
             {'friend_name': request.session['friend_name'], 
                 'memes': first_friend_experience_memes,
