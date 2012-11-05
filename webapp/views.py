@@ -513,8 +513,6 @@ def linked_username(request, linked_username):
 def meme_in_album(request):
     if request.is_ajax():
         if request.method == 'POST':
-            import pdb;
-            pdb.set_trace()
             dragged_meme_id = request.POST['meme']
             dropped_album_id = request.POST['album']
 

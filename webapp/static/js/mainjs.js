@@ -11,6 +11,13 @@
       closeEffect : 'elastic',
       closeSpeed  : 150,                       
     });
+    $('.fancybox-media').fancybox({
+      openEffect  : 'none',
+      closeEffect : 'none',
+      helpers : {
+        media : {}
+      }
+    });
   });
 
   var addEvent = (function () {
