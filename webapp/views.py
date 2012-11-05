@@ -395,7 +395,7 @@ def helloworld_create(request):
     elif request.user.get_profile().school == 'Y Combinator':
         drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
     else:
-        drag_list_experience = Experiences.objects.get(title = 'UCB', creator = college_meme_obj) # if nothing, default to UCB
+        drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
 
     drag_list_memes = reversed(drag_list_experience.meme_set.all())
 
@@ -532,7 +532,7 @@ def meme_in_album(request):
                 # Y Combinator hardcoded album
             # grab college meme user first
             college_meme_obj = User.objects.get(username = 'College Memes')
-            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.filter(title = 'UCB', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'Dartmouth', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'YCombinator', creator = college_meme_obj).count():
+            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.filter(title = 'UCB', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'Dartmouth', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'YCombinator', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'General', creator = college_meme_obj).count():
 
                 dragged_meme_obj.e.add(dropped_album_obj)
 
@@ -566,7 +566,7 @@ def delete_meme(request, delete_meme_id=None):
                 # Delete it and refresh page
                 selected_meme.delete()
                     # calls post_delete signal to delete files
-                messages.add_message(request, messages.SUCCESS, 'Success! You deleted the album', extra_tags="text-success")
+                messages.add_message(request, messages.SUCCESS, 'Success! You deleted the meme', extra_tags="text-success")
 
                 return HttpResponseRedirect(reverse('webapp_index'))
             else:
