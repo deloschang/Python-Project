@@ -1,1 +1,1 @@
-Welcome! Please activate your Memeja account within {{ expiration_days }} days
+Welcome to Memeja!
