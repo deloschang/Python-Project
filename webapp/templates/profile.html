@@ -55,15 +55,15 @@
 	<span id="albums_display_container">
     {% for experiences in experiences %}
 		  <div id ="albums_display">
+			<div id="delete_album_container">
+					<a href="{% url webapp.views.delete_album experiences.pk %}"> <i class="icon-remove"></i></a>
+			</div>
 			<span id="hide_text_container">
 			  <span id="albums_info">
 				<a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
 				 <!-- ({{ experiences.meme_set.count }} memes)-->
-				  <span id="delete_album">
-					<a href="{% url webapp.views.delete_album experiences.pk %}"> X</a>
-				  </span>
 				  <div>
-					<a> with </a>
+					<a> with </a> 
 					<class id="coowner">
 						{% for creator in experiences.creator.all %}
 						  {% if not forloop.first %},{% endif %}<a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
@@ -94,7 +94,6 @@
 			  {% csrf_token %}
 			  {{ imageform.non_field_errors }}
 			  {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
-			  
 				{{ imageform.image.errors }}
 				{{ imageform.image }}
 					<span id="profile_button">
@@ -121,7 +120,7 @@
             <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
               <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
             </a>
-            <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
+            <span id="delete_uncat_meme"><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
             {% if memes.top_caption %}
               <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
             {% endif %}

@@ -14,109 +14,142 @@
     {# User is not authenticated #}
       {# Show registration page #}
 
-    {% if form.errors %}
+    <!-- {% if form.errors %}
       <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
-    {% endif %}
+    {% endif %} -->
 
+<div id="landing_wrapper">
+  <div id="header_wrapper">
+    <span id="landing_logo">	
+      <a href="/" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif" /></a>
+    </span>
+    <div id="landing_header_container">
+      <div id="prop_text_container">  
+        {# Value Proposition Line #} 
+          The best way to <div></div>share experiences
+      </div>
+    </div>
+    <div id="registration_container">
+
+      {% if form.errors %}
+        <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
+      {% endif %}
       
-    {# Value Proposition Line #} 
-    <div id="headline" class="lead">A New Way to Share Experiences</div>
-
-    <h1>Create an account</h1>
-
-    {# For invited users #}
-    {% if invitation_key %}
-      <h2>
+      {# For invited users #}
+      {% if invitation_key %}
+        <h4>
           <div>{{ invitee_object.from_user }} invited you to share in the experience: "{{ invitee_object.from_user_album }}"</div>
-      </h2>
-    {% endif %}
-    
-    <form method="post" action="" id="registrationForm" class="wide">
-    {% csrf_token %}
+        </h4>
+      {% endif %}
+      
+      <form method="post" action="" id="registrationForm" class="wide">
+      {% csrf_token %}
 
-      <p>
-        <!--<label for="id_username">Full Name:</label>-->
-        {% if form.username.errors %}
-          <p class="errors">{{ form.username.errors.as_text }}</p>
-        {% endif %}
-        <div class="control-group">
-          <div class="controls">
-            {{ form.username }}
-          </div>
-        </div>
-      </p>
-
-      {# Use prefilled email for registration #}
-      {% if not invitee_object.to_user_email %}
         <p>
-          <!--<label for="id_email">Email:</label>-->
-          {% if form.email.errors %}
-            <p class="errors">{{ form.email.errors.as_text }}</p>
+          <!--<label for="id_username">Full Name:</label>-->
+          {% if form.username.errors %}
+            <p class="errors">{{ form.username.errors.as_text }}</p>
           {% endif %}
           <div class="control-group">
             <div class="controls">
-              {{ form.email }}
+              {{ form.username }}
             </div>
           </div>
         </p>
-      {% else %}
-        <label for="id_email" class="text-success">{{ invitee_object.to_user_email }} </label>
-        {% if form.email.errors %}
-          <p class="errors">{{ form.email.errors.as_text }}</p>
-        {% endif %}
-      {% endif %}
-      {# end #}
 
-      <p>
-        <!--<label for="id_password1">Password:</label>-->
-        {% if form.password1.errors %}
-          <p class="errors">{{ form.password1.errors.as_text }}</p>
+        {# Use prefilled email for registration #}
+        {% if not invitee_object.to_user_email %}
+          <p>
+            <!--<label for="id_email">Email:</label>-->
+            {% if form.email.errors %}
+            <p class="errors">{{ form.email.errors.as_text }}</p>
+            {% endif %}
+            <div class="control-group">
+              <div class="controls">
+                {{ form.email }}
+              </div>
+            </div>
+          </p>
+        {% else %}
+          <label for="id_email">{{ invitee_object.to_user_email }} </label>
+          {% if form.email.errors %}
+            <p class="errors">{{ form.email.errors.as_text }}</p>
+          {% endif %}
         {% endif %}
-          
+        {# end #}
+
+        <p>
+          {% if form.password1.errors %}
+            <p class="errors">{{ form.password1.errors.as_text }}</p>
+          {% endif %}
+
           <div class="control-group">
             <div class="controls">
               {{ form.password1 }}
             </div>
           </div>
-      </p>
-      {% comment %}
-      <p>
+        </p>
+        {% comment %}
+        <p>
         <label for="id_password2">Password (type again to catch typos):</label>
         {% if form.password2.errors %}
           <p class="errors">{{ form.password2.errors.as_text }}</p>
         {% endif %}
         {{ form.password2 }}
-      </p>
-      {% endcomment %}
-      <p class="submit"><input type="submit" class="btn btn-primary" value="Register &rarr;"></p>
-    </form>
-
-    {% comment %}
-    <h1>Log in</h1>
-
-      {% if form.errors %}
-      <p class="error">Please correct the errors below:</p>
-      {% endif %}
-
-      <form method="post" action="?next={{ next|default:"/" }}">{% csrf_token %}
-      <dl>
-        {# Change to Email Later #}
-        {# Also add Closed Alpha email regex #}
-      <dt><label for="id_username">Full Name:</label>{% if form.username.errors %} <span class="error">{{ form.username.errors|join:", " }}</span>{% endif %}</dt>
-        <dd>{{ form.username }}</dd>
-      <dt><label for="id_password">Password:</label>{% if form.password.errors %} <span class="error">{{ form.password.errors|join:", " }}</span>{% endif %}</dt>
-        <dd>{{ form.password }}</dd>
-      <dt><input type="submit" value="Log in" /></dt>
-      </dl>
+        </p>
+        {% endcomment %}
+        <p class="submit"><input type="submit" class="btn btn-primary" value="Join Memeja"></p>
       </form>
-    {% endcomment %}
+    </div>
     
     {# Video for NLU to watch #}
-      <div id="video_container">
+      <!--
+    <div id="video_container">
         <div id="video">
           <iframe src="http://player.vimeo.com/video/47618336?byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
         </div>
       </div>
+    -->
+  </div>
+</div>
+
+<div id="footer_wrapper">
+  <div id="footer_text">
+    Memeja lets you recreate stories with friends:
+  </div>
+
+  <div id="footer_prop_container1">
+    <div id="share_story">
+      <div id="value_pic1">
+        <img src="{{ STATIC_URL }}images/share_experiences2.png" />
+      </div>
+      <div id="value_text1">
+        <h3>Share every story easily</h3>
+        Tired of writing your stories? Memeja helps you tell stories with memes.
+      </div>
+    </div>
+
+    <div id="exclusively_private">
+      <div id="value_pic2">
+        <img src="{{ STATIC_URL }}images/exclusively_private.png" />
+      </div>
+      <div id="value_text2">
+        <h3>Exclusively Private</h3>
+        Only the friends <b>you</b> invite can see your stories
+      </div>
+    </div>
+
+    <div id="recreate_experiences">
+      <div id="value_pic3">
+        <img src="{{ STATIC_URL }}images/recreate_together.png" />
+      </div>
+      <div id="value_text3">
+        <h3>Recreate experiences together</h3>
+        Read your friend's stories, add your perspective, continue the storyline.
+      </div>
+    </div>
+  </div>
+</div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL}}js/jquery.validate.js"></script>

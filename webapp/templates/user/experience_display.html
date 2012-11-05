@@ -8,12 +8,14 @@
 				  
           <form action="{% url invitation_invite %}" method="POST">
               {% csrf_token %}
-            <table>
-              {{ autocomplete_form }}
-              <tr>
-                <th></th><td><input id="invite_button" type="submit" value="Invite to Album" /></td>
-              </tr>
-            </table>
+            
+              <table>
+				  {{ autocomplete_form }}
+				  <tr>
+					<span id="td_container"><th></th><td><input id="invite_button" type="submit" value="Invite to Album" /></td></span>
+				  </tr>
+			  </table>
+            
           </form>
 				</div>
 			<div id="album_title_container">
@@ -38,11 +40,11 @@
           <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
         </a>
 			  
-			  <span><a href="{% url webapp.views.delete_meme memes.pk %}">X</a></span>
+			  <span><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
         {% if memes.top_caption %}
           <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
         {% endif %}
-			  <div>Created by <a href ="/{{ memes.creator.get_profile.url_username }}/">{{ memes.creator }}</a></div>
+			  <div>Created by <span id="coowner"><a href ="/{{ memes.creator.get_profile.url_username }}/">{{ memes.creator }}</a></span></div>
 			</div>
 		  {% endfor %}
 		</div>
