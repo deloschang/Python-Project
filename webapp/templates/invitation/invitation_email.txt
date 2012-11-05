@@ -1,6 +1,6 @@
 {{ from_user.username }} sent you a personal invitation to the experience titled "{{ album.title }}" with {{ album.meme_set.count }} memes.
 
-Memeja is an invite-only website where users collaboratively share inside jokes with their social circle.
+Memeja is an invite-only website for sharing inside jokes in your social circle.
 
 Click the link below to activate your personal invitation before it expires in {{ expiration_days }} days.
 

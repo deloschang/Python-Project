@@ -90,7 +90,7 @@ def yc_no_login(request, extra=None):
 # Home URL and Profile Page
 def index(request, backend, success_url=None, 
         form_class=EmailRegistrationForm, profile_callback=None,
-        authentication_form = EmailLoginForm,
+        #authentication_form = EmailLoginForm,
         template_name='landing.html',
         extra_context=None, invitation_key=None):
 
@@ -123,8 +123,9 @@ def index(request, backend, success_url=None,
             else:
                 if invitation_key == None:
                     # User enters website normally (uninvited)
-                    form_auth = EmailLoginForm() # for login form
-                    return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context={'form_auth': form_auth})
+                    #form_auth = EmailLoginForm() # for login form
+                    return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context=None)
+                            #extra_context={'form_auth': form_auth})
                 else:
                     # User entered invalid key
                     template = 'invitation/wrong_invitation_key.html'

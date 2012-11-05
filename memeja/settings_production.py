@@ -165,8 +165,8 @@ ACCOUNT_ACTIVATION_DAYS=20
 
 # Invitation Keys
 INVITE_MODE = True
-ACCOUNT_INVITATION_DAYS=30  # number of days invitation keys remain valid
-INVITATIONS_PER_USER = 7 
+ACCOUNT_INVITATION_DAYS=7  # number of days invitation keys remain valid
+INVITATIONS_PER_USER = 99
 
 
 # A sample logging configuration. The only tangible logging

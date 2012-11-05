@@ -1,7 +1,7 @@
 {% load humanize %}
 
 Welcome! 
-You're about to embark on a journey to share experiences in a whole new way.
+You're about to embark on a journey to share experiences in a new way.
 
 Click the link below to activate your account: 
 http://memeja.com/activate/{{ activation_key }}/
