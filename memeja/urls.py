@@ -23,7 +23,8 @@ urlpatterns = patterns('',
 
     # invitation urls
     url(r'^', include('invitation.urls')),
-    url(r'^', include('registration.backends.default.urls')),
+    #url(r'^', include('registration.backends.default.urls')),
+    url(r'^', include('registration.backends.simple.urls')), ## temporary no email activation
 
     (r'^lookups/', include('ajax_select.urls')),
 

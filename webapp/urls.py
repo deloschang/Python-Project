@@ -8,10 +8,15 @@ urlpatterns = patterns('webapp.views',
     url(r'^yc/(?P<extra>[-\w]+)', 'yc_no_login'),
 
     #### end ####
-    url(r'^$', index, {'backend' : 'registration.backends.default.DefaultBackend'},
+    url(r'^$', index, 
+                #{'backend' : 'registration.backends.default.DefaultBackend'},
+                #### modified for simple activation ####
+                {'backend' : 'registration.backends.simple.SimpleBackend'},
                 name='webapp_index'),
     url(r'^invited/(?P<invitation_key>\w+)/$', 
-                index, {'backend' : 'registration.backends.default.DefaultBackend'},
+                #index, {'backend' : 'registration.backends.default.DefaultBackend'},
+                #### modified for simple activation ####
+                index, {'backend' : 'registration.backends.simple.SimpleBackend'},
                 name='invitation_invited'), # change if works
     url(r'^validate/email_duplicates/$', 
                 'validate_email_duplicate'),

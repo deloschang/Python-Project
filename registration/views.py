@@ -280,6 +280,21 @@ def register(request, backend, success_url=None, form_class=None,
                 linked_experience.creator.add(new_user)
 
             if success_url is None:
+
+
+
+
+
+
+                ###### FOR SIMPLE REGISTRATION (NO ACTIVATION ######
+                if request.user.get_profile().is_first_login:
+                    # send to the tutorial
+                    return HttpResponseRedirect(reverse('webapp_helloworld'))
+                ###### END ######
+
+
+
+
                 to, args, kwargs = backend.post_registration_redirect(request, new_user)
                 return redirect(to, *args, **kwargs)
             else:
