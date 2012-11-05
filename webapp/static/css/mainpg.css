@@ -754,10 +754,21 @@
 	
 	}
 	/* 12 master */
-	#landing_wrapper{
-	background-color:#F5F3F4;
+	
+	#login_button_container{
+	position:relative;
+	width:400px;
 	
 	}
+	
+	#login_button{
+	float:right;
+	margin-top:15px;
+	}
+	/*#landing_wrapper{
+	background-color:#F5F3F4;
+	
+	}*/
 	
 	#header_wrapper{
 	position:relative;
@@ -807,9 +818,39 @@
 		position:relative;
 		left:200px;
 		bottom:240px;
-		height:210px;
+		height:auto;
 		width:230px;
+		z-index:500;
 	}
+	
+	#video_wrapper{
+	width:100%;
+	background-color:#F5F3F4;
+	border-bottom:1px solid #ACACA5;
+	
+	}
+	
+	#video_container{
+	position:relative;
+	width:960px;
+	height:68px;
+	background-color:#F5F3F4;
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	
+	}
+	
+	#video_pic{
+	float:left;
+	}
+	
+	#video_text{
+	float:left;
+	
+	}
+	
+	
 	#footer_wrapper{
 	margin-top:200px;
 	background-color:white /*#F5F3F4*/;

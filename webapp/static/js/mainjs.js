@@ -11,12 +11,15 @@
       closeEffect : 'elastic',
       closeSpeed  : 150,                       
     });
-    $('.fancybox-media').fancybox({
-      openEffect  : 'none',
-      closeEffect : 'none',
-      helpers : {
-        media : {}
-      }
+
+    $(document).ready(function() {
+      $('.fancybox-media').fancybox({
+        openEffect  : 'none',
+        closeEffect : 'none',
+        helpers : {
+          media : {}
+        }
+      });
     });
   });
 
@@ -61,6 +64,91 @@
   }
 
   // end 
+
+  // Registration JS
+  // csrf passed for AJAX 
+  $.ajaxSetup({ 
+       beforeSend: function(xhr, settings) {
+           function getCookie(name) {
+               var cookieValue = null;
+               if (document.cookie && document.cookie != '') {
+                   var cookies = document.cookie.split(';');
+                   for (var i = 0; i < cookies.length; i++) {
+                       var cookie = jQuery.trim(cookies[i]);
+                       // Does this cookie string begin with the name we want?
+                   if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                       cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                       break;
+                   }
+               }
+           }
+           return cookieValue;
+           }
+           if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+               // Only send the token to relative URLs i.e. locally.
+               xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+           }
+       } 
+  });
+    $.validator.addMethod("usernameRegex", function(value, element){
+      return this.optional(element) || /^[A-Za-z0-9._%-]+\s[A-Za-z0-9._%-]+$/i.test(value);
+    }, "Please enter your full name");
+
+    $.validator.addMethod("emailRegex", function(value, element){
+      return this.optional(element) || /^[A-Za-z0-9._%-]+@(dartmouth|berkeley|nyu)\.edu$/i.test(value);
+    }, "Please enter a Berkeley, Dartmouth or NYU email");
+
+    $('#registrationForm').validate({
+      rules: {
+        "username": {
+          required: true,
+          usernameRegex: true,
+        },
+        "email": {
+          emailRegex: true,
+          remote: {
+            url: "/validate/email_duplicates/",
+            type: "post",
+            data: { 
+              response: function(){
+                return $('#email').val();
+              }
+            }
+          }
+        }
+      },
+      messages: {
+        "username": {
+          required: "Your name is required",
+          usernameRegex: "Please enter your full name"
+        },
+        "email": {
+          required: "Your email is required",
+          emailRegex: "Please enter a Berkeley, Dartmouth or NYU email",
+          remote: "That email is already in use."
+        }
+      },
+    
+      errorClass: 'text-error',
+      validClass: 'text-success',
+
+      // shows for any error
+      showErrors: function(errorMap, errorList){
+        this.defaultShowErrors();
+        if (errorList.length < 1){
+          $('label.error').remove();
+          return;
+        }
+        $.each(errorList, function(index, error){
+          $(error.element).parent().parent().attr('class', 'control-group error');
+        });
+      },
+
+      // changes form to green on success
+      success: function(label){
+        label.parent().parent().attr('class', 'control-group success');
+      }
+    });
 
   function handleDragStart(e){
     this.style.opacity = '0.4';

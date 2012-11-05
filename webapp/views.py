@@ -386,9 +386,11 @@ def helloworld_create(request):
     first_friend_experience = request.session['first_friend_experience']
 
     if request.user.get_profile().school == 'Berkeley':
-        drag_list_experience = Experiences.objects.get(title = 'UCB') # hardcoded UCB meme album
+        drag_list_experience = Experiences.objects.get(title = 'UCB') # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
     elif request.user.get_profile().school == 'Dartmouth': 
-        drag_list_experience = Experiences.objects.get(title = 'Dartmouth')
+        drag_list_experience = Experiences.objects.get(title = 'Dartmouth') # hardcoded Dartmouth album
+    else:
+        drag_list_experience = Experiences.objects.get(title = 'UCB') # worst-case, default to UCB
 
     drag_list_memes = reversed(drag_list_experience.meme_set.all())
 
