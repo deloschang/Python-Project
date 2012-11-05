@@ -385,7 +385,11 @@ def helloworld_create(request):
     # Tutorial: user can drag memes now
     first_friend_experience = request.session['first_friend_experience']
 
-    drag_list_experience = Experiences.objects.get(title = 'UCB') # hardcoded UCB meme album
+    if request.user.get_profile().school == 'Berkeley':
+        drag_list_experience = Experiences.objects.get(title = 'UCB') # hardcoded UCB meme album
+    elif request.user.get_profile().school == 'Dartmouth': 
+        drag_list_experience = Experiences.objects.get(title = 'Dartmouth')
+
     drag_list_memes = reversed(drag_list_experience.meme_set.all())
 
     return render_to_response('user/tutorial2.html',
@@ -509,6 +513,8 @@ def linked_username(request, linked_username):
 def meme_in_album(request):
     if request.is_ajax():
         if request.method == 'POST':
+            import pdb;
+            pdb.set_trace()
             dragged_meme_id = request.POST['meme']
             dropped_album_id = request.POST['album']
 
@@ -517,7 +523,7 @@ def meme_in_album(request):
 
             # Check if user is authenticated for album and meme
                 # UCB is a hardcoded album for display
-            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.get(title = 'UCB'):
+            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.filter(title = 'UCB').count() or dragged_meme_obj.e.filter(title = 'Dartmouth').count():
 
                 dragged_meme_obj.e.add(dropped_album_obj)
 
