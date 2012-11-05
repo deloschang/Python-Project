@@ -4,6 +4,7 @@ I've invited you to the album titled to an album titled "{{ album.title }}" with
 
 Memeja is an invite-only website for sharing inside jokes in your social circle.
 
+- {{ from_user.username }}
 
 Click the link below to activate this personal invitation (it expires in {{ expiration_days }} days).
 http://memeja.com/invited/{{ invitation_key }}

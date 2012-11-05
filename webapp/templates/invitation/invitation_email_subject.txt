@@ -1,1 +1,1 @@
-{{ from_user.username }} want to share his album titled "{{ album.title }}" with you
+{{ from_user.username }} wants to share his album titled "{{ album.title }}" with you
