@@ -73,10 +73,17 @@ def yc_no_login(request, extra=None):
             #message = request.user.username+' logged in with '+request.user.email
             #send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['deloschang@memeja.com'], fail_silently=True)
         ####### end #######
-        date = []
-        date.append(str(datetime.now()))
-        with open(os.path.join(settings.STATIC_ROOT, 'login_track.txt'), "a") as text_file:
-            text_file.write(date[0]+'    '+request.user.username+' logged in with '+request.user.email+'\n')
+
+        if extra != 'test':
+            date = []
+            date.append(str(datetime.now()))
+            with open(os.path.join(settings.STATIC_ROOT, 'login_track.txt'), "a") as text_file:
+                text_file.write(date[0]+'    '+request.user.username+' logged in with '+request.user.email+'\n')
+        else:
+            date = []
+            date.append(str(datetime.now()))
+            with open(os.path.join(settings.STATIC_ROOT, 'login_track.txt'), "a") as text_file:
+                text_file.write(date[0]+'     TEST:'+request.user.username+' logged in with '+request.user.email+'\n')
 
         if extra == 'create':
             return HttpResponseRedirect(reverse('create'))
@@ -532,6 +539,7 @@ def meme_in_album(request):
                 # Y Combinator hardcoded album
             # grab college meme user first
             college_meme_obj = User.objects.get(username = 'College Memes')
+
             if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.filter(title = 'UCB', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'Dartmouth', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'YCombinator', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'General', creator = college_meme_obj).count():
 
                 dragged_meme_obj.e.add(dropped_album_obj)
