@@ -3,17 +3,16 @@
 {% block content %}
 
   <div id="top_container">
-    <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
-    <p id="top_instruction" class="lead">Drag memes into your album, bro.</p>
+    <p id="top_instruction" class="lead">Try drag-n-dropping stories into your album. </p>
 
       {# User's first album #}
       <div id="albums_display">
-        <div style="font-size:20px; padding-bottom:15px;"> {{ first_friend_experience.title }} </div>
+        <div style="font-size:18px; padding-bottom:5px;"> {{ first_friend_experience.title }} </div>
         <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ first_friend_experience.pk }}" style="height:100px;"/>
       </div>
   
     <div>
-      <a href="{% url webapp_helloworld_generator %}" id="letsflash" class="btn btn-success">Done <i class="icon-white icon-ok"></i></a>
+      <a href="{% url webapp_helloworld_generator %}" id="letsflash" class="btn btn-success">Yes, I'm done <i class="icon-white icon-ok"></i></a>
     </div>
 
 		<div id="uncategorized">

@@ -363,7 +363,7 @@ def helloworld_create(request):
 
             friend_name = strip_tags(request.POST['friend_name'].title())
             # create first album with friend name: "My Experiences with <friend>"
-            first_friend_experience = Experiences(title='Experiences with '+friend_name)
+            first_friend_experience = Experiences(title='Memes with '+friend_name)
             first_friend_experience.save()
             first_friend_experience.creator.add(request.user)
 

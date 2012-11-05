@@ -6,7 +6,7 @@ class ImageUploadForm(forms.Form):
 
 class AddExperienceForm(forms.Form):
     title = forms.CharField(max_length=60,
-                                widget=forms.TextInput(attrs={'placeholder': 'e.g. Burning Man w/ Max'}))
+                                widget=forms.TextInput(attrs={'placeholder': 'e.g. Burning Man 2009'}))
 
 class InvitationKeyForm(forms.Form):
     email = forms.EmailField()
@@ -18,7 +18,7 @@ class SearchForm(forms.Form):
     q = AutoCompleteSelectMultipleField(
             'label',
             required=True,
-            help_text="Enter name or email. Or leave email in input box to invite",
+            help_text="Invite via email or add an existing user",
             label="",
             #attrs={'size': 100}
             )

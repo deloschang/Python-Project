@@ -3,11 +3,8 @@
 {% block content %}
 
   <div id="top_container">
-    <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
-    <p id="top_instruction" class="lead">Or create a personal meme for {{ friend_name }}
-    <a href="{% url webapp_helloworld_invite %}" class="btn btn-small btn-warning" style="float:right;">Skip <i class="icon-white icon-chevron-right"></i></a>
+    <p id="top_instruction" class="lead">Create a <span class="text-info">personal</span> meme for {{ friend_name }}
     </p>
-  </div>
         {# Library Support for Macromeme #}
       <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
@@ -40,8 +37,6 @@
         // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
             swfobject.createCSS("#flashContent", "display:block;text-align:left");
       </script>
-
-      <br>
       <div id="flashContent">
         <p>
           to view this page ensure that adobe flash player version 11.2.0 or greater is installed. 
@@ -52,6 +47,10 @@
                          + pagehost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='get adobe flash player' /></a>" ); 
         </script> 
       </div>
+  </div>
+    <div>
+      <a href="{% url webapp_helloworld_invite %}" id="skip_generator" class="btn btn-small btn-info" style="float:right;">Skip <i class="icon-white icon-chevron-right"></i></a>
+    </div>
 <style>
   html {
     height: 100%;
@@ -68,16 +67,22 @@
   }
 
   #macromeme {
-    height:500px;
+    height:475px;
     width:600px;
     position:absolute;
-    top:31%;
-    left:90%;
+    top:23%;
+    left:140%;
     /*margin-left: -760px;*/
     border: 1px solid #ACACAC;
       -moz-border-radius: 8px; 
       -webkit-border-radius: 8px;
     border-radius: 5px;
+  }
+
+  #skip_generator{
+    position:absolute;
+    bottom:10px;
+    left:46%;
   }
 
 </style>
