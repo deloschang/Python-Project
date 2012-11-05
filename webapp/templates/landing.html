@@ -43,31 +43,40 @@
       {# For invited users #}
       {% if invitation_key %}
         <h4>
-          <div>{{ invitee_object.from_user }} invited you to share in the experience: "{{ invitee_object.from_user_album }}"</div>
+          <div><span class="text-info">{{ invitee_object.from_user }}</span> invited you to the album: "<span class="text-info">{{ invitee_object.from_user_album }}</span>"</div>
         </h4>
       {% endif %}
       
       <form method="post" action="" id="registrationForm" class="wide">
       {% csrf_token %}
 
-        <p>
-          <!--<label for="id_username">Full Name:</label>-->
-          {% if form.username.errors %}
-            <p class="errors">{{ form.username.errors.as_text }}</p>
-          {% endif %}
-          <div class="control-group">
-            <div class="controls">
-              {{ form.username }}
+        {% if not invitee_object.to_user_email %}
+          <p>
+            <!--<label for="id_username">Full Name:</label>-->
+            {% if form.username.errors %}
+              <p class="errors">{{ form.username.errors.as_text }}</p>
+            {% endif %}
+            <div class="control-group">
+              <div class="controls">
+                {{ form.username }}
+              </div>
             </div>
-          </div>
-        </p>
+          </p>
+        {% else %}
+          <p>
+            <label for="id_email"><span class="text-success">{{ invitee_object.to_user_email }}</span></label>
+              {% if form.email.errors %}
+                <p class="errors">{{ form.email.errors.as_text }}</p>
+              {% endif %}
+          </p>
+        {% endif %}
 
         {# Use prefilled email for registration #}
         {% if not invitee_object.to_user_email %}
           <p>
             <!--<label for="id_email">Email:</label>-->
             {% if form.email.errors %}
-            <p class="errors">{{ form.email.errors.as_text }}</p>
+              <p class="errors">{{ form.email.errors.as_text }}</p>
             {% endif %}
             <div class="control-group">
               <div class="controls">
@@ -76,10 +85,17 @@
             </div>
           </p>
         {% else %}
-          <label for="id_email">{{ invitee_object.to_user_email }} </label>
-          {% if form.email.errors %}
-            <p class="errors">{{ form.email.errors.as_text }}</p>
-          {% endif %}
+          <p>
+            <!--<label for="id_username">Full Name:</label>-->
+            {% if form.username.errors %}
+              <p class="errors">{{ form.username.errors.as_text }}</p>
+            {% endif %}
+            <div class="control-group">
+              <div class="controls">
+                {{ form.username }}
+              </div>
+            </div>
+          </p>
         {% endif %}
         {# end #}
 
