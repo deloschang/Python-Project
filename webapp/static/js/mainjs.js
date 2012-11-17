@@ -95,8 +95,8 @@
     }, "Please enter your full name");
 
     $.validator.addMethod("emailRegex", function(value, element){
-      return this.optional(element) || /^[A-Za-z0-9._%-]+@(dartmouth|berkeley|nyu)\.edu$/i.test(value);
-    }, "Please enter a Berkeley, Dartmouth or NYU email");
+      return this.optional(element) || /^[A-Za-z0-9._%-]+@(dartmouth|berkeley)\.edu$/i.test(value);
+    }, "Please enter a Berkeley or Dartmouth email");
 
     $('#registrationForm').validate({
       rules: {
@@ -124,7 +124,7 @@
         },
         "email": {
           required: "Your email is required",
-          emailRegex: "Please enter a Berkeley, Dartmouth or NYU email",
+          emailRegex: "Please enter a Berkeley or Dartmouth email",
           remote: "That email is already in use."
         }
       },

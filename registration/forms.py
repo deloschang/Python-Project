@@ -38,12 +38,12 @@ class RegistrationForm(forms.Form):
                                 error_messages={'invalid': _("Please enter your full name")})
     #email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict,
                                                                #maxlength=75)),
-    email = forms.RegexField(regex=r'^[A-Za-z0-9._%-]+@(dartmouth|berkeley|nyu)\.edu$', # change
+    email = forms.RegexField(regex=r'^[A-Za-z0-9._%-]+@(dartmouth|berkeley)\.edu$', # change
                                 max_length=75,
                                 #widget=forms.TextInput(attrs=attrs_dict), 
                                 widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'required'}),
                                 label=_("E-mail"),
-                                error_messages={'invalid':_("You must use a Berkeley, Dartmouth, or NYU email")})
+                                error_messages={'invalid':_("You must use a Berkeley or Dartmouth email")})
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'class': 'required'}, render_value=False),
                                 label=_("Password"))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict, render_value=False),
