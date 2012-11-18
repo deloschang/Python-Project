@@ -13,7 +13,7 @@
   {% endif %}
 
   <div id="top_container">
-    <img src="{{ STATIC_URL }}images/intro_logo.gif"/>
+    <span id="logo_tutorial"><img src="{{ STATIC_URL }}images/intro_logo.gif"/></span>
     <p id="top_instruction" class="lead">Welcome! {% if school %}I see you're from {{ school }}.{% endif %}</p>
   
     <p id="lower_instruction" class="text-info" style="padding-top:10px;">Memeja is a new way to share experiences</p>
@@ -38,7 +38,7 @@
       <img src="{{ STATIC_URL }}/images/memeja_logo.png" style="height:100px;"/>
     </div>
     <div>
-      <a href="{% url webapp_helloworld_create %}" id="letscreate" class="btn btn-success" style="display:none;">I love my album <i class="icon-white icon-heart"></i></a>
+      <a href="{% url webapp_helloworld_create %}" id="letscreate" class="btn btn-success" style="display:none;">Sweet, continue <i class="icon-white icon-forward"></i></a>
     </div>
   </div>
 

@@ -243,17 +243,14 @@
 
   // Tutorial: enter friends name JS
   $('#friend_form').submit(function(){
-    //e.preventDefault();
-    //return false;
     var csrftoken = getCookie('csrftoken');
-    //$.post('/welcome/hello-world/create', {
     $.ajax({
       data: $(this).serialize(),
       type: "post",
       url: $(this).attr('action'),
-      //'csrfmiddlewaretoken': csrftoken
       success: function(response){
         $('#friend_div').fadeOut('medium', function(){
+          $('#logo_tutorial').hide();
           $('#lower_instruction').html('This is your Album!').attr('class', 'lead');
           $('#second_lower_instruction').fadeIn('medium', function(){
             $('#my_first_album_title').html(response);
