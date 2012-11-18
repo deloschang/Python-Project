@@ -267,14 +267,3 @@
     return false;
   });
 
-  // Tutorial: Looks great button, sends to invite
-  $('#looksgreatbutton').live('click', function(){
-    $('#looksgreatbutton').hide();
-    $('#top_instruction').fadeOut('fast', function(){
-      $('#invite_instruction').show();
-      $('#tutorial_invite_container').show();
-      $('#tutorial_skipme').show();
-    });
-  });
-
-
