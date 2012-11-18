@@ -135,20 +135,16 @@
         {% endfor %}
     </div>
   {% else %}
+    {% load endless %}
+
     <div id="school_feed_memes">
-        {% for memes in memes %}
-          <div class="schoolmemes">
-            <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
-              <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
-            </a>
-            {% if is_uncat %}
-              <span id="delete_uncat_meme"><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
-            {% endif %}
-            {% if memes.top_caption %}
-              <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
-            {% endif %}
-          </div>
-        {% endfor %}
+      {% include page_template %}
+      {% block js %}
+        {{ block.super }}
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+        <script>$.endlessPaginate({paginateOnScroll: true});</script>
+      {% endblock %}
     </div>
   {% endif %}
 

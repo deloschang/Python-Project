@@ -99,6 +99,7 @@ def index(request, backend, success_url=None,
         form_class=EmailRegistrationForm, profile_callback=None,
         #authentication_form = EmailLoginForm,
         template_name='landing.html',
+        page_template = 'entry_index_page.html',
         extra_context=None, invitation_key=None):
 
     # Show landing page with registration 
@@ -156,7 +157,8 @@ def index(request, backend, success_url=None,
         else:
             drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
 
-        school_feed_memes = reversed(drag_list_experience.meme_set.all())
+        #school_feed_memes = reversed(drag_list_experience.meme_set.all())
+        school_feed_memes = drag_list_experience.meme_set.all().order_by('-id')
 
         ##### For uncategorized ####
         # grabs uncategorized memes from the database
@@ -173,9 +175,14 @@ def index(request, backend, success_url=None,
         # form to upload meme
         imageform = ImageUploadForm()
 
+        if request.is_ajax():
+            template = page_template
+        else:
+            template = 'profile.html'
+
         return render_to_response(
-                'profile.html',
-                {'memes': school_feed_memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform, 'user_school': user_school},
+                template,
+                {'memes': school_feed_memes, 'experiences': experiences, 'page_template': page_template, 'addexperienceform': addexperienceform, 'imageform' : imageform, 'user_school': user_school},
                 # is_uncat is 0 (user on feed not uncat page)
                 RequestContext(request))
 
