@@ -13,6 +13,7 @@ urlpatterns = patterns('webapp.views',
                 #### modified for simple activation ####
                 {'backend' : 'registration.backends.simple.SimpleBackend'},
                 name='webapp_index'),
+    url(r'^uncat_library', index_uncat, name='webapp_index_uncat'),
     url(r'^invited/(?P<invitation_key>\w+)/$', 
                 #index, {'backend' : 'registration.backends.default.DefaultBackend'},
                 #### modified for simple activation ####

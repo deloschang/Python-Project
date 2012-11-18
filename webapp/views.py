@@ -178,6 +178,31 @@ def index(request, backend, success_url=None,
         return render_to_response(
                 'profile.html',
                 {'memes': school_feed_memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform, 'user_school': user_school},
+                # is_uncat is 0 (user on feed not uncat page)
+                RequestContext(request))
+
+def index_uncat(request):
+        ##### For uncategorized ####
+        # grabs uncategorized memes from the database
+        # filter by USER
+            # filter out categorized memes
+        user_school = request.user.get_profile().school
+
+        memes = reversed(Meme.objects.filter(creator = request.user, e = None))
+        
+        # grabs user's albums from the database
+        experiences = Experiences.objects.filter(creator = request.user)
+
+        # form to create new experience/album
+        addexperienceform = AddExperienceForm()
+
+        # form to upload meme
+        imageform = ImageUploadForm()
+
+        return render_to_response(
+                'profile.html',
+                {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform, 'user_school': user_school, 'is_uncat':1},
+                # is_uncat tells profile.html if user is on uncat page or feed page
                 RequestContext(request))
 
 # Upload a Meme 

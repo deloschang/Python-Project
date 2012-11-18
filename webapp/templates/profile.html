@@ -97,7 +97,15 @@
 		</div>
 	<div id="uncat_header_container">
 		<div id="uncat_header_text"> 
-      {{ user_school }} Feed
+      {% if is_uncat %}
+        {# User is on uncat page #}
+        <a href="{% url webapp_index %}">{{ user_school }} Feed</a>
+        Uncategorized
+      {% else %}
+        {# User is on School feed page #}
+        {{ user_school }} Feed
+        <a href="{% url webapp_index_uncat %}">Uncategorized</a>
+      {% endif %}
 		</div>
 		<span id="uncat_header_text_addition">
 		(Drag into an album)
