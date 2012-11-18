@@ -1,4 +1,4 @@
-  // JS utils #}
+  // JS utils 
     // Fancybox 
   $(document).ready(function() {
     $(".fancybox").fancybox();
@@ -162,9 +162,12 @@
   }
 
   var cols = document.querySelectorAll('#uncategorized .uncatmemes img');
+
+  // for school feed
   if (cols.length == 0 ){
     var cols = document.querySelectorAll('#school_feed_memes .schoolmemes img');
   }
+
   [].forEach.call(cols, function(col) {
     col.addEventListener('dragstart', handleDragStart, false);
   });
@@ -255,7 +258,9 @@
           $('#second_lower_instruction').fadeIn('medium', function(){
             $('#my_first_album_title').html(response);
             $('#albums_display').fadeIn('slow', function(){
-              $('#letscreate').fadeIn('medium');
+              $('#try_dragging').fadeIn('slow', function(){
+                $('#letsinvite').fadeIn('medium');
+              });
             });
           });
         });

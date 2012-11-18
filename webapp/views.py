@@ -384,7 +384,23 @@ def helloworld(request):
         # Check which school they are from package import module
         school = request.user.get_profile().school 
         friend_form = TutorialNameForm()
-        return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form}, RequestContext(request))
+
+
+        # Grab College Meme user with the tutorial memes for user to try drag-n-dropping
+        college_meme_obj = User.objects.get(username = 'College Memes')
+
+        if request.user.get_profile().school == 'Berkeley':
+            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
+        elif request.user.get_profile().school == 'Dartmouth': 
+            drag_list_experience = Experiences.objects.get(title = settings.DARTMOUTH_ALBUM, creator = college_meme_obj) # hardcoded Dartmouth album
+        elif request.user.get_profile().school == 'Y Combinator':
+            drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
+        else:
+            drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
+
+        drag_list_memes = reversed(drag_list_experience.meme_set.all())
+
+        return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form, 'memes':drag_list_memes}, RequestContext(request))
         
 @login_required
 def helloworld_create(request):

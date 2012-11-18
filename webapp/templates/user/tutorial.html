@@ -17,7 +17,7 @@
     <p id="top_instruction" class="lead">Welcome! {% if school %}I see you're from {{ school }}.{% endif %}</p>
   
     <p id="lower_instruction" class="text-info" style="padding-top:10px;">Memeja is a new way to share experiences</p>
-    <div id="second_lower_instruction" class="text-info" style="display:none; margin-top:-10px;">Only the people <strong>you</strong> invite can see inside</div>
+    <div id="second_lower_instruction" class="text-info" style="display:none; margin-top:-10px;">Only friends <strong>you</strong> invite can see inside</div>
   
     <a href="javascript:;" id="start_me" class="btn btn-success">Let's start</a>
   
@@ -34,11 +34,28 @@
     </div>
   
     <div id="albums_display" style="display:none; margin-bottom:25px; margin-left:175px;">
-      <div id="my_first_album_title" style="font-size:18px; padding-bottom:15px;"></div>
-      <img src="{{ STATIC_URL }}/images/memeja_logo.png" style="height:100px;"/>
+      <div id="my_first_album_title" class="experiences_list" style="font-size:18px; padding-bottom:15px;"></div>
+      <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ first_friend_experience.pk }}" style="height:100px;"/>
     </div>
-    <div>
-      <a href="{% url webapp_helloworld_create %}" id="letscreate" class="btn btn-success" style="display:none;">Sweet, continue <i class="icon-white icon-forward"></i></a>
+
+    <div id="try_dragging" style="display:none; margin-top:25px;">
+      <p class="lead">Try drag-n-dropping stories into your album. </p>
+
+      <div>
+        <a href="{% url webapp_helloworld_invite %}" id="letsinvite" class="btn btn-success" style="display:none;">Sweet, I'm done <i class="icon-white icon-forward"></i></a>
+      </div>
+
+      <div id="uncategorized">
+        <div id="album_list">
+          {% for memes in memes %}
+            <div class="uncatmemes">
+              <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
+                <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </div>
 
@@ -58,6 +75,29 @@
     left:50%;
     top:50%;
     margin:-250px 0 0 -250px;
+  }
+
+  .uncatmemes{
+    display: block;
+    float: left;
+    padding:5px;
+    margin: 5px;
+    border:0 0 1px solid #ACACA5;
+    box-shadow:0 0 10px #ACACA5;
+    background-color:white;
+    /*width: 420px;*/
+    /*margin: 5px;*/
+  }
+
+  .uncatmemes img{
+    display: block;
+    width: 200px;
+
+  }
+
+  #album_list{
+    width: 1000px;
+    right: 200px;
   }
 </style>
 

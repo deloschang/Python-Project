@@ -20,6 +20,18 @@
       </div>
       <a href="/" class="btn btn-small btn-info" id="tutorial_skipme" style="display:none;">Skip <i class="icon-white icon-chevron-right"></i></a>
     </p>
+
+    <div id="uncategorized">
+      <div id="album_list">
+        {% for memes in memes %}
+          <div class="uncatmemes">
+            <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
+              <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 
 <style>
