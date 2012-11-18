@@ -2,10 +2,38 @@
 {# Default profile and album page that logged-in user sees #}
 {# Authentication handled in views.index #}
 
+<!--<span id="test me"> banana man </span>-->
 {% extends 'base.html' %}
 
 {# displays new/uncategorized memes to profile for categorization#}
 {% block content %}
+<div id="subheader_container">
+	{% if is_uncat %}
+        {# User is on uncat page #}
+        <a href="{% url webapp_index %}">{{ user_school }} Feed</a>
+        Uncategorized 
+		<span id="uncat_header_text_addition">
+		(Drag into an album)
+		</span>
+		<div id="upload_button_container" >
+			<form action="{% url create %}" method="post" enctype="multipart/form-data">
+			  {% csrf_token %}
+			  {{ imageform.non_field_errors }}
+			  {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
+				{{ imageform.image.errors }}
+				{{ imageform.image }}
+					<span id="profile_button">
+						<input type="submit" value="Upload" /></p>
+					</span>
+			</form>
+		</div>
+      {% else %}
+        {# User is on School feed page #}
+        {{ user_school }} Feed
+        <a href="{% url webapp_index_uncat %}">Uncategorized</a>
+      {% endif %}
+<div style ="clear:both;"></div>
+</div>
 
 <div id="albums_container_placeholder">
   <div id="albums_container">
@@ -81,40 +109,13 @@
     No experience albums
   {% endif %}
   </div>
-</div>
+	<div style ="clear:both;"></div>
+  </div>
 
 
  <div id="uncat_container">
-	<div id="upload_button_container" >
-			<form action="{% url create %}" method="post" enctype="multipart/form-data">
-			  {% csrf_token %}
-			  {{ imageform.non_field_errors }}
-			  {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
-				{{ imageform.image.errors }}
-				{{ imageform.image }}
-					<span id="profile_button">
-						<input type="submit" value="Upload" /></p>
-					</span>
-			</form>
-		</div>
 	<div id="uncat_header_container">
 		<div id="uncat_header_text"> 
-      {% if is_uncat %}
-        {# User is on uncat page #}
-        <a href="{% url webapp_index %}">{{ user_school }} Feed</a>
-        Uncategorized
-      {% else %}
-        {# User is on School feed page #}
-        {{ user_school }} Feed
-        <a href="{% url webapp_index_uncat %}">Uncategorized</a>
-      {% endif %}
-		</div>
-		<span id="uncat_header_text_addition">
-		(Drag into an album)
-		</span>
- 
-		
-		<div style ="clear:both;"></div>
 	 </div>
 
   {% if memes and is_uncat %}
