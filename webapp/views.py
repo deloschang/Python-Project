@@ -428,7 +428,11 @@ def helloworld_create(request):
             #return HttpResponseRedirect(reverse('webapp_helloworld_create'))
 
             # create album and return for user
-            return HttpResponse(first_friend_experience.title)
+            response = {
+                "title": first_friend_experience.title,
+                "id": first_friend_experience.id
+            }
+            return HttpResponse(json.dumps(response), mimetype="application/json")
 
 
     # Tutorial: user can drag memes now
@@ -579,7 +583,7 @@ def meme_in_album(request):
             # grab college meme user first
             college_meme_obj = User.objects.get(username = 'College Memes')
 
-            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.filter(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'YCombinator', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'General', creator = college_meme_obj).count():
+            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.filter(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = settings.SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'YCombinator', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'General', creator = college_meme_obj).count():
 
                 dragged_meme_obj.e.add(dropped_album_obj)
 
