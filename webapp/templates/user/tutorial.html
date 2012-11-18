@@ -22,7 +22,6 @@
     <a href="javascript:;" id="start_me" class="btn btn-success">Let's start</a>
   
     <div id="friend_div" style="display:none;">
-      <!--<form action="url webapp_helloworld %}" method="post" class="form_search">-->
       <form action="{% url webapp_helloworld_create %}" method="post" id="friend_form" class="form_search">
         {% csrf_token %}
         <div class="input-append">
@@ -34,7 +33,7 @@
       </form>
     </div>
   
-    <div id="albums_display" style="display:none; margin-bottom:25px;">
+    <div id="albums_display" style="display:none; margin-bottom:25px; margin-left:175px;">
       <div id="my_first_album_title" style="font-size:18px; padding-bottom:15px;"></div>
       <img src="{{ STATIC_URL }}/images/memeja_logo.png" style="height:100px;"/>
     </div>

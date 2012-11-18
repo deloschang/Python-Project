@@ -6,7 +6,7 @@
     <p id="top_instruction" class="lead">Try drag-n-dropping stories into your album. </p>
 
       {# User's first album #}
-      <div id="albums_display">
+      <div id="albums_display" style="display:inline-block;">
         <div style="font-size:18px; padding-bottom:5px;"> {{ first_friend_experience.title }} </div>
         <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ first_friend_experience.pk }}" style="height:100px;"/>
       </div>

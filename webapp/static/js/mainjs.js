@@ -162,6 +162,9 @@
   }
 
   var cols = document.querySelectorAll('#uncategorized .uncatmemes img');
+  if (cols.length == 0 ){
+    var cols = document.querySelectorAll('#school_feed_memes .schoolmemes img');
+  }
   [].forEach.call(cols, function(col) {
     col.addEventListener('dragstart', handleDragStart, false);
   });
