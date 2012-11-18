@@ -122,7 +122,9 @@
             <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
               <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
             </a>
-            <span id="delete_uncat_meme"><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
+            {% if is_uncat %}
+              <span id="delete_uncat_meme"><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
+            {% endif %}
             {% if memes.top_caption %}
               <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
             {% endif %}

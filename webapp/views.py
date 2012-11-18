@@ -208,8 +208,6 @@ def index_uncat(request):
 # Upload a Meme 
 @login_required
 def create(request):
-    #import pdb; pdb.set_trace()
-
     # Handle file upload
     if request.method == 'POST':
         imageform = ImageUploadForm(request.POST, request.FILES)
@@ -219,13 +217,11 @@ def create(request):
             newimage.save()
 
             #redirect('webapp.views.index')
-            return HttpResponseRedirect(reverse('webapp_index'))
+            return HttpResponseRedirect(reverse('webapp_index_uncat'))
             #return render_to_response(
                 #'profile.html',
                 #context_instance=RequestContext(request)
             #)
-
-
 
         #form = DocumentForm(request.POST, request.FILES)
         #if form.is_valid():
@@ -375,7 +371,7 @@ def macromeme_publish(request):
             add_meme_in_db.e.add(first_friend_experience)
             return HttpResponse('invite') # like localhost:8000/welcome/hello-world/invite
         else:
-            return HttpResponse('http://memeja.com')
+            return HttpResponse('http://memeja.com/uncat_library')
 
 # First-time user tutorial page 'experience'
 @login_required
@@ -658,7 +654,7 @@ def custom_404(request):
 def custom_500(request, template_name='500.html'):
     return render_to_response(template_name, RequestContext(request))
 
-# tracks the users that login and register for admins
+# tracking page for admins
 def privatetracking(request):
     if request.user.username == 'Delos Chang' or request.user.username == 'Max Frenkel' or request.user.username == 'deloschang':
         readlogfile = open(os.path.join(settings.STATIC_ROOT, 'login_track.txt'), 'r+').read()
