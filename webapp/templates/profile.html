@@ -7,13 +7,14 @@
 {# displays new/uncategorized memes to profile for categorization#}
 {% block content %}
 
-<div id="albums_container">
-  <div id="albums_header_container">
-    <div id="albums_header"> 
-       Albums
-    </div>
-    
-    <div style ="clear:both;"></div>
+<div id="albums_container_placeholder">
+  <div id="albums_container">
+    <div id="albums_header_container">
+      <div id="albums_header"> 
+         Albums
+      </div>
+      
+      <div style ="clear:both;"></div>
   </div>
 
   {# Insert flash message when inviting friend #}
@@ -80,6 +81,7 @@
     No experience albums
   {% endif %}
   </div>
+</div>
 
 
  <div id="uncat_container">
