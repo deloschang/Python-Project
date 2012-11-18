@@ -1,0 +1,17 @@
+{% load endless %}
+
+{% paginate memes %}
+  {% for memes in memes %}
+    <div class="schoolmemes">
+      <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
+        <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
+      </a>
+      {% if is_uncat %}
+        <span id="delete_uncat_meme"><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
+      {% endif %}
+      {% if memes.top_caption %}
+        <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% show_more %}
