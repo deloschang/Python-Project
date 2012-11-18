@@ -142,15 +142,31 @@ def index(request, backend, success_url=None,
             # norm registration mode (not used unless invite mode off)
             return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context)
         
-    ## SHOW PROFILE PAGE ##
+    ## SHOW PROFILE PAGE with SCHOOL FEED ##
     else:
+        ###### BRING UP SCHOOL FEED ######
+        # Find College Meme user w/ school memes
+        college_meme_obj = User.objects.get(username = 'College Memes')
+
+        user_school = request.user.get_profile().school
+        if user_school == 'Berkeley':
+            drag_list_experience = Experiences.objects.get(title = 'UCB', creator = college_meme_obj) # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
+        elif user_school == 'Dartmouth': 
+            drag_list_experience = Experiences.objects.get(title = 'Dartmouth', creator = college_meme_obj) # hardcoded Dartmouth album
+        elif user_school == 'Y Combinator':
+            drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
+        else:
+            drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
+
+        school_feed_memes = reversed(drag_list_experience.meme_set.all())
+
+        ##### For uncategorized ####
         # grabs uncategorized memes from the database
         # filter by USER
             # filter out categorized memes
-        memes = reversed(Meme.objects.filter(creator = request.user, e = None))
+        #memes = reversed(Meme.objects.filter(creator = request.user, e = None))
         
-        # grabs existing experiences/albums from the database
-        # filter by USER
+        # grabs user's albums from the database
         experiences = Experiences.objects.filter(creator = request.user)
 
         # form to create new experience/album
@@ -159,19 +175,10 @@ def index(request, backend, success_url=None,
         # form to upload meme
         imageform = ImageUploadForm()
 
-        ##### FOR YC ONLY #####
-        if request.user.email == 'yc@gmail.com':
-            yc = request.user
-            
-            return render_to_response(
-                    'profile.html',
-                    {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform, 'yc' : yc},
-                    RequestContext(request))
-        else:
-            return render_to_response(
-                    'profile.html',
-                    {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform},
-                    RequestContext(request))
+        return render_to_response(
+                'profile.html',
+                {'memes': school_feed_memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform, 'user_school': user_school},
+                RequestContext(request))
 
 # Upload a Meme 
 @login_required
