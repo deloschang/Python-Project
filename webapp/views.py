@@ -436,34 +436,35 @@ def helloworld_create(request):
 
 
     # Tutorial: user can drag memes now
-    first_friend_experience = request.session['first_friend_experience']
+    #first_friend_experience = request.session['first_friend_experience']
 
-    # Grab College Meme user with the tutorial memes
-    college_meme_obj = User.objects.get(username = 'College Memes')
+    ## Grab College Meme user with the tutorial memes
+    #college_meme_obj = User.objects.get(username = 'College Memes')
 
-    if request.user.get_profile().school == 'Berkeley':
-        drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
-    elif request.user.get_profile().school == 'Dartmouth': 
-        drag_list_experience = Experiences.objects.get(title = settings.DARTMOUTH_ALBUM, creator = college_meme_obj) # hardcoded Dartmouth album
-    elif request.user.get_profile().school == 'Y Combinator':
-        drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
-    else:
-        drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
+    #if request.user.get_profile().school == 'Berkeley':
+        #drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
+    #elif request.user.get_profile().school == 'Dartmouth': 
+        #drag_list_experience = Experiences.objects.get(title = settings.DARTMOUTH_ALBUM, creator = college_meme_obj) # hardcoded Dartmouth album
+    #elif request.user.get_profile().school == 'Y Combinator':
+        #drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
+    #else:
+        #drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
 
-    drag_list_memes = reversed(drag_list_experience.meme_set.all())
+    #drag_list_memes = reversed(drag_list_experience.meme_set.all())
 
-    return render_to_response('user/tutorial2.html',
-            {'first_friend_experience':first_friend_experience, 
-                'memes': drag_list_memes }, 
-            RequestContext(request))
+    #return render_to_response('user/tutorial2.html',
+            #{'first_friend_experience':first_friend_experience, 
+                #'memes': drag_list_memes }, 
+            #RequestContext(request))
     
 
+# deprecated
 # Tutorial: user makes a meme with generator
-@login_required
-def helloworld_generator(request):
-    return render_to_response('user/tutorial3.html',
-            {'friend_name': request.session['friend_name']},
-            RequestContext(request))
+#@login_required
+#def helloworld_generator(request):
+    #return render_to_response('user/tutorial3.html',
+            #{'friend_name': request.session['friend_name']},
+            #RequestContext(request))
 
 # Tutorial: user invites friends
 @login_required

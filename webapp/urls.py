@@ -24,7 +24,7 @@ urlpatterns = patterns('webapp.views',
     url(r'^create/$', create, name='create'),
     url(r'^welcome/hello-world/experience$', helloworld, name='webapp_helloworld'),
     url(r'^welcome/hello-world/create$', helloworld_create, name='webapp_helloworld_create'),
-    url(r'^welcome/hello-world/personalize$', helloworld_generator, name='webapp_helloworld_generator'),
+    #url(r'^welcome/hello-world/personalize$', helloworld_generator, name='webapp_helloworld_generator'),
     url(r'^welcome/hello-world/invite$', helloworld_invite, name='webapp_helloworld_invite'),
 
     # hardcoded in webapp.views.macromeme_publish for HttpResponse
