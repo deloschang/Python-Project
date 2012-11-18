@@ -150,11 +150,9 @@ def index(request, backend, success_url=None,
 
         user_school = request.user.get_profile().school
         if user_school == 'Berkeley':
-            drag_list_experience = Experiences.objects.get(title = 'UCB', creator = college_meme_obj) # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
+            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) 
         elif user_school == 'Dartmouth': 
-            drag_list_experience = Experiences.objects.get(title = 'Dartmouth', creator = college_meme_obj) # hardcoded Dartmouth album
-        elif user_school == 'Y Combinator':
-            drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
+            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj) 
         else:
             drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
 
@@ -424,9 +422,9 @@ def helloworld_create(request):
     college_meme_obj = User.objects.get(username = 'College Memes')
 
     if request.user.get_profile().school == 'Berkeley':
-        drag_list_experience = Experiences.objects.get(title = 'UCB', creator = college_meme_obj) # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
+        drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
     elif request.user.get_profile().school == 'Dartmouth': 
-        drag_list_experience = Experiences.objects.get(title = 'Dartmouth', creator = college_meme_obj) # hardcoded Dartmouth album
+        drag_list_experience = Experiences.objects.get(title = settings.DARTMOUTH_ALBUM, creator = college_meme_obj) # hardcoded Dartmouth album
     elif request.user.get_profile().school == 'Y Combinator':
         drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
     else:
@@ -562,13 +560,10 @@ def meme_in_album(request):
             dropped_album_obj = Experiences.objects.get(pk=dropped_album_id)
 
             # Check if user is authenticated for album and meme
-                # UCB is a hardcoded album for display
-                # Dartmouth hardcoded album
-                # Y Combinator hardcoded album
             # grab college meme user first
             college_meme_obj = User.objects.get(username = 'College Memes')
 
-            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.filter(title = 'UCB', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'Dartmouth', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'YCombinator', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'General', creator = college_meme_obj).count():
+            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.filter(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'YCombinator', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'General', creator = college_meme_obj).count():
 
                 dragged_meme_obj.e.add(dropped_album_obj)
 

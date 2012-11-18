@@ -139,7 +139,6 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-
 ROOT_URLCONF = 'memeja.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -191,3 +190,6 @@ LOGGING = {
         },
     }
 }
+
+SCHOOL_UCB_ALBUM = 'UCB'
+SCHOOL_DARTMOUTH_ALBUM = 'Dartmouth'
