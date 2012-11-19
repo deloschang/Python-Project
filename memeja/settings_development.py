@@ -37,6 +37,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
+#MEDIA_ROOT = '/Users/deloschang/memeja/webapp/static/media/'
 MEDIA_ROOT = '/Users/deloschang/memeja/webapp/static/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -66,6 +67,14 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.humanize',
@@ -87,36 +96,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
-
-# Channels and models for ajax-select application
-AJAX_LOOKUP_CHANNELS = {
-    # simplest way, automatically construct a search channel by passing a dictionary
-    #'label'  : {'model':'webapp.Meme', 'search_field':'title'},
-    #'invite_user' : {'model':'django.contrib.auth.User'
-
-    # Custom channels are specified with a tuple
-    # channel: ( module.where_lookup_is, ClassNameOfLookup )
-    'label' : ('webapp.lookups', 'UserLookup'),
-    #'person' : ('example.lookups', 'PersonLookup'),
-    #'group'  : ('example.lookups', 'GroupLookup'),
-    #'song'   : ('example.lookups', 'SongLookup'),
-    #'cliche' : ('example.lookups','ClicheLookup')
-}
-
-AJAX_SELECT_BOOTSTRAP = True
-
-AJAX_SELECT_INLINES = 'inline'
-    
-
-
-# List of finder classes that know how to find static files in
-# various locations.
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
-
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -173,6 +152,24 @@ TEMPLATE_DIRS = (
     '/Users/deloschang/memeja/webapp/templates'
 )
 
+# Channels and models for ajax-select application
+AJAX_LOOKUP_CHANNELS = {
+    # simplest way, automatically construct a search channel by passing a dictionary
+    #'label'  : {'model':'webapp.Meme', 'search_field':'title'},
+    #'invite_user' : {'model':'django.contrib.auth.User'
+
+    # Custom channels are specified with a tuple
+    # channel: ( module.where_lookup_is, ClassNameOfLookup )
+    'label' : ('webapp.lookups', 'UserLookup'),
+    #'person' : ('example.lookups', 'PersonLookup'),
+    #'group'  : ('example.lookups', 'GroupLookup'),
+    #'song'   : ('example.lookups', 'SongLookup'),
+    #'cliche' : ('example.lookups','ClicheLookup')
+}
+
+AJAX_SELECT_BOOTSTRAP = True
+
+AJAX_SELECT_INLINES = 'inline'
 
 # Registration Options
 ACCOUNT_ACTIVATION_DAYS=20
@@ -180,7 +177,7 @@ ACCOUNT_ACTIVATION_DAYS=20
 # Invitation Keys
 INVITE_MODE = True
 ACCOUNT_INVITATION_DAYS=7  # number of days invitation keys remain valid
-INVITATIONS_PER_USER = 10 
+INVITATIONS_PER_USER = 99 
 
 
 

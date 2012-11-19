@@ -76,12 +76,28 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-#TEMPLATE_CONTEXT_PROCESSORS = (
-    #'django.core.context_processors.static',
-    #'django.core.context_processors.media',
-    #'webapp.processor.analytics',
-    #'django.contrib.auth.context_processors.auth',
-#)
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.humanize',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'webapp', # main application
+    'registration', # registration system
+    'invitation', # invitation system
+    'south',
+    'email_usernames',
+    'ajax_select',
+    'endless_pagination',
+    'social_auth',
+
+    # Uncomment the next line to enable the admin:
+    # 'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
+)
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -138,29 +154,6 @@ TEMPLATE_DIRS = (
     '/Users/deloschang/memeja/webapp/templates'
 )
 
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.humanize',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'webapp', # main application
-    'registration', # registration system
-    'invitation', # invitation system
-    'south',
-    'email_usernames',
-    'ajax_select',
-
-    'endless_pagination',
-    'social_auth',
-
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
-)
 
 # Channels and models for ajax-select application
 AJAX_LOOKUP_CHANNELS = {
