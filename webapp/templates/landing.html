@@ -35,7 +35,9 @@
       </div>
     </div>
     <div id="registration_container">
-
+		<a href="{% url socialauth_begin 'facebook' %}" class="fb_login_button">Login with Facebook</a>
+	</div>
+	<!--
       {% if form.errors %}
         <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
       {% endif %}
@@ -53,6 +55,7 @@
         {% if not invitee_object.to_user_email %}
           <p>
             <!--<label for="id_username">Full Name:</label>-->
+			<!--
             {% if form.username.errors %}
               <p class="errors">{{ form.username.errors.as_text }}</p>
             {% endif %}
@@ -75,6 +78,7 @@
         {% if not invitee_object.to_user_email %}
           <p>
             <!--<label for="id_email">Email:</label>-->
+			<!--
             {% if form.email.errors %}
               <p class="errors">{{ form.email.errors.as_text }}</p>
             {% endif %}
@@ -87,6 +91,7 @@
         {% else %}
           <p>
             <!--<label for="id_username">Full Name:</label>-->
+			<!--
             {% if form.username.errors %}
               <p class="errors">{{ form.username.errors.as_text }}</p>
             {% endif %}
@@ -119,12 +124,12 @@
         {{ form.password2 }}
         </p>
         {% endcomment %}
-        <p class="submit"><input type="submit" class="btn btn-primary" value="Join Memeja"></p>
-        Login with <a href="{% url socialauth_begin 'facebook' %}">Facebook</a>
+		<p class="submit"><input type="submit" class="btn btn-primary" value="Join Memeja"></p>
       </form>
     </div>
   </div>
-
+-->
+</div>
     {# Video for NLU to watch #}
   <div id="video_wrapper">
 		<div id="video_container">
@@ -137,7 +142,8 @@
 		</div>
 	</div>
   
-</div>
+
+
 
 
 <div id="footer_wrapper">

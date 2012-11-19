@@ -63,9 +63,11 @@ def load_extra_data(backend, details, response, uid, user, social_user=None,
                 # better to be too general than to filter by ID
                 if 'Berkeley' in response['education'][index]['school']['name']: 
                     user.get_profile().school = 'Berkeley'
+                    user.get_profile().save()
                     break
-                if 'Dartmouth' in response['education'][index]['school']['name']: 
+                elif 'Dartmouth' in response['education'][index]['school']['name']: 
                     user.get_profile().school = 'Dartmouth'
+                    user.get_profile().save()
                     break
 
         user.get_profile().save()

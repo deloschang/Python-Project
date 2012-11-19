@@ -130,7 +130,7 @@ def index(request, backend, success_url=None,
 
             else:
                 if invitation_key == None:
-                    # User enters website normally (uninvited)
+                    #1 User enters website normally (uninvited)
                     #form_auth = EmailLoginForm() # for login form
                     return register(request, backend, success_url, form_class, profile_callback, template_name, extra_context=None)
                             #extra_context={'form_auth': form_auth})
@@ -398,6 +398,9 @@ def helloworld(request):
             drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
         else:
             drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
+
+        # Add user to the album
+        #first_friend_experience.creator.add(request.user) 
 
         drag_list_memes = reversed(drag_list_experience.meme_set.all())
 
