@@ -393,7 +393,7 @@ def helloworld(request):
         if request.user.get_profile().school == 'Berkeley':
             drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
         elif request.user.get_profile().school == 'Dartmouth': 
-            drag_list_experience = Experiences.objects.get(title = settings.DARTMOUTH_ALBUM, creator = college_meme_obj) # hardcoded Dartmouth album
+            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj) # hardcoded Dartmouth album
         elif request.user.get_profile().school == 'Y Combinator':
             drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
         else:
