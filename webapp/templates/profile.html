@@ -8,30 +8,33 @@
 {# displays new/uncategorized memes to profile for categorization#}
 {% block content %}
 <div id="subheader_container">
-	{% if is_uncat %}
-        {# User is on uncat page #}
-        <a href="{% url webapp_index %}">{{ user_school }} Feed</a>
-        Uncategorized 
-		<span id="uncat_header_text_addition">
-		(Drag into an album)
-		</span>
-		<div id="upload_button_container" >
+	<div id="left_balance">
+	</div>
+	<span id="subheader_menu">
+		{% if is_uncat %}
+			{# User is on uncat page #}
+			<a href="{% url webapp_index %}">{{ user_school }} Feed</a>
+			Uncategorized 
+			<span id="uncat_header_text_addition">
+				(Drag into an album)
+			</span>
+			
+		{% else %}
+        {# User is on School feed page #}
+        {{ user_school }} Feed
+	</span>
+      <a href="{% url webapp_index_uncat %}">Uncategorized</a>
+      {% endif %}
+	  <div id="upload_button_container" >
 			<form action="{% url create %}" method="post" enctype="multipart/form-data">
 			  {% csrf_token %}
 			  {{ imageform.non_field_errors }}
 			  {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
 				{{ imageform.image.errors }}
 				{{ imageform.image }}
-					<span id="profile_button">
 						<input type="submit" value="Upload" /></p>
-					</span>
 			</form>
 		</div>
-      {% else %}
-        {# User is on School feed page #}
-        {{ user_school }} Feed
-        <a href="{% url webapp_index_uncat %}">Uncategorized</a>
-      {% endif %}
 <div style ="clear:both;"></div>
 </div>
 
@@ -97,10 +100,12 @@
 			</span>
 			<a href="{% url webapp.views.show_experience experiences.pk %}">
 			  {% if experiences.album_pic %}
-			  <img src="{{ MEDIA_URL }}/{{ experiences.album_pic.image }}" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
-			  {% else %}
-				<img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
-			  {% endif %}
+			  <span id="hide_album_image">
+				  <img src="{{ MEDIA_URL }}/{{ experiences.album_pic.image }}" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
+				  {% else %}
+					<img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
+				  {% endif %}
+			  </span>
 			</a>
 		  </div>
 	  </span>
@@ -114,12 +119,7 @@
 
 
  <div id="uncat_container">
-	<div id="uncat_header_container">
-		<div id="uncat_header_text"> 
-	 </div>
-
   {% if memes and is_uncat %}
-    <div id="uncategorized">
         {% for memes in memes %}
           <div class="uncatmemes">
             <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
@@ -133,20 +133,23 @@
             {% endif %}
           </div>
         {% endfor %}
-    </div>
   {% else %}
-    {% load endless %}
-
     <div id="school_feed_memes">
-      {% include page_template %}
-      {% block js %}
-        {{ block.super }}
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
-        <script>$.endlessPaginate({paginateOnScroll: true});</script>
-      {% endblock %}
+        {% for memes in memes %}
+          <div class="schoolmemes">
+            <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
+              <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
+            </a>
+            {% if is_uncat %}
+              <span id="delete_uncat_meme"><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
+            {% endif %}
+            {% if memes.top_caption %}
+              <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
+            {% endif %}
+          </div>
+        {% endfor %}
     </div>
   {% endif %}
-
+</div>
   {{ standard_js }}
 {% endblock %}
