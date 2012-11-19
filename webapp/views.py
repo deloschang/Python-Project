@@ -175,7 +175,13 @@ def index(request, backend, success_url=None,
 
         return render_to_response(
                 template,
-                {'memes': school_feed_memes, 'experiences': experiences, 'page_template': page_template, 'addexperienceform': addexperienceform, 'imageform' : imageform, 'user_school': user_school},
+                {'memes': school_feed_memes, 'experiences': experiences,
+                    'page_template': page_template, 
+                    'addexperienceform': addexperienceform,
+                    'imageform' : imageform,
+                    'user_school': user_school,
+                    'temp_school_feed': drag_list_experience,
+                },
                 # is_uncat is 0 (user on feed not uncat page)
                 RequestContext(request))
 
@@ -400,6 +406,7 @@ def helloworld(request):
             drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
 
         # Add user to the album
+        ### not implemented yet
         #first_friend_experience.creator.add(request.user) 
 
         drag_list_memes = reversed(drag_list_experience.meme_set.all())

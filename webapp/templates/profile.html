@@ -79,6 +79,42 @@
   {% if experiences %}
    
 	<span id="albums_display_container">
+
+
+
+
+    {# TEMPORARY SOLUTION #}
+    {% if temp_school_feed %}
+		  <div id ="albums_display">
+        <span id="hide_text_container">
+          <span id="albums_info">
+          <a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
+           <!-- ({{ experiences.meme_set.count }} memes)-->
+            <div>
+            <a> with </a> 
+            <class id="coowner">
+              {% for creator in experiences.creator.all %}
+                {% if not forloop.first %},{% endif %}<a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
+              {% endfor %}
+            </class>
+            </div>
+          </span>
+        </span>
+        <a href="{% url webapp.views.show_experience experiences.pk %}">
+          {% if experiences.album_pic %}
+          <span id="hide_album_image">
+            <img src="{{ MEDIA_URL }}/{{ experiences.album_pic.image }}" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
+            {% else %}
+            <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
+            {% endif %}
+          </span>
+        </a>
+		  </div>
+    {% endif %}
+
+
+
+
     {% for experiences in experiences %}
 		  <div id ="albums_display">
         <div id="delete_album_container">

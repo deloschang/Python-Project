@@ -59,7 +59,7 @@ def load_extra_data(backend, details, response, uid, user, social_user=None,
         elif 'dartmouth.edu' in response['email']:
             user.get_profile().school = 'Dartmouth'
         else:
-            for index in range(0, len(response['education']) - 1):
+            for index in range(0, len(response['education'])):
                 # better to be too general than to filter by ID
                 if 'Berkeley' in response['education'][index]['school']['name']: 
                     user.get_profile().school = 'Berkeley'
