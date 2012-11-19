@@ -6,6 +6,9 @@ from social_auth.backends import USERNAME
 from social_auth.signals import socialauth_registered, \
                                 pre_update
 
+# check dupe users
+from webapp.models import UserProfile
+
 
 def get_username(details, user=None,
                  user_exists=UserSocialAuth.simple_user_exists,
@@ -33,8 +36,11 @@ def get_username(details, user=None,
     # Generate a unique username for current user using username
     # as base but adding a unique hash at the end. Original
     # username is cut to avoid any field max_length.
-    while user_exists(username=final_username):
-        username = short_username + uuid4().get_hex()[:uuid_length]
+
+    count_existing = UserProfile.objects.filter(url_username__iexact=short_username).count() # count existing url_username duplicates
+    if user_exists(username=final_username) or count_existing != 0:
+        # original is 0. next is 1 (count is not 0-indexed) 
+        username = short_username + '-' + str(count_existing) 
         final_username = UserSocialAuth.clean_username(username[:max_length])
 
     return {'username': final_username}
