@@ -456,7 +456,8 @@
 		float:right;
 		padding:5px;
 		height:37px;
-		margin-bottom:0px;
+		padding:0px;
+		padding-right:5px;
 	}
 	
 	.h1{
