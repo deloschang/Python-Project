@@ -235,6 +235,19 @@
  
   });
 
+  // jQuery masonry for tutorial
+  $(function(){
+ 
+    var $container = $('#tut_list');
+ 
+    $container.imagesLoaded( function(){
+      $container.masonry({
+        itemSelector : '.tutmemes',
+      });
+    });
+ 
+  });
+
   // Tutorial JS 
   $('#start_me').live('click', function(){
     $('#top_instruction').fadeOut('medium', function(){
@@ -261,6 +274,7 @@
           $('#second_lower_instruction').fadeIn('medium', function(){
             $('#my_first_album_title').html(response['title']);
             $('#albums_display').fadeIn('slow', function(){
+              $('#show_container').animate({opacity: 1});
               $('#try_dragging').fadeIn('slow', function(){
                 $('#letsinvite').fadeIn('medium');
               });
