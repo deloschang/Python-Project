@@ -82,35 +82,37 @@
 
 
 
-
+{#### TEMP ####}
     {# TEMPORARY SOLUTION #}
-    {% if temp_school_feed %}
+    {% if berkeley %}
 		  <div id ="albums_display">
         <span id="hide_text_container">
           <span id="albums_info">
-          <a href="{% url webapp.views.show_experience experiences.pk %}" class="experiences_list" id="{{ experiences.pk }}" style="font-size:20px;"> {{ experiences.title }} </a>
-           <!-- ({{ experiences.meme_set.count }} memes)-->
-            <div>
-            <a> with </a> 
-            <class id="coowner">
-              {% for creator in experiences.creator.all %}
-                {% if not forloop.first %},{% endif %}<a href="/{{ creator.get_profile.url_username }}/">{{ creator.username }}</a> 
-              {% endfor %}
-            </class>
-            </div>
+            <a href="/" class="experiences_list" id="{{
+              berkeley.pk }}" style="font-size:20px;"> {{ berkeley.title }} Feed</a>
           </span>
         </span>
-        <a href="{% url webapp.views.show_experience experiences.pk %}">
-          {% if experiences.album_pic %}
-          <span id="hide_album_image">
-            <img src="{{ MEDIA_URL }}/{{ experiences.album_pic.image }}" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
-            {% else %}
-            <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ experiences.pk }}" style="height:125px;width:125px;"/>
-            {% endif %}
-          </span>
+        <a href="/">
+            <img src="http://rlv.zcache.com/university_of_california_berkeley_bear_gold_postcard-p239609698918142121b2ork_216.jpg" class="experiences_list" id="{{ berkeley.pk }}" style="height:125px;width:125px;"/>
         </a>
 		  </div>
     {% endif %}
+
+    {# TEMPORARY SOLUTION #}
+    {% if dartmouth %}
+		  <div id ="albums_display">
+        <span id="hide_text_container">
+          <span id="albums_info">
+            <a href="/" class="experiences_list" id="{{
+              dartmouth.pk }}" style="font-size:20px;"> {{ dartmouth.title }} Feed</a>
+          </span>
+        </span>
+        <a href="/">
+            <img src="http://www.dartmouth.org/classes/63/images/dart.logo.gif" class="experiences_list" id="{{ dartmouth.pk }}" style="height:125px;width:125px;"/>
+        </a>
+		  </div>
+    {% endif %}
+{##### end ###}
 
 
 
@@ -156,19 +158,21 @@
 
  <div id="uncat_container">
   {% if memes and is_uncat %}
-        {% for memes in memes %}
-          <div class="uncatmemes">
-            <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
-              <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
-            </a>
-            {% if is_uncat %}
-              <span id="delete_uncat_meme"><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
-            {% endif %}
-            {% if memes.top_caption %}
-              <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
-            {% endif %}
-          </div>
-        {% endfor %}
+        <div id="uncategorized">
+          {% for memes in memes %}
+            <div class="uncatmemes">
+              <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
+                <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
+              </a>
+              {% if is_uncat %}
+                <span id="delete_uncat_meme"><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
+              {% endif %}
+              {% if memes.top_caption %}
+                <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
   {% else %}
     <div id="school_feed_memes">
       {% include page_template %}

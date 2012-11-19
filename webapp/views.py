@@ -145,6 +145,16 @@ def index(request, backend, success_url=None,
         
     ## SHOW PROFILE PAGE with SCHOOL FEED ##
     else:
+
+
+        ### TEMP ###
+        berkeley = 0 
+        dartmouth = 0 
+        ## end ##
+
+
+
+
         ###### BRING UP SCHOOL FEED ######
         # Find College Meme user w/ school memes
         college_meme_obj = User.objects.get(username = 'College Memes')
@@ -152,8 +162,15 @@ def index(request, backend, success_url=None,
         user_school = request.user.get_profile().school
         if user_school == 'Berkeley':
             drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) 
+
+            #temp
+            berkeley = drag_list_experience
         elif user_school == 'Dartmouth': 
             drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj) 
+
+
+            #temp
+            dartmouth = drag_list_experience
         else:
             drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
 
@@ -180,7 +197,10 @@ def index(request, backend, success_url=None,
                     'addexperienceform': addexperienceform,
                     'imageform' : imageform,
                     'user_school': user_school,
-                    'temp_school_feed': drag_list_experience,
+
+                    # temp
+                    'dartmouth': dartmouth,
+                    'berkeley': berkeley,
                 },
                 # is_uncat is 0 (user on feed not uncat page)
                 RequestContext(request))
@@ -191,7 +211,31 @@ def index_uncat(request):
         # grabs uncategorized memes from the database
         # filter by USER
             # filter out categorized memes
+
         user_school = request.user.get_profile().school
+
+
+
+        #### TEMP #####
+        ### TEMP ###
+        berkeley = 0 
+        dartmouth = 0 
+        college_meme_obj = User.objects.get(username = 'College Memes')
+        if user_school == 'Berkeley':
+            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) 
+
+            #temp
+            berkeley = drag_list_experience
+        elif user_school == 'Dartmouth': 
+            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj) 
+
+
+            #temp
+            dartmouth = drag_list_experience
+        else:
+            drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
+        ## end ##
+
 
         memes = reversed(Meme.objects.filter(creator = request.user, e = None))
         
@@ -206,7 +250,14 @@ def index_uncat(request):
 
         return render_to_response(
                 'profile.html',
-                {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform, 'imageform' : imageform, 'user_school': user_school, 'is_uncat':1},
+                {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform,
+                    'imageform' : imageform, 'user_school': user_school,
+                    'is_uncat':1,
+
+                    # temp
+                    'dartmouth': dartmouth,
+                    'berkeley': berkeley,
+                    },
                 # is_uncat tells profile.html if user is on uncat page or feed page
                 RequestContext(request))
 
@@ -603,10 +654,6 @@ def meme_in_album(request):
                 if not dropped_album_obj.album_pic: 
                     dropped_album_obj.album_pic = dragged_meme_obj # adding instance
                     dropped_album_obj.save()
-
-            # newimage = Meme.objects.get(pk=#)
-            # testalbum = Experiences.objects.get(pk=#)
-            # newimage.e.add(testalbum)
 
             #updated_meme_count = dropped_album_obj.meme_set.count
                 return HttpResponse('success')
