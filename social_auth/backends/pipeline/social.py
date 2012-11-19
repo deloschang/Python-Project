@@ -52,8 +52,7 @@ def load_extra_data(backend, details, response, uid, user, social_user=None,
     """
     
     # check if school has been filled out yet
-    import pdb; pdb.set_trace()
-    if user.get_profile().school != '':
+    if user.get_profile().school == '':
         # check by email first
         if 'berkeley.edu' in response['email']:
             user.get_profile().school = 'Berkeley'
