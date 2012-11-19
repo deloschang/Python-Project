@@ -52,21 +52,24 @@ def load_extra_data(backend, details, response, uid, user, social_user=None,
     """
     
     # check if school has been filled out yet
-    #if user.get_profile().school != '':
-        ## check by email first
-        #if 'berkeley.edu' in response['email']:
-            #user.get_profile().school = 'Berkeley'
-        #elif 'dartmouth.edu' in response['email']:
-            #user.get_profile().school = 'Dartmouth'
+    import pdb; pdb.set_trace()
+    if user.get_profile().school != '':
+        # check by email first
+        if 'berkeley.edu' in response['email']:
+            user.get_profile().school = 'Berkeley'
+        elif 'dartmouth.edu' in response['email']:
+            user.get_profile().school = 'Dartmouth'
+        else:
+            for index in range(0, len(response['education']) - 1):
+                # better to be too general than to filter by ID
+                if 'Berkeley' in response['education'][index]['school']['name']: 
+                    user.get_profile().school = 'Berkeley'
+                    break
+                if 'Dartmouth' in response['education'][index]['school']['name']: 
+                    user.get_profile().school = 'Dartmouth'
+                    break
 
-        #for index in len(response['education']) - 1:
-            ## better to be too general than to filter by ID
-            #if 'Berkeley' in response['education'][index]['school']['name']: 
-                #user.get_profile().school = 'Berkeley'
-            #if 'Dartmouth' in response['education'][index]['school']['name']: 
-                #user.get_profile().school = 'Dartmouth'
-
-        #user.get_profile().save()
+        user.get_profile().save()
         
     social_user = social_user or \
                   UserSocialAuth.get_social_auth(backend.name, uid)

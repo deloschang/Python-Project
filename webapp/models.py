@@ -71,7 +71,6 @@ def create_user_profile(sender, instance, created, **kwargs):
 
         # add profile information after registration
         profile.url_username = profile.user.username  
-        profile.school = 'Berkeley'
         profile.save()
 
 post_save.connect(create_user_profile, sender=User) 
