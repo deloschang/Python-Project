@@ -16,10 +16,14 @@ def get_username(details, user=None,
     if user:
         return {'username': user.username}
 
-    if details.get(USERNAME):
-        username = unicode(details[USERNAME])
-    else:
-        username = uuid4().get_hex()
+    # uses FB username
+    #if details.get(USERNAME):
+        #username = unicode(details[USERNAME])
+    #else:
+        #username = uuid4().get_hex()
+
+    # uses hyphenated first and last name
+    username = details['first_name']+'-'+details['last_name']
 
     uuid_length = 16
     max_length = UserSocialAuth.username_max_length()

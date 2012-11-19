@@ -129,7 +129,7 @@ AUTHENTICATION_BACKENDS = (
 # social auth keys
 FACEBOOK_APP_ID              = '479174175436255'
 FACEBOOK_API_SECRET          = 'a0522ed8310df87c00ade91df0352cc8'
-FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+FACEBOOK_EXTENDED_PERMISSIONS = ['email', 'user_education_history']
 
 LOGIN_URL          = '/login-form/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
