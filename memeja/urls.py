@@ -20,6 +20,7 @@ urlpatterns = patterns('',
 
     # First page that user comes to 
     url(r'^$', include('webapp.urls')),
+    url(r'', include('social_auth.urls')),
 
     # invitation urls
     url(r'^', include('invitation.urls')),

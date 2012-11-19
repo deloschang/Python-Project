@@ -157,15 +157,8 @@ def index(request, backend, success_url=None,
         else:
             drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
 
-        #school_feed_memes = reversed(drag_list_experience.meme_set.all())
         school_feed_memes = drag_list_experience.meme_set.all().order_by('-id')
 
-        ##### For uncategorized ####
-        # grabs uncategorized memes from the database
-        # filter by USER
-            # filter out categorized memes
-        #memes = reversed(Meme.objects.filter(creator = request.user, e = None))
-        
         # grabs user's albums from the database
         experiences = Experiences.objects.filter(creator = request.user)
 
@@ -186,6 +179,7 @@ def index(request, backend, success_url=None,
                 # is_uncat is 0 (user on feed not uncat page)
                 RequestContext(request))
 
+# shows uncategorized feed
 def index_uncat(request):
         ##### For uncategorized ####
         # grabs uncategorized memes from the database

@@ -67,6 +67,11 @@ class UserProfile(models.Model):
 
 def create_user_profile(sender, instance, created, **kwargs):  
     if created:  
-       profile, created = UserProfile.objects.get_or_create(user=instance)  
+        profile, created = UserProfile.objects.get_or_create(user=instance)  
+
+        # add profile information after registration
+        profile.url_username = profile.user.username  
+        profile.school = 'Berkeley'
+        profile.save()
 
 post_save.connect(create_user_profile, sender=User) 

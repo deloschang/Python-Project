@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'email_usernames',
     'ajax_select',
     'endless_pagination',
+    'social_auth',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -120,7 +121,27 @@ STATICFILES_FINDERS = (
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'email_usernames.backends.EmailOrUsernameModelBackend',
+    'social_auth.backends.facebook.FacebookBackend', # social_auth
+    'django.contrib.auth.backends.ModelBackend', # social_auth
 )
+
+
+# social auth keys
+FACEBOOK_APP_ID              = '479174175436255'
+FACEBOOK_API_SECRET          = 'a0522ed8310df87c00ade91df0352cc8'
+FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+
+LOGIN_URL          = '/login-form/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/welcome/hello-world/experience' 
+LOGIN_ERROR_URL    = '/login-error/'
+
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+
+# end
+
+
 
 AUTH_PROFILE_MODULE = 'webapp.UserProfile'
 
