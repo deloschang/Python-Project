@@ -86,7 +86,7 @@ def create_user_profile(sender, instance, created, **kwargs):
         date.append(str(datetime.now()))
 
         with open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), "a") as text_file:
-            text_file.write(date[0]+'   '+profile.user.username+' registered with '+profile.user.email'\n')
+            text_file.write(date[0]+'   '+profile.user.username+' registered with '+profile.user.email+'\n')
 
         profile.save()
 
