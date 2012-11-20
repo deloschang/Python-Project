@@ -258,33 +258,31 @@
   });
 
   // Tutorial: enter friends name JS
-  //$('#friend_form').submit(function(){
-    //var csrftoken = getCookie('csrftoken');
-    //$.ajax({
-      //data: $(this).serialize(),
-      //type: "post",
-      //url: $(this).attr('action'),
-      //datatype: 'json',
-      //success: function(response){
-        //console.log('hello');
-        //return false;
-        //// returns json with title and id 
-        //$('#albums_display img').attr('id',response['id']); // change id for dragging
-        //$('#friend_div').fadeOut('medium', function(){
-          //$('#logo_tutorial').hide();
-          //$('#lower_instruction').html('This is your Album!').attr('class', 'lead');
-          //$('#second_lower_instruction').fadeIn('medium', function(){
-            //$('#my_first_album_title').html(response['title']);
-            //$('#albums_display').fadeIn('slow', function(){
-              //$('#show_container').animate({opacity: 1});
-              //$('#try_dragging').fadeIn('slow', function(){
-                //$('#letsinvite').fadeIn('medium');
-              //});
-            //});
-          //});
-        //});
-      //}
-    //});
-    //return false;
-  //});
+  $('#friend_form').submit(function(){
+    var csrftoken = getCookie('csrftoken');
+    $.ajax({
+      data: $(this).serialize(),
+      type: "post",
+      url: $(this).attr('action'),
+      datatype: 'json',
+      success: function(response){
+        // returns json with title and id 
+        $('#albums_display img').attr('id',response['id']); // change id for dragging
+        $('#friend_div').fadeOut('medium', function(){
+          $('#logo_tutorial').hide();
+          $('#lower_instruction').html('This is your Album!').attr('class', 'lead');
+          $('#second_lower_instruction').fadeIn('medium', function(){
+            $('#my_first_album_title').html(response['title']);
+            $('#albums_display').fadeIn('slow', function(){
+              $('#show_container').animate({opacity: 1});
+              $('#try_dragging').fadeIn('slow', function(){
+                $('#letsinvite').fadeIn('medium');
+              });
+            });
+          });
+        });
+      }
+    });
+    return false;
+  });
 

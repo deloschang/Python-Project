@@ -4,83 +4,6 @@
 
 <body>
 
-{{ standard_js }}
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
-<!--<script src="http://code.jquery.com/jquery-1.8.2.js"></script>-->
-<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-<script>
-$(function() {
-      $( "#autocomplete-input" ).autocomplete({
-        source: function( request, response ) {
-        var url = "https://graph.facebook.com/me/friends?access_token={{ access_token }}&callback=?";
-        $.ajax({
-          url: url,
-          dataType: "jsonp",
-          data: {
-            featureClass: "P",
-            style: "full",
-            name_startsWith: request.term
-          },
-          success: function( data ) {
-            res = $.map( data.data, function( item ) {
-              if (item.name.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
-                return {
-                  label: item.name,
-                  value: item.name,
-                  picture: item.id
-                }
-              }
-            });
-            response(res);
-          }
-        });
-      },
-      autoFocus:true,
-      minLength: 0,
-      select: function( event, ui ) {
-        // log( ui.item ?
-        //   "Selected: " + ui.item.label :
-        //   "Nothing selected, input was " + this.value);
-      },
-      open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-      },
-      close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-      }
-      });
-    $("#autocomplete-input").data("autocomplete")._renderItem =  function( ul, item ) {
-        console.log(item);
-        var image_url = "http://graph.facebook.com/" + item.picture +"/picture";
-        $('#hash').val(item.picture) // id
-
-        return $( "<li>" )
-          .append($("<img style='float:left'>").attr('src',image_url))
-          .append( $( "<a>" ).text( item.label ) )
-          .appendTo( ul );
-    }
-    });
-</script>
-
-<style>
-    /* limits the number of people */
-     .ui-autocomplete {
-          max-height: 200px;
-          width:100px;
-          overflow-y: auto;
-          /* prevent horizontal scrollbar */
-          overflow-x: hidden;
-          /* add padding to account for vertical scrollbar */
-      } 
-      .ui-menu-item {
-        height:50px;
-      }
-      .ui-state-hover, .ui-autocomplete li:hover
-        {
-          display:none;
-        }
-</style>
-
 
 
   {# added for YC demo 'For our demo, this first-time user tutorial' #}
@@ -103,40 +26,6 @@ $(function() {
   
     <a href="javascript:;" id="start_me" class="btn btn-success">Let's start</a>
   
-    <script>
-      // Tutorial: enter friends name JS
-      $('#friend_form').submit(function(){
-        console.log('womb');
-        return false;
-
-        var csrftoken = getCookie('csrftoken');
-        $.ajax({
-          data: $(this).serialize(),
-          type: "post",
-          url: $(this).attr('action'),
-          datatype: 'json',
-          success: function(response){
-            // returns json with title and id 
-            $('#albums_display img').attr('id',response['id']); // change id for dragging
-            $('#friend_div').fadeOut('medium', function(){
-              $('#logo_tutorial').hide();
-              $('#lower_instruction').html('This is your Album!').attr('class', 'lead');
-              $('#second_lower_instruction').fadeIn('medium', function(){
-                $('#my_first_album_title').html(response['title']);
-                $('#albums_display').fadeIn('slow', function(){
-                  $('#show_container').animate({opacity: 1});
-                  $('#try_dragging').fadeIn('slow', function(){
-                    $('#letsinvite').fadeIn('medium');
-                  });
-                });
-              });
-            });
-          }
-        });
-        return false;
-      });
-    </script>
-
     <div id="friend_div" style="display:none;">
       <form action="{% url webapp_helloworld_create %}" method="post" id="friend_form" class="form_search">
         {% csrf_token %}
@@ -230,7 +119,79 @@ $(function() {
     width: 1000px;
     right: 200px;
   }
+  /* limits the number of people */
+   .ui-autocomplete {
+        max-height: 200px;
+        width:100px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+    } 
+    .ui-menu-item {
+      height:50px;
+    }
+    .ui-state-hover, .ui-autocomplete li:hover
+      {
+        display:none;
+      }
 </style>
 
+{{ standard_js }}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+<script>
+$(function() {
+      $( "#autocomplete-input" ).autocomplete({
+        source: function( request, response ) {
+        var url = "https://graph.facebook.com/me/friends?access_token={{ access_token }}&callback=?";
+        $.ajax({
+          url: url,
+          dataType: "jsonp",
+          data: {
+            featureClass: "P",
+            style: "full",
+            name_startsWith: request.term
+          },
+          success: function( data ) {
+            res = $.map( data.data, function( item ) {
+              if (item.name.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
+                return {
+                  label: item.name,
+                  value: item.name,
+                  picture: item.id
+                }
+              }
+            });
+            response(res);
+          }
+        });
+      },
+      autoFocus:true,
+      minLength: 0,
+      select: function( event, ui ) {
+        // log( ui.item ?
+        //   "Selected: " + ui.item.label :
+        //   "Nothing selected, input was " + this.value);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+      });
+    $("#autocomplete-input").data("autocomplete")._renderItem =  function( ul, item ) {
+        console.log(item);
+        var image_url = "http://graph.facebook.com/" + item.picture +"/picture";
+        $('#hash').val(item.picture) // id
+
+        return $( "<li>" )
+          .append($("<img style='float:left'>").attr('src',image_url))
+          .append( $( "<a>" ).text( item.label ) )
+          .appendTo( ul );
+    }
+    });
+</script>
 {% endblock %}
 
