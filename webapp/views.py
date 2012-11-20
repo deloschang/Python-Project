@@ -761,7 +761,7 @@ def custom_500(request, template_name='500.html'):
 
 # tracking page for admins
 def privatetracking(request):
-    if request.user.username == 'Delos Chang' or request.user.username == 'Max Frenkel' or request.user.username == 'deloschang':
+    if request.user.username == 'Delos Chang' or request.user.username == 'Delos-Chang-1' or request.user.username == 'Max Frenkel' or request.user.username == 'deloschang':
         readlogfile = open(os.path.join(settings.STATIC_ROOT, 'login_track.txt'), 'r+').read()
         readregfile = open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), 'r+').read()
         return render_to_response('privatetracking.html', {'readlogfile':readlogfile, 'readregfile':readregfile}, RequestContext(request))
