@@ -4,6 +4,7 @@
 settings_local.py
 settings_local_backup.py
 login_track.txt
+userlist.txt
 registration_track.txt
 media/
 migrations/

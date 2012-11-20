@@ -47,4 +47,5 @@ urlpatterns = patterns('webapp.views',
     (r'^meme_in_album/$', 'meme_in_album'),
     (r'^(?P<linked_username>[-\w]+)/$', 'linked_username'),
     url(r'^thatsrightmax/privatetracking', privatetracking, name='webapp_privatetracking'),
+    url(r'^thatsrightmax/userlist', userlist, name='webapp_userlist'),
 )

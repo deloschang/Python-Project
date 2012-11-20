@@ -774,3 +774,19 @@ def privatetracking(request):
         readregfile = open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), 'r+').read()
         return render_to_response('privatetracking.html', {'readlogfile':readlogfile, 'readregfile':readregfile}, RequestContext(request))
 
+def userlist(request):
+    if request.user.username == 'Delos Chang' or request.user.username == 'Delos-Chang-1' or request.user.username == 'Max Frenkel' or request.user.username == 'deloschang':
+
+        handle=open('userlist.txt','r+')
+        for userobj in User.objects.all():
+            handle.write(userobj.username +'......  email: ' + userobj.email)
+            try: 
+                fb_id = userobj.social_auth.all().get(user = userobj).uid # grab fb id
+                handle.write('......http://facebook.com/'+fb_id+'\n')
+            except:
+                handle.write('\n')
+
+        handle.close()
+
+        readuserlist = open(os.path.join(settings.STATIC_ROOT, 'userlist.txt'), 'r+').read()
+        return render_to_response('privatetracking.html', {'readlogfile':readuserlist, 'readregfile':0}, RequestContext(request))

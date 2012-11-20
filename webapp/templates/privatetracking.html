@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<table class="table table-striped table-hover">
-  <div style="position: absolute; top:75px; left:0">{{ readlogfile|linebreaks}}</div>
-</table>
 
-<table class="table table-striped table-hover">
-  <div style="position: absolute; top:75px; left:1000px;">{{ readregfile|linebreaks}}</div>
-</table>
+{% if readlogfile %}
+  <table class="table table-striped table-hover">
+    <div style="position: absolute; top:75px; left:0">{{ readlogfile|linebreaks}}</div>
+  </table>
+{% endif %}
+
+{% if readlogfile %}
+  <table class="table table-striped table-hover">
+    <div style="position: absolute; top:75px; left:1000px;">{{ readregfile|linebreaks}}</div>
+  </table>
+{% endif %}
 
 {% endblock %}
 
