@@ -427,7 +427,8 @@ def macromeme_publish(request):
             add_meme_in_db.e.add(first_friend_experience)
             return HttpResponse('invite') # like localhost:8000/welcome/hello-world/invite
         else:
-            return HttpResponse('http://memeja.com/uncat_library')
+            #return HttpResponse('http://memeja.com/uncat_library')
+            return HttpResponse('http://localhost:8000/uncat_library')
 
 # First-time user tutorial page 'experience'
 @login_required

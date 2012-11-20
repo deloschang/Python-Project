@@ -110,7 +110,7 @@ FACEBOOK_APP_ID              = '479174175436255'
 FACEBOOK_API_SECRET          = 'a0522ed8310df87c00ade91df0352cc8'
 FACEBOOK_EXTENDED_PERMISSIONS = ['email', 'user_education_history', 'user_photos', 'friends_photos']
 
-LOGIN_URL          = '/login-form/'
+LOGIN_URL          = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/welcome/hello-world/experience' 
 LOGIN_ERROR_URL    = '/login-error/'
