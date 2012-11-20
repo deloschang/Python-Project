@@ -52,6 +52,8 @@ $(function() {
     $("#autocomplete-input").data("autocomplete")._renderItem =  function( ul, item ) {
         console.log(item);
         var image_url = "http://graph.facebook.com/" + item.picture +"/picture";
+        $('#friend_id').val(item.picture) // id
+
         return $( "<li>" )
           .append($("<img style='float:left'>").attr('src',image_url))
           .append( $( "<a>" ).text( item.label ) )
@@ -114,7 +116,8 @@ $(function() {
           #}
           {# test #}
 
-          <input class="input-large" style="width:200px;" type="text" placeholder="Friend's name" id="autocomplete-input" />
+          <input name='friend_name' class="input-large" style="width:200px;" type="text" placeholder="Friend's name" id="autocomplete-input" />
+          <input type="hidden" name='friend_id' id='friend_id' value=''/>
           <input type="submit" id="createmyfirstalbum" class="btn btn-primary" value="Go!" />
         </div>
       </form>
