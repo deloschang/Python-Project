@@ -481,33 +481,34 @@ def helloworld_create(request):
     # Tutorial: user just entered friends name
     if request.method == 'POST':
 
-        import pdb;
-        pdb.set_trace()
-        friend_form = TutorialNameForm(request.POST)
-        if friend_form.is_valid():
+        friend_name = request.POST['friend_name']
+        friend_id = request.POST['hash']
 
-            friend_name = strip_tags(request.POST['friend_name'].title())
-            # create first album with friend name: "My Experiences with <friend>"
-            first_friend_experience = Experiences(title='Memes with '+friend_name)
-            first_friend_experience.save()
-            first_friend_experience.creator.add(request.user)
+        #friend_form = TutorialNameForm(request.POST)
+        #if friend_form.is_valid():
 
-            # pass to next page (dragging memes into album)
-            request.session['first_friend_experience'] = first_friend_experience
+        friend_name = strip_tags(request.POST['friend_name'].title())
+        # create first album with friend name: "My Experiences with <friend>"
+        first_friend_experience = Experiences(title='Memes with '+friend_name)
+        first_friend_experience.save()
+        first_friend_experience.creator.add(request.user) # added to user's album
 
-            # pass friends name for tutorial generator page
-            request.session['friend_name'] = friend_name
-            
-            #messages.add_message(request, messages.SUCCESS, 'Awesome! We created an album for you', extra_tags="text-success")
-            #messages.add_message(request, messages.SUCCESS, 'You can drag memes into your album', extra_tags="text-success")
-            #return HttpResponseRedirect(reverse('webapp_helloworld_create'))
+        # pass to next page (dragging memes into album)
+        request.session['first_friend_experience'] = first_friend_experience
 
-            # create album and return for user
-            response = {
-                "title": first_friend_experience.title,
-                "id": first_friend_experience.id
-            }
-            return HttpResponse(json.dumps(response), mimetype="application/json")
+        # pass friends name for tutorial generator page
+        request.session['friend_name'] = friend_name
+        
+        #messages.add_message(request, messages.SUCCESS, 'Awesome! We created an album for you', extra_tags="text-success")
+        #messages.add_message(request, messages.SUCCESS, 'You can drag memes into your album', extra_tags="text-success")
+        #return HttpResponseRedirect(reverse('webapp_helloworld_create'))
+
+        # create album and return for user
+        response = {
+            "title": first_friend_experience.title,
+            "id": first_friend_experience.id
+        }
+        return HttpResponse(json.dumps(response), mimetype="application/json")
 
 
     # Tutorial: user can drag memes now
