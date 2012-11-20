@@ -649,8 +649,36 @@ def meme_in_album(request):
             # grab college meme user first
             college_meme_obj = User.objects.get(username = 'College Memes')
 
-            if request.user == dragged_meme_obj.creator and request.user.experiences_set.get(pk=dropped_album_id) or dragged_meme_obj.e.filter(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = settings.SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'YCombinator', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'General', creator = college_meme_obj).count():
 
+            # if meme from public SCHOOL feed is dragged, let anybody do it. BUT DONT CANNABLIZE the meme.
+            if dragged_meme_obj.e.filter(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = settings.SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'YCombinator', creator = college_meme_obj).count() or dragged_meme_obj.e.filter(title = 'General', creator = college_meme_obj).count():
+                dragged_meme_obj.e.add(dropped_album_obj)
+                return HttpResponse('you dragged a meme from school feed')
+
+            ## check for school feed ##
+            # if public SCHOOL feed then anybody can drag a meme in
+            elif dropped_album_obj.title == settings.SCHOOL_UCB_ALBUM and college_meme_obj in dropped_album_obj.creator.all():
+                dragged_meme_obj.e.add(dropped_album_obj)
+                return HttpResponse('you dropped a meme into school feed')
+
+            # if public SCHOOL feed then anybody can drag a meme in
+            elif dropped_album_obj.title == settings.SCHOOL_DARTMOUTH_ALBUM and college_meme_obj in dropped_album_obj.creator.all():
+                dragged_meme_obj.e.add(dropped_album_obj)
+                return HttpResponse('you dropped a meme into school feed')
+
+            # if public SCHOOL feed then anybody can drag a meme in
+            elif dropped_album_obj.title == settings.YCOMBINATOR and college_meme_obj in dropped_album_obj.creator.all():
+                dragged_meme_obj.e.add(dropped_album_obj)
+                return HttpResponse('you dropped a meme into school feed')
+
+            # if public SCHOOL feed then anybody can drag a meme in
+            elif dropped_album_obj.title == settings.GENERAL and college_meme_obj in dropped_album_obj.creator.all():
+                dragged_meme_obj.e.add(dropped_album_obj)
+                return HttpResponse('you dropped a meme into school feed')
+            ## end ##
+
+            # otherwise, check if user owns the album
+            elif request.user == dragged_meme_obj.creator and request.user.experiences_set.filter(pk=dropped_album_id).count():
                 dragged_meme_obj.e.add(dropped_album_obj)
 
                 # If no album profile pic, add it

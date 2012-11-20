@@ -222,3 +222,5 @@ LOGGING = {
 
 SCHOOL_UCB_ALBUM = 'UCB'
 SCHOOL_DARTMOUTH_ALBUM = 'Dartmouth'
+YCOMBINATOR = 'YCombinator'
+GENERAL = 'General'
