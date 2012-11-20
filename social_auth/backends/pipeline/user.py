@@ -56,15 +56,6 @@ def get_username(details, user=None,
         #final_username = UserSocialAuth.clean_username(username[:max_length])
 
 
-    # private tracking code
-    date = []
-    date.append(str(datetime.now()))
-
-    with open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), "a") as text_file:
-        text_file.write(date[0]+'  FB      '+final_username+' registered with '+details['email']+'\n')
-        
-
-
     return {'username': final_username}
 
 

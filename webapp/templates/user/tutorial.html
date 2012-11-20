@@ -26,7 +26,8 @@ $(function() {
               if (item.name.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
                 return {
                   label: item.name,
-                  value: item.id
+                  value: item.name,
+                  picture: item.id
                 }
               }
             });
@@ -50,7 +51,7 @@ $(function() {
       });
     $("#autocomplete-input").data("autocomplete")._renderItem =  function( ul, item ) {
         console.log(item);
-        var image_url = "http://graph.facebook.com/" + item.value +"/picture";
+        var image_url = "http://graph.facebook.com/" + item.picture +"/picture";
         return $( "<li>" )
           .append($("<img style='float:left'>").attr('src',image_url))
           .append( $( "<a>" ).text( item.label ) )
@@ -72,6 +73,10 @@ $(function() {
       .ui-menu-item {
         height:50px;
       }
+      .ui-state-hover, .ui-autocomplete li:hover
+        {
+          display:none;
+        }
 </style>
 
 

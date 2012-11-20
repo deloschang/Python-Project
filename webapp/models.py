@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
+# for private tracking
+from datetime import datetime
+import os
+from django.conf import settings
+
 class Experiences(models.Model):
     # user id
     title = models.CharField(max_length=60)
@@ -75,6 +80,13 @@ def create_user_profile(sender, instance, created, **kwargs):
 
         if count_existing !=0:
             profile.url_username = profile.url_username + '-' + str(count_existing)
+
+        # private tracking code
+        date = []
+        date.append(str(datetime.now()))
+
+        with open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), "a") as text_file:
+            text_file.write(date[0]+'   '+profile.user.username+' registered with '+profile.user.email'\n')
 
         profile.save()
 
