@@ -155,6 +155,9 @@
   </div>
 
 
+  {# moved up for endless pagination #}
+  {{ standard_js }}
+
  <div id="uncat_container">
   {% if memes and is_uncat %}
         <div id="uncategorized">
@@ -177,12 +180,10 @@
       {% include page_template %}
       {% block js %}
         {{ block.super }}
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+        <script src="{{ STATIC_URL }}endless_pagination/endless-pagination.js"></script>
         <script>$.endlessPaginate({paginateOnScroll: true});</script>
       {% endblock %}
     </div>
   {% endif %}
 </div>
-  {{ standard_js }}
 {% endblock %}
