@@ -777,7 +777,7 @@ def privatetracking(request):
 def userlist(request):
     if request.user.username == 'Delos Chang' or request.user.username == 'Delos-Chang-1' or request.user.username == 'Max Frenkel' or request.user.username == 'deloschang':
 
-        handle=open(os.path.join(settings.STATIC_ROOT, 'login_track.txt'), 'r+')
+        handle=open(os.path.join(settings.STATIC_ROOT, 'userlist.txt'), 'r+')
         for userobj in User.objects.all():
             handle.write(userobj.username +'......  email: ' + userobj.email)
             try: 
