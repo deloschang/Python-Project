@@ -9,6 +9,10 @@ from social_auth.signals import socialauth_registered, \
 # check dupe users
 from webapp.models import UserProfile
 
+# for private tracking
+from datetime import datetime
+import os
+from django.conf import settings
 
 def get_username(details, user=None,
                  user_exists=UserSocialAuth.simple_user_exists,
@@ -17,6 +21,14 @@ def get_username(details, user=None,
     if user was given.
     """
     if user:
+        
+        # login private tracking code 
+        date = []
+        date.append(str(datetime.now()))
+
+        with open(os.path.join(settings.STATIC_ROOT, 'login_track.txt'), "a") as text_file:
+            text_file.write(date[0]+'  FB      '+user.username+' logged in with '+user.email+'\n')
+
         return {'username': user.username}
 
     # uses FB username
@@ -42,6 +54,16 @@ def get_username(details, user=None,
         # original is 0. next is 1 (count is not 0-indexed) 
         #username = short_username + ' ' + str(count_existing) 
         #final_username = UserSocialAuth.clean_username(username[:max_length])
+
+
+    # private tracking code
+    date = []
+    date.append(str(datetime.now()))
+
+    with open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), "a") as text_file:
+        text_file.write(date[0]+'  FB      '+final_username+' registered with '+details['email']+'\n')
+        
+
 
     return {'username': final_username}
 
