@@ -36,7 +36,7 @@ $(function() {
         });
       },
       autoFocus:true,
-      minLength: 2,
+      minLength: 0,
       select: function( event, ui ) {
         // log( ui.item ?
         //   "Selected: " + ui.item.label :
@@ -92,8 +92,6 @@ $(function() {
 
   <div id="top_container">
 
-            {# test #}
-            <input id="autocomplete-input" />
 
     <span id="logo_tutorial"><img src="{{ STATIC_URL }}images/intro_logo.gif"/></span>
     <p id="top_instruction" class="lead">Welcome! {% if school %}I see you're from {{ school }}.{% endif %}</p>
@@ -107,11 +105,17 @@ $(function() {
       <form action="{% url webapp_helloworld_create %}" method="post" id="friend_form" class="form_search">
         {% csrf_token %}
         <div class="input-append">
+          {# Obsolete 
           {% for field in friend_form %}
-            {{ field }}
+            {{ field 
 
 
           {% endfor %}
+          #}
+          <!--<input type="submit" id="createmyfirstalbum" class="btn btn-primary" value="Go!" />-->
+          {# test #}
+
+          <input class="input-large" style="width:200px;" type="text" placeholder="Friend's name" id="autocomplete-input" />
           <input type="submit" id="createmyfirstalbum" class="btn btn-primary" value="Go!" />
         </div>
       </form>
