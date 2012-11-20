@@ -69,8 +69,13 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:  
         profile, created = UserProfile.objects.get_or_create(user=instance)  
 
-        # add profile information after registration
-        profile.url_username = profile.user.username  
+        # add profile information for social auth after registration
+        profile.url_username = profile.user.username.replace(' ','-') 
+        count_existing = UserProfile.objects.filter(url_username__iexact=profile.url_username).count() # count existing url_username duplicates
+
+        if count_existing !=0:
+            profile.url_username = profile.url_username + '-' + str(count_existing)
+
         profile.save()
 
 post_save.connect(create_user_profile, sender=User) 

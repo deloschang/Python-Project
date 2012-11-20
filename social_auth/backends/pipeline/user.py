@@ -26,22 +26,22 @@ def get_username(details, user=None,
         #username = uuid4().get_hex()
 
     # uses hyphenated first and last name
-    username = details['first_name']+'-'+details['last_name']
+    final_username = details['first_name']+' '+details['last_name']
 
-    uuid_length = 16
-    max_length = UserSocialAuth.username_max_length()
-    short_username = username[:max_length - uuid_length]
-    final_username = UserSocialAuth.clean_username(username[:max_length])
+    #uuid_length = 16
+    #max_length = UserSocialAuth.username_max_length()
+    #short_username = username[:max_length - uuid_length]
+    #final_username = UserSocialAuth.clean_username(username[:max_length])
 
     # Generate a unique username for current user using username
     # as base but adding a unique hash at the end. Original
     # username is cut to avoid any field max_length.
 
-    count_existing = UserProfile.objects.filter(url_username__iexact=short_username).count() # count existing url_username duplicates
-    if user_exists(username=final_username) or count_existing != 0:
+    #count_existing = UserProfile.objects.filter(url_username__iexact=short_username).count() # count existing url_username duplicates
+    #if user_exists(username=final_username) or count_existing != 0:
         # original is 0. next is 1 (count is not 0-indexed) 
-        username = short_username + '-' + str(count_existing) 
-        final_username = UserSocialAuth.clean_username(username[:max_length])
+        #username = short_username + ' ' + str(count_existing) 
+        #final_username = UserSocialAuth.clean_username(username[:max_length])
 
     return {'username': final_username}
 
