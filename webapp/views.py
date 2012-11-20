@@ -436,11 +436,14 @@ def macromeme_publish(request):
 @login_required
 def helloworld(request):
     ### bring back when done testing ###
-    if request.user.get_profile().is_first_login or request.user.email == 'yc@gmail.com':
+
+    if request.user.get_profile().is_first_login or request.user.email == 'yc@gmail.com' or request.user.email == 'lol.i.laugh@gmail.com':
     #if not request.user.get_profile().is_first_login:
          #not first time login ANYMORE
-        request.user.get_profile().is_first_login = False
-        request.user.get_profile().save()
+
+        #####test ###
+        #request.user.get_profile().is_first_login = False
+        #request.user.get_profile().save()
 
         # Check which school they are from package import module
         school = request.user.get_profile().school 
@@ -465,7 +468,12 @@ def helloworld(request):
 
         drag_list_memes = reversed(drag_list_experience.meme_set.all())
 
-        return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form, 'memes':drag_list_memes}, RequestContext(request))
+
+        #import pdb; pdb.set_trace()
+        access_token = request.user.social_auth.get(user = request.user).extra_data['access_token']
+        return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form, 'memes':drag_list_memes,
+            'access_token':access_token,
+            }, RequestContext(request))
         
 @login_required
 def helloworld_create(request):
