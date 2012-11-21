@@ -4,6 +4,16 @@
 
 {% extends 'base.html' %}
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=320238601417173";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
 {% block header %}
 {% endblock %}
 
@@ -34,12 +44,16 @@
 		</span>
 		  <div id="prop_text_container">  
 			{# Value Proposition Line View cal stories, share cal stories, recreate cal stories #} 
-			  See what cal students are saying <!-- <span id="cal_text"> Cal </span> -->
+			  See what Cal students are saying <!-- <span id="cal_text"> Cal </span> -->
 		  </div>
+      <div style="position:relative; top:50px; right:180px;">
+        <iframe src="//www.facebook.com/plugins/facepile.php?href=http%3A%2F%2Ffacebook.com%2Fmemejalove&amp;action&amp;size=medium&amp;max_rows=1&amp;width=250&amp;colorscheme=light&amp;appId=320238601417173" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px;" allowTransparency="true"></iframe>
+      </div>
 		</div>
 		<div id="registration_container">
 			<a href="{% url socialauth_begin 'facebook' %}" class="fb_login_button">Login with Facebook</a>
       <div class='text-info'>(It takes one click, and we will never post without your permission)</div>
+      <div class="fb-facepile" data-href="http://facebook.com/memejalove" data-max-rows="1" data-width="250"></div>
 			
 			<!--
 			{# Video for NLU to watch #}
