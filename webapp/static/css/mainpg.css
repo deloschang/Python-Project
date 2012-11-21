@@ -520,7 +520,8 @@
 	
 	}
 	#albums_container{
-		position:fixed;
+		position:absolute;
+    left:0;
 		/*max-height:624px;*/
 		border-bottom:1px solid #ACACA5;
 		/*width:180px;*/
@@ -528,10 +529,21 @@
 		padding-top:5px;
 		overflow:scroll;
 		z-index:500;
-		height:90%;
 		
 		
 	}
+  
+  /*CSS to stick albums to top */
+  #albums_container.stick{
+    position:fixed;
+    top:0px;
+		border-bottom:1px solid #ACACA5;
+		/*width:180px;*/
+		background-color:rgb(245,243,244);
+		padding-top:5px;
+		overflow:scroll;
+		z-index:500;
+  }
 	
 	#albums_header_container{
 		position:relative;

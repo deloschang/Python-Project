@@ -9,6 +9,10 @@
 {% block content %}
 
 
+{# anchor for album to stay #}
+<div id="album-anchor"></div>
+{# do not remove #}
+
 <div id="albums_container_placeholder">
   <div id="albums_container">
     <div id="albums_header_container">
@@ -17,7 +21,7 @@
       </div>
       
       <div style ="clear:both;"></div>
-  </div>
+    </div>
 
   {# Insert flash message when inviting friend #}
   {% if messages %}
@@ -154,4 +158,31 @@
   {% endif %}
 </div>
   {{ standard_js }}
+  <script>
+  $(document).ready(function($) {
+      function sticky_relocate() {
+          var window_top = $(window).scrollTop();
+
+          if ($('#album-anchor').length) {
+              var offset = $('#album-anchor').offset();
+              var div_top = offset.top;
+              console.log('window_top:'+window_top);
+              console.log('album_top:'+div_top);
+              if (window_top > div_top) {
+                  $('#albums_container').addClass('stick');
+                  //$('#album_container').attr('class','stick');
+                  //$('#album_container').css( {position: 'fixed', top: '0px'});
+                  console.log('stick added')
+                  //if($('#top-notice').length && !$('#top-notice').is(":hidden")) { $('#player-container').css( {top: ''} ); }
+              } else {
+                  $('#albums_container').removeClass('stick');
+                  //if($('#top-notice').length && !$('#top-notice').is(":hidden")) { $('#player-container').css( {top: '67px'} ); }
+              }
+          }
+      }
+
+      $(window).scroll(sticky_relocate);
+      sticky_relocate();
+  });
+  </script>
 {% endblock %}

@@ -25,6 +25,7 @@
     });
   });
 
+
   var addEvent = (function () {
     if (document.addEventListener) {
       return function (el, type, fn) {
