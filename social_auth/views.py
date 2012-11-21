@@ -33,7 +33,31 @@ def auth(request, backend):
 def complete(request, backend, *args, **kwargs):
     """Authentication complete view, override this view if transaction
     management doesn't suit your needs."""
+
+    #import pdb; pdb.set_trace()
     if request.user.is_authenticated():
+
+        # if Facebook2, user is inviting
+        # try checking for session 
+        # session comes from helloworld_create, views.py
+        try: 
+            social_user = request.user.social_auth.all().get(user=request.user)
+            if social_user.provider == 'facebook' and request.session['friend_inv_exist'] == True:
+                try:
+                    from facepy import GraphAPI
+
+                    access_token = social_user.extra_data['access_token']
+                    graph = GraphAPI(access_token)
+                    graph.post(path="me/feed", retry=1, message="Hello world")
+
+                    del request.session['friend_id']
+                    del request.session['friend_inv_exist']
+                except:
+                    return associate_complete(request, backend, *args, **kwargs)
+        except:
+            return associate_complete(request, backend, *args, **kwargs)
+
+
         return associate_complete(request, backend, *args, **kwargs)
     else:
         return complete_process(request, backend, *args, **kwargs)
@@ -55,6 +79,9 @@ def associate_complete(request, backend, *args, **kwargs):
               backend_setting(backend,
                               'SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL') or \
               DEFAULT_REDIRECT
+
+    
+
     return HttpResponseRedirect(url)
 
 

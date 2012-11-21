@@ -19,12 +19,6 @@ def social_auth_user(backend, uid, user=None, *args, **kwargs):
             if social_user.provider == 'facebook2':
                 user = social_user.user
 
-                from facepy import GraphAPI
-
-                access_token = social_user.extra_data['access_token']
-                graph = GraphAPI(access_token)
-                #graph.post(path="https://graph.facebook.com/426364720649/feed", retry=1, message="Hello", source = " ")
-                graph.post(path="https://graph.facebook.com/me/feed", retry=1, message="Hello world")
 
             else:
                 msg = ugettext('This %(provider)s account is already in use.')
@@ -85,6 +79,7 @@ def load_extra_data(backend, details, response, uid, user, social_user=None,
 
         user.get_profile().save()
         
+
     social_user = social_user or \
                   UserSocialAuth.get_social_auth(backend.name, uid)
     if social_user:

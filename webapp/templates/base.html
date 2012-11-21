@@ -30,52 +30,56 @@
         {% else %}
         <a href="/login/">Log in</a> 
         {% endif %}
-	</div>
+    </div>
+
+  {% block feeduncatstrip %}
 	<div id="subheader_container">
-	<div id="left_balance">
-	</div>
-	<span id="subheader_menu">
-		{% if is_uncat %}
-			{# User is on uncat page #}
-			<span id="school_subheader_link">
-				<a href="{% url webapp_index %}">{{ user_school }} Feed</a>
-			</span>
-			<span id="uncat_text">
-				Uncategorized 
-			</span>
-			<span id="uncat_header_text_addition">
-				(Drag into an album)
-			</span>
-			
-    {% elif is_album %}
-			{# User is on uncat page #}
-			<span id="school_subheader_link">
-				<a href="{% url webapp_index %}">{{ user_school }} Feed</a>
-			</span>
-      <span> | </span>
-      <span id="uncategorized_subheader_link">
-        <a href="{% url webapp_index_uncat %}">Uncategorized</a>
-      </span>
-		{% else %}
-        {# User is on School feed page #}
-       <span id="school_text"> {{ user_school }} Feed </span>
-      <span id="uncategorized_subheader_link">
-        <a href="{% url webapp_index_uncat %}">Uncategorized</a>
-      </span>
-    {% endif %}
-	</span>
-	  <div id="upload_button_container" >
-			<form action="{% url create %}" method="post" enctype="multipart/form-data">
-			  {% csrf_token %}
-			  {{ imageform.non_field_errors }}
-			  {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
-				{{ imageform.image.errors }}
-				{{ imageform.image }}
-						<input type="submit" value="Upload" /></p>
-			</form>
-		</div>
-<div style ="clear:both;"></div>
-</div>
+    <div id="left_balance">
+    </div>
+    <span id="subheader_menu">
+      {% if is_uncat %}
+        {# User is on uncat page #}
+        <span id="school_subheader_link">
+          <a href="{% url webapp_index %}">{{ user_school }} Feed</a>
+        </span>
+        <span id="uncat_text">
+          Uncategorized 
+        </span>
+        <span id="uncat_header_text_addition">
+          (Drag into an album)
+        </span>
+        
+      {% elif is_album %}
+        {# User is on uncat page #}
+        <span id="school_subheader_link">
+          <a href="{% url webapp_index %}">{{ user_school }} Feed</a>
+        </span>
+        <span> | </span>
+        <span id="uncategorized_subheader_link">
+          <a href="{% url webapp_index_uncat %}">Uncategorized</a>
+        </span>
+      {% else %}
+          {# User is on School feed page #}
+         <span id="school_text"> {{ user_school }} Feed </span>
+        <span id="uncategorized_subheader_link">
+          <a href="{% url webapp_index_uncat %}">Uncategorized</a>
+        </span>
+      {% endif %}
+    </span>
+      <div id="upload_button_container" >
+        <form action="{% url create %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ imageform.non_field_errors }}
+          {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
+          {{ imageform.image.errors }}
+          {{ imageform.image }}
+              <input type="submit" value="Upload" /></p>
+        </form>
+      </div>
+    <div style ="clear:both;"></div>
+  </div>
+  {% endblock %}
+
   {% endblock %}
 
    <body>

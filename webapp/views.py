@@ -477,7 +477,7 @@ def helloworld_create(request):
     # Tutorial: user just entered friends name
     if request.method == 'POST':
 
-        friend_name = request.POST['friend_name']
+        friend_name = strip_tags(request.POST['friend_name'])
         friend_id = request.POST['hash']
 
         #friend_form = TutorialNameForm(request.POST)
@@ -492,12 +492,9 @@ def helloworld_create(request):
         # pass to next page (dragging memes into album)
         request.session['first_friend_experience'] = first_friend_experience
 
-        # pass friends name for tutorial generator page
-        request.session['friend_name'] = friend_name
-        
-        #messages.add_message(request, messages.SUCCESS, 'Awesome! We created an album for you', extra_tags="text-success")
-        #messages.add_message(request, messages.SUCCESS, 'You can drag memes into your album', extra_tags="text-success")
-        #return HttpResponseRedirect(reverse('webapp_helloworld_create'))
+        # pass to invitation process
+        request.session['friend_id'] = strip_tags(friend_id)
+        request.session['friend_inv_exist'] = True
 
         # create album and return for user
         response = {
