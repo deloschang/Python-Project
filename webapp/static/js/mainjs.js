@@ -277,6 +277,7 @@
             $('#my_first_album_title').html(response['title']);
             $('#albums_display').fadeIn('slow', function(){
               $('#letsinvite').fadeIn('medium');
+              $('#letsinvitehelper').fadeIn('medium');
             });
           });
         });
