@@ -449,29 +449,13 @@ def helloworld(request):
         school = request.user.get_profile().school 
         friend_form = TutorialNameForm()
 
-
-        # Grab College Meme user with the tutorial memes for user to try drag-n-dropping
-        college_meme_obj = User.objects.get(username = 'College Memes')
-
-        if request.user.get_profile().school == 'Berkeley':
-            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
-        elif request.user.get_profile().school == 'Dartmouth': 
-            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj) # hardcoded Dartmouth album
-        elif request.user.get_profile().school == 'Y Combinator':
-            drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
-        else:
-            drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
-
         # Add user to the album
         ### not implemented yet
         #first_friend_experience.creator.add(request.user) 
 
-        drag_list_memes = reversed(drag_list_experience.meme_set.all())
-
-
         #import pdb; pdb.set_trace()
         access_token = request.user.social_auth.get(user = request.user).extra_data['access_token']
-        return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form, 'memes':drag_list_memes,
+        return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form,
             'access_token':access_token,
             }, RequestContext(request))
         
@@ -543,29 +527,29 @@ def helloworld_create(request):
             #RequestContext(request))
 
 # Tutorial: user invites friends
-@login_required
-def helloworld_invite(request):
-    # Grab the memes in the album
+#@login_required
+#def helloworld_invite(request):
+    ## Grab the memes in the album
 
-    first_friend_experience = request.session['first_friend_experience']
-    first_friend_experience_memes = reversed(first_friend_experience.meme_set.all())
+    #first_friend_experience = request.session['first_friend_experience']
+    #first_friend_experience_memes = reversed(first_friend_experience.meme_set.all())
 
-    #### New implementation for autocomplete####
-    dd = {}
-    if 'q' in request.GET:
-        dd['entered'] = request.GET.get('q')
-    #initial = {'q':"\"This is an initial value,\" said O'Leary."}
-    #autocomplete_form = SearchForm(initial=initial)
-    autocomplete_form = SearchForm()
-    dd['autocomplete_form'] = autocomplete_form
+    ##### New implementation for autocomplete####
+    #dd = {}
+    #if 'q' in request.GET:
+        #dd['entered'] = request.GET.get('q')
+    ##initial = {'q':"\"This is an initial value,\" said O'Leary."}
+    ##autocomplete_form = SearchForm(initial=initial)
+    #autocomplete_form = SearchForm()
+    #dd['autocomplete_form'] = autocomplete_form
 
-    request.session['experience_no'] = first_friend_experience
-    return render_to_response('user/tutorial4.html',
-            {'friend_name': request.session['friend_name'], 
-                'memes': first_friend_experience_memes,
-                'first_friend_experience': first_friend_experience,
-                'autocomplete_form':autocomplete_form},
-            RequestContext(request))
+    #request.session['experience_no'] = first_friend_experience
+    #return render_to_response('user/tutorial4.html',
+            #{'friend_name': request.session['friend_name'], 
+                #'memes': first_friend_experience_memes,
+                #'first_friend_experience': first_friend_experience,
+                #'autocomplete_form':autocomplete_form},
+            #RequestContext(request))
 
 
 # Add new album for user   

@@ -4,6 +4,7 @@
     $(".fancybox").fancybox();
     $(".fancybox").fancybox({
       padding: 0,
+      closeClick: true,
 
       openEffect : 'elastic',
       openSpeed  : 150,
@@ -16,6 +17,7 @@
       $('.fancybox-media').fancybox({
         openEffect  : 'none',
         closeEffect : 'none',
+        nextClick: false,
         helpers : {
           media : {}
         }
@@ -274,10 +276,7 @@
           $('#second_lower_instruction').fadeIn('medium', function(){
             $('#my_first_album_title').html(response['title']);
             $('#albums_display').fadeIn('slow', function(){
-              $('#show_container').animate({opacity: 1});
-              $('#try_dragging').fadeIn('slow', function(){
-                $('#letsinvite').fadeIn('medium');
-              });
+              $('#letsinvite').fadeIn('medium');
             });
           });
         });

@@ -50,27 +50,10 @@
       <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ first_friend_experience.pk }}" style="height:100px;"/>
     </div>
 
-    <div id="try_dragging" style="display:none; margin-top:25px;">
-      <p class="lead">Try drag-n-dropping stories into your album. </p>
-
-      <div>
-        <a href="{% url webapp_helloworld_invite %}" id="letsinvite" class="btn btn-success" style="display:none; margin-bottom:5px;">Sweet, I'm done <i class="icon-white icon-forward"></i></a>
-      </div>
-
+    <div>
+      <a href="{% url webapp_index %}" id="letsinvite" class="btn btn-success" style="display:none; margin-bottom:5px;">Cool, continue <i class="icon-white icon-forward"></i></a>
     </div>
-    <div id="show_container">
-      <div id="uncategorized">
-        <div id="tut_list">
-          {% for memes in memes %}
-            <div class="tutmemes">
-              <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
-                <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
-              </a>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-  </div>
+
   </div>
 
 
@@ -89,12 +72,6 @@
     left:50%;
     top:50%;
     margin:-250px 0 0 -250px;
-  }
-
-  #show_container {
-    opacity: 0;
-    width:1000px;
-    margin-left:-200px;
   }
 
   .tutmemes{
@@ -141,6 +118,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 <script>
+{# functions needs to be written inline because of access_token parameter #}
 $(function() {
       $( "#autocomplete-input" ).autocomplete({
         source: function( request, response ) {
