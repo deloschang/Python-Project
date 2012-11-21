@@ -36,7 +36,7 @@ def complete(request, backend, *args, **kwargs):
     management doesn't suit your needs."""
 
     if request.user.is_authenticated():
-        social_user = request.user.social_auth.all().get(user=request.user)
+        social_user = request.user.social_auth.all().get(user=request.user, provider = 'facebook')
 
 
         # if session exists, user is inviting FB friends
@@ -47,12 +47,17 @@ def complete(request, backend, *args, **kwargs):
                 try:
                     from facepy import GraphAPI
 
+                    #import pdb; pdb.set_trace()
                     access_token = social_user.extra_data['access_token']
                     graph = GraphAPI(access_token)
                     message = 'Hey '+request.session['friend_name']+'. I invited you to our private album: '+\
                             request.session['first_friend_experience'].title+' on Memeja. -'+request.user.username
 
-                    graph.post(path=request.session['friend_id']+"/feed", retry=1, message=message)
+                    picture = 'http://www.memeja.com/static/images/intro_logo.gif'
+                    link = 'http://memeja.com/login/facebook'
+                    name = 'See it here'
+
+                    graph.post(path=request.session['friend_id']+"/feed", retry=1, message=message, picture=picture, link=link, name=name)
 
                     # Invitation 
                     # key is request.session['friend_id']

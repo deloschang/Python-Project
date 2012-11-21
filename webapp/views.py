@@ -456,7 +456,7 @@ def helloworld(request):
         #first_friend_experience.creator.add(request.user) 
 
         #import pdb; pdb.set_trace()
-        access_token = request.user.social_auth.get(user = request.user).extra_data['access_token']
+        access_token = request.user.social_auth.get(user = request.user, provider = 'facebook').extra_data['access_token']
         return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form,
             'access_token':access_token,
             }, RequestContext(request))
