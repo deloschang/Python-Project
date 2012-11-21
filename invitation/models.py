@@ -36,7 +36,7 @@ class InvitationKeyManager(models.Manager):
             return not invitation_key.key_expired()
         return False
 
-    def create_invitation(self, user, to_user_email, from_user_album):
+    def create_invitation(self, user, from_user_album):
         """
         Create an ``InvitationKey`` and returns it.
         
@@ -45,7 +45,7 @@ class InvitationKeyManager(models.Manager):
         """
         salt = sha_constructor(str(random.random())).hexdigest()[:5]
         key = sha_constructor(salt+user.username).hexdigest()
-        return self.create(from_user=user, key=key, to_user_email=to_user_email, from_user_album=from_user_album) 
+        return self.create(from_user=user, key=key, from_user_album=from_user_album) 
 
     def remaining_invitations_for_user(self, user):
         """
@@ -71,7 +71,7 @@ class InvitationKey(models.Model):
                                         default=datetime.datetime.now)
     from_user = models.ForeignKey(User)
     from_user_album = models.ForeignKey(Experiences, null=True) # album that User1 invites invitee to join
-    to_user_email = models.EmailField() # email of invite recipient from form
+    #to_user_email = models.EmailField() # email of invite recipient from form
     
     
     objects = InvitationKeyManager()

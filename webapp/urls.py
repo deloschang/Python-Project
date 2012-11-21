@@ -8,8 +8,6 @@ urlpatterns = patterns('webapp.views',
     url(r'^yc/(?P<extra>[-\w]+)', 'yc_no_login'),
 
 
-    # test
-    url(r'^testpost', testpost, name='webapp_testpost'),
     #### end ####
     url(r'^$', index, 
                 #{'backend' : 'registration.backends.default.DefaultBackend'},

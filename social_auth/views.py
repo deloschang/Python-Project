@@ -14,6 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from social_auth.utils import sanitize_redirect, setting, \
                               backend_setting, clean_partial_pipeline
 from social_auth.decorators import dsa_view
+from invitation.models import InvitationKeyManager, InvitationKey
 
 
 DEFAULT_REDIRECT = setting('SOCIAL_AUTH_LOGIN_REDIRECT_URL',
@@ -34,14 +35,14 @@ def complete(request, backend, *args, **kwargs):
     """Authentication complete view, override this view if transaction
     management doesn't suit your needs."""
 
-    #import pdb; pdb.set_trace()
     if request.user.is_authenticated():
+        social_user = request.user.social_auth.all().get(user=request.user)
 
-        # if Facebook2, user is inviting
+
+        # if session exists, user is inviting FB friends
         # try checking for session 
         # session comes from helloworld_create, views.py
         try: 
-            social_user = request.user.social_auth.all().get(user=request.user)
             if social_user.provider == 'facebook' and request.session['friend_inv_exist'] == True:
                 try:
                     from facepy import GraphAPI
@@ -50,12 +51,23 @@ def complete(request, backend, *args, **kwargs):
                     graph = GraphAPI(access_token)
                     graph.post(path=request.session['friend_id']+"/feed", retry=1, message="Hello world")
 
+                    # Invitation 
+                    # key is request.session['friend_id']
+                    # from_user is request.user
+                    # from_user_album can be sent with request.session
+
+                    invite = InvitationKey.objects.create_invitation(request.user, request.session['first_friend_experience'])
+                    invite.key = request.session['friend_id'] # replace key with uid of INVITED user
+                    invite.save()
+
+                    del request.session['first_friend_experience']
                     del request.session['friend_id']
                     del request.session['friend_inv_exist']
                 except:
                     return associate_complete(request, backend, *args, **kwargs)
         except:
             return associate_complete(request, backend, *args, **kwargs)
+
 
 
         return associate_complete(request, backend, *args, **kwargs)
@@ -177,9 +189,21 @@ def complete_process(request, backend, *args, **kwargs):
                                   LOGIN_ERROR_URL)
     else:
         msg = setting('LOGIN_ERROR_MESSAGE', None)
-        url = backend_setting(backend, 'LOGIN_ERROR_URL', LOGIN_ERROR_URL)
+        url = backend_setting(backend, 'LOGIN_ERROR_URL', LOGIN_ERROR_URL) # set to '/'
     if msg:
         messages.error(request, msg)
+
+
+    # Check if the user has been invited. If so, link albums
+    try:
+        #pass
+        invitee_obj = InvitationKey.objects.get(key=social_user.uid)
+        #invitee_obj = InvitationKey.objects.get(key='641286114')
+
+        invitee_obj.from_user_album.creator.add(request.user) # add user to the album then
+    except:
+        pass
+
     return HttpResponseRedirect(url)
 
 

@@ -461,11 +461,11 @@ def helloworld(request):
             'access_token':access_token,
             }, RequestContext(request))
 
-def testpost(request):
-    from facepy import GraphAPI
+#def testpost(request):
+    #from facepy import GraphAPI
 
-    access_token = request.user.social_auth.all().get(user = request.user).extra_data['access_token']
-    graph = GraphAPI(access_token)
+    #access_token = request.user.social_auth.all().get(user = request.user).extra_data['access_token']
+    #graph = GraphAPI(access_token)
 
     #graph.post(path="https://graph.facebook.com/426364720649/feed", retry=1, message="Hello", source = " ")
 #message, picture, link, name, caption, description, source, place, tags
