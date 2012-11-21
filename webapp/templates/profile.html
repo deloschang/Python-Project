@@ -51,7 +51,36 @@
    
 	<span id="albums_display_container">
 
+{#### TEMP ####}
+    {# TEMPORARY SOLUTION #}
+    {% if berkeley %}
+		  <div id ="albums_display">
+        <span id="hide_text_container">
+          <span id="albums_info">
+            <a href="/" class="experiences_list" id="{{ berkeley.pk }}" style="font-size:20px;"> {{ berkeley.title }} Feed</a>
+          </span>
+        </span>
+        <a href="/">
+            <img src="http://rlv.zcache.com/university_of_california_berkeley_bear_gold_postcard-p239609698918142121b2ork_216.jpg" class="experiences_list" id="{{ berkeley.pk }}" style="height:125px;width:125px;"/>
+        </a>
+		  </div>
+    {% endif %}
 
+    {# TEMPORARY SOLUTION #}
+    {% if dartmouth %}
+		  <div id ="albums_display">
+        <span id="hide_text_container">
+          <span id="albums_info">
+            <a href="/" class="experiences_list" id="{{
+              dartmouth.pk }}" style="font-size:20px;"> {{ dartmouth.title }} Feed</a>
+          </span>
+        </span>
+        <a href="/">
+            <img src="http://www.dartmouth.org/classes/63/images/dart.logo.gif" class="experiences_list" id="{{ dartmouth.pk }}" style="height:125px;width:125px;"/>
+        </a>
+		  </div>
+    {% endif %}
+{##### end ###}
 
 
 
