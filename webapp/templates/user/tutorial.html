@@ -51,7 +51,8 @@
     </div>
 
     <div>
-      <a href="{% url socialauth_begin 'facebook2' %}" id="letsinvite" class="btn btn-success" style="display:none; margin-bottom:5px;">Cool, continue <i class="icon-white icon-forward"></i></a>
+      {# facebook2 asks for 2nd step permission with publish_stream #}
+      <a href="{% url socialauth_begin 'facebook2' %}" id="letsinvite" class="btn btn-success" style="display:none; margin-bottom:5px;">Invite <i class="icon-white icon-ok"></i></a>
     </div>
 
   </div>
