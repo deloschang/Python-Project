@@ -520,8 +520,9 @@
 	
 	}
 	#albums_container{
-		position:absolute;
-    left:0;
+		/*position:absolute;*/
+    /*left:0;*/
+    position:fixed;
 		/*max-height:624px;*/
 		border-bottom:1px solid #ACACA5;
 		/*width:180px;*/
@@ -529,6 +530,7 @@
 		padding-top:5px;
 		overflow:scroll;
 		z-index:500;
+    height:99%;
 		
 		
 	}

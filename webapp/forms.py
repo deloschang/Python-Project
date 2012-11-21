@@ -6,7 +6,7 @@ class ImageUploadForm(forms.Form):
 
 class AddExperienceForm(forms.Form):
     title = forms.CharField(max_length=60,
-                                widget=forms.TextInput(attrs={'placeholder': 'e.g. Burning Man 2009'}))
+                                widget=forms.TextInput(attrs={'placeholder': 'Our Shared Experience'}))
 
 class InvitationKeyForm(forms.Form):
     email = forms.EmailField()
