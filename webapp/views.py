@@ -485,7 +485,7 @@ def helloworld_create(request):
 
         friend_name = strip_tags(request.POST['friend_name'].title())
         # create first album with friend name: "My Experiences with <friend>"
-        first_friend_experience = Experiences(title='Memes with '+friend_name)
+        first_friend_experience = Experiences(title='Stories with '+friend_name)
         first_friend_experience.save()
         first_friend_experience.creator.add(request.user) # added to user's album
 
@@ -495,6 +495,7 @@ def helloworld_create(request):
         # pass to invitation process
         request.session['friend_id'] = strip_tags(friend_id)
         request.session['friend_inv_exist'] = True
+        request.session['friend_name'] = friend_name.split()[0] # Take only first name
 
         # create album and return for user
         response = {

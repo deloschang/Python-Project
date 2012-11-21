@@ -49,12 +49,17 @@ def complete(request, backend, *args, **kwargs):
 
                     access_token = social_user.extra_data['access_token']
                     graph = GraphAPI(access_token)
-                    graph.post(path=request.session['friend_id']+"/feed", retry=1, message="Hello world")
+                    message = 'Hey '+request.session['friend_name']+'. I invited you to our private album: '+\
+                            request.session['first_friend_experience'].title+' on Memeja. -'+request.user.username
+
+                    graph.post(path=request.session['friend_id']+"/feed", retry=1, message=message)
 
                     # Invitation 
                     # key is request.session['friend_id']
                     # from_user is request.user
                     # from_user_album can be sent with request.session
+
+                    # Hey ['friend_name'], I invited you to my private album: ['first_friend_experience'].title    - request.user.username
 
                     invite = InvitationKey.objects.create_invitation(request.user, request.session['first_friend_experience'])
                     invite.key = request.session['friend_id'] # replace key with uid of INVITED user
@@ -63,6 +68,7 @@ def complete(request, backend, *args, **kwargs):
                     del request.session['first_friend_experience']
                     del request.session['friend_id']
                     del request.session['friend_inv_exist']
+                    del request.session['friend_name']
                 except:
                     return associate_complete(request, backend, *args, **kwargs)
         except:
