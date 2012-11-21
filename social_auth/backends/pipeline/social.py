@@ -14,8 +14,18 @@ def social_auth_user(backend, uid, user=None, *args, **kwargs):
     social_user = UserSocialAuth.get_social_auth(backend.name, uid)
     if social_user:
         if user and social_user.user != user:
+
+            # if facebook2, this is the 2nd step, which is OK
             if social_user.provider == 'facebook2':
                 user = social_user.user
+
+                from facepy import GraphAPI
+
+                access_token = social_user.extra_data['access_token']
+                graph = GraphAPI(access_token)
+                #graph.post(path="https://graph.facebook.com/426364720649/feed", retry=1, message="Hello", source = " ")
+                graph.post(path="https://graph.facebook.com/me/feed", retry=1, message="Hello world")
+
             else:
                 msg = ugettext('This %(provider)s account is already in use.')
                 raise AuthAlreadyAssociated(backend, msg % {

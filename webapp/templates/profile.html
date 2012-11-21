@@ -7,36 +7,7 @@
 
 {# displays new/uncategorized memes to profile for categorization#}
 {% block content %}
-<div id="subheader_container">
-	<div id="left_balance">
-	</div>
-	<span id="subheader_menu">
-		{% if is_uncat %}
-			{# User is on uncat page #}
-			<a href="{% url webapp_index %}">{{ user_school }} Feed</a>
-			Uncategorized 
-			<span id="uncat_header_text_addition">
-				(Drag into an album)
-			</span>
-			
-		{% else %}
-        {# User is on School feed page #}
-        {{ user_school }} Feed
-	</span>
-      <a href="{% url webapp_index_uncat %}">Uncategorized</a>
-      {% endif %}
-	  <div id="upload_button_container" >
-			<form action="{% url create %}" method="post" enctype="multipart/form-data">
-			  {% csrf_token %}
-			  {{ imageform.non_field_errors }}
-			  {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
-				{{ imageform.image.errors }}
-				{{ imageform.image }}
-						<input type="submit" value="Upload" /></p>
-			</form>
-		</div>
-<div style ="clear:both;"></div>
-</div>
+
 
 <div id="albums_container_placeholder">
   <div id="albums_container">
@@ -70,51 +41,19 @@
           {% csrf_token %}
           {{ addexperienceform.title }}
          <div id="profile_button">
-           <input type="submit" value="Create Album" />
+         <input type="submit" value="Create Album" />
          </div>
         
         </div>
       </form>
     </div>
+  {% if experiences %}
    
 	<span id="albums_display_container">
 
 
 
-{#### TEMP ####}
-    {# TEMPORARY SOLUTION #}
-    {% if berkeley %}
-		  <div id ="albums_display">
-        <span id="hide_text_container">
-          <span id="albums_info">
-            <a href="/" class="experiences_list" id="{{ berkeley.pk }}" style="font-size:20px;"> {{ berkeley.title }} Feed</a>
-          </span>
-        </span>
-        <a href="/">
-            <img src="http://rlv.zcache.com/university_of_california_berkeley_bear_gold_postcard-p239609698918142121b2ork_216.jpg" class="experiences_list" id="{{ berkeley.pk }}" style="height:125px;width:125px;"/>
-        </a>
-		  </div>
-    {% endif %}
 
-    {# TEMPORARY SOLUTION #}
-    {% if dartmouth %}
-		  <div id ="albums_display">
-        <span id="hide_text_container">
-          <span id="albums_info">
-            <a href="/" class="experiences_list" id="{{
-              dartmouth.pk }}" style="font-size:20px;"> {{ dartmouth.title }} Feed</a>
-          </span>
-        </span>
-        <a href="/">
-            <img src="http://www.dartmouth.org/classes/63/images/dart.logo.gif" class="experiences_list" id="{{ dartmouth.pk }}" style="height:125px;width:125px;"/>
-        </a>
-		  </div>
-    {% endif %}
-{##### end ###}
-
-
-
-  {% if experiences %}
 
     {% for experiences in experiences %}
 		  <div id ="albums_display">
@@ -148,12 +87,11 @@
 	  </span>
     {% endfor %}
   {% else %}
-    No albums
+    No experience albums
   {% endif %}
   </div>
 	<div style ="clear:both;"></div>
   </div>
-
 
 
  <div id="uncat_container">
@@ -179,12 +117,11 @@
       {% block js %}
         {{ block.super }}
         <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="{{ STATIC_URL }}endless_pagination/endless-pagination.js"></script>
+        <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
         <script>$.endlessPaginate({paginateOnScroll: true});</script>
       {% endblock %}
     </div>
   {% endif %}
 </div>
-  {# moved up for endless pagination #}
   {{ standard_js }}
 {% endblock %}

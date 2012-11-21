@@ -13,7 +13,7 @@
 
 .uncatmemes a img{
   display: block;
-  width: 300px;
+  width: 370px;
 
 }
 
@@ -348,11 +348,11 @@
 
 	/* Max edits */
 	/* A master */
-	#wrapper{
+	/*#wrapper{
 		margin-left:auto;
 		margin-right:auto;
 		width:100%;
-		min-width:516px;
+		min-width:516px;*/
 	}
 	
 	.basic_text{
@@ -377,50 +377,49 @@
 	
 	/* 2 master */
 	
-	#test_me{
-	
-	
-	}
-	
 	#intro_logo {
 		position:relative;
 		width:130px;
-		height:40px;
 		float:left;
 		left:0px;
 		top: -2px;
 		display:block;
 		padding:1px;
+		top:-11px;
 	}
 	
 	#header_container{
 		position:relative;
-		background-color:#FAF7F7;
+		background-color:#FAFFFF;
+		/*#FAF7F7;*/
 		/*initial #F0F8FF*/
 		width: 100%;
 		height:30px;
-		border:1px solid #ACACA5;
-		box-shadow:0px .5px 2px #ACACA5;
-		padding-bottom:10px;
+		/*border:1px solid #ACACA5;
+		box-shadow:0px .5px 2px #ACACA5;*/
+		padding-top:10px;
 	}
 	
 	#header_menu_container{
-	padding: 2.5px;
-	
+		position:relative;
+		padding: 2.5px;
+		padding-bottom:10px;
 	}
 	#header_menu li{
 		float:right;
 		display:inline;
 		font-size:15px;
 		margin-right:25px;
+		margin-bottom:15px;
 	}
 	
 	#header_menu li a{
 		padding: .2em 1em;
 		text-decoration:none;
-		color:#221919;
+		color:#524D4D;
 		font-weight:bold;
 		font-family:"helvetica neu", arial, sans-serif;
+		margin-bottom:10px;
 	}
 	
 	#header_menu li a:hover{
@@ -433,11 +432,19 @@
 	}
 	
 	#subheader_container{
-		background-color:#FAF7F7;
-		border:1px solid #ACACA5;
+		background-color:#FAFFFF;
+		/*#FAF7F7;*/
+		border-bottom:1px solid #ACACA5;
+		
 		box-shadow:0px .5px 2px #ACACA5;
+		box-shadow: inset 0 1 px white, 0 1px 3px rgba(34, 25, 25, 0.4);
+		-webkit-bow-shadow:inset 0 1px 
+			white, 0 1px 3px 
+			rgba(34, 25, 25, 0.4);
 		height:35px;
+		width:100%;
 		text-align:center;
+		overflow:hidden;
 		}
 		
 	#left_balance{
@@ -449,7 +456,34 @@
 		
 	#subheader_menu{
 		position:relative;
+		font-family:"helvetica neue",arial,sans-serif;
+		text-shadow: 0 1px white;
+		color: #8C7E7E;
+		top:5px;
 	}
+	
+	#subheader_menu a{
+		position:relative;
+		font-family:"helvetica neue",arial,sans-serif;
+		text-shadow: 0 1px white;
+		color: #524D4d;
+		margin-top:5px;
+	}
+	
+	#uncat_text{
+		font-weight:bold;
+		border-left:1px solid black;
+		padding-left:2px;
+	
+	}
+	
+	#school_text{
+		font-weight:bold;
+		border-right:1px solid black;
+		padding-right:1px;
+		margin-right:2px;
+		
+		}
 	
 	
 	#upload_button_container{
@@ -525,7 +559,7 @@
 		border: 2px dashed rgba(34, 25, 25, 0.4);
 		-webkit-border-radius:5px;
 		margin-left:10px;
-		margin-bottom:25px;
+		margin-bottom:20px;
 		overflow:hidden;
 		
 	}
@@ -595,6 +629,33 @@
 		box-shadow:0 1px 3px rgba(34, 25, 25, 0.4);
 		-webkit-box-shadow:0 1px 3px rgba(34, 25, 25, 0.4);
 	} 
+	#berkeley_feed_display{
+		position:relative;
+		/*display:inline-block;*/
+		background-color:white; /*#87D2FF;*/
+		/*border-radius:5px;*/
+		width:125px;
+		margin:10px;
+		padding:10px;
+		border: 3px solid yellow;
+		outline: 2px solid blue;
+		box-shadow:0 1px 3px rgba(34, 25, 25, 0.4);
+		-webkit-box-shadow:0 1px 3px rgba(34, 25, 25, 0.4);
+	} 
+	#dartmouth_feed_display{
+	position:relative;
+		/*display:inline-block;*/
+		background-color:white; /*#87D2FF;*/
+		/*border-radius:5px;*/
+		width:125px;
+		margin:10px;
+		padding:10px;
+		outline: 2px solid green;
+		box-shadow:0 1px 3px rgba(34, 25, 25, 0.4);
+		-webkit-box-shadow:0 1px 3px rgba(34, 25, 25, 0.4);
+	
+	
+	}
 	
 	#delete_album_container{
 	position:relative;
@@ -668,6 +729,7 @@
 		margin-left:185px;
 		background-color:#F5F3F4;
 		padding-top:5px;
+		margin-top:.5px;
 	}
 	
 	#uncat_header_container{
@@ -691,6 +753,14 @@
 	#uncat_header_text_addition{
 		font-size:10px;
 		color:#221919;
+	}
+	
+	#school_subheader_link:hover{
+		text-decoration:underline;
+	}
+	
+	#uncategorized_subheader_link:hover{
+		text-decoration:underline;
 	}
 
 	
@@ -823,12 +893,22 @@
 	
 	}*/
 	
+	#landing_image_container{
+		background-image:url(../images/berkeley.jpg);
+		background-size:100% 600px;
+		background-repeat:no-repeat;
+	
+	
+	
+	}
+	
 	#header_wrapper{
-	position:relative;
-	height:250px;
-	background-color:#F5F3F4;
-	background-image: url(../images/grey.png);
-	background-repeat:repeat;
+		position:relative;
+		height:250px;
+		/*background-color:#F5F3F4;
+		background-image: url(../images/grey.png);
+		background-repeat:repeat;*/
+		overflow:visible;
 	}
 	
 	#landing_logo{
@@ -851,12 +931,19 @@
 		position:relative;
 		top:75px;
 		right:195px;
-		width:auto;
 		height:100px;
 		font-size:40px;
 		line-height:40px;
+		color:#FEFEF2;
+		
 	
 	}
+	
+	/*#cal_text{
+		font-family:"Rage Italic", serif;
+		font-size:40px;
+	
+	}*/
 	
 	#registration_container{
 		/*padding-top:15px
@@ -871,99 +958,160 @@
 		-webkit-box-shadow:0 1px 3px rgba(34, 25, 25, 0.4);
 		*/
 		position:relative;
-		left:200px;
-		bottom:170px;
+		left:40%;
+		bottom:190px;
 		height:auto;
-		width:auto;
+		width:50%;
 		z-index:500;
+		overflow:hidden;
+		margin-bottom:50px;
 	}
 	
 	.fb_login_button {
 	-moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
 	box-shadow:inset 0px 1px 0px 0px #97c4fe;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
-	background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
-	background-color:#3d94f6;
-	-moz-border-radius:9px;
-	-webkit-border-radius:9px;
-	border-radius:9px;
-	border:1px solid #337fed;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #296fba), color-stop(1, #183666) );
+	background:-moz-linear-gradient( center top, #296fba 5%, #183666 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#296fba', endColorstr='#183666');
+	background-color:#296fba;
+	border:1px solid #123766;
 	display:inline-block;
 	color:#ffffff;
 	font-family:arial;
-	font-size:19px;
+	font-size:23px;
 	font-weight:bold;
-	padding:11px 24px;
+	padding:16px 24px;
 	text-decoration:none;
-	text-shadow:1px 1px 0px #1570cd;
+	text-shadow:1px 1px 0px #1d65ad;
 }.fb_login_button:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
-	background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
-	background-color:#1e62d0;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #183666), color-stop(1, #296fba) );
+	background:-moz-linear-gradient( center top, #183666 5%, #296fba 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#183666', endColorstr='#296fba');
+	background-color:#183666;
+
 }.fb_login_button:active {
 	position:relative;
 	top:1px;
 }
+
+	#landing_middle_container{
+		position:relative;
+		height:200px;
+		width:100%;
+		padding-bottom:150px;
+	
+}
 	
 	#video_wrapper{
 		position:relative;
-		width:100%;
-		background-color:white;
+		right:-170px;
+		margin-top:20px;
 	}
 	#video_container{
 		position:relative;
-		width:960px;
-		height:68px;
-		background-color:white; /*#F5F3F4;*/
-		text-align:center;
-		margin-left:auto;
-		margin-right:auto;
 	}
 	#video_pic{
 		float:left;
 	}
 	#video_text{
 		float:left;
-		margin-left:25px;
-		margin-top:15px;
 	}
+	
+	#video_text a{
+		float:left;
+		color:white;
+	}
+	
+	#landing_meme_container{
+		text-align:center;
+		position:relative;
+		width:100%;
+		max-height:500px;
+		overflow:hidden;
+		height:auto;
+	}
+	
+	.landing_meme a{
+		width:200px;
+		margin:5px;
+	}
+	
+	#more_memes_container{
+		height:54px;
+		width:204px;
+	}
+	
+	.more_memes {
+		-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+		-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+		box-shadow:inset 0px 1px 0px 0px #ffffff;
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+		background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+		background-color:#ededed;
+		border:1px solid #dcdcdc;
+		display:inline-block;
+		color:#777777;
+		font-family:arial;
+		font-size:23px;
+		font-weight:bold;
+		padding:16px 24px;
+		text-decoration:none;
+		text-shadow:1px 1px 0px #ffffff;
+}.more_memes:hover {
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+		background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+		background-color:#dfdfdf;
+}.more_memes:active {
+		position:relative;
+		top:1px;
+}
+	
 	#footer_wrapper{
-		margin-top:50px;
-		height:500px;
+		padding-top:10px;
 		background-color: #F5F3F4;
 		border-top:1px solid #F5F3F4;
 		box-shadow: 0px -3px #F5F3F4;
+		background-image: url(../images/grey.png);
+		background-repeat:repeat;
+		height:100%;
 	}
-	#footer_text{
-		font-size:20px;
-		color:#837A71;
+	#value_prop2_text{
+		font-size:30px;
+		color:#333;
+		padding-bottom:20px;
+		/*color:#837A71;*/
 	}
 	#footer_prop_container1{
 		margin-left:auto;
 		margin-right:auto;
 		padding:10px; 
 		display:inline-block;
-		margin-top:25px;
+		/*margin-top:60px;*/
+		margin-top:15px;
 		width:auto;
 		overflow:hidden;
 		text-align:center;
+		background-color:rgba(255,255,255,0.6);
+		filter:alpha(opacity=60);
+		border-radius:5px;
+		padding: 0 15px 10px 15px;
 	}
 	#share_story{
-	float:left;
-	margin-right:30px;
-	width:220px;
+		float:left;
+		margin-right:30px;
+		width:220px;
 	}
 	#exclusively_private{
-	float:left;
-	margin-right:30px;
-	width:220px;
+		float:left;
+		margin-right:30px;
+		width:220px;
 	}
 	#recreate_experiences{
-	float:left;
-	width:220px;
+		float:left;
+		width:220px;
 	}
 	
 	#value_pic1{
@@ -990,7 +1138,7 @@
 	}
 	
 	#value_text1{
-		color:#837A71;
+		/*color:#837A71;*/
 	}
 	
 	
@@ -1000,7 +1148,7 @@
 	}
 	
 	#value_text2{
-		color:#837A71;
+		/*color:#837A71;*/
 	}
 	
 	#value_text3 h3{
@@ -1009,7 +1157,7 @@
 	}
 	
 	#value_text3{
-		color:#837A71;
+		/*color:#837A71;*/
 	}
 	
 	

@@ -254,12 +254,14 @@ def index_uncat(request):
                 {'memes': memes, 'experiences': experiences, 'addexperienceform': addexperienceform,
                     'imageform' : imageform, 'user_school': user_school,
                     'is_uncat':1,
+                    'is_album':0,
 
                     # temp
                     'dartmouth': dartmouth,
                     'berkeley': berkeley,
                     },
                 # is_uncat tells profile.html if user is on uncat page or feed page
+                # is_album says if album
                 RequestContext(request))
 
 # Upload a Meme 
@@ -609,7 +611,37 @@ def show_experience(request, pk,
         # Grabs memes within the experience albums
             # reverse order: newest memes are on top
         memes = reversed(experiences.meme_set.all())
-        return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes, 'autocomplete_form':autocomplete_form})
+
+
+
+        ### TEMP ###
+        berkeley = 0 
+        dartmouth = 0 
+        ## end ##
+
+        ###### BRING UP SCHOOL FEED ######
+        # Find College Meme user w/ school memes
+        college_meme_obj = User.objects.get(username = 'College Memes')
+
+        user_school = request.user.get_profile().school
+        if user_school == 'Berkeley':
+            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) 
+
+            #temp
+            berkeley = drag_list_experience
+        elif user_school == 'Dartmouth': 
+            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj) 
+
+
+            #temp
+            dartmouth = drag_list_experience
+        else:
+            drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
+
+        school_feed_memes = drag_list_experience.meme_set.all().order_by('-id')
+
+        return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes, 'autocomplete_form':autocomplete_form,
+            'user_school': user_school, 'is_album':1})
 
     # User does not have access to the experiences album
     except:

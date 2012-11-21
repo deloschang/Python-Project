@@ -19,169 +19,202 @@
     {% endif %} -->
 
 <div id="landing_wrapper">
-  <div id="header_wrapper">
-    <span id="landing_logo">	
-      <a href="/" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif" /></a>
-    </span>
-    <div id="landing_header_container">
-      <span id="login_button_container">
-		<span id="login_button">
-			<a class="btn btn-mini btn-info" href="/login">Log In</a>
+	<div id="landing_image_container">
+	  <div id="header_wrapper">
+		<span id="landing_logo">	
+		  <a href="/" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif" /></a>
 		</span>
-	</span>
-	  <div id="prop_text_container">  
-        {# Value Proposition Line #} 
-          The best way to <div></div>share experiences
-      </div>
-    </div>
-    <div id="registration_container">
-		<a href="{% url socialauth_begin 'facebook' %}" class="fb_login_button">Login with Facebook</a>
-	</div>
-	<!--
-      {% if form.errors %}
-        <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
-      {% endif %}
-      
-      {# For invited users #}
-      {% if invitation_key %}
-        <h4>
-          <div><span class="text-info">{{ invitee_object.from_user }}</span> invited you to the album: "<span class="text-info">{{ invitee_object.from_user_album }}</span>"</div>
-        </h4>
-      {% endif %}
-      
-      <form method="post" action="" id="registrationForm" class="wide">
-      {% csrf_token %}
-
-        {% if not invitee_object.to_user_email %}
-          <p>
-            <!--<label for="id_username">Full Name:</label>-->
-			<!--
-            {% if form.username.errors %}
-              <p class="errors">{{ form.username.errors.as_text }}</p>
-            {% endif %}
-            <div class="control-group">
-              <div class="controls">
-                {{ form.username }}
-              </div>
-            </div>
-          </p>
-        {% else %}
-          <p>
-            <label for="id_email"><span class="text-success">{{ invitee_object.to_user_email }}</span></label>
-              {% if form.email.errors %}
-                <p class="errors">{{ form.email.errors.as_text }}</p>
-              {% endif %}
-          </p>
-        {% endif %}
-
-        {# Use prefilled email for registration #}
-        {% if not invitee_object.to_user_email %}
-          <p>
-            <!--<label for="id_email">Email:</label>-->
-			<!--
-            {% if form.email.errors %}
-              <p class="errors">{{ form.email.errors.as_text }}</p>
-            {% endif %}
-            <div class="control-group">
-              <div class="controls">
-                {{ form.email }}
-              </div>
-            </div>
-          </p>
-        {% else %}
-          <p>
-            <!--<label for="id_username">Full Name:</label>-->
-			<!--
-            {% if form.username.errors %}
-              <p class="errors">{{ form.username.errors.as_text }}</p>
-            {% endif %}
-            <div class="control-group">
-              <div class="controls">
-                {{ form.username }}
-              </div>
-            </div>
-          </p>
-        {% endif %}
-        {# end #}
-
-        <p>
-          {% if form.password1.errors %}
-            <p class="errors">{{ form.password1.errors.as_text }}</p>
-          {% endif %}
-
-          <div class="control-group">
-            <div class="controls">
-              {{ form.password1 }}
-            </div>
-          </div>
-        </p>
-        {% comment %}
-        <p>
-        <label for="id_password2">Password (type again to catch typos):</label>
-        {% if form.password2.errors %}
-          <p class="errors">{{ form.password2.errors.as_text }}</p>
-        {% endif %}
-        {{ form.password2 }}
-        </p>
-        {% endcomment %}
-		<p class="submit"><input type="submit" class="btn btn-primary" value="Join Memeja"></p>
-      </form>
-    </div>
-  </div>
--->
-</div>
-    {# Video for NLU to watch #}
-  <div id="video_wrapper">
-		<div id="video_container">
-			<div id="video_pic">
-        <a class="fancybox-media" href="http://vimeo.com/50658061"><img src="{{ STATIC_URL }}images/video_picture.png" /></a>
-		  </div>
-		  <div id="video_text">
-        <a class="fancybox-media" href="http://vimeo.com/50658061"><div class="lead">What is Memeja?</div></a>
+		<div id="landing_header_container">
+		  <span id="login_button_container">
+			<!-- Log in Button
+			<span id="login_button">
+				<a class="btn btn-mini btn-info" href="/login">Log In</a>
+			</span>
+			-->
+		</span>
+		  <div id="prop_text_container">  
+			{# Value Proposition Line View cal stories, share cal stories, recreate cal stories #} 
+			  See what cal students are saying <!-- <span id="cal_text"> Cal </span> -->
 		  </div>
 		</div>
+		<div id="registration_container">
+			<a href="{% url socialauth_begin 'facebook' %}" class="fb_login_button">Login with Facebook</a>
+			
+			<!--
+			{# Video for NLU to watch #}
+			<div id="video_wrapper">
+				<div id="video_container">
+					<div id="video_pic">
+						<a class="fancybox-media" href="http://vimeo.com/50658061"><img src="{{ STATIC_URL }}images/video_picture.png" /></a>
+					</div>
+					<div id="video_text">
+						<a class="fancybox-media" href="http://vimeo.com/50658061"><div class="lead">What is Memeja?</div></a>
+					</div>
+				</div>
+			</div>
+			-->
+		</div>
+		<!--
+		  {% if form.errors %}
+			<p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
+		  {% endif %}
+		  
+		  {# For invited users #}
+		  {% if invitation_key %}
+			<h4>
+			  <div><span class="text-info">{{ invitee_object.from_user }}</span> invited you to the album: "<span class="text-info">{{ invitee_object.from_user_album }}</span>"</div>
+			</h4>
+		  {% endif %}
+		  
+		  <form method="post" action="" id="registrationForm" class="wide">
+		  {% csrf_token %}
+
+			{% if not invitee_object.to_user_email %}
+			  <p>
+				<!--<label for="id_username">Full Name:</label>-->
+				<!--
+				{% if form.username.errors %}
+				  <p class="errors">{{ form.username.errors.as_text }}</p>
+				{% endif %}
+				<div class="control-group">
+				  <div class="controls">
+					{{ form.username }}
+				  </div>
+				</div>
+			  </p>
+			{% else %}
+			  <p>
+				<label for="id_email"><span class="text-success">{{ invitee_object.to_user_email }}</span></label>
+				  {% if form.email.errors %}
+					<p class="errors">{{ form.email.errors.as_text }}</p>
+				  {% endif %}
+			  </p>
+			{% endif %}
+
+			{# Use prefilled email for registration #}
+			{% if not invitee_object.to_user_email %}
+			  <p>
+				<!--<label for="id_email">Email:</label>-->
+				<!--
+				{% if form.email.errors %}
+				  <p class="errors">{{ form.email.errors.as_text }}</p>
+				{% endif %}
+				<div class="control-group">
+				  <div class="controls">
+					{{ form.email }}
+				  </div>
+				</div>
+			  </p>
+			{% else %}
+			  <p>
+				<!--<label for="id_username">Full Name:</label>-->
+				<!--
+				{% if form.username.errors %}
+				  <p class="errors">{{ form.username.errors.as_text }}</p>
+				{% endif %}
+				<div class="control-group">
+				  <div class="controls">
+					{{ form.username }}
+				  </div>
+				</div>
+			  </p>
+			{% endif %}
+			{# end #}
+
+			<p>
+			  {% if form.password1.errors %}
+				<p class="errors">{{ form.password1.errors.as_text }}</p>
+			  {% endif %}
+
+			  <div class="control-group">
+				<div class="controls">
+				  {{ form.password1 }}
+				</div>
+			  </div>
+			</p>
+			{% comment %}
+			<p>
+			<label for="id_password2">Password (type again to catch typos):</label>
+			{% if form.password2.errors %}
+			  <p class="errors">{{ form.password2.errors.as_text }}</p>
+			{% endif %}
+			{{ form.password2 }}
+			</p>
+			{% endcomment %}
+			<p class="submit"><input type="submit" class="btn btn-primary" value="Join Memeja"></p>
+		  </form>
+		</div>
+	  </div>
+	-->
 	</div>
-  
+
+	<div id ="landing_middle_container">
+		
+		
+		
+		<div id="footer_prop_container1">
+			<div id="value_prop2_text" style="padding-top:10px;">
+				<!--See the stories Cal students are talking about-->
+			</div>
+				<div id="share_story">
+				  <div id="value_pic1">
+					<img src="{{ STATIC_URL }}images/makememe.png" />
+				  </div>
+				  <div id="value_text1">
+					<h3>A better way of sharing</h3>
+					On Memeja, stories are told with pictures
+				  </div>
+				</div>
+
+				<div id="exclusively_private">
+				  <div id="value_pic2">
+					<img src="{{ STATIC_URL }}images/exclusively_private.png" />
+				  </div>
+				  <div id="value_text2">
+					<h3>Exclusively Private</h3>
+					Only the friends <b>you</b> invite can see your stories
+				  </div>
+				</div>
+
+				<div id="recreate_experiences">
+				  <div id="value_pic3">
+					<img src="{{ STATIC_URL }}images/recreate_together.png" />
+				  </div>
+				  <div id="value_text3">
+					<h3>See what your school is saying</h3>
+					View the Cal stories collection, add your perspective, or tell your own story
+					<!--Read your friend's stories, add your perspective, continue the storyline.-->
+				  </div>
+				</div>
+		</div>
+	</div>
+  </div>
 
 
 
 
 <div id="footer_wrapper">
-  <div id="footer_text" style="padding-top:20px;">
-    Memeja helps you relive every moment with friends:
-  </div>
-
-  <div id="footer_prop_container1">
-    <div id="share_story">
-      <div id="value_pic1">
-        <img src="{{ STATIC_URL }}images/share_experiences2.png" />
-      </div>
-      <div id="value_text1">
-        <h3>Share every story easily</h3>
-        Tired of writing your stories? Memeja helps you tell stories with memes.
-      </div>
-    </div>
-
-    <div id="exclusively_private">
-      <div id="value_pic2">
-        <img src="{{ STATIC_URL }}images/exclusively_private.png" />
-      </div>
-      <div id="value_text2">
-        <h3>Exclusively Private</h3>
-        Only the friends <b>you</b> invite can see your stories
-      </div>
-    </div>
-
-    <div id="recreate_experiences">
-      <div id="value_pic3">
-        <img src="{{ STATIC_URL }}images/recreate_together.png" />
-      </div>
-      <div id="value_text3">
-        <h3>Recreate experiences together</h3>
-        Read your friend's stories, add your perspective, continue the storyline.
-      </div>
-    </div>
-  </div>
+  <div id="landing_meme_container">
+		<span class="landing_meme">
+			<a href="/" title="nobody"><img src="{{ STATIC_URL }}images/finals.png" width="175px"  /></a>
+		</span>
+		<span class="landing_meme">
+			<a href="/" title="nobody"><img src="{{ STATIC_URL }}images/homeless.png" width="225px" /></a>
+		</span>
+		<span class="landing_meme">
+			<a href="/" title="nobody"><img src="{{ STATIC_URL }}images/yoshua.jpg" width="150px" /></a>
+		</span>
+		<span class="landing_meme">
+			<a href="/" title="nobody"><img src="{{ STATIC_URL }}images/decal.png" width="225px" /></a>
+		</span>
+		<span class="landing_meme">
+			<a href="/" title="nobody"><img src="{{ STATIC_URL }}images/51bBus.jpg" width="175px" /></a>
+		</span>
+		<span id="more_memes_container">	
+			<a href="{% url socialauth_begin 'facebook' %}" class="more_memes">More?</a>
+		</span>
+   
+   </div>
 </div>
 
 {{ standard_js }}
