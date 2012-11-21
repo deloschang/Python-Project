@@ -13,6 +13,19 @@
       closeSpeed  : 150,                       
     });
 
+    $(".fancybox-landing").fancybox({
+      padding: 0,
+
+      openEffect : 'elastic',
+      openSpeed  : 150,
+
+      closeEffect : 'elastic',
+      closeSpeed  : 150,                       
+      afterShow: function(){
+        mixpanel.track("Opened landing page image");
+      }
+    });
+
     $(document).ready(function() {
       $('.fancybox-media').fancybox({
         openEffect  : 'none',
