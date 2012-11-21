@@ -36,7 +36,7 @@ ACCESS_TOKEN = 'https://graph.facebook.com/oauth/access_token?'
 
 class FacebookBackend(OAuthBackend):
     """Facebook OAuth2 authentication backend"""
-    name = 'facebook'
+    name = 'facebook2'
     # Default extra data to store
     EXTRA_DATA = [
         ('id', 'id'),
@@ -61,7 +61,7 @@ class FacebookAuth(BaseOAuth2):
     SETTINGS_KEY_NAME = 'FACEBOOK_APP_ID'
     SETTINGS_SECRET_NAME = 'FACEBOOK_API_SECRET'
 
-    SCOPE_VAR_NAME = 'FACEBOOK_EXTENDED_PERMISSIONS'
+    SCOPE_VAR_NAME = 'FACEBOOK_EXTENDED_PERMISSIONS_SECONDSTEP'
     EXTRA_PARAMS_VAR_NAME = 'FACEBOOK_PROFILE_EXTRA_PARAMS'
 
     def user_data(self, access_token, *args, **kwargs):
@@ -193,5 +193,5 @@ def load_signed_request(signed_request, api_secret=None):
 
 # Backend definition
 BACKENDS = {
-    'facebook': FacebookAuth,
+    'facebook2': FacebookAuth,
 }

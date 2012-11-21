@@ -101,6 +101,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'email_usernames.backends.EmailOrUsernameModelBackend',
     'social_auth.backends.facebook.FacebookBackend', # social_auth
+    'social_auth.backends.facebook2.FacebookBackend', # social_auth for extended permissions
     'django.contrib.auth.backends.ModelBackend', # social_auth
 )
 
@@ -109,6 +110,8 @@ AUTHENTICATION_BACKENDS = (
 FACEBOOK_APP_ID              = '479174175436255'
 FACEBOOK_API_SECRET          = 'a0522ed8310df87c00ade91df0352cc8'
 FACEBOOK_EXTENDED_PERMISSIONS = ['email', 'user_education_history', 'user_photos', 'friends_photos']
+# second step for permission when inviting
+FACEBOOK_EXTENDED_PERMISSIONS_SECONDSTEP = ['email', 'user_education_history', 'user_photos', 'friends_photos', 'publish_stream']
 
 LOGIN_URL          = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'

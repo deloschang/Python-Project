@@ -14,10 +14,13 @@ def social_auth_user(backend, uid, user=None, *args, **kwargs):
     social_user = UserSocialAuth.get_social_auth(backend.name, uid)
     if social_user:
         if user and social_user.user != user:
-            msg = ugettext('This %(provider)s account is already in use.')
-            raise AuthAlreadyAssociated(backend, msg % {
-                'provider': backend.name
-            })
+            if social_user.provider == 'facebook2':
+                user = social_user.user
+            else:
+                msg = ugettext('This %(provider)s account is already in use.')
+                raise AuthAlreadyAssociated(backend, msg % {
+                    'provider': backend.name
+                })
         elif not user:
             user = social_user.user
     return {'social_user': social_user, 'user': user}
