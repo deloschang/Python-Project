@@ -158,31 +158,31 @@
 			</div>
 				<div id="share_story">
 				  <div id="value_pic1">
-					<img src="{{ STATIC_URL }}images/makememe.png" />
+            <img src="{{ STATIC_URL }}images/makememe.png" />
 				  </div>
 				  <div id="value_text1">
-					<h3>A better way of sharing</h3>
-					On Memeja, stories are told with pictures
+            <h3>A better way of sharing</h3>
+            On Memeja, stories are told with pictures
 				  </div>
 				</div>
 
 				<div id="exclusively_private">
 				  <div id="value_pic2">
-					<img src="{{ STATIC_URL }}images/exclusively_private.png" />
+            <img src="{{ STATIC_URL }}images/exclusively_private.png" />
 				  </div>
 				  <div id="value_text2">
-					<h3>Exclusively Private</h3>
-					Only the friends <b>you</b> invite can see your stories
-				  </div>
+            <h3>Exclusively Private</h3>
+            Only the friends <b>you</b> invite can see your stories
+            </div>
 				</div>
 
 				<div id="recreate_experiences">
 				  <div id="value_pic3">
-					<img src="{{ STATIC_URL }}images/recreate_together.png" />
+            <img src="{{ STATIC_URL }}images/recreate_together.png" />
 				  </div>
 				  <div id="value_text3">
-					<h3>See what your school is saying</h3>
-					View the Cal stories collection, add your perspective, or tell your own story
+            <h3>See what your school is saying</h3>
+            View the Cal stories collection, add your perspective, or tell your own story
 					<!--Read your friend's stories, add your perspective, continue the storyline.-->
 				  </div>
 				</div>
@@ -196,19 +196,29 @@
 <div id="footer_wrapper">
   <div id="landing_meme_container">
 		<span class="landing_meme">
-			<a href="/" title="nobody"><img src="{{ STATIC_URL }}images/finals.png" width="175px"  /></a>
+      <a class="fancybox" rel="group" href="{{ STATIC_URL }}images/finals.png">
+        <img src="{{ STATIC_URL }}images/finals.png" width="175px"/>
+      </a>
 		</span>
 		<span class="landing_meme">
-			<a href="/" title="nobody"><img src="{{ STATIC_URL }}images/homeless.png" width="225px" /></a>
+      <a class="fancybox" rel="group" href="{{ STATIC_URL }}images/homeless.png">
+        <img src="{{ STATIC_URL }}images/homeless.png" width="225px" />
+      </a>
 		</span>
 		<span class="landing_meme">
-			<a href="/" title="nobody"><img src="{{ STATIC_URL }}images/yoshua.jpg" width="150px" /></a>
+      <a class="fancybox" rel="group" href="{{ STATIC_URL }}images/yoshua.jpg">
+        <img src="{{ STATIC_URL }}images/yoshua.jpg" width="150px" />
+      </a>
 		</span>
 		<span class="landing_meme">
-			<a href="/" title="nobody"><img src="{{ STATIC_URL }}images/decal.png" width="225px" /></a>
+      <a class="fancybox" rel="group" href="{{ STATIC_URL }}images/decal.png">
+        <img src="{{ STATIC_URL }}images/decal.png" width="225px" />
+      </a>
 		</span>
 		<span class="landing_meme">
-			<a href="/" title="nobody"><img src="{{ STATIC_URL }}images/51bBus.jpg" width="175px" /></a>
+      <a class="fancybox" rel="group" href="{{ STATIC_URL }}images/51bBus.jpg">
+        <img src="{{ STATIC_URL }}images/51bBus.jpg" width="175px" />
+      </a>
 		</span>
 		<span id="more_memes_container">	
 			<a href="{% url socialauth_begin 'facebook' %}" class="more_memes">More?</a>
