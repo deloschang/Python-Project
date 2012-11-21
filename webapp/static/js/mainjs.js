@@ -266,6 +266,7 @@
 
   // Tutorial JS 
   $('#start_me').live('click', function(){
+    mixpanel.track("Clicked LetsStart button tutorial");
     $('#top_instruction').fadeOut('medium', function(){
       $('#lower_instruction').html('Name a friend you share experiences with').attr('class', 'lead');
       $('#start_me').hide();
