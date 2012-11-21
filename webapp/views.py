@@ -444,8 +444,8 @@ def helloworld(request):
          #not first time login ANYMORE
 
         #####test ###
-        #request.user.get_profile().is_first_login = False
-        #request.user.get_profile().save()
+        request.user.get_profile().is_first_login = False
+        request.user.get_profile().save()
 
         # Check which school they are from package import module
         school = request.user.get_profile().school 
