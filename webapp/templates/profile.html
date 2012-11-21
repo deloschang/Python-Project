@@ -47,7 +47,6 @@
         </div>
       </form>
     </div>
-  {% if experiences %}
    
 	<span id="albums_display_container">
 
@@ -84,6 +83,7 @@
 
 
 
+  {% if experiences %}
     {% for experiences in experiences %}
 		  <div id ="albums_display">
         <div id="delete_album_container">
@@ -116,6 +116,7 @@
 	  </span>
     {% endfor %}
   {% else %}
+    </span>
     No experience albums
   {% endif %}
   </div>
