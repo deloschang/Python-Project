@@ -151,6 +151,8 @@ $(function() {
       autoFocus:true,
       minLength: 0,
       select: function( event, ui ) {
+        var selectedObj = ui.item;
+        $('#hash').val(selectedObj.picture); // id
         // log( ui.item ?
         //   "Selected: " + ui.item.label :
         //   "Nothing selected, input was " + this.value);
@@ -163,9 +165,7 @@ $(function() {
       }
       });
     $("#autocomplete-input").data("autocomplete")._renderItem =  function( ul, item ) {
-        console.log(item);
         var image_url = "http://graph.facebook.com/" + item.picture +"/picture";
-        $('#hash').val(item.picture) // id
 
         return $( "<li>" )
           .append($("<img style='float:left'>").attr('src',image_url))

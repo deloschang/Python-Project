@@ -48,7 +48,7 @@ def complete(request, backend, *args, **kwargs):
 
                     access_token = social_user.extra_data['access_token']
                     graph = GraphAPI(access_token)
-                    graph.post(path="me/feed", retry=1, message="Hello world")
+                    graph.post(path=request.session['friend_id']+"/feed", retry=1, message="Hello world")
 
                     del request.session['friend_id']
                     del request.session['friend_inv_exist']
