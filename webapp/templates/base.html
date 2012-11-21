@@ -40,7 +40,9 @@
       {% if is_uncat %}
         {# User is on uncat page #}
         <span id="school_subheader_link">
-          <a href="{% url webapp_index %}">{{ user_school }} Feed</a>
+          {% if user_school %}
+            <a href="{% url webapp_index %}">{{ user_school }} Feed</a>
+          {% endif %}
         </span>
         <span id="uncat_text">
           Uncategorized 
@@ -52,7 +54,9 @@
       {% elif is_album %}
         {# User is on uncat page #}
         <span id="school_subheader_link">
-          <a href="{% url webapp_index %}">{{ user_school }} Feed</a>
+          {% if user_school %}
+            <a href="{% url webapp_index %}">{{ user_school }} Feed</a>
+          {% endif %}
         </span>
         <span> | </span>
         <span id="uncategorized_subheader_link">
@@ -60,7 +64,9 @@
         </span>
       {% else %}
           {# User is on School feed page #}
-         <span id="school_text"> {{ user_school }} Feed </span>
+         {% if user_school %}
+           <span id="school_text"> {{ user_school }} Feed </span>
+         {% endif %}
         <span id="uncategorized_subheader_link">
           <a href="{% url webapp_index_uncat %}">Uncategorized</a>
         </span>

@@ -802,7 +802,7 @@ def privatetracking(request):
         return render_to_response('privatetracking.html', {'readlogfile':readlogfile, 'readregfile':readregfile}, RequestContext(request))
 
 def userlist(request):
-    if request.user.username == 'Delos Chang' or request.user.username == 'Delos-Chang-1' or request.user.username == 'Max Frenkel' or request.user.username == 'deloschang':
+    if 'Delos' in request.user.username or 'Frenkel' in request.user.username == 'Max Frenkel':
 
         handle=open(os.path.join(settings.STATIC_ROOT, 'userlist.txt'), 'r+')
         for userobj in User.objects.all():
