@@ -33,7 +33,7 @@
         nextClick: false,
         afterShow: function(){
           mixpanel.track("Opened Video");
-        }
+        },
         helpers : {
           media : {}
         }
