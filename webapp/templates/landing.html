@@ -210,7 +210,9 @@
 		<div class="landing_meme">
 
       <span class="landing_meme_node">
-        <img src="{{ STATIC_URL }}images/bancroftberkeleyhobo.png" width="100px" class="image_not_active"/>
+        <a href="javascript:;" class="render_image">
+          <img src="{{ STATIC_URL }}images/bancroftberkeleyhobo.png" width="100px" class="image_not_active"/>
+        </a>
         {# replace with real line #}
         <span>--------</span>
         <img src="{{ STATIC_URL }}images/homeless.png" width="100px" class="image_active"/>
@@ -233,9 +235,9 @@
       </span>
 
       {# main comic #}
-      <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/homeless.png">
-        <img src="{{ STATIC_URL }}images/homeless.png"/>
-      </a>
+        <span id="main_comic">
+          <img src="{{ STATIC_URL }}images/homeless.png"/>
+        </span>
 		</div>
 
 		<div class="landing_meme">

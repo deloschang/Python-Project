@@ -1174,8 +1174,9 @@
 
   .image_active {
     opacity:1;
-    border:
-    border: 10px solid #ACACAC;
+    padding:1px;
+    border:1px solid #021a40;
+    background-color:#ff0;
   }
 	
 	.more_memes {

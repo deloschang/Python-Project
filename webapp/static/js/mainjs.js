@@ -332,3 +332,7 @@
       console.log('Created Album');
     }
   });
+
+  $('.render_image').live('click', function(){
+    console.log($(this).closest('img'))
+  });
