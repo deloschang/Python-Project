@@ -79,8 +79,10 @@ def complete(request, backend, *args, **kwargs):
 
                     graph.post(path=request.session['friend_id']+"/feed", retry=1, message=message, picture=picture, link=link, name=name)
 
+                    import pdb;
+                    pdb.set_trace()
                     with open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), "a") as text_file:
-                        text_file.write(date[0]+'   **'+request.user.username+' invited '+request.session['friend_name']+'\n')
+                        text_file.write('   **'+request.user.username+' invited '+request.session['friend_name']+'\n')
 
                     # Invitation 
                     # key is request.session['friend_id']
