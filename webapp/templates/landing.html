@@ -60,21 +60,9 @@
 			<a href="{% url socialauth_begin 'facebook' %}" class="fb_login_button">Login with Facebook</a>
       <div class='text-info'>(It takes one click, and we will never post without your permission)</div>
       <div class="fb-facepile" data-href="http://facebook.com/memejalove" data-max-rows="1" data-width="250"></div>
-			
-			<!--
-			{# Video for NLU to watch #}
-			<div id="video_wrapper">
-				<div id="video_container">
-					<div id="video_pic">
-						<a class="fancybox-media" href="http://vimeo.com/50658061"><img src="{{ STATIC_URL }}images/video_picture.png" /></a>
-					</div>
-					<div id="video_text">
-						<a class="fancybox-media" href="http://vimeo.com/50658061"><div class="lead">What is Memeja?</div></a>
-					</div>
-				</div>
-			</div>
-			-->
 		</div>
+		
+		
 		<!--
 		  {% if form.errors %}
 			<p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
@@ -172,42 +160,52 @@
 	<div id ="landing_middle_container">
 		
 		
-		
-		<div id="footer_prop_container1">
-			<div id="value_prop2_text" style="padding-top:10px;">
-				<!--See the stories Cal students are talking about-->
-			</div>
+		<div id="footer_video_container">
+			<div id="footer_prop_container1">
+				<div id="value_prop2_text" style="padding-top:10px;">
+					<!--See the stories Cal students are talking about-->
+				</div>
 				<div id="share_story">
-				  <div id="value_pic1">
-            <img src="{{ STATIC_URL }}images/makememe.png" />
-				  </div>
-				  <div id="value_text1">
-            <h3>A better way of sharing</h3>
-            On Memeja, stories are told with pictures
-				  </div>
+					<div id="value_pic1">
+						<img src="{{ STATIC_URL }}images/makememe.png" />
+					</div>
+					<div id="value_text1">
+						<h3>A better way of sharing</h3>
+						On Memeja, stories are told with pictures
+					</div>
 				</div>
+					<div id="exclusively_private">
+					  <div id="value_pic2">
+						<img src="{{ STATIC_URL }}images/exclusively_private.png" />
+					  </div>
+					  <div id="value_text2">
+						<h3>Exclusively Private</h3>
+						Only the friends <b>you</b> invite can see your stories
+					  </div>
+					</div>
 
-				<div id="exclusively_private">
-				  <div id="value_pic2">
-            <img src="{{ STATIC_URL }}images/exclusively_private.png" />
-				  </div>
-				  <div id="value_text2">
-            <h3>Exclusively Private</h3>
-            Only the friends <b>you</b> invite can see your stories
-            </div>
-				</div>
-
-				<div id="recreate_experiences">
-				  <div id="value_pic3">
-            <img src="{{ STATIC_URL }}images/recreate_together.png" />
-				  </div>
-				  <div id="value_text3">
-            <h3>See what your school is saying</h3>
-            View the Cal stories collection, add your perspective, or tell your own story
-					<!--Read your friend's stories, add your perspective, continue the storyline.-->
-				  </div>
-				</div>
+					<div id="recreate_experiences">
+					  <div id="value_pic3">
+						<img src="{{ STATIC_URL }}images/recreate_together.png" />
+					  </div>
+					  <div id="value_text3">
+						<h3>See what your school is saying</h3>
+						View the Cal stories collection, add your perspective, or tell your own story
+						<!--Read your friend's stories, add your perspective, continue the storyline.-->
+					  </div>
+					</div>
+			</div>
+			{# Video for NLU to watch #}
+			<div id="video_container">
+						<div id="video_text">
+							<a class="fancybox-media" href="http://vimeo.com/50658061"><div class="lead">What is Memeja?</div></a>
+						</div>
+						<div id="video_pic">
+							<a class="fancybox-media" href="http://vimeo.com/50658061"><img src="{{ STATIC_URL }}images/video_picture.png" /></a>
+						</div>
+			</div>
 		</div>
+		
 	</div>
   </div>
 
@@ -218,14 +216,14 @@
   <div id="landing_meme_container">
 		<span class="landing_meme">
       <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/finals.png">
-        <img src="{{ STATIC_URL }}images/finals.png" />
+        <img src="{{ STATIC_URL }}images/finals.png" width="175px"/>
       </a>
 		</span>
-		<div class="landing_meme">
+		<span class="landing_meme">
       <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/homeless.png">
-        <img src="{{ STATIC_URL }}images/homeless.png" />
+        <img src="{{ STATIC_URL }}images/homeless.png" width="225px" />
       </a>
-		</div>
+		</span>
 		<span class="landing_meme">
       <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/yoshua.jpg">
         <img src="{{ STATIC_URL }}images/yoshua.jpg" width="150px" />
