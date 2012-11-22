@@ -269,7 +269,7 @@
     try{
       mixpanel.track("Clicked LetsStart button tutorial");
     } catch(e) {
-      console.log(e);
+      console.log('start');
     }
     $('#top_instruction').fadeOut('medium', function(){
       $('#lower_instruction').html('Name a friend you share experiences with').attr('class', 'lead');
@@ -288,10 +288,15 @@
       datatype: 'json',
       success: function(response){
         // returns json with title and id 
+        try{
+          mixpanel.track("Entered friend name");
+        } catch(e) {
+          console.log('friend name');
+        }
         $('#albums_display img').attr('id',response['id']); // change id for dragging
         $('#friend_div').fadeOut('medium', function(){
           $('#logo_tutorial').hide();
-          $('#lower_instruction').html('This is your Album!').attr('class', 'lead');
+          $('#lower_instruction').html('This is your Albusm!').attr('class', 'lead');
           $('#second_lower_instruction').fadeIn('medium', function(){
             $('#my_first_album_title').html(response['title']);
             $('#albums_display').fadeIn('slow', function(){
@@ -305,3 +310,10 @@
     return false;
   });
 
+  $('#letsinvite').live('click', function(){
+    try{
+      mixpanel.track("Invited friend");
+    } catch(e) {
+      console.log('invite friend');
+    }
+  });
