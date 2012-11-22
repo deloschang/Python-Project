@@ -4,7 +4,7 @@
   {% for memes in memes %}
     <div class="schoolmemes">
       {# add rel="group" to link through #}
-      <a class="fancybox" href="{{ MEDIA_URL }}/{{ memes.image }}">
+      <a class="fancybox fancybox.ajax" href="{% url webapp_recreate_map memes.pk %}">
         <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
       </a>
       {% if is_uncat %}

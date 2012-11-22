@@ -13,6 +13,23 @@
       closeSpeed  : 150,                       
     });
 
+    $(".fancybox-feed").fancybox({
+      maxWidth	: 800,
+      maxHeight	: 600,
+      fitToView	: false,
+      width		: '70%',
+      height		: '70%',
+      autoSize	: false,
+      closeClick: true,
+
+      openEffect : 'elastic',
+      openSpeed  : 150,
+
+      closeEffect : 'elastic',
+      closeSpeed  : 150,                       
+
+    });
+
     $(".fancybox-landing").fancybox({
       padding: 0,
 

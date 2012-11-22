@@ -766,6 +766,11 @@ def delete_meme(request, delete_meme_id=None):
             # Meme does not exist
             return render_to_response('profile/access_denied.html', RequestContext(request))
 
+def recreate_map(request, meme_id=None):
+    if meme_id:
+        return render_to_response('profile/access_denied.html', RequestContext(request))
+
+
 
 @login_required
 def delete_album(request, delete_album_id=None):
