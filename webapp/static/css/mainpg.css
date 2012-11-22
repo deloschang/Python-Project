@@ -1149,13 +1149,34 @@
 	}
 	
   .landing_meme{
+    position:relative;
     margin-bottom:20px;
+  }
+
+  .landing_meme_node{
+    position:relative;
+    right:200px;
+    top:-200px;
+  }
+
+  .landing_meme_node img{
+    vertical-align:text-top;
   }
 	
 	.landing_meme a{
 		width:200px;
 		margin:5px;
 	}
+
+  .image_not_active {
+    opacity:0.4;
+  }
+
+  .image_active {
+    opacity:1;
+    border:
+    border: 10px solid #ACACAC;
+  }
 	
 	.more_memes {
 		-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
