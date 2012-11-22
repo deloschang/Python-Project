@@ -35,9 +35,22 @@ def complete(request, backend, *args, **kwargs):
     """Authentication complete view, override this view if transaction
     management doesn't suit your needs."""
 
+
     if request.user.is_authenticated():
         social_user = request.user.social_auth.all().get(user=request.user, provider = 'facebook')
 
+        #### INVITATION TO RETURNING USER ####
+        # Everytime, you log in, check if somebody has invited you to their album!
+        # Check if the user has been invited. If so, link albums
+        try:
+            invitations = InvitationKey.objects.filter(key=social_user.uid)
+            #invitee_obj = InvitationKey.objects.get(key='641286114')
+
+            for invitee_obj in invitations:
+                invitee_obj.from_user_album.creator.add(request.user) # add user to the album then
+                invitee_obj.delete() #cleanup
+        except:
+            pass
 
         # if session exists, user is inviting FB friends
         # try checking for session 
@@ -205,13 +218,15 @@ def complete_process(request, backend, *args, **kwargs):
         messages.error(request, msg)
 
 
+    #### INVITATION TO NEW USER ####
     # Check if the user has been invited. If so, link albums
     try:
         #pass
-        invitee_obj = InvitationKey.objects.get(key=social_user.uid)
+        invitations = InvitationKey.objects.filter(key=social_user.uid)
         #invitee_obj = InvitationKey.objects.get(key='641286114')
 
-        invitee_obj.from_user_album.creator.add(request.user) # add user to the album then
+        for invitee_obj in invitations:
+            invitee_obj.from_user_album.creator.add(request.user) # add user to the album then
     except:
         pass
 

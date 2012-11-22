@@ -4,7 +4,7 @@
 
 {% if linked_experiences %}
   <div>
-    <h1>Your Shared albums with {{ linked_user.username }}</h1>
+    <div class="lead">Shared Albums with {{ linked_user.username }}</div>
     {% for experiences in linked_experiences %}
       <ul>
         <li><a href="{% url webapp.views.show_experience experiences.pk %}">{{ experiences.title }}</a></li>
@@ -17,7 +17,7 @@
 {% endif %}
 
 {# Show all the memes #}
-<h1>All your shared memes</h1>
+<div class="lead">Shared Memes</div>
 
 <div id="album_list">
   {% for experiences in linked_experiences %}

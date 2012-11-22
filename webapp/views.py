@@ -439,7 +439,8 @@ def macromeme_publish(request):
 def helloworld(request):
     ### bring back when done testing ###
 
-    if request.user.get_profile().is_first_login or request.user.email == 'yc@gmail.com' or request.user.email == 'lol.i.laugh@gmail.com':
+    #if request.user.get_profile().is_first_login or request.user.email == 'yc@gmail.com' or request.user.email == 'lol.i.laugh@gmail.com':
+    if True:
     #if not request.user.get_profile().is_first_login:
          #not first time login ANYMORE
 
@@ -455,11 +456,25 @@ def helloworld(request):
         ### not implemented yet
         #first_friend_experience.creator.add(request.user) 
 
+
+        ## check if user was invited ##
+        try:
+            ### doesnt work
+            invitations = InvitationKey.objects.filter(key=request.user.social_auth.all().get(user=request.user).uid)
+
+            for invitee_obj in invitations:
+                invitee_obj.delete() #cleanup
+
+        except:
+            invitations = 0
+
         #import pdb; pdb.set_trace()
         access_token = request.user.social_auth.get(user = request.user, provider = 'facebook').extra_data['access_token']
         return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form,
             'access_token':access_token,
+            'invitations':invitations,
             }, RequestContext(request))
+    import pdb; pdb.set_trace()
 
 #def testpost(request):
     #from facepy import GraphAPI
