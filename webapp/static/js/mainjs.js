@@ -301,7 +301,7 @@
         $('#albums_display img').attr('id',response['id']); // change id for dragging
         $('#friend_div').fadeOut('medium', function(){
           $('#logo_tutorial').hide();
-          $('#lower_instruction').html('This is your Albusm!').attr('class', 'lead');
+          $('#lower_instruction').html('This is your Album!').attr('class', 'lead');
           $('#second_lower_instruction').fadeIn('medium', function(){
             $('#my_first_album_title').html(response['title']);
             $('#albums_display').fadeIn('slow', function(){

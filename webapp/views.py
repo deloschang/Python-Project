@@ -450,7 +450,6 @@ def helloworld(request):
 
         # Check which school they are from package import module
         school = request.user.get_profile().school 
-        friend_form = TutorialNameForm()
 
         # Add user to the album
         ### not implemented yet
@@ -470,7 +469,7 @@ def helloworld(request):
 
         #import pdb; pdb.set_trace()
         access_token = request.user.social_auth.get(user = request.user, provider = 'facebook').extra_data['access_token']
-        return render_to_response('user/tutorial.html', {'school':school, 'friend_form':friend_form,
+        return render_to_response('user/tutorial.html', {'school':school, 
             'access_token':access_token,
             'invitations':invitations,
             }, RequestContext(request))
