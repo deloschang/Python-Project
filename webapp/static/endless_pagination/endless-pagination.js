@@ -59,6 +59,11 @@
                         container.remove();
                         // Increase the number of loaded pages.
                         loadedPages += 1;
+                        try{
+                          mixpanel.track("Paginated Feed Memes",{'page':loadedPages});
+                        } catch(e) {
+                          console.log('Paginated Feed Memes '+loadedPages);
+                        }
                         // Fire onCompleted callback.
                         settings.onCompleted.apply(
                             html_link, [context, fragment]);

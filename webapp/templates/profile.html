@@ -36,7 +36,7 @@
   <div id="create_album_container">
       <div id="create_album">
         <div id="input_field_container">
-        <form action="{% url add_experience %}" method="post">
+        <form action="{% url add_experience %}" id="create_album_form" method="post">
           <!--<input placeholder="Album Title" size="6">-->
           {% if addexperienceform.title.errors %}
             <p class="errors">Please correct the errors below: {{ addexperienceform.non_field_errors }}</p>

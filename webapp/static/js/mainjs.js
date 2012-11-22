@@ -221,6 +221,11 @@
         'csrfmiddlewaretoken': csrftoken  
       }, function(data){
           console.log(data);
+          try{
+            mixpanel.track("Dragged in Meme", {"meme": DRAGSOURCE.id, "album":this.id});
+          } catch(e) {
+            console.log("Dragged in Meme, {meme: "+DRAGSOURCE.id+", album:"+this.id+"}")
+          }
       });
     }
   });
@@ -315,5 +320,13 @@
       mixpanel.track("Invited friend");
     } catch(e) {
       console.log('invite friend');
+    }
+  });
+
+  $('#create_album_form').submit(function(){
+    try{
+      mixpanel.track("Created Album");
+    } catch(e) {
+      console.log('Created Album');
     }
   });
