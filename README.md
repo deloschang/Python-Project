@@ -1,6 +1,5 @@
-Memeja-Loves-Python
+Python Project
 ===================
 
-Repo to migrate Memeja from PHP to Django
-
+Python repo
 
