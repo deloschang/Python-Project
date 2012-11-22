@@ -17,6 +17,13 @@ from social_auth.decorators import dsa_view
 from invitation.models import InvitationKeyManager, InvitationKey
 
 
+# for private tracking
+from datetime import datetime
+import os
+from django.conf import settings
+
+
+
 DEFAULT_REDIRECT = setting('SOCIAL_AUTH_LOGIN_REDIRECT_URL',
                            setting('LOGIN_REDIRECT_URL'))
 LOGIN_ERROR_URL = setting('LOGIN_ERROR_URL', setting('LOGIN_URL'))
@@ -71,6 +78,9 @@ def complete(request, backend, *args, **kwargs):
                     name = 'See it here'
 
                     graph.post(path=request.session['friend_id']+"/feed", retry=1, message=message, picture=picture, link=link, name=name)
+
+                    with open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), "a") as text_file:
+                        text_file.write(date[0]+'   **'+request.user.username+' invited '+request.session['friend_name']+'\n')
 
                     # Invitation 
                     # key is request.session['friend_id']
