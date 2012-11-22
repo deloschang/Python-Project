@@ -766,9 +766,20 @@ def delete_meme(request, delete_meme_id=None):
             # Meme does not exist
             return render_to_response('profile/access_denied.html', RequestContext(request))
 
+# view called when user clicks a meme on the feed to see the node.
 def recreate_map(request, meme_id=None):
     if meme_id:
-        return render_to_response('profile/access_denied.html', RequestContext(request))
+        # Query for the meme
+        try:
+            selected_meme = Meme.objects.get(pk=meme_id)
+        except:
+            # Something went wrong!
+            return render_to_response('profile/access_denied.html', RequestContext(request))
+
+        return render_to_response('meme/meme_node_map.html',
+                {'selected_meme':selected_meme
+                    },
+                RequestContext(request))
 
 
 
