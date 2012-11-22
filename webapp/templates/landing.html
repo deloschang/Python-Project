@@ -205,10 +205,10 @@
 
 
   <div class="lead">
-    See what students are making on Memeja
+    See what Cal students are making 
   </div>
 		<div class="landing_meme">
-
+     <!-- 
       <span class="landing_meme_node">
         <a href="javascript:;" class="render_image">
           <img src="{{ STATIC_URL }}images/bancroftberkeleyhobo.png" width="100px" class="image_not_active"/>
@@ -243,6 +243,7 @@
           </a>
         </span>
       </span>
+!-->
 
       {# main comic #}
         <span id="main_comic">
@@ -251,28 +252,24 @@
 		</div>
 
 		<div class="landing_meme">
-      <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/finals.png">
-        <img src="{{ STATIC_URL }}images/finals.png" />
-      </a>
+      <img src="{{ STATIC_URL }}images/yoshua.jpg" />
 		</div>
 		<div class="landing_meme">
-      <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/yoshua.jpg">
-        <img src="{{ STATIC_URL }}images/yoshua.jpg" />
-      </a>
+      <img src="{{ STATIC_URL }}images/decal.png" />
 		</div>
 		<div class="landing_meme">
-      <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/decal.png">
-        <img src="{{ STATIC_URL }}images/decal.png" />
-      </a>
+      <img src="{{ STATIC_URL }}images/dwinelledump.png" />
 		</div>
 		<div class="landing_meme">
-      <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/51bBus.jpg">
-        <img src="{{ STATIC_URL }}images/51bBus.jpg" />
-      </a>
+      <img src="{{ STATIC_URL }}images/architecturememe.png" />
+		</div>
+		<div class="landing_meme">
+      <img src="{{ STATIC_URL }}images/yoshuastory.png" />
 		</div>
 		<div>	
-      <span class="lead">Please login to see more</span>
-			<div>
+      <span class="lead" > See more Cal stories</span>
+      <div style="margin-bottom:15px;"></div>
+      <div>
         <a href="{% url socialauth_begin 'facebook' %}" class="fb_login_button">Login with Facebook</a>
         <div class='text-info'>(It takes one click, and we will never post without your permission)</div>
 			</div>

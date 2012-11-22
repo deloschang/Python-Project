@@ -338,6 +338,5 @@
     $('img', this).attr('class','image_active');
 
     var imgSrcVal = $('img', this).attr("src"); // grab img source
-    console.log(imgSrcVal);
     $('img','#main_comic').attr('src', imgSrcVal);
   });
