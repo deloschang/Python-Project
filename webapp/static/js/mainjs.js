@@ -318,6 +318,7 @@
   $('#letsinvite').live('click', function(){
     try{
       mixpanel.track("Invited friend");
+      console.log("invited");
     } catch(e) {
       console.log('invite friend');
     }
@@ -326,6 +327,7 @@
   $('#create_album_form').submit(function(){
     try{
       mixpanel.track("Created Album");
+      console.log("album created");
     } catch(e) {
       console.log('Created Album');
     }
