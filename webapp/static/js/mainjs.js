@@ -334,5 +334,8 @@
   });
 
   $('.render_image').live('click', function(){
-    console.log($(this).closest('img'))
+    $('.image_active').attr('class','image_not_active'); // change to inactive
+    $('img', this).attr('class','image_active');
+    var imgSrcVal = $('img', this).attr("src"); // grab img source
+    console.log(imgSrcVal);
   });
