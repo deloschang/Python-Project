@@ -1148,23 +1148,13 @@
 		
 	}
 	
-	#landing_meme_container{
-		text-align:center;
-		position:relative;
-		width:100%;
-		max-height:500px;
-		overflow:hidden;
-		height:auto;
-	}
+  .landing_meme{
+    margin-bottom:20px;
+  }
 	
 	.landing_meme a{
 		width:200px;
 		margin:5px;
-	}
-	
-	#more_memes_container{
-		height:54px;
-		width:204px;
 	}
 	
 	.more_memes {

@@ -10,14 +10,6 @@
     </script>
 {% endblock %}
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=320238601417173";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 
 {% block header %}
@@ -212,39 +204,38 @@
 
 
 
-<div id="footer_wrapper">
-  <div id="landing_meme_container">
-		<span class="landing_meme">
+		<div class="landing_meme">
       <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/finals.png">
-        <img src="{{ STATIC_URL }}images/finals.png" width="175px"/>
+        <img src="{{ STATIC_URL }}images/finals.png" />
       </a>
-		</span>
-		<span class="landing_meme">
+		</div>
+		<div class="landing_meme">
       <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/homeless.png">
-        <img src="{{ STATIC_URL }}images/homeless.png" width="225px" />
+        <img src="{{ STATIC_URL }}images/homeless.png"/>
       </a>
-		</span>
-		<span class="landing_meme">
+		</div>
+		<div class="landing_meme">
       <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/yoshua.jpg">
-        <img src="{{ STATIC_URL }}images/yoshua.jpg" width="150px" />
+        <img src="{{ STATIC_URL }}images/yoshua.jpg" />
       </a>
-		</span>
-		<span class="landing_meme">
+		</div>
+		<div class="landing_meme">
       <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/decal.png">
-        <img src="{{ STATIC_URL }}images/decal.png" width="225px" />
+        <img src="{{ STATIC_URL }}images/decal.png" />
       </a>
-		</span>
-		<span class="landing_meme">
+		</div>
+		<div class="landing_meme">
       <a class="fancybox-landing" rel="group" href="{{ STATIC_URL }}images/51bBus.jpg">
-        <img src="{{ STATIC_URL }}images/51bBus.jpg" width="175px" />
+        <img src="{{ STATIC_URL }}images/51bBus.jpg" />
       </a>
-		</span>
-		<span id="more_memes_container">	
-			<a href="{% url socialauth_begin 'facebook' %}" class="more_memes">More?</a>
-		</span>
-   
-   </div>
-</div>
+		</div>
+		<div>	
+      <span class="lead">Please login to see more</span>
+			<div>
+        <a href="{% url socialauth_begin 'facebook' %}" class="fb_login_button">Login with Facebook</a>
+        <div class='text-info'>(It takes one click, and we will never post without your permission)</div>
+			</div>
+		</div>
 
 {{ standard_js }}
 
