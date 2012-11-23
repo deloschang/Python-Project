@@ -25,7 +25,7 @@
   height:800px;
   width:1500px;
   position:absolute;
-  top:7%;
+  top:100px;
   left:50%;
   margin-left: -760px;
   border: 1px solid #ACACAC;
@@ -316,6 +316,7 @@
 		min-width:768px;
 		margin-left:auto;
 		margin-right:auto;
+		left:50%;
 	   
 	}
 	
@@ -387,17 +388,22 @@
 		}
 	
 	
-	/* 2 master */
+	/* Base master */
+	
+	#intro_logo_container{
+		text-align:center;
+		width:100%;
+	}
+	
 	
 	#intro_logo {
-		position:relative;
+		position:absolute;
 		width:130px;
-		float:left;
 		left:0px;
-		top: -2px;
 		display:block;
 		padding:1px;
-		top:-11px;
+		left:50%;
+		margin-left:-65px;
 	}
 	
 	#header_container{
@@ -410,6 +416,7 @@
 		/*border:1px solid #ACACA5;
 		box-shadow:0px .5px 2px #ACACA5;*/
 		padding-top:10px;
+		text-align:center;
 	}
 	
 	#header_menu_container{
@@ -417,6 +424,12 @@
 		padding: 2.5px;
 		padding-bottom:10px;
 	}
+	#header_menu{
+		text-align:center;
+	
+	
+	}
+	
 	#header_menu li{
 		float:right;
 		display:inline;
@@ -447,7 +460,6 @@
 		background-color:#FAFFFF;
 		/*#FAF7F7;*/
 		border-bottom:1px solid #ACACA5;
-		
 		box-shadow:0px .5px 2px #ACACA5;
 		box-shadow: inset 0 1 px white, 0 1px 3px rgba(34, 25, 25, 0.4);
 		-webkit-bow-shadow:inset 0 1px 
@@ -472,6 +484,7 @@
 		text-shadow: 0 1px white;
 		color: #8C7E7E;
 		top:5px;
+		
 	}
 	
 	#subheader_menu a{
@@ -519,7 +532,7 @@
 	margin:5px;	
 	float:right;} */
 	
-	/* 21 master */
+	/* Profile master */
 	
 
 	
@@ -751,7 +764,6 @@
 	
 	
 	#uncat_container{
-		float:left;
 		margin-left:185px;
 		background-color:#F5F3F4;
 		padding-top:5px;
@@ -776,9 +788,10 @@
 		font-family:"helvetica neu", arial, sans-serif;
 	}
 	
-	#uncat_header_text_addition{
+	.uncat_header_text_addition{
 		font-size:10px;
 		color:#221919;
+		font-weight:normal;
 	}
 	
 	#school_subheader_link:hover{
@@ -810,8 +823,16 @@
 	
 	}
 	
+	#school_feed_memes img{
+		padding:25px 30px 25px 30px;
+		background-color:white;
+		border-radius:10px;
 	
-	/*5-4 master */
+	
+	}
+	
+	
+	/*Exprerience display master */
 	#overall_album_container{
 		border: 0 1px 1px 1px solid #ACACA5;
 		box-shadow:0 0 10px #ACACA5;
@@ -1222,7 +1243,15 @@
 		/*color:#837A71;*/
 	}
 	
+	/* Create Master */
 	
+	
+	#flashContent{
+		position:absolute;
+		top:200px;
+	
+	
+	}
 	
 	
 	/*End*/

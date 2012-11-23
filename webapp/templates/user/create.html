@@ -3,6 +3,8 @@
 
 {% extends 'base.html' %}
 
+{% block feeduncatstrip %}
+{% endblock %}
 {% block content %}
   
   <body>
@@ -46,16 +48,19 @@
       </script>
 
       <br>
-      <div id="flashContent">
-        <p>
-          to view this page ensure that adobe flash player version 11.2.0 or greater is installed. 
-        </p>
-        <script type="text/javascript"> 
-          var pagehost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
-          document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
-                         + pagehost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='get adobe flash player' /></a>" ); 
-        </script> 
-      </div>
+      
+	  <div id="flash_container">
+		  <div id="flashContent">
+			<p>
+			  to view this page ensure that adobe flash player version 11.2.0 or greater is installed. 
+			</p>
+			<script type="text/javascript"> 
+			  var pagehost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+			  document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
+							 + pagehost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='get adobe flash player' /></a>" ); 
+			</script> 
+		  </div>
+	  </div>
     </body>
 
 {% endblock %}
