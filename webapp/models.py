@@ -28,12 +28,18 @@ class Meme(models.Model):
     source_content = models.ImageField(upload_to='images/%Y/%m%d', null=True)
 
     creator = models.ForeignKey(User, null=True, blank=True)
-    # many-to-many relationship with the experiences
 
+    # many-to-many relationship with the experiences
     e = models.ManyToManyField(Experiences, blank=True)
     #created = models.DateTimeField(auto_now_add=True)
 
-    
+    #### RECREATION ####
+    # perspectives linked together
+    meme_horizontal = models.ManyToManyField('self', blank=True, null=True)
+
+    # plotlines linked together
+    meme_vertical = models.OneToOneField('self', blank=True, null=True)
+
     # for macromeme generator
     type = models.CharField(max_length=60, blank=True)
     #thumb = models.CharField(max_length=60, blank=True)  # path to relative path

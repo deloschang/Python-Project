@@ -14,13 +14,13 @@
     });
 
     $(".fancybox-feed").fancybox({
-      maxWidth	: 800,
+      maxWidth	: 1200,
       maxHeight	: 600,
       fitToView	: false,
       width		: '70%',
       height		: '70%',
       autoSize	: false,
-      closeClick: true,
+      closeClick: false,
 
       openEffect : 'elastic',
       openSpeed  : 150,
