@@ -768,6 +768,11 @@ def delete_meme(request, delete_meme_id=None):
 
 # view called when user clicks a meme on the feed to see the node.
 def recreate_map(request, meme_id=None):
+    import pdb;
+    pdb.set_trace()
+    if request.method == 'POST':
+        return HttpResponse('dog');
+
     if meme_id:
         # Query for the meme
         try:

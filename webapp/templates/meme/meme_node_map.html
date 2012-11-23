@@ -45,13 +45,36 @@
 </div>
 
 <script>
-  $('.render_image').live('click', function(){
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
+$('.render_image').live('click', function(){
     $('.image_active').attr('class','image_not_active'); // change to inactive
     $('img', this).attr('class','image_active');
 
     var imgSrcVal = $('img', this).attr("src"); // grab img source
     console.log(imgSrcVal)
     $('img','#main_comic').attr('src', imgSrcVal);
+    
+    var csrftoken = getCookie('csrftoken');
+    $.post('/recreate_map/128/', function(data){
+        console.log(data);
+    });
   });
+
+  
 </script>
 
