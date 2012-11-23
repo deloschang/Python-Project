@@ -768,8 +768,6 @@ def delete_meme(request, delete_meme_id=None):
 
 # view called when user clicks a meme on the feed to see the node.
 def recreate_map(request, meme_id=None):
-    #import pdb;
-    #pdb.set_trace()
 
     # User clicked a meme while Fancybox was open (a node)
     if request.method == 'POST':
@@ -777,23 +775,27 @@ def recreate_map(request, meme_id=None):
 
         selected_meme = Meme.objects.get(pk=meme_id)
 
+        # sanitize to see if it came from original perspective
         if meme_active_id in selected_meme.meme_horizontal.all():
             return render_to_response('meme/meme_node_map_load.html',
                     {'selected_meme':selected_meme
                         },
                     RequestContext(request))
 
+    # User clicked a meme on feed to open 
     if meme_id:
         # Query for the meme
         try:
-            # sanitize the meme_id to see if it came from the original perspective ? 
             selected_meme = Meme.objects.get(pk=meme_id)
         except:
             # Something went wrong!
             return render_to_response('500.html', RequestContext(request))
 
+        uncat_memes = reversed(Meme.objects.filter(creator = request.user, e = None))
+
         return render_to_response('meme/meme_node_map.html',
-                {'selected_meme':selected_meme
+                {'selected_meme':selected_meme,
+                'uncat_memes': uncat_memes,
                     },
                 RequestContext(request))
 

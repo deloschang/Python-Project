@@ -15,6 +15,8 @@
 {% endif %}
 
 
+
+{# Why render this again and again with AJAX? Better to simply render this once earlier and not change position #}
 <div>
   Meme Horizontal
 </div>
@@ -59,4 +61,15 @@
 
 <div class="main_comic" style="">
   <img src="{{ MEDIA_URL }}/{{ selected_meme.image }}" id="{{ selected_meme.pk }}"/>
+</div>
+
+<br><br><br>
+
+<div>
+  Uncategorized
+</div>
+<div>
+  {% for uncat_meme in uncat_memes %}
+    <img src="{{ MEDIA_URL }}/{{ uncat_meme.image }}" width='75' id="{{ uncat_meme.pk }}"/>
+  {% endfor %}
 </div>
