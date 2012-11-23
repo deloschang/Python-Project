@@ -1,3 +1,20 @@
+{# plotline before #}
+{% if selected_meme.meme %}
+<div>
+  Meme Plotline Before
+</div>
+<div style="">
+  <div>
+    <a href="javascript:;" class="render_image" style="float:left;" >
+      <img src="{{ MEDIA_URL }}/{{ selected_meme.meme.image }}" width='50' class="image_not_active" id="{{ selected_meme.meme.pk }}" />
+    </a>
+  </div>
+</div>
+
+  <br><br><br>
+{% endif %}
+
+
 <div>
   Meme Horizontal
 </div>
@@ -17,12 +34,14 @@
 
   {# remove when Max designs #}
   <br><br><br>
+
+
+{% if selected_meme.meme_vertical %}
 <div>
   Meme Vertical
 </div>
 
 <div style="">
-{% if selected_meme.meme_vertical %}
   <div>
     <a href="javascript:;" class="render_image" style="float:left;" >
       <img src="{{ MEDIA_URL }}/{{ selected_meme.meme_vertical.image }}" width='50' class="image_not_active" id="{{ selected_meme.meme_vertical.pk }}" />
