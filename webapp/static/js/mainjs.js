@@ -353,10 +353,25 @@
     }
   });
 
-  $('.render_image').live('click', function(){
+  //$('.render_image').live('click', function(){
+    //$('.image_active').attr('class','image_not_active'); // change to inactive
+    //$('img', this).attr('class','image_active');
+
+    //var imgSrcVal = $('img', this).attr("src"); // grab img source
+    //$('img','#main_comic').attr('src', imgSrcVal);
+  //});
+
+// Script for Recreation Nodes
+$('.render_image').live('click', function(){
     $('.image_active').attr('class','image_not_active'); // change to inactive
     $('img', this).attr('class','image_active');
 
-    var imgSrcVal = $('img', this).attr("src"); // grab img source
-    $('img','#main_comic').attr('src', imgSrcVal);
+    var meme_active_id = $('.image_active').attr('id');
+    var meme_id = $('img', this).attr('id');
+    
+    $.post('/recreate_map/'+meme_id+'/', {
+      'meme_active_id':meme_active_id
+    }, function(data){
+      $('#big_container').html(data);
+    });
   });
