@@ -768,14 +768,25 @@ def delete_meme(request, delete_meme_id=None):
 
 # view called when user clicks a meme on the feed to see the node.
 def recreate_map(request, meme_id=None):
-    import pdb;
-    pdb.set_trace()
+    #import pdb;
+    #pdb.set_trace()
+
+    # User clicked a meme while Fancybox was open (a node)
     if request.method == 'POST':
-        return HttpResponse('dog');
+        meme_active_id = strip_tags(request.POST['meme_active_id'])
+
+        selected_meme = Meme.objects.get(pk=meme_id)
+
+        if meme_active_id in selected_meme.meme_horizontal.all():
+            return render_to_response('meme/meme_node_map.html',
+                    {'selected_meme':selected_meme
+                        },
+                    RequestContext(request))
 
     if meme_id:
         # Query for the meme
         try:
+            # sanitize the meme_id to see if it came from the original perspective ? 
             selected_meme = Meme.objects.get(pk=meme_id)
         except:
             # Something went wrong!
