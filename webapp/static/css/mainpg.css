@@ -536,10 +536,10 @@
 	
 
 	
-	#albums_container_placeholder{
-		position:relative;
-		width:180px;
-		height:auto;
+  #albums_container_placeholder{
+    position:relative;
+    width:180px;
+    height:auto;
 		
 	
 	
@@ -764,7 +764,6 @@
 	
 	
 	#uncat_container{
-		margin-left:185px;
 		background-color:#F5F3F4;
 		padding-top:5px;
 		margin-top:.5px;
