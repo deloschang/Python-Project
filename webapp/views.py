@@ -790,7 +790,7 @@ def recreate_map(request, meme_id=None):
             selected_meme = Meme.objects.get(pk=meme_id)
         except:
             # Something went wrong!
-            return render_to_response('profile/access_denied.html', RequestContext(request))
+            return render_to_response('500.html', RequestContext(request))
 
         return render_to_response('meme/meme_node_map.html',
                 {'selected_meme':selected_meme

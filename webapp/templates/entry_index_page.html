@@ -3,6 +3,21 @@
 {% paginate memes %}
   {% for memes in memes %}
     <div class="schoolmemes">
+      {# another perspective that opens up #}
+      {% if memes.meme_horizontal.all.0.image %}
+        <div style="float:left;">
+          {% with memes.meme_horizontal.all|first as first_object %}
+            <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map first_object.pk %}">
+          {% endwith %}
+            <img src="{{ MEDIA_URL }}/{{ memes.meme_horizontal.all.0.image }}" width='200' id="{{ memes.meme_horizontal.all.0.pk }}"/>
+            <div>
+              {{ memes.meme_horizontal.count }} Perspectives
+            </div>
+          </a>
+        </div>
+        {# end another perspective #}
+      {% endif %}
+
       {# add rel="group" to link through #}
       <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map memes.pk %}">
         <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
@@ -13,6 +28,8 @@
       {% if memes.top_caption %}
         <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
       {% endif %}
+
+
     </div>
     <div style="margin-bottom:30px;"></div>
   {% endfor %}
