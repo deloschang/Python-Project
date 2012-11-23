@@ -778,7 +778,7 @@ def recreate_map(request, meme_id=None):
         selected_meme = Meme.objects.get(pk=meme_id)
 
         if meme_active_id in selected_meme.meme_horizontal.all():
-            return render_to_response('meme/meme_node_map.html',
+            return render_to_response('meme/meme_node_map_load.html',
                     {'selected_meme':selected_meme
                         },
                     RequestContext(request))

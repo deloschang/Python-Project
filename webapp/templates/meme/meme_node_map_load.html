@@ -1,0 +1,43 @@
+<div>
+  Meme Horizontal
+</div>
+<div style="float:left;">
+  {# selected meme #}
+  <a href="javascript:;" class="render_image" >
+    <img src="{{ MEDIA_URL }}/{{ selected_meme.image }}" width='50' id="{{ selected_meme.pk }}" class="image_active"/>
+  </a>
+</div>
+{% for meme in selected_meme.meme_horizontal.all %}
+  <div style="float:left;">
+    <a href="javascript:;" class="render_image" >
+      <img src="{{ MEDIA_URL }}/{{ meme.image }}" width='50' id="{{ meme.pk }}" class="image_not_active"/>
+    </a>
+  </div>
+{% endfor %}
+
+  {# remove when Max designs #}
+  <br><br><br>
+<div>
+  Meme Vertical
+</div>
+
+<div style="">
+{% if selected_meme.meme_vertical %}
+  <div>
+    <a href="javascript:;" class="render_image" style="float:left;" >
+      <img src="{{ MEDIA_URL }}/{{ selected_meme.meme_vertical.image }}" width='50' class="image_not_active" id="{{ selected_meme.meme_vertical.pk }}" />
+    </a>
+  </div>
+{% endif %}
+<div>
+
+
+  {# remove when Max designs #}
+  <br><br>
+<div>
+  Selected Meme
+</div>
+
+<div class="main_comic" style="">
+  <img src="{{ MEDIA_URL }}/{{ selected_meme.image }}" id="{{ selected_meme.pk }}"/>
+</div>
