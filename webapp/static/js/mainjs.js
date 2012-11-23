@@ -20,13 +20,13 @@
       width		: '70%',
       height		: '70%',
       autoSize	: false,
-      closeClick: false,
 
       openEffect : 'elastic',
       openSpeed  : 150,
 
       closeEffect : 'elastic',
       closeSpeed  : 150,                       
+      close : [27],
 
     });
 
