@@ -65,10 +65,12 @@
 
 <br><br><br>
 
-<div>
-  Uncategorized
-</div>
-<div>
+
+{# begin uncategorized container for dragging #}
+<div style="position:fixed; z-index:500; top:0; width:1000px;">
+  <div style="color: white;">
+    Uncategorized
+  </div>
   {% for uncat_meme in uncat_memes %}
     <img src="{{ MEDIA_URL }}/{{ uncat_meme.image }}" width='75' id="{{ uncat_meme.pk }}"/>
   {% endfor %}
