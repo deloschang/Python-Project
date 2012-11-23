@@ -4,7 +4,7 @@
   {% for memes in memes %}
     <div class="schoolmemes">
       {# another perspective that opens up #}
-      {% if memes.meme_horizontal.all.0.image %}
+      {% if memes.meme_horizontal.all %}
         <div style="float:left;">
           {% for perspective in memes.meme_horizontal.all %}
             <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map perspective.pk %}">
@@ -28,9 +28,8 @@
       {% if memes.top_caption %}
         <div><a href="/create/?meme={{ memes.pk }}">Remix</a></div>
       {% endif %}
-
       {# next plotline in the story #}
-      <span>
+      <div>
         {% if memes.meme_vertical %}
           <div style="float:left;">
               <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map memes.meme_vertical.pk %}">
@@ -43,6 +42,10 @@
           {# end another perspective #}
         {% endif %}
       </div>
+
+      {# REMOVE WHEN YOU DESIGN #}
+      <br><br><br><br>
+
 
     </div>
     <div style="margin-bottom:30px;"></div>
