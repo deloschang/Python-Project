@@ -467,9 +467,25 @@ def helloworld(request):
         except:
             invitations = 0
 
+
+        # Grab college memes
+        college_meme_obj = User.objects.get(username = 'College Memes')
+
+        if request.user.get_profile().school == 'Berkeley':
+            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_UCB_ALBUM, creator = college_meme_obj) # hardcoded UCB meme album, made by user 'Berkeley Memes'(?)
+        elif request.user.get_profile().school == 'Dartmouth': 
+            drag_list_experience = Experiences.objects.get(title = settings.SCHOOL_DARTMOUTH_ALBUM, creator = college_meme_obj) # hardcoded Dartmouth album
+        elif request.user.get_profile().school == 'Y Combinator':
+            drag_list_experience = Experiences.objects.get(title = 'YCombinator', creator = college_meme_obj) # for YC memes
+        else:
+            drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
+
+        drag_list_memes = reversed(drag_list_experience.meme_set.all())
+
         #import pdb; pdb.set_trace()
         access_token = request.user.social_auth.get(user = request.user, provider = 'facebook').extra_data['access_token']
         return render_to_response('user/tutorial.html', {'school':school, 
+            'memes':drag_list_memes,
             'access_token':access_token,
             'invitations':invitations,
             }, RequestContext(request))

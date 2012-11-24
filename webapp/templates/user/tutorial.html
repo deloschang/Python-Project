@@ -10,7 +10,7 @@
   {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li>
+          <li{% if message.tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li>
         {% endfor %}
     </ul>
   {% endif %}
@@ -49,13 +49,52 @@
     <div id="albums_display" style="display:none; margin-bottom:25px; margin-left:175px;">
       <div id="my_first_album_title" class="experiences_list" style="font-size:18px; padding-bottom:15px;"></div>
       <img src="{{ STATIC_URL }}/images/memeja_logo.png" class="experiences_list" id="{{ first_friend_experience.pk }}" style="height:100px;"/>
+
     </div>
 
     <div>
+      <p class="lead" id="letsinvite">Try drag-n-dropping stories into your album. </p>
+      <a href="" id="letsinvitehelper" style="display:none;" class="btn btn-success">Yes, I'm done <i class="icon-white icon-ok"></i></a>
       {# facebook2 asks for 2nd step permission with publish_stream #}
-      <a href="{% url socialauth_begin 'facebook2' %}" id="letsinvite" class="btn btn-success" style="display:none; margin-bottom:5px;">Invite my friend <i class="icon-white icon-ok"></i></a>
-      <div class="text-info" id="letsinvitehelper" style="display:none;">We will never post without your permission.</div>
+      <!--<span style="display:none;">-->
+        <!--<a href="{% url socialauth_begin 'facebook2' %}" id="letsinvite" class="btn btn-success" style="display:none; margin-bottom:5px;">Invite my friend <i class="icon-white icon-ok"></i></a>-->
+        <!--<div class="text-info" id="letsinvitehelper" style="display:none;">We will never post without your permission.</div>-->
+      <!--</span>-->
     </div>
+
+		<div id="uncategorized">
+      <div id="album_list">
+        {% for memes in memes %}
+          <div class="uncatmemes">
+            <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
+              <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+		</div>
+<style>
+
+  .uncatmemes{
+    display: block;
+    float: left;
+    padding:5px;
+    margin: 5px;
+    border:0 0 1px solid #ACACA5;
+    box-shadow:0 0 10px #ACACA5;
+    background-color:white;
+    /*width: 420px;*/
+    /*margin: 5px;*/
+  }
+
+  .uncatmemes img{
+    display: block;
+    width: 200px;
+
+  }
+
+
+</style>
 
     {# if invited, show why #}
     <p>

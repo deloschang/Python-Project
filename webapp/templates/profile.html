@@ -23,14 +23,6 @@
       <div style ="clear:both;"></div>
     </div>
 
-  {# Insert flash message when inviting friend #}
-  {% if messages %}
-  <ul class="messages">
-      {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-  </ul>
-  {% endif %}
     
   {# Displays existing experiences #}
   <div id="create_album_container">
@@ -129,6 +121,15 @@
 
 
  <div id="uncat_container">
+  {# Insert flash message when inviting friend #}
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
   {% if memes and is_uncat %}
         <div id="uncategorized">
           {% for memes in memes %}

@@ -423,16 +423,3 @@ $('.render_image').live('click', function(){
     });
   });
 
-  // for dragging recreation memes
-  // begin
-  //function handleDragStart(e){
-    //this.style.opacity = '0.4';
-    //this.classList.add('over');
-
-    //// set source object 
-    //DRAGSOURCE = this;
-
-    //e.dataTransfer.effectAllowed = 'copy'; 
-    //e.dataTransfer.setData('Text', this.innerHTML);
-  //}
-
