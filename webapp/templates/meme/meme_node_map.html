@@ -63,6 +63,8 @@
     if (e.stopPropagation)
       e.stopPropagation();
 
+    console.log($(this).attr('class'));
+
     // link specific meme to disappear 
     if (RECREATE_DRAGSOURCE){
       $(RECREATE_DRAGSOURCE).remove(); 
@@ -76,15 +78,24 @@
         // id not passed from masonry
         type:'horizontal',
         meme:RECREATE_DRAGSOURCE.id,
-        //album:this.id,
+        horizontal_node:$(this).attr('class'),
         'csrfmiddlewaretoken': csrftoken  
+
+        // need to grab which meme this is...... for the horizontal structure
+        // also the uncat meme doesn't disappear!! because it hasnt been added to the album
+
+        //album:this.id,
       }, function(data){
-          console.log(data);
-          try{
-            mixpanel.track("Dragged in Meme", {"meme": RECREATE_DRAGSOURCE.id, "album":this.id});
-          } catch(e) {
-            console.log("Dragged in Meme, {meme: "+RECREATE_DRAGSOURCE.id+", album:"+this.id+"}")
-          }
+        if (data == 'success'){
+          console.log(RECREATE_DRAGSOURCE);
+          $('#add_meme_horizontal').html(RECREATE_DRAGSOURCE);
+        }
+        console.log(data);
+        try{
+          mixpanel.track("Dragged in Meme", {"meme": RECREATE_DRAGSOURCE.id, "meme_node":$(this).attr('class')});
+        } catch(e) {
+          console.log("Dragged in Meme, {meme: "+RECREATE_DRAGSOURCE.id+", meme_node:"+$(this).attr('class')+"}")
+        }
       });
     }
   });

@@ -688,10 +688,23 @@ def linked_username(request, linked_username):
 def add_meme_to_node(request):
     if request.is_ajax():
         if request.method == 'POST':
-            dragged_meme_id = request.POST['meme']
-            add_type = request.POST['type']
+            dragged_meme_id = strip_tags(request.POST['meme'])
+            add_type = strip_tags(request.POST['type'])
+            meme_node = strip_tags(request.POST['horizontal_node'])
             
-            return HttpResponse(add_type)
+            if add_type == 'horizontal':
+                selected_meme = Meme.objects.get(pk=meme_node) # meme that was opened in fancybox
+                dragged_meme_obj = Meme.objects.get(pk=dragged_meme_id) # meme that was dragged from uncat
+
+                # first add connections to every permutation in the link
+                for node in selected_meme.meme_horizontal.all():
+                    node.meme_horizontal.add(dragged_meme_obj)
+
+                # add connection to original
+                selected_meme.meme_horizontal.add(dragged_meme_obj) 
+
+                return HttpResponse('success')
+
 
 # drag meme into album and update server
 @login_required
