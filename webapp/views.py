@@ -683,6 +683,16 @@ def linked_username(request, linked_username):
         #return HttpResponseRedirect(reverse('webapp_index'))
 
 
+# drag meme into the node and update server
+@login_required
+def add_meme_to_node(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            dragged_meme_id = request.POST['meme']
+            add_type = request.POST['type']
+            
+            return HttpResponse(add_type)
+
 # drag meme into album and update server
 @login_required
 def meme_in_album(request):

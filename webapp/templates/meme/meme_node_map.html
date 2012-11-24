@@ -64,25 +64,26 @@
       e.stopPropagation();
 
     // link specific meme to disappear 
-    if (DRAGSOURCE){
-      $(DRAGSOURCE).remove(); 
+    if (RECREATE_DRAGSOURCE){
+      $(RECREATE_DRAGSOURCE).remove(); 
     
       var csrftoken = getCookie('csrftoken');
 
       // AJAX call to add meme into album - server side 
-      $.post('/meme_in_album/', {
-        
+      $.post('/add_meme_to_node/', {
+
         // figure out better way to retrieve id
-          // id not passed from masonry
-        meme:DRAGSOURCE.id,
-        album:this.id,
+        // id not passed from masonry
+        type:'horizontal',
+        meme:RECREATE_DRAGSOURCE.id,
+        //album:this.id,
         'csrfmiddlewaretoken': csrftoken  
       }, function(data){
           console.log(data);
           try{
-            mixpanel.track("Dragged in Meme", {"meme": DRAGSOURCE.id, "album":this.id});
+            mixpanel.track("Dragged in Meme", {"meme": RECREATE_DRAGSOURCE.id, "album":this.id});
           } catch(e) {
-            console.log("Dragged in Meme, {meme: "+DRAGSOURCE.id+", album:"+this.id+"}")
+            console.log("Dragged in Meme, {meme: "+RECREATE_DRAGSOURCE.id+", album:"+this.id+"}")
           }
       });
     }
