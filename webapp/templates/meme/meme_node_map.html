@@ -5,6 +5,18 @@
 </div>
 
 <script>
+  function recreate_handleDragStart(e){
+    this.style.opacity = '0.4';
+    this.classList.add('over');
+    $('#add_meme_horizontal').show();
+
+    // set source object 
+    RECREATE_DRAGSOURCE = this;
+
+    e.dataTransfer.effectAllowed = 'copy'; 
+    e.dataTransfer.setData('Text', this.innerHTML);
+  }
+
   function recreate_handleDragEnd(e) {
     // this/e.target is the source node.
 
@@ -16,19 +28,6 @@
     $('#add_meme_horizontal').hide();
   }
 
-  function recreate_handleDragStart(e){
-    this.style.opacity = '0.4';
-    this.classList.add('over');
-    $('#add_meme_horizontal').show();
-
-
-    // set source object 
-    DRAGSOURCE = this;
-
-    //$('#albums_display').attr('class', 'over');
-    e.dataTransfer.effectAllowed = 'copy'; 
-    e.dataTransfer.setData('Text', this.innerHTML);
-  }
 
   var recreate_cols = document.querySelectorAll('#uncat_recreate_container .uncat_recreate_memes img');
   console.log('col'+recreate_cols);
@@ -40,15 +39,53 @@
 
 
   // drop source
-  var bin = document.querySelectorAll('.experiences_list');
+  var recreate_bin = document.querySelectorAll('#add_meme_horizontal');
 
   // when image dragged over album 
-  addEvent(bin, 'dragover', function(e){
+  addEvent(recreate_bin, 'dragover', function(e){
     if (e.preventDefault)
       e.preventDefault();
 
     e.dataTransfer.dropEffect = 'copy';
     return false;
+  });
+
+  addEvent(recreate_bin, 'dragenter', function(e){
+    if (e.preventDefault)
+      e.preventDefault();
+
+    //DRAGSOURCE.classList.remove('over');
+    return false;
+  });
+
+  // when uncat image dropped into add button 
+  addEvent(recreate_bin, 'drop', function(e) {
+    if (e.stopPropagation)
+      e.stopPropagation();
+
+    // link specific meme to disappear 
+    if (DRAGSOURCE){
+      $(DRAGSOURCE).remove(); 
+    
+      var csrftoken = getCookie('csrftoken');
+
+      // AJAX call to add meme into album - server side 
+      $.post('/meme_in_album/', {
+        
+        // figure out better way to retrieve id
+          // id not passed from masonry
+        meme:DRAGSOURCE.id,
+        album:this.id,
+        'csrfmiddlewaretoken': csrftoken  
+      }, function(data){
+          console.log(data);
+          try{
+            mixpanel.track("Dragged in Meme", {"meme": DRAGSOURCE.id, "album":this.id});
+          } catch(e) {
+            console.log("Dragged in Meme, {meme: "+DRAGSOURCE.id+", album:"+this.id+"}")
+          }
+      });
+    }
   });
   // recreation end
 </script>
