@@ -570,7 +570,7 @@
 		z-index:500;
     height:99%;
 	}
-  
+
   /*CSS to stick albums to top */
   #albums_container.stick{
     position:fixed;
@@ -775,9 +775,10 @@
 	
 	
 	#uncat_container{
-    padding-left:400px;
 		background-color:#F5F3F4;
 		padding-top:5px;
+    padding-left:200px;
+    margin-left:auto;
 		margin-top:.5px;
 	}
 	

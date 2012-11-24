@@ -62,15 +62,20 @@
       <!--</span>-->
     </div>
 
-		<div id="tutorial_meme_container" style="display:none;">
-      {% for memes in memes %}
-        <div class="uncatmemesbreak" style="margin-bottom:5px;">
-          <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
-            <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}" />
-          </a>
-        </div>
-      {% endfor %}
-		</div>
+
+		<!--<div id="tutorial_meme_container" style="display:none;">-->
+      <div class="arrow_box" style="display:none; width:100px; height:75px; position:fixed; top:300px; right:220px; z-index:1000">
+        <h3 class="text_in_arrow">Drag us</h3>
+      </div>
+      <div id="tutorial_meme_container" style="display:none;" >
+        {% for memes in memes %}
+          <div class="uncatmemesbreak" style="margin-bottom:5px;">
+            <a class="fancybox" rel="group" href="{{ MEDIA_URL }}/{{ memes.image }}">
+              <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}" />
+            </a>
+          </div>
+        {% endfor %}
+      </div>
 <style>
 
   .uncatmemes{
@@ -91,6 +96,45 @@
 
   }
 
+  .text_in_arrow{
+    color: white;
+    text-align: center;
+    font-size: 27px;
+    line-height: 27px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+
+  .arrow_box {
+	position: relative;
+	background: #88b7d5;
+	border: 4px solid #c2e1f5;
+}
+.arrow_box:after, .arrow_box:before {
+	left: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-left-color: #88b7d5;
+	border-width: 30px;
+	top: 50%;
+	margin-top: -30px;
+}
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-left-color: #c2e1f5;
+	border-width: 36px;
+	top: 50%;
+	margin-top: -36px;
+}
 
 </style>
 

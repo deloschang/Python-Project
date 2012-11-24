@@ -197,6 +197,8 @@
 
     e.dataTransfer.effectAllowed = 'copy'; 
     e.dataTransfer.setData('Text', this.innerHTML);
+
+    $('.arrow_box').hide();
   }
 
   function handleDragOver(e) {
@@ -227,6 +229,7 @@
       col.classList.remove('over');
       col.style.opacity = '1';
     });
+    $('.arrow_box').show();
   }
 
 
@@ -378,6 +381,7 @@
             $('#my_first_album_title').html(response['title']);
             $('#albums_display').fadeIn('slow', function(){
               $('#letsinvitehelper').fadeIn('medium', function(){
+                $('.arrow_box').show();
                 $('#tutorial_meme_container').fadeIn('medium', function(){
                   $('#letsinvite').fadeIn('fast');
                 });
