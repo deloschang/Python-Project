@@ -804,9 +804,6 @@ def recreate_map(request, meme_id=None):
         else:
             uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]).exclude(id = selected_meme.id))
 
-
-
-
         return render_to_response('meme/meme_node_map.html',
                 {'selected_meme':selected_meme,
                 'uncat_memes': uncat_memes_filter,

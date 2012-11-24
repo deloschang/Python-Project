@@ -97,6 +97,9 @@ def complete(request, backend, *args, **kwargs):
                     del request.session['friend_id']
                     del request.session['friend_inv_exist']
                     del request.session['friend_name']
+
+                    # add in a message for user to know invitation completed
+                    messages.add_message(request, messages.INFO, 'You successfully invited your friend to the album!', extra_tags="text-success")
                 except:
                     return associate_complete(request, backend, *args, **kwargs)
         except:
