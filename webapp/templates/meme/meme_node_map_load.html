@@ -36,9 +36,9 @@
 
 {# placeholder - do not remove #}
 <div id="add_meme_placeholder" style="float:left;"></div>
-<div id="add_meme_horizontal" style="float:left;" class="{{ selected_meme.pk }}">
+<div id="add_meme_horizontal" style="float:left; display:none;" class="{{ selected_meme.pk }}">
   {# Add a Perspective #}
-  ADD ME (drag me here) 
+  ADD PERSPECTIVE (drag me here) 
 </div>
 
   {# remove when Max designs #}
@@ -57,8 +57,14 @@
     </a>
   </div>
 {% endif %}
-<div>
 
+{% if not selected_meme.meme_vertical %}
+<div id="add_meme_vertical" style="float:left; display:none;" class="{{ selected_meme.pk }}">
+  {# Add a Storyline #}
+  ADD NEXT STORYLINE (drag me here) 
+</div>
+<div id="add_meme_vertical_placeholder" style="float:left;"></div>
+{% endif %}
 
   {# remove when Max designs #}
   <br><br>

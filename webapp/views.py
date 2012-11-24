@@ -795,10 +795,10 @@ def recreate_map(request, meme_id=None):
 
         uncat_memes = Meme.objects.filter(creator = request.user, e = None)
         horizontal_memes = selected_meme.meme_horizontal.all()
-        uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]))
-        
+        vertical_memes = selected_meme.meme_vertical
 
-        
+        # Filter out memes already added
+        uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]).exclude(id = vertical_memes.id))
 
 
         return render_to_response('meme/meme_node_map.html',
@@ -816,9 +816,11 @@ def add_meme_to_node(request):
             add_type = strip_tags(request.POST['type'])
             meme_node = strip_tags(request.POST['horizontal_node'])
             
+            # discover obj for drag and drop
+            selected_meme = Meme.objects.get(pk=meme_node) # meme that was opened in fancybox
+            dragged_meme_obj = Meme.objects.get(pk=dragged_meme_id) # meme that was dragged from uncat
+
             if add_type == 'horizontal':
-                selected_meme = Meme.objects.get(pk=meme_node) # meme that was opened in fancybox
-                dragged_meme_obj = Meme.objects.get(pk=dragged_meme_id) # meme that was dragged from uncat
 
                 # first add connections to every permutation in the link
                 for node in selected_meme.meme_horizontal.all():
@@ -826,6 +828,13 @@ def add_meme_to_node(request):
 
                 # add connection to original
                 selected_meme.meme_horizontal.add(dragged_meme_obj) 
+
+                return HttpResponse('success')
+
+            if add_type == 'vertical':
+                # just add 1 node
+                selected_meme.meme_vertical = dragged_meme_obj
+                selected_meme.save()
 
                 return HttpResponse('success')
 

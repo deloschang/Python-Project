@@ -9,6 +9,7 @@
     this.style.opacity = '0.4';
     this.classList.add('over');
     $('#add_meme_horizontal').show();
+    $('#add_meme_vertical').show();
 
     // set source object 
     RECREATE_DRAGSOURCE = this;
@@ -25,7 +26,8 @@
       col.style.opacity = '1';
     });
 
-    //$('#add_meme_horizontal').hide();
+    $('#add_meme_horizontal').hide();
+    $('#add_meme_vertical').hide();
   }
 
 
@@ -39,6 +41,7 @@
 
   // drop source
   var recreate_bin = document.querySelectorAll('#add_meme_horizontal');
+  var recreate_vertical_bin = document.querySelectorAll('#add_meme_vertical');
 
   // when image dragged over album 
   addEvent(recreate_bin, 'dragover', function(e){
@@ -57,7 +60,7 @@
     return false;
   });
 
-  // when uncat image dropped into add button 
+  // when uncat image dropped into perspective button
   addEvent(recreate_bin, 'drop', function(e) {
     if (e.stopPropagation)
       e.stopPropagation();
@@ -75,7 +78,7 @@
         // id not passed from masonry
         type:'horizontal',
         meme:RECREATE_DRAGSOURCE.id,
-        horizontal_node:$(this).attr('class'),
+        vertical_node:$(this).attr('class'),
         'csrfmiddlewaretoken': csrftoken  
 
         // need to grab which meme this is...... for the horizontal structure
@@ -86,6 +89,61 @@
         if (data == 'success'){
           var drag_html = RECREATE_DRAGSOURCE;
           $('#add_meme_placeholder').append('<a href="javascript:;" class="render_image"><img src="'+drag_html.src+'" width="75" id="'+drag_html.id+'" </a>');
+        }
+        try{
+          mixpanel.track("Dragged in Meme", {"meme": RECREATE_DRAGSOURCE.id, "meme_node":$(this).attr('class')});
+        } catch(e) {
+          console.log("Dragged in Meme, {meme: "+RECREATE_DRAGSOURCE.id+", meme_node:"+$(this).attr('class')+"}")
+        }
+      });
+    }
+  });
+
+  ///////////// FOR NEW STORYLINES ////////////////
+  addEvent(recreate_vertical_bin, 'dragover', function(e){
+    if (e.preventDefault)
+      e.preventDefault();
+
+    e.dataTransfer.dropEffect = 'copy';
+    return false;
+  });
+
+  addEvent(recreate_vertical_bin, 'dragenter', function(e){
+    if (e.preventDefault)
+      e.preventDefault();
+
+    //DRAGSOURCE.classList.remove('over');
+    return false;
+  });
+
+  addEvent(recreate_vertical_bin, 'drop', function(e) {
+    if (e.stopPropagation)
+      e.stopPropagation();
+
+    // link specific meme to disappear 
+    if (RECREATE_DRAGSOURCE){
+      $(RECREATE_DRAGSOURCE).remove(); 
+    
+      var csrftoken = getCookie('csrftoken');
+
+      // AJAX call to add meme into album - server side 
+      $.post('/add_meme_to_node/', {
+
+        // figure out better way to retrieve id
+        // id not passed from masonry
+        type:'vertical',
+        meme:RECREATE_DRAGSOURCE.id,
+        horizontal_node:$(this).attr('class'),
+        'csrfmiddlewaretoken': csrftoken  
+
+        // need to grab which meme this is...... for the horizontal structure
+        // also the uncat meme doesn't disappear!! because it hasnt been added to the album
+
+        //album:this.id,
+      }, function(data){
+        if (data == 'success'){
+          var drag_html = RECREATE_DRAGSOURCE;
+          $('#add_meme_vertical_placeholder').append('<a href="javascript:;" class="render_image"><img src="'+drag_html.src+'" width="75" id="'+drag_html.id+'" </a>');
         }
         try{
           mixpanel.track("Dragged in Meme", {"meme": RECREATE_DRAGSOURCE.id, "meme_node":$(this).attr('class')});
