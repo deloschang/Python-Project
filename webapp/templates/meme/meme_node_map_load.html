@@ -1,7 +1,7 @@
 {# plotline before #}
 {% if selected_meme.meme_set.all %}
 <div>
-  Meme Plotline Before
+  Previous Plotline
 </div>
 <div style="">
   <div>
@@ -20,7 +20,7 @@
 
 {# Why render this again and again with AJAX? Better to simply render this once earlier and not change position #}
 <div>
-  Meme Horizontal
+  Related Perspectives
 </div>
 <div style="float:left;">
   {# selected meme #}
@@ -49,7 +49,7 @@
 
 {% if selected_meme.meme_vertical %}
 <div>
-  Meme Vertical
+  Next Plotline
 </div>
 
 <div style="">
