@@ -36,6 +36,7 @@
 
 .over {
   border: 2px dashed #000;
+  -webkit-transform:scale(0.8);-moz-transform:scale(0.8);-ms-transform:scale(0.8);-o-transform:scale(0.8);
 }
 
 

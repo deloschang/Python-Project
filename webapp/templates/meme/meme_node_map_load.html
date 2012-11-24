@@ -67,11 +67,14 @@
 
 
 {# begin uncategorized container for dragging #}
-<div style="position:fixed; z-index:500; top:0; width:1000px;">
+<div style="position:fixed; z-index:500; top:0; width:1000px;" id="uncat_recreate_container">
   <div style="color: white;">
-    Uncategorized
+    Uncategorized (Drag) 
   </div>
   {% for uncat_meme in uncat_memes %}
-    <img src="{{ MEDIA_URL }}/{{ uncat_meme.image }}" width='75' id="{{ uncat_meme.pk }}"/>
+    <span class="uncat_recreate_memes">
+      <img src="{{ MEDIA_URL }}/{{ uncat_meme.image }}" width='75' id="{{ uncat_meme.pk }}"/>
+    </span>
   {% endfor %}
 </div>
+

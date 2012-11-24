@@ -4,3 +4,25 @@
   {% include 'meme/meme_node_map_load.html' %}
 </div>
 
+<script>
+  var recreate_cols = document.querySelectorAll('#uncat_recreate_container .uncat_recreate_memes img');
+  console.log('col'+recreate_cols);
+
+  [].forEach.call(recreate_cols, function(col) {
+    col.addEventListener('dragstart', handleDragStart, false);
+    console.log(col);
+  });
+
+  // drop source
+  var bin = document.querySelectorAll('.experiences_list');
+
+  // when image dragged over album 
+  addEvent(bin, 'dragover', function(e){
+    if (e.preventDefault)
+      e.preventDefault();
+
+    e.dataTransfer.dropEffect = 'copy';
+    return false;
+  });
+  // recreation end
+</script>
