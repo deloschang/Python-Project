@@ -199,6 +199,7 @@
     e.dataTransfer.setData('Text', this.innerHTML);
 
     $('.arrow_box').hide();
+    $('.left_arrow_box').show();
   }
 
   function handleDragOver(e) {
@@ -230,6 +231,7 @@
       col.style.opacity = '1';
     });
     $('.arrow_box').show();
+    $('.left_arrow_box').hide();
   }
 
 
@@ -383,7 +385,7 @@
               $('#letsinvitehelper').fadeIn('medium', function(){
                 $('.arrow_box').show();
                 $('#tutorial_meme_container').fadeIn('medium', function(){
-                  $('#letsinvite').fadeIn('fast');
+                  $('#letsinvite').fadeIn('slow');
                 });
               });
             });
