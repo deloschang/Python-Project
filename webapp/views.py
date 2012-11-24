@@ -691,6 +691,8 @@ def add_meme_to_node(request):
             dragged_meme_id = strip_tags(request.POST['meme'])
             add_type = strip_tags(request.POST['type'])
             meme_node = strip_tags(request.POST['horizontal_node'])
+
+            return HttpResponse('success')
             
             if add_type == 'horizontal':
                 selected_meme = Meme.objects.get(pk=meme_node) # meme that was opened in fancybox
@@ -703,7 +705,7 @@ def add_meme_to_node(request):
                 # add connection to original
                 selected_meme.meme_horizontal.add(dragged_meme_obj) 
 
-                return HttpResponse('success')
+                #return HttpResponse('success')
 
 
 # drag meme into album and update server

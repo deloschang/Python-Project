@@ -25,12 +25,11 @@
       col.style.opacity = '1';
     });
 
-    $('#add_meme_horizontal').hide();
+    //$('#add_meme_horizontal').hide();
   }
 
 
   var recreate_cols = document.querySelectorAll('#uncat_recreate_container .uncat_recreate_memes img');
-  console.log('col'+recreate_cols);
 
   [].forEach.call(recreate_cols, function(col) {
     col.addEventListener('dragstart', recreate_handleDragStart, false);
@@ -63,8 +62,6 @@
     if (e.stopPropagation)
       e.stopPropagation();
 
-    console.log($(this).attr('class'));
-
     // link specific meme to disappear 
     if (RECREATE_DRAGSOURCE){
       $(RECREATE_DRAGSOURCE).remove(); 
@@ -88,7 +85,12 @@
       }, function(data){
         if (data == 'success'){
           console.log(RECREATE_DRAGSOURCE);
-          $('#add_meme_horizontal').html(RECREATE_DRAGSOURCE);
+
+          // add a new placeholder for second meme
+          // make meme clickable!!
+          $('#add_meme_placeholder').html(RECREATE_DRAGSOURCE);
+          //$('#add_meme_horizontal').prepend(RECREATE_DRAGSOURCE);
+          //$('#add_meme_horizontal').html(RECREATE_DRAGSOURCE);
         }
         console.log(data);
         try{
