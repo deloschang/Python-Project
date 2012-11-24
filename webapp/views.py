@@ -683,29 +683,6 @@ def linked_username(request, linked_username):
         #return HttpResponseRedirect(reverse('webapp_index'))
 
 
-# drag meme into the node and update server
-@login_required
-def add_meme_to_node(request):
-    if request.is_ajax():
-        if request.method == 'POST':
-            dragged_meme_id = strip_tags(request.POST['meme'])
-            add_type = strip_tags(request.POST['type'])
-            meme_node = strip_tags(request.POST['horizontal_node'])
-
-            return HttpResponse('success')
-            
-            if add_type == 'horizontal':
-                selected_meme = Meme.objects.get(pk=meme_node) # meme that was opened in fancybox
-                dragged_meme_obj = Meme.objects.get(pk=dragged_meme_id) # meme that was dragged from uncat
-
-                # first add connections to every permutation in the link
-                for node in selected_meme.meme_horizontal.all():
-                    node.meme_horizontal.add(dragged_meme_obj)
-
-                # add connection to original
-                selected_meme.meme_horizontal.add(dragged_meme_obj) 
-
-                #return HttpResponse('success')
 
 
 # drag meme into album and update server
@@ -816,13 +793,41 @@ def recreate_map(request, meme_id=None):
             # Something went wrong!
             return render_to_response('500.html', RequestContext(request))
 
-        uncat_memes = reversed(Meme.objects.filter(creator = request.user, e = None))
+        uncat_memes = Meme.objects.filter(creator = request.user, e = None)
+        horizontal_memes = selected_meme.meme_horizontal.all()
+        uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]))
+        
+
+        
+
 
         return render_to_response('meme/meme_node_map.html',
                 {'selected_meme':selected_meme,
-                'uncat_memes': uncat_memes,
+                'uncat_memes': uncat_memes_filter,
                     },
                 RequestContext(request))
+
+# drag meme into the node and update server
+@login_required
+def add_meme_to_node(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            dragged_meme_id = strip_tags(request.POST['meme'])
+            add_type = strip_tags(request.POST['type'])
+            meme_node = strip_tags(request.POST['horizontal_node'])
+            
+            if add_type == 'horizontal':
+                selected_meme = Meme.objects.get(pk=meme_node) # meme that was opened in fancybox
+                dragged_meme_obj = Meme.objects.get(pk=dragged_meme_id) # meme that was dragged from uncat
+
+                # first add connections to every permutation in the link
+                for node in selected_meme.meme_horizontal.all():
+                    node.meme_horizontal.add(dragged_meme_obj)
+
+                # add connection to original
+                selected_meme.meme_horizontal.add(dragged_meme_obj) 
+
+                return HttpResponse('success')
 
 
 

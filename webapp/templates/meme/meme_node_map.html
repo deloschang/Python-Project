@@ -84,16 +84,8 @@
         //album:this.id,
       }, function(data){
         if (data == 'success'){
-          console.log(RECREATE_DRAGSOURCE);
-
           var drag_html = RECREATE_DRAGSOURCE;
-          console.log(drag_html);
           $('#add_meme_placeholder').append('<a href="javascript:;" class="render_image"><img src="'+drag_html.src+'" width="75" id="'+drag_html.id+'" </a>');
-          //$('#add_meme_placeholder').append(RECREATE_DRAGSOURCE);
-
-          // make meme clickable!!
-          //$('#add_meme_placeholder').html(RECREATE_DRAGSOURCE);
-          //$('#add_meme_horizontal').html(RECREATE_DRAGSOURCE);
         }
         try{
           mixpanel.track("Dragged in Meme", {"meme": RECREATE_DRAGSOURCE.id, "meme_node":$(this).attr('class')});
