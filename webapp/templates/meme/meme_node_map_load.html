@@ -1,13 +1,15 @@
 {# plotline before #}
-{% if selected_meme.meme %}
+{% if selected_meme.meme_set.all %}
 <div>
   Meme Plotline Before
 </div>
 <div style="">
   <div>
-    <a href="javascript:;" class="render_image" style="float:left;" >
-      <img src="{{ MEDIA_URL }}/{{ selected_meme.meme.image }}" width='50' class="image_not_active" id="{{ selected_meme.meme.pk }}" />
-    </a>
+    {% for back_meme in selected_meme.meme_set.all %}
+      <a href="javascript:;" class="render_image" style="float:left;" >
+        <img src="{{ MEDIA_URL }}/{{ back_meme.image }}" width='50' class="image_not_active" id="{{ back_meme.pk }}" />
+      </a>
+    {% endfor %}
   </div>
 </div>
 

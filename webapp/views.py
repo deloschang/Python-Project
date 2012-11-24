@@ -794,11 +794,17 @@ def recreate_map(request, meme_id=None):
             return render_to_response('500.html', RequestContext(request))
 
         uncat_memes = Meme.objects.filter(creator = request.user, e = None)
+        
         horizontal_memes = selected_meme.meme_horizontal.all()
         vertical_memes = selected_meme.meme_vertical
 
         # Filter out memes already added
-        uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]).exclude(id = vertical_memes.id))
+        if vertical_memes:
+            uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]).exclude(id = vertical_memes.id))
+        else:
+            uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]))
+
+
 
 
         return render_to_response('meme/meme_node_map.html',
@@ -814,7 +820,7 @@ def add_meme_to_node(request):
         if request.method == 'POST':
             dragged_meme_id = strip_tags(request.POST['meme'])
             add_type = strip_tags(request.POST['type'])
-            meme_node = strip_tags(request.POST['horizontal_node'])
+            meme_node = strip_tags(request.POST['meme_node'])
             
             # discover obj for drag and drop
             selected_meme = Meme.objects.get(pk=meme_node) # meme that was opened in fancybox

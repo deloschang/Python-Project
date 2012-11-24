@@ -38,7 +38,7 @@ class Meme(models.Model):
     meme_horizontal = models.ManyToManyField('self', blank=True, null=True)
 
     # plotlines linked together
-    meme_vertical = models.OneToOneField('self', blank=True, null=True)
+    meme_vertical = models.ForeignKey('self', blank=True, null=True)
 
     # for macromeme generator
     type = models.CharField(max_length=60, blank=True)
