@@ -5,13 +5,39 @@
 </div>
 
 <script>
+  function recreate_handleDragEnd(e) {
+    // this/e.target is the source node.
+
+    [].forEach.call(recreate_cols, function (col) {
+      col.classList.remove('over');
+      col.style.opacity = '1';
+    });
+
+    $('#add_meme_horizontal').hide();
+  }
+
+  function recreate_handleDragStart(e){
+    this.style.opacity = '0.4';
+    this.classList.add('over');
+    $('#add_meme_horizontal').show();
+
+
+    // set source object 
+    DRAGSOURCE = this;
+
+    //$('#albums_display').attr('class', 'over');
+    e.dataTransfer.effectAllowed = 'copy'; 
+    e.dataTransfer.setData('Text', this.innerHTML);
+  }
+
   var recreate_cols = document.querySelectorAll('#uncat_recreate_container .uncat_recreate_memes img');
   console.log('col'+recreate_cols);
 
   [].forEach.call(recreate_cols, function(col) {
-    col.addEventListener('dragstart', handleDragStart, false);
-    console.log(col);
+    col.addEventListener('dragstart', recreate_handleDragStart, false);
+    col.addEventListener('dragend', recreate_handleDragEnd, false);
   });
+
 
   // drop source
   var bin = document.querySelectorAll('.experiences_list');

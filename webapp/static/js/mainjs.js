@@ -193,6 +193,8 @@
     // set source object 
     DRAGSOURCE = this;
 
+    //$('#albums_display').attr('class', 'over');
+
     e.dataTransfer.effectAllowed = 'copy'; 
     e.dataTransfer.setData('Text', this.innerHTML);
   }
@@ -210,13 +212,11 @@
 
   function handleDragEnter(e) {
     // this / e.target is the current hover target.
-    console.log('handleDragEnter fired');
     this.classList.add('over');
   }
 
 
   function handleDragLeave(e) {
-    console.log('handleDragLeave fired');
     this.classList.remove('over');  // this / e.target is previous target element.
   }
 
@@ -241,7 +241,6 @@
     col.addEventListener('dragstart', handleDragStart, false);
     col.addEventListener('dragenter', handleDragEnter, false);
     col.addEventListener('dragover', handleDragOver, false);
-    //col.addEventListener('dragleave', handleDragLeave, false);
     col.addEventListener('dragend', handleDragEnd, false);
   });
 
@@ -263,8 +262,7 @@
     if (e.preventDefault)
       e.preventDefault();
 
-    console.log('drag enter for album fired');
-    DRAGSOURCE.classList.remove('over');
+    //DRAGSOURCE.classList.remove('over');
     return false;
   });
 
