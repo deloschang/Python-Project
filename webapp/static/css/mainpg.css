@@ -557,8 +557,18 @@
 		overflow:scroll;
 		z-index:500;
     height:99%;
-		
-		
+	}
+
+	#tutorial_meme_container{
+    position:fixed;
+    top:40px;
+    right:0px;
+		/*max-height:624px;*/
+		/*width:180px;*/
+		padding-top:5px;
+		overflow:scroll;
+		z-index:500;
+    height:99%;
 	}
   
   /*CSS to stick albums to top */

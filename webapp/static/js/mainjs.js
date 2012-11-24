@@ -236,6 +236,11 @@
   if (cols.length == 0 ){
     var cols = document.querySelectorAll('#school_feed_memes .schoolmemes img');
   }
+  //
+  // for school feed
+  if (cols.length == 0 ){
+    var cols = document.querySelectorAll('#tutorial_meme_container .uncatmemesbreak img');
+  }
 
   [].forEach.call(cols, function(col) {
     col.addEventListener('dragstart', handleDragStart, false);
@@ -372,8 +377,11 @@
           $('#second_lower_instruction').fadeIn('medium', function(){
             $('#my_first_album_title').html(response['title']);
             $('#albums_display').fadeIn('slow', function(){
-              $('#letsinvite').fadeIn('medium');
-              $('#letsinvitehelper').fadeIn('medium');
+              $('#letsinvitehelper').fadeIn('medium', function(){
+                $('#tutorial_meme_container').fadeIn('medium', function(){
+                  $('#letsinvite').fadeIn('fast');
+                });
+              });
             });
           });
         });
