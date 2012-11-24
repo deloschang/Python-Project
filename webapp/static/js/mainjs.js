@@ -385,7 +385,7 @@
               $('#letsinvitehelper').fadeIn('medium', function(){
                 $('.arrow_box').show();
                 $('#tutorial_meme_container').fadeIn('medium', function(){
-                  $('#letsinvite').fadeIn('slow');
+                  $('#nextstep').fadeIn('slow');
                 });
               });
             });
@@ -396,13 +396,12 @@
     return false;
   });
 
-  $('#letsinvite').live('click', function(){
-    try{
-      mixpanel.track("Invited friend");
-      console.log("invited");
-    } catch(e) {
-      console.log('invite friend');
-    }
+  $('#nextstep').live('click', function(){
+    $('#letsinvitehelper').hide();
+    $('#lower_instruction').html('Share your Album');
+    $('#nextstep').fadeOut('fast', function(){
+      $('#letsinvite').fadeIn('medium');
+    });
   });
 
   $('#create_album_form').submit(function(){

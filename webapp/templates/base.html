@@ -18,9 +18,12 @@
 
   {% block header %}
     <div id="header_container">
-			<div id="intro_logo">
-			  <a href="/" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif" style="width:130px;height:40px;"/></a>
-			</div>
+
+      {% block logo %}
+        <div id="intro_logo">
+          <a href="/" title="Memeja!"><img src="{{ STATIC_URL }}images/intro_logo.gif" style="width:130px;height:40px;"/></a>
+        </div>
+      {% endblock %}
         {% if user.is_authenticated %}
         {# permanent header at top in base.html #}
           <div ="header_menu_container">
@@ -84,16 +87,18 @@
       {% endif %}
     </span>
      
-	 <div id="upload_button_container" >
-        <form action="{% url create %}" method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          {{ imageform.non_field_errors }}
-          {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
-          {{ imageform.image.errors }}
-          {{ imageform.image }}
-              <input type="submit" value="Upload" /></p>
-        </form>
-      </div>
+    {% block base_upload %}
+     <div id="upload_button_container" >
+          <form action="{% url create %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ imageform.non_field_errors }}
+            {{ imageform.docfile.label_tag }} {{ imageform.docfile.help_text }}
+            {{ imageform.image.errors }}
+            {{ imageform.image }}
+                <input type="submit" value="Upload" /></p>
+          </form>
+        </div>
+    {% endblock %}
 	  
     <div style ="clear:both;"></div>
   </div>

@@ -2,6 +2,7 @@
 
 {% block content %}
 {% block feeduncatstrip %}{% endblock %}
+{% block logo %}{% endblock %}
 <body>
 
 
@@ -56,13 +57,14 @@
 
     <div>
       <p class="lead" id="letsinvitehelper" style="display:none; margin-top:-20px;">Try drag-n-dropping stories into your album. </p>
-      <a href="" id="letsinvite" style="display:none;" class="btn btn-success">Yes, I'm done <i class="icon-white icon-ok"></i></a>
-      {# facebook2 asks for 2nd step permission with publish_stream #}
-      <!--<span style="display:none;">-->
-        <!--<a href="{% url socialauth_begin 'facebook2' %}" id="letsinvite" class="btn btn-success" style="display:none; margin-bottom:5px;">Invite my friend <i class="icon-white icon-ok"></i></a>-->
-        <!--<div class="text-info" id="letsinvitehelper" style="display:none;">We will never post without your permission.</div>-->
-      <!--</span>-->
+      <a href="javascript:;" id="nextstep" style="display:none;" class="btn btn-success">Yes, I'm done <i class="icon-white icon-ok"></i></a>
     </div>
+
+      {# facebook2 asks for 2nd step permission with publish_stream #}
+      <span style="display:none;" id="letsinvite">
+        <a href="{% url socialauth_begin 'facebook2' %}" class="btn btn-primary" style="margin-bottom:5px;">Invite my friend <i class="icon-white icon-ok"></i></a>
+        <div class="text-info">We will never post without your permission.</div>
+      </span>
 
 
 		<!--<div id="tutorial_meme_container" style="display:none;">-->
