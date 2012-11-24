@@ -800,9 +800,9 @@ def recreate_map(request, meme_id=None):
 
         # Filter out memes already added
         if vertical_memes:
-            uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]).exclude(id = vertical_memes.id))
+            uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]).exclude(id = vertical_memes.id).exclude(id = selected_meme.id))
         else:
-            uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]))
+            uncat_memes_filter = reversed(uncat_memes.exclude(id__in = [o.id for o in horizontal_memes]).exclude(id = selected_meme.id))
 
 
 
