@@ -828,7 +828,11 @@ def add_meme_to_node(request):
 
             if add_type == 'horizontal':
 
-                # first add connections to every permutation in the link
+                # first add connections to every permutation of DRAGGED MEME PERSPECTIVE
+                for node in dragged_meme_obj.meme_horizontal.all():
+                    node.meme_horizontal.add(selected_meme)
+
+                # ADD CONNECTIONS TO OPENED MEMES PERSPECTIVE
                 for node in selected_meme.meme_horizontal.all():
                     node.meme_horizontal.add(dragged_meme_obj)
 
