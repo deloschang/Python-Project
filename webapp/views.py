@@ -624,18 +624,6 @@ def show_experience(request, pk,
     try:
         experiences = request.user.experiences_set.get(pk=pk)
 
-        # Form to invite friends
-        form = form_class()
-
-        #### New implementation for autocomplete####
-        dd = {}
-        if 'q' in request.GET:
-            dd['entered'] = request.GET.get('q')
-        #initial = {'q':"\"This is an initial value,\" said O'Leary."}
-        #autocomplete_form = SearchForm(initial=initial)
-        autocomplete_form = SearchForm()
-        dd['autocomplete_form'] = autocomplete_form
-
         # Grabs memes within the experience albums
             # reverse order: newest memes are on top
         memes = reversed(experiences.meme_set.all())
@@ -668,7 +656,9 @@ def show_experience(request, pk,
 
         school_feed_memes = drag_list_experience.meme_set.all().order_by('-id')
 
-        return invite(request, success_url, form_class, template_name, extra_context={'experiences':experiences, 'memes':memes, 'autocomplete_form':autocomplete_form,
+        return invite(request, success_url, form_class, 
+                template_name, extra_context={
+                    'experiences':experiences, 'memes':memes, 
             'user_school': user_school, 'is_album':1})
 
     # User does not have access to the experiences album

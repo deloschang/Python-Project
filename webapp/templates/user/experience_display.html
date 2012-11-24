@@ -2,22 +2,6 @@
 	{% block content %}
 	{# Invite friends #}
 		<div id= "album_header_container">
-				<div id="invitation_container">
-					<!--<div id="invite_friends_email"></div>
-					<div id="invite_friends_button"></div>-->
-				  
-          <form action="{% url invitation_invite %}" method="POST">
-              {% csrf_token %}
-            
-              <table>
-				  {{ autocomplete_form }}
-				  <tr>
-					<span id="td_container"><th></th><td><input id="invite_button" type="submit" value="Invite to Album" /></td></span>
-				  </tr>
-			  </table>
-            
-          </form>
-				</div>
 			<div id="album_title_container">
 			{# Images #}
 			  <div><h2> {{ experiences.title }}</h2></div> 
