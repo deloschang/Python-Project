@@ -5,7 +5,7 @@
 	{% block content %}
 	{# Invite friends #}
     <div id="invite_container">
-      <form action="{% url webapp_from_album_invite %}" method="post" id="friend_form" class="form_search">
+      <form action="{% url webapp_from_album_invite experiences.pk %}" method="post" class="form_search">
         {% csrf_token %}
         <div class="input-append">
           <input name='friend_name' class="input-large" style="width:200px;" type="text" placeholder="Invite Friend to Album" id="autocomplete-input" />
@@ -14,6 +14,15 @@
         </div>
       </form>
     </div>
+
+  {# Insert flash message when inviting friend #}
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
 
 		<div id= "album_header_container">
 			<div id="album_title_container">

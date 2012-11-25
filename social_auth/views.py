@@ -69,6 +69,8 @@ def complete(request, backend, *args, **kwargs):
 
                     #import pdb; pdb.set_trace()
                     access_token = social_user.extra_data['access_token']
+
+                    # change in webapp_from_album_invite as well
                     graph = GraphAPI(access_token)
                     message = 'Hey '+request.session['friend_name']+'. I invited you to our private album: '+\
                             request.session['first_friend_experience'].title+' on Memeja. -'+request.user.username
@@ -83,12 +85,6 @@ def complete(request, backend, *args, **kwargs):
                         text_file.write('   **'+request.user.username+' invited '+request.session['friend_name']+'\n')
 
                     # Invitation 
-                    # key is request.session['friend_id']
-                    # from_user is request.user
-                    # from_user_album can be sent with request.session
-
-                    # Hey ['friend_name'], I invited you to my private album: ['first_friend_experience'].title    - request.user.username
-
                     invite = InvitationKey.objects.create_invitation(request.user, request.session['first_friend_experience'])
                     invite.key = request.session['friend_id'] # replace key with uid of INVITED user
                     invite.save()
