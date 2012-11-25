@@ -482,14 +482,12 @@ def helloworld(request):
 
         drag_list_memes = reversed(drag_list_experience.meme_set.all())
 
-        #import pdb; pdb.set_trace()
         access_token = request.user.social_auth.get(user = request.user, provider = 'facebook').extra_data['access_token']
         return render_to_response('user/tutorial.html', {'school':school, 
             'memes':drag_list_memes,
             'access_token':access_token,
             'invitations':invitations,
             }, RequestContext(request))
-    import pdb; pdb.set_trace()
 
 #def testpost(request):
     #from facepy import GraphAPI
@@ -665,7 +663,7 @@ def show_experience(request, pk,
 
     # User does not have access to the experiences album
     except:
-        return render_to_response('profile/access_denied.html', RequestContext(request))
+        return render_to_response('500.html', RequestContext(request))
 
 def from_album_invite(request, album_id=None):
     if request.method == 'POST':
@@ -700,7 +698,7 @@ def from_album_invite(request, album_id=None):
             link = 'http://memeja.com/login/facebook'
             name = 'See it here'
 
-            #graph.post(path=friend_id+"/feed", retry=1, message=message, picture=picture, link=link, name=name)
+            graph.post(path=friend_id+"/feed", retry=1, message=message, picture=picture, link=link, name=name)
 
             with open(os.path.join(settings.STATIC_ROOT, 'registration_track.txt'), "a") as text_file:
                 text_file.write('   **'+request.user.username+' invited '+friend_name+'\n')
@@ -716,7 +714,8 @@ def from_album_invite(request, album_id=None):
         else:
             # If not, send them to auth dialog
             ##### AUTH DIALOG #####
-            return HttpResponse('hello')
+            messages.error(request, 'Please first <a href="/login/facebook2">click to enable permissions</a>, then invite again', extra_tags='safe')
+            return HttpResponseRedirect('/%s/' % album_id)
 
 
 
