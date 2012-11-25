@@ -4,6 +4,17 @@
 
 	{% block content %}
 	{# Invite friends #}
+    <div id="invite_container">
+      <form action="{% url webapp_from_album_invite %}" method="post" id="friend_form" class="form_search">
+        {% csrf_token %}
+        <div class="input-append">
+          <input name='friend_name' class="input-large" style="width:200px;" type="text" placeholder="Invite Friend to Album" id="autocomplete-input" />
+          <input type="hidden" name='hash' id='hash' value=''/>
+          <input type="submit" class="btn btn-primary" value="Invite" />
+        </div>
+      </form>
+    </div>
+
 		<div id= "album_header_container">
 			<div id="album_title_container">
 			{# Images #}
@@ -37,4 +48,60 @@
 		</div>
 
     {{ standard_js }}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <script>
+    {# functions needs to be written inline because of access_token parameter #}
+    $(function() {
+          $( "#autocomplete-input" ).autocomplete({
+            source: function( request, response ) {
+            var url = "https://graph.facebook.com/me/friends?access_token={{ access_token }}&callback=?";
+            $.ajax({
+              url: url,
+              dataType: "jsonp",
+              data: {
+                featureClass: "P",
+                style: "full",
+                name_startsWith: request.term
+              },
+              success: function( data ) {
+                res = $.map( data.data, function( item ) {
+                  if (item.name.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
+                    return {
+                      label: item.name,
+                      value: item.name,
+                      picture: item.id
+                    }
+                  }
+                });
+                response(res);
+              }
+            });
+          },
+          autoFocus:true,
+          minLength: 0,
+          select: function( event, ui ) {
+            var selectedObj = ui.item;
+            $('#hash').val(selectedObj.picture); // id
+            // log( ui.item ?
+            //   "Selected: " + ui.item.label :
+            //   "Nothing selected, input was " + this.value);
+          },
+          open: function() {
+            $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+          },
+          close: function() {
+            $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+          }
+          });
+        $("#autocomplete-input").data("autocomplete")._renderItem =  function( ul, item ) {
+            var image_url = "http://graph.facebook.com/" + item.picture +"/picture";
+
+            return $( "<li>" )
+              .append($("<img style='float:left'>").attr('src',image_url))
+              .append( $( "<a>" ).text( item.label ) )
+              .appendTo( ul );
+        }
+        });
+    </script>
 {% endblock %}

@@ -32,14 +32,6 @@
       <form action="{% url webapp_helloworld_create %}" method="post" id="friend_form" class="form_search">
         {% csrf_token %}
         <div class="input-append">
-          {# Obsolete 
-          {% for field in friend_form %}
-            {{ field 
-
-          {% endfor %}
-          #}
-          {# test #}
-
           <input name='friend_name' class="input-large" style="width:200px;" type="text" placeholder="Friend's name" id="autocomplete-input" />
           <input type="hidden" name='hash' id='hash' value=''/>
           <input type="submit" id="createmyfirstalbum" class="btn btn-primary" value="Go!" />
@@ -81,18 +73,6 @@
         {% endfor %}
       </div>
 <style>
-
-  .uncatmemes{
-    display: block;
-    float: left;
-    padding:5px;
-    margin: 5px;
-    border:0 0 1px solid #ACACA5;
-    box-shadow:0 0 10px #ACACA5;
-    background-color:white;
-    /*width: 420px;*/
-    /*margin: 5px;*/
-  }
 
   .uncatmemesbreak img{
     display: block;

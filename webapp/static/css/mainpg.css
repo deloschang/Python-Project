@@ -1,4 +1,25 @@
 /***** Newest CSS - do not delete ****/
+
+
+  /* limits the number of people */
+   .ui-autocomplete {
+        max-height: 200px;
+        width:100px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+    } 
+    .ui-menu-item {
+      height:55px;
+    }
+    .ui-state-hover, .ui-autocomplete li:hover
+      {
+        display:none;
+      }
+
+
+
 /* for masonry */
 .uncatmemes{
   display: block;

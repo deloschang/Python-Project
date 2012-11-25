@@ -33,6 +33,10 @@ urlpatterns = patterns('webapp.views',
     (r'^welcome/hello-world/library/$', 'library'),
     (r'^welcome/hello-world/ohwhy/$', 'fb_privacy_explanation'), 
 
+    url(r'album/from_album_invite/$',
+                from_album_invite,
+                name='webapp_from_album_invite'),
+
     (r'^create/library/$', 'library'),
     (r'^create/publish/$', 'macromeme_publish'),
     (r'^create/remix/(?P<meme_id>\d+)', 'library'),

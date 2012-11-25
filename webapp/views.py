@@ -655,15 +655,42 @@ def show_experience(request, pk,
             drag_list_experience = Experiences.objects.get(title = 'General', creator = college_meme_obj) # if nothing, default to General
 
         school_feed_memes = drag_list_experience.meme_set.all().order_by('-id')
+        access_token = request.user.social_auth.get(user = request.user, provider = 'facebook').extra_data['access_token']
 
         return invite(request, success_url, form_class, 
                 template_name, extra_context={
                     'experiences':experiences, 'memes':memes, 
+                    'access_token':access_token,
             'user_school': user_school, 'is_album':1})
 
     # User does not have access to the experiences album
     except:
         return render_to_response('profile/access_denied.html', RequestContext(request))
+
+def from_album_invite(request):
+    if request.method == 'POST':
+        import pdb;
+        pdb.set_trace()
+        # Check if publish_stream permissions are set
+        social_user = request.user.social_auth.all().get(user=request.user, provider = 'facebook')
+        access_token = social_user.extra_data['access_token']
+        graph_permissions = 'https://graph.facebook.com/me/permissions?access_token='+access_token
+
+        import json;
+        from urllib2 import urlopen
+
+        permission_content = urlopen(graph_permissions).read()
+        json_content = json.loads(permission_content)
+        data = json_content['data']
+        publish_stream = data[0]['publish_stream']
+
+        if publish_stream:
+            return HttpResponse('hello')
+        # If so, invite friend
+
+        # If not, send them to auth dialog
+
+
 
 # User clicks on linked username & profile of shared albums displayed
 def linked_username(request, linked_username):
