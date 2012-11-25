@@ -7,7 +7,7 @@
       {% if memes.meme_horizontal.all %}
         <div style="float:left;">
           {% for perspective in memes.meme_horizontal.all %}
-            <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map perspective.pk %}">
+            <a class="fancybox-feed fancybox.ajax" rel="group" href="{% url webapp_recreate_map perspective.pk %}">
             <img src="{{ MEDIA_URL }}/{{ perspective.image }}" width='50' id="{{ perspective.pk }}"/>
           {% endfor %}
             <div>
@@ -19,7 +19,7 @@
       {% endif %}
 
       {# add rel="group" to link through #}
-      <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map memes.pk %}">
+      <a class="fancybox-feed fancybox.ajax" rel="group" href="{% url webapp_recreate_map memes.pk %}">
         <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
       </a>
       {% if is_uncat %}
@@ -32,7 +32,7 @@
       <div>
         {% if memes.meme_vertical %}
           <div style="float:left;">
-              <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map memes.meme_vertical.pk %}">
+              <a class="fancybox-feed fancybox.ajax" rel="group" href="{% url webapp_recreate_map memes.meme_vertical.pk %}">
               <img src="{{ MEDIA_URL }}/{{ memes.meme_vertical.image }}" width='50' id="{{ memes.meme_vertical.pk }}"/>
               <div>
                 Next Plotline
