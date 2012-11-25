@@ -655,11 +655,14 @@ def show_experience(request, pk,
         school_feed_memes = drag_list_experience.meme_set.all().order_by('-id')
         access_token = request.user.social_auth.get(user = request.user, provider = 'facebook').extra_data['access_token']
 
+        # display who was invited
+        invitees = InvitationKey.objects.filter(from_user_album=pk).distinct('key')
         return invite(request, success_url, form_class, 
                 template_name, extra_context={
                     'experiences':experiences, 'memes':memes, 
                     'access_token':access_token,
-            'user_school': user_school, 'is_album':1})
+                    'invitees':invitees,
+                    'user_school': user_school, 'is_album':1})
 
     # User does not have access to the experiences album
     except:
