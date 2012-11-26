@@ -53,7 +53,7 @@
 		<div id="album_list">
 		  {% for memes in memes %}
 			<div class="uncatmemes">
-        <a class="fancybox-feed fancybox.ajax" rel="group" href="{% url webapp_recreate_map memes.pk %}">
+        <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map memes.pk %}">
           <img src="{{ MEDIA_URL }}/{{ memes.image }}"/>
         </a>
 			  
