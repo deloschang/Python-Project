@@ -1450,10 +1450,17 @@
 	
 	#main_comic img{
 		float:right;
-		margin-right:25%;
 		
 		
 	}
+	
+	#feed_comic_entry{
+		max-height:500px;
+		max-width:500px;
+	
+	
+	}
+	
 	
 	/*End*/
 	

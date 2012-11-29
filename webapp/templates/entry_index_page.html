@@ -7,7 +7,7 @@
       {% if memes.meme_horizontal.all %}
 		<div id="additional_perspective_container">
 			<div id="additional_perspective">
-			  {% for perspective in memes.meme_horizontal.all %}
+			   {% for perspective in memes.meme_horizontal.all|slice:":2" %}
 				<a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map perspective.pk %}">
 				<img src="{{ MEDIA_URL }}/{{ perspective.image }}" width='50' id="{{ perspective.pk }}"/>
 			  {% endfor %}
@@ -21,9 +21,11 @@
       {% endif %}
 
       {# add rel="group" to link through #}
-      <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map memes.pk %}">
-        <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}" .style.minWidth='500px' />
-      </a>
+	 
+		  <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map memes.pk %}">
+			<img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}" .style.minWidth='500px' />
+		  </a>
+	  
       {% if is_uncat %}
         <span id="delete_uncat_meme"><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
       {% endif %}
