@@ -686,8 +686,9 @@ def from_album_invite(request, album_id=None):
         # 0 if no permission, 1 if yes
         publish_stream = data[0]['publish_stream']
 
+        raise Exception(data[0])
         # If so, invite friend
-        if True:
+        if publish_stream:
 
             friend_name = strip_tags(request.POST['friend_name'])
             friend_id = strip_tags(request.POST['hash'])
