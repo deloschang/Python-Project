@@ -1,83 +1,88 @@
 {# plotline before #}
-{% if selected_meme.meme_set.all %}
-<div>
-  Previous Plotline
+<div id="meme_map_container">
+	{% if selected_meme.meme_set.all %}
+	<div>
+	  Previous Plotline
+	</div>
+	<div style="">
+	  <div>
+		{% for back_meme in selected_meme.meme_set.all %}
+		  <a href="javascript:;" class="render_image" style="" >
+			<img src="{{ MEDIA_URL }}/{{ back_meme.image }}" width='50' class="image_not_active" id="{{ back_meme.pk }}" />
+		  </a>
+		{% endfor %}
+	  </div>
+	</div>
+	{% endif %}
+
+
+
+	{# Why render this again and again with AJAX? Better to simply render this once earlier and not change position #}
+	<div>
+	  Related Perspectives
+	</div>
+	<div id="horizontal_memes_container">
+		<div id="horizontal_memes">
+			<div style="float:left;">
+			  {# selected meme #}
+			  <a href="javascript:;" class="render_image" >
+				<img src="{{ MEDIA_URL }}/{{ selected_meme.image }}" width='50' id="{{ selected_meme.pk }}" class="image_active"/>
+			  </a>
+			</div>
+			{% for meme in selected_meme.meme_horizontal.all %}
+			  <div style="float:left;">
+			  <i class="icon-minus"></i>
+				<a href="javascript:;" class="render_image" >
+						<img src="{{ MEDIA_URL }}/{{ meme.image }}" width='50px' height='50px' id="{{ meme.pk }}" class="image_not_active"/>
+				</a>
+			  </div>
+			{% endfor %}
+		</div>
+	</div>
+	{# placeholder - do not remove #}
+	<div id="add_meme_placeholder" style="float:left;"></div>
+	<span id="add_meme_horizontal" style="float:left; display:none;" class="{{ selected_meme.pk }}">
+	  {# Add a Perspective #}
+	  <img src="{{ STATIC_URL }}images/addPerspective.jpg" width='50' height='50' />
+	</span>
+
+
+	{% if selected_meme.meme_vertical %}
+	
+
+	
+	<div id="vertical_meme_container"style="">
+	  <div>
+	  Next Plotline
+	  </div>
+	  <img src="{{ STATIC_URL }}images/vertical.png" />
+	  <div id="vertical_meme">
+		<a href="javascript:;" class="render_image" style="" >
+		  <img src="{{ MEDIA_URL }}/{{ selected_meme.meme_vertical.image }}" width='50' class="image_not_active" id="{{ selected_meme.meme_vertical.pk }}" />
+		</a>
+	  </div>
+	{% endif %}
+
+	{% if not selected_meme.meme_vertical %}
+	<div id="add_meme_vertical_container">
+		<div id="add_meme_vertical" style="display:none;" class="{{ selected_meme.pk }}">
+		  {# Add a Storyline #}
+		   <img src="{{ STATIC_URL }}images/addStoryline.jpg" width='50' height='50' />
+		</div>
+	</div>
+	<div id="add_meme_vertical_placeholder" width='50' height='50'></div>
+	{% endif %}
+
+	
 </div>
-<div style="">
-  <div>
-    {% for back_meme in selected_meme.meme_set.all %}
-      <a href="javascript:;" class="render_image" style="float:left;" >
-        <img src="{{ MEDIA_URL }}/{{ back_meme.image }}" width='50' class="image_not_active" id="{{ back_meme.pk }}" />
-      </a>
-    {% endfor %}
-  </div>
 </div>
-
-  <br><br><br>
-{% endif %}
-
-
-
-{# Why render this again and again with AJAX? Better to simply render this once earlier and not change position #}
-<div>
-  Related Perspectives
+<div id="main_comic_container">
+	<div id="main_comic">
+		<div class="main_comic" style="">
+		  <img src="{{ MEDIA_URL }}/{{ selected_meme.image }}" id="{{ selected_meme.pk }}"/>
+		</div>
+	</div>
 </div>
-<div style="float:left;">
-  {# selected meme #}
-  <a href="javascript:;" class="render_image" >
-    <img src="{{ MEDIA_URL }}/{{ selected_meme.image }}" width='50' id="{{ selected_meme.pk }}" class="image_active"/>
-  </a>
-</div>
-{% for meme in selected_meme.meme_horizontal.all %}
-  <div style="float:left;">
-    <a href="javascript:;" class="render_image" >
-      <img src="{{ MEDIA_URL }}/{{ meme.image }}" width='50' id="{{ meme.pk }}" class="image_not_active"/>
-    </a>
-  </div>
-{% endfor %}
-
-{# placeholder - do not remove #}
-<div id="add_meme_placeholder" style="float:left;"></div>
-<div id="add_meme_horizontal" style="float:left; display:none;" class="{{ selected_meme.pk }}">
-  {# Add a Perspective #}
-  ADD PERSPECTIVE (drag me here) 
-</div>
-
-  {# remove when Max designs #}
-  <br><br><br>
-
-
-{% if selected_meme.meme_vertical %}
-<div>
-  Next Plotline
-</div>
-
-<div style="">
-  <div>
-    <a href="javascript:;" class="render_image" style="float:left;" >
-      <img src="{{ MEDIA_URL }}/{{ selected_meme.meme_vertical.image }}" width='50' class="image_not_active" id="{{ selected_meme.meme_vertical.pk }}" />
-    </a>
-  </div>
-{% endif %}
-
-{% if not selected_meme.meme_vertical %}
-<div id="add_meme_vertical" style="float:left; display:none;" class="{{ selected_meme.pk }}">
-  {# Add a Storyline #}
-  ADD NEXT STORYLINE (drag me here) 
-</div>
-<div id="add_meme_vertical_placeholder" style="float:left;"></div>
-{% endif %}
-
-  {# remove when Max designs #}
-  <br><br>
-<div>
-  Selected Meme
-</div>
-
-<div class="main_comic" style="">
-  <img src="{{ MEDIA_URL }}/{{ selected_meme.image }}" id="{{ selected_meme.pk }}"/>
-</div>
-
 <br><br><br>
 
 
@@ -88,7 +93,7 @@
   </div>
   {% for uncat_meme in uncat_memes %}
     <span class="uncat_recreate_memes">
-      <img src="{{ MEDIA_URL }}/{{ uncat_meme.image }}" width='75' id="{{ uncat_meme.pk }}"/>
+      <img src="{{ MEDIA_URL }}/{{ uncat_meme.image }}" width='50' height='50' id="{{ uncat_meme.pk }}"/>
     </span>
   {% endfor %}
 </div>

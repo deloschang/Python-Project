@@ -5,22 +5,24 @@
     <div class="schoolmemes">
       {# another perspective that opens up #}
       {% if memes.meme_horizontal.all %}
-        <div style="float:left;">
-          {% for perspective in memes.meme_horizontal.all %}
-            <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map perspective.pk %}">
-            <img src="{{ MEDIA_URL }}/{{ perspective.image }}" width='50' id="{{ perspective.pk }}"/>
-          {% endfor %}
-            <div>
-              {{ memes.meme_horizontal.count }} more Perspectives
-            </div>
-          </a>
-        </div>
+		<div id="additional_perspective_container">
+			<div id="additional_perspective">
+			  {% for perspective in memes.meme_horizontal.all %}
+				<a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map perspective.pk %}">
+				<img src="{{ MEDIA_URL }}/{{ perspective.image }}" width='50' id="{{ perspective.pk }}"/>
+			  {% endfor %}
+				<div>
+				  {{ memes.meme_horizontal.count }} more Perspectives
+				</div>
+			  </a>
+			</div>
+		</div>
         {# end another perspective #}
       {% endif %}
 
       {# add rel="group" to link through #}
       <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map memes.pk %}">
-        <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}"/>
+        <img src="{{ MEDIA_URL }}/{{ memes.image }}" id="{{ memes.pk }}" .style.minWidth='500px' />
       </a>
       {% if is_uncat %}
         <span id="delete_uncat_meme"><a href="{% url webapp.views.delete_meme memes.pk %}">Delete</a></span>
@@ -31,20 +33,21 @@
       {# next plotline in the story #}
       <div>
         {% if memes.meme_vertical %}
-          <div style="float:left;">
-              <a class="fancybox-feed fancybox.ajax" rel="group" href="{% url webapp_recreate_map memes.meme_vertical.pk %}">
-              <img src="{{ MEDIA_URL }}/{{ memes.meme_vertical.image }}" width='50' id="{{ memes.meme_vertical.pk }}"/>
-              <div>
-                Next Plotline
-              </div>
-            </a>
+          <div id="additional_storyline_container">
+				<div id="additional_storyline">
+				  <a class="fancybox-feed fancybox.ajax" rel="group" href="{% url webapp_recreate_map memes.meme_vertical.pk %}">
+				  <img src="{{ MEDIA_URL }}/{{ memes.meme_vertical.image }}" width='50' id="{{ memes.meme_vertical.pk }}"/>
+				  <div>
+					Next Plotline
+				  </div>
+				</div>
+				</a>
           </div>
           {# end another perspective #}
         {% endif %}
       </div>
 
-      {# REMOVE WHEN YOU DESIGN #}
-      <br><br><br><br>
+      
 
 
     </div>
