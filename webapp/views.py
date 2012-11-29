@@ -687,7 +687,7 @@ def from_album_invite(request, album_id=None):
         publish_stream = data[0]['publish_stream']
 
         # If so, invite friend
-        if publish_stream:
+        if True:
 
             friend_name = strip_tags(request.POST['friend_name'])
             friend_id = strip_tags(request.POST['hash'])

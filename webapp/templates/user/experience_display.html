@@ -38,12 +38,14 @@
 				  {% endfor %}
 				  </span>
           <div>
+            {% if invitees %}
             invited
             {% for invitee in invitees %}
               <a href="http://facebook.com/{{ invitee.key }}">
                 <img src="http://graph.facebook.com/{{ invitee.key }}/picture?type=square"/>
               </a>
             {% endfor %}
+            {% endif %}
           </div>
 			  </div>
 	  
