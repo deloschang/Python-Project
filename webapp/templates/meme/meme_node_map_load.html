@@ -17,7 +17,6 @@
 
 
 
-	{# Why render this again and again with AJAX? Better to simply render this once earlier and not change position #}
 	<div>
 	  Related Perspectives
 	</div>
@@ -51,37 +50,36 @@
 	
 
 	
-	<div id="vertical_meme_container"style="">
-	  <div>
-	  Next Plotline
-	  </div>
-	  <img src="{{ STATIC_URL }}images/vertical.png" />
-	  <div id="vertical_meme">
-		<a href="javascript:;" class="render_image" style="" >
-		  <img src="{{ MEDIA_URL }}/{{ selected_meme.meme_vertical.image }}" width='50' class="image_not_active" id="{{ selected_meme.meme_vertical.pk }}" />
-		</a>
-	  </div>
-	{% endif %}
+  <div id="vertical_meme_container"style="">
+    <div>
+      Next Plotline
+    </div>
+    <img src="{{ STATIC_URL }}images/vertical.png" />
+    <div id="vertical_meme">
+      <a href="javascript:;" class="render_image" style="" >
+        <img src="{{ MEDIA_URL }}/{{ selected_meme.meme_vertical.image }}" width='50' class="image_not_active" id="{{ selected_meme.meme_vertical.pk }}" />
+      </a>
+    </div>
+    {% endif %}
 
-	{% if not selected_meme.meme_vertical %}
-	<div id="add_meme_vertical_container">
-		<div id="add_meme_vertical" style="display:none;" class="{{ selected_meme.pk }}">
-		  {# Add a Storyline #}
-		   <img src="{{ STATIC_URL }}images/addStoryline.jpg" width='50' height='50' />
-		</div>
-	</div>
-	<div id="add_meme_vertical_placeholder" width='50' height='50'></div>
-	{% endif %}
+    {% if not selected_meme.meme_vertical %}
+    <div id="add_meme_vertical_container">
+      <div id="add_meme_vertical" style="display:none;" class="{{ selected_meme.pk }}">
+        {# Add a Storyline #}
+        <img src="{{ STATIC_URL }}images/addStoryline.jpg" width='50' height='50' />
+      </div>
+    </div>
+    <div id="add_meme_vertical_placeholder" width='50' height='50'></div>
+    {% endif %}
+  </div>
 
-	
-</div>
-</div>
 <div id="main_comic_container">
 	<div id="main_comic">
 		<div class="main_comic" style="">
 		  <img src="{{ MEDIA_URL }}/{{ selected_meme.image }}" id="{{ selected_meme.pk }}"/>
 		</div>
 	</div>
+</div>
 </div>
 <br><br><br>
 

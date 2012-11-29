@@ -89,6 +89,7 @@
         if (data == 'success'){
           var drag_html = RECREATE_DRAGSOURCE;
           $('#add_meme_placeholder').append('<a href="javascript:;" class="render_image"><img src="'+drag_html.src+'" width="75" id="'+drag_html.id+'" </a>');
+          //location.reload();
         }
         try{
           mixpanel.track("Dragged in Meme", {"meme": RECREATE_DRAGSOURCE.id, "meme_node":$(this).attr('class')});
