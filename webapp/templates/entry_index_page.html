@@ -37,7 +37,7 @@
         {% if memes.meme_vertical %}
           <div id="additional_storyline_container">
 				<div id="additional_storyline">
-				  <a class="fancybox-feed fancybox.ajax" rel="group" href="{% url webapp_recreate_map memes.meme_vertical.pk %}">
+				  <a class="fancybox-feed fancybox.ajax" href="{% url webapp_recreate_map memes.meme_vertical.pk %}">
 				  <img src="{{ MEDIA_URL }}/{{ memes.meme_vertical.image }}" width='50' id="{{ memes.meme_vertical.pk }}"/>
 				  <div>
 					Next Plotline
