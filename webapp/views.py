@@ -684,7 +684,7 @@ def from_album_invite(request, album_id=None):
         data = json_content['data']
         
         # Is publish_stream permission available?
-        if publish_stream in data[0]:
+        if 'publish_stream' in data[0]:
 
             friend_name = strip_tags(request.POST['friend_name'])
             friend_id = strip_tags(request.POST['hash'])
