@@ -71,6 +71,7 @@
     
       var csrftoken = getCookie('csrftoken');
 
+      var meme_node = $(this).attr('class');
       // AJAX call to add meme into album - server side 
       $.post('/add_meme_to_node/', {
 
@@ -78,7 +79,7 @@
         // id not passed from masonry
         type:'horizontal',
         meme:RECREATE_DRAGSOURCE.id,
-        meme_node:$(this).attr('class'),
+        meme_node:meme_node,
         'csrfmiddlewaretoken': csrftoken  
 
         // need to grab which meme this is...... for the horizontal structure
@@ -87,8 +88,9 @@
         //album:this.id,
       }, function(data){
         if (data == 'success'){
-          var drag_html = RECREATE_DRAGSOURCE;
-          $('#add_meme_placeholder').append('<a href="javascript:;" class="render_image"><img src="'+drag_html.src+'" width="75" id="'+drag_html.id+'" </a>');
+          //var drag_html = RECREATE_DRAGSOURCE;
+          //$('#add_meme_placeholder').append('<a href="javascript:;" class="render_image"><img src="'+drag_html.src+'" width="75" id="'+drag_html.id+'" </a>');
+          $.get('recreate_map/'+meme_node+'/', {}, function(data) { $.fancybox(data); } );
           //location.reload();
         }
         try{
@@ -127,6 +129,7 @@
     
       var csrftoken = getCookie('csrftoken');
 
+      var meme_node = $(this).attr('class');
       // AJAX call to add meme into album - server side 
       $.post('/add_meme_to_node/', {
 
@@ -134,7 +137,7 @@
         // id not passed from masonry
         type:'vertical',
         meme:RECREATE_DRAGSOURCE.id,
-        meme_node:$(this).attr('class'),
+        meme_node:meme_node,
         'csrfmiddlewaretoken': csrftoken  
 
         // need to grab which meme this is...... for the horizontal structure
@@ -143,8 +146,9 @@
         //album:this.id,
       }, function(data){
         if (data == 'success'){
-          var drag_html = RECREATE_DRAGSOURCE;
-          $('#add_meme_vertical_placeholder').append('<a href="javascript:;" class="render_image"><img src="'+drag_html.src+'" width="75" id="'+drag_html.id+'" </a>');
+          //var drag_html = RECREATE_DRAGSOURCE;
+          //$('#add_meme_vertical_placeholder').append('<a href="javascript:;" class="render_image"><img src="'+drag_html.src+'" width="75" id="'+drag_html.id+'" </a>');
+          $.get('recreate_map/'+meme_node+'/', {}, function(data) { $.fancybox(data); } );
         }
         try{
           mixpanel.track("Dragged in Meme", {"meme": RECREATE_DRAGSOURCE.id, "meme_node":$(this).attr('class')});
