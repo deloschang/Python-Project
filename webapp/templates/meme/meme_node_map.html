@@ -3,6 +3,17 @@
 <div id="big_container">
   {% include 'meme/meme_node_map_load.html' %}
 </div>
+{# begin uncategorized container for dragging #}
+<div style="position:fixed; z-index:500; top:0; width:1000px;" id="uncat_recreate_container">
+  <div style="color: white;">
+    Uncategorized (Drag) 
+  </div>
+  {% for uncat_meme in uncat_memes %}
+    <span class="uncat_recreate_memes">
+      <img src="{{ MEDIA_URL }}/{{ uncat_meme.image }}" width='50' height='50' id="{{ uncat_meme.pk }}"/>
+    </span>
+  {% endfor %}
+</div>
 
 <script>
   function recreate_handleDragStart(e){
@@ -88,9 +99,10 @@
         //album:this.id,
       }, function(data){
         if (data == 'success'){
-          //var drag_html = RECREATE_DRAGSOURCE;
+          var drag_html = RECREATE_DRAGSOURCE;
           //$('#add_meme_placeholder').append('<a href="javascript:;" class="render_image"><img src="'+drag_html.src+'" width="75" id="'+drag_html.id+'" </a>');
-          $.get('recreate_map/'+meme_node+'/', {}, function(data) { $.fancybox(data); } );
+          //$.get('recreate_map/'+meme_node+'/', {}, function(data) { $.fancybox(data); } );
+          //$.fancybox.update();
           //location.reload();
         }
         try{
@@ -146,9 +158,13 @@
         //album:this.id,
       }, function(data){
         if (data == 'success'){
-          //var drag_html = RECREATE_DRAGSOURCE;
+          var drag_html = RECREATE_DRAGSOURCE;
           //$('#add_meme_vertical_placeholder').append('<a href="javascript:;" class="render_image"><img src="'+drag_html.src+'" width="75" id="'+drag_html.id+'" </a>');
-          $.get('recreate_map/'+meme_node+'/', {}, function(data) { $.fancybox(data); } );
+          //$.get('recreate_map/'+meme_node+'/', {}, function(data) { 
+            //$.fancybox(data); 
+            //$.fancybox.update();
+            //$.fancybox.reposition();
+          //});
         }
         try{
           mixpanel.track("Dragged in Meme", {"meme": RECREATE_DRAGSOURCE.id, "meme_node":$(this).attr('class')});
